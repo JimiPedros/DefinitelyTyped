@@ -1,20 +1,27 @@
-import { MaterialParameters, Material } from './Material';
-import { Vector3 } from './../math/Vector3';
-import { Texture } from './../textures/Texture';
+import { Vector3 } from "../math/Vector3.js";
+import { Texture } from "../textures/Texture.js";
+import { Material, MaterialParameters } from "./Material.js";
 
 export interface MeshDistanceMaterialParameters extends MaterialParameters {
-    map?: Texture | null;
-    alphaMap?: Texture | null;
-    displacementMap?: Texture | null;
-    displacementScale?: number;
-    displacementBias?: number;
-    farDistance?: number;
-    nearDistance?: number;
-    referencePosition?: Vector3;
+    map?: Texture | null | undefined;
+    alphaMap?: Texture | null | undefined;
+    displacementMap?: Texture | null | undefined;
+    displacementScale?: number | undefined;
+    displacementBias?: number | undefined;
+    farDistance?: number | undefined;
+    nearDistance?: number | undefined;
+    referencePosition?: Vector3 | undefined;
 }
 
 export class MeshDistanceMaterial extends Material {
     constructor(parameters?: MeshDistanceMaterialParameters);
+
+    /**
+     * Read-only flag to check if a given object is of type {@link MeshDistanceMaterial}.
+     * @remarks This is a _constant_ value
+     * @defaultValue `true`
+     */
+    readonly isMeshDistanceMaterial: true;
 
     /**
      * @default 'MeshDistanceMaterial'
@@ -45,31 +52,6 @@ export class MeshDistanceMaterial extends Material {
      * @default 0
      */
     displacementBias: number;
-
-    /**
-     * @default 1000
-     */
-    farDistance: number;
-
-    /**
-     * @default 1
-     */
-    nearDistance: number;
-
-    /**
-     * @default new THREE.Vector3()
-     */
-    referencePosition: Vector3;
-
-    /**
-     * @default false
-     */
-    skinning: boolean;
-
-    /**
-     * @default false
-     */
-    morphTargets: boolean;
 
     /**
      * @default false

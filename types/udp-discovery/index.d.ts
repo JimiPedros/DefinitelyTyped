@@ -1,9 +1,4 @@
-// Type definitions for udp-discovery 2.0
-// Project: https://github.com/stdarg/udp-discovery
-// Definitions by: Scott Page <https://github.com/scottpage>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
-import { EventEmitter } from 'events';
+import { EventEmitter } from "events";
 
 /**
  * Discovery constructor options
@@ -12,23 +7,23 @@ export interface DiscoveryConstructorOptions {
     /**
      * The port to listen upon for service announcements. Default: 44201.
      */
-    port?: number;
+    port?: number | undefined;
 
     /**
      * The address to bind to. Default: listens to all interfaces.
      */
-    bindAddr?: string;
+    bindAddr?: string | undefined;
 
     /**
      * Either 'udp4' or 'udp6'. Default: 'udp4'.
      */
-    dgramType?: string;
+    dgramType?: string | undefined;
 }
 
 /**
  * Reason for available or unavailable event to be fired.
  */
-export type ReasonType = 'new' | 'availabilityChange' | 'timedOut';
+export type ReasonType = "new" | "availabilityChange" | "timedOut";
 
 /**
  * Discovery events
@@ -61,7 +56,7 @@ export interface DiscoveryEvents {
      * @param eventName The name of the event.
      * @param data The payload for the event.
      */
-    MessageBus?: (eventName: string, data: any) => void;
+    MessageBus?: ((eventName: string, data: any) => void) | undefined;
 }
 
 /**

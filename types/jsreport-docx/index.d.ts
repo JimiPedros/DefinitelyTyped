@@ -1,13 +1,8 @@
-// Type definitions for jsreport-docx 2.8
-// Project: https://github.com/jsreport/jsreport-docx
-// Definitions by: pofider <https://github.com/pofider>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
-import { ExtensionDefinition, TemplateBase } from 'jsreport-core';
+import { ExtensionDefinition, TemplateBase } from "jsreport-core";
 
 declare namespace JsReportDocx {
     interface DocxTemplateModifier extends TemplateBase {
-        docx?: DocxTemplate;
+        docx?: DocxTemplate | undefined;
     }
 
     interface Configuration {
@@ -15,19 +10,19 @@ declare namespace JsReportDocx {
             enabled: true;
             publicUri: string;
             showWarning: false;
-        };
+        } | undefined;
     }
 
     interface DocxTemplate {
-        templateAsetShortid?: string;
+        templateAsetShortid?: string | undefined;
         templateAsset?: {
             content: string;
             encoding: string;
-        };
+        } | undefined;
     }
 }
 
-declare module 'jsreport-core' {
+declare module "jsreport-core" {
     interface TemplateRegistry {
         DocxTemplateModifier: JsReportDocx.DocxTemplateModifier;
     }

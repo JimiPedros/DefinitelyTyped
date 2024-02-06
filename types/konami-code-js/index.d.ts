@@ -1,27 +1,22 @@
-// Type definitions for konami-code-js 0.8
-// Project: https://github.com/Haeresis/konami-code-js#readme
-// Definitions by: Josh Goldberg <https://github.com/JoshuaKGoldberg>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 interface KonamiOptions {
     /**
      * Function executed after the the Konami Code sequence has been entered.
      */
-    callback?: KonamiCallback;
+    callback?: KonamiCallback | undefined;
 
     /**
      * When true, allows you to see all debug messages in the console.
      *
      * @default false
      */
-    debug?: boolean;
+    debug?: boolean | undefined;
 
     /**
      * Pass some element to only recognize the Konami Code sequence from thatt element.
      *
      * @default window.document
      */
-    listener?: Node;
+    listener?: Node | undefined;
 }
 
 type KonamiCallback = (instance: KonamiCode) => void;

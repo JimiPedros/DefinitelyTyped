@@ -1,8 +1,3 @@
-// Type definitions for short-css-vars 1.1
-// Project: https://github.com/godaddy/short-css-vars/packages/short-css-vars#readme
-// Definitions by: Piotr Błażejewicz <https://github.com/peterblazejewicz>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /**
  * Each instance keeps track of renamed variables to check for collisions and
  * to provide a mapping of changed names.
@@ -48,11 +43,11 @@ declare namespace ShortCssVars {
         /**
          * Custom formatter
          */
-        formatter?: CustomFormatter;
+        formatter?: CustomFormatter | undefined;
         /**
          * Rule to ignore certain variable names
          */
-        ignore?: IgnoreType;
+        ignore?: IgnoreType | undefined;
     }
 
     interface CustomFormatter {

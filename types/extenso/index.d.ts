@@ -1,28 +1,23 @@
-// Type definitions for extenso 2.0
-// Project: https://github.com/theuves/extenso.js#readme
-// Definitions by: fer22f <https://github.com/fer22f>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 declare namespace Extenso {
     interface BaseOptions {
-        negative?: 'formal' | 'informal';
-        locale?: 'br' | 'pt';
-        scale?: 'short' | 'long';
+        negative?: "formal" | "informal" | undefined;
+        locale?: "br" | "pt" | undefined;
+        scale?: "short" | "long" | undefined;
     }
 
     interface NumberModeOptions extends BaseOptions {
-        mode?: 'number';
+        mode?: "number" | undefined;
         number?: {
-            gender?: 'm' | 'f';
-            decimal?: 'formal' | 'informal';
-        };
+            gender?: "m" | "f" | undefined;
+            decimal?: "formal" | "informal" | undefined;
+        } | undefined;
     }
 
     interface CurrencyModeOptions extends BaseOptions {
-        mode: 'currency';
+        mode: "currency";
         currency?: {
-            type?: 'BRL' | 'EUR';
-        };
+            type?: "BRL" | "EUR" | undefined;
+        } | undefined;
     }
 
     type Options = NumberModeOptions | CurrencyModeOptions;

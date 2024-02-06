@@ -1,9 +1,4 @@
-// Type definitions for npm-profile 5.0
-// Project: https://github.com/npm/npm-profile#readme
-// Definitions by: Piotr Błażejewicz <https://github.com/peterblazejewicz>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// Minimum TypeScript Version: 3.5
-import fetch = require('npm-registry-fetch');
+import fetch = require("npm-registry-fetch");
 
 /**
  * Fetch profile information for the authenticated user.
@@ -40,16 +35,75 @@ export function createToken(
     options?: Options,
 ): Promise<Token>;
 
+/**
+ * Creates a new user on the server along with a fresh bearer token for future authentication as this user.
+ * This is what you see as an authToken in an .npmrc.
+ * @async
+ */
+export function adduser(
+    opener: (url: string) => Promise<void>,
+    prompter: (creds: ProfileAuthCredentials) => Promise<ProfileAuthCredentials>,
+    opts?: Options,
+): Promise<ProfileAuthToken>;
+
+/**
+ * Tries to login using new web based login, if that fails it falls back to using the legacy CouchDB APIs.
+ * @async
+ */
+export function login(
+    opener: (url: string) => Promise<void>,
+    prompter: (creds: ProfileAuthCredentials) => Promise<ProfileAuthCredentials>,
+    opts?: Options,
+): Promise<ProfileAuthToken>;
+
+/**
+ * Tries to login using new web based login, if that fails it falls back to using the legacy CouchDB APIs.
+ * @async
+ */
+export function loginWeb(opener: (url: string) => Promise<void>, opts?: Options): Promise<ProfileAuthToken>;
+
+/**
+ * Tries to create a user new web based login,
+ * if that fails it falls back to using the legacy CouchDB APIs.
+ * @async
+ */
+export function adduserWeb(opener: (url: string) => Promise<void>, opts?: Options): Promise<ProfileAuthToken>;
+
+/**
+ * Creates a new user on the server along with a fresh bearer token for future authentication as this user.
+ * This is what you see as an authToken in an .npmrc.
+ * @async
+ */
+export function adduserCouch(
+    username: string,
+    email: string,
+    password: string,
+    opts?: Options,
+): Promise<ProfileAuthToken>;
+
+/**
+ * Logs you into an existing user. Does not create the user if they do not already exist.
+ * Logging in means generating a new bearer token for use in future authentication.
+ * This is what you use as an authToken in an .npmrc.
+ * @async
+ */
+export function loginCouch(
+    username: string,
+    email: string,
+    password: string,
+    opts?: Options,
+): Promise<ProfileAuthToken>;
+
 export type Options = fetch.Options & ProfileFetchOptions;
 
 export interface ProfileFetchOptions {
     /** passed through to prompter */
-    creds?: ProfileCredentials;
+    creds?: ProfileCredentials | undefined;
     /**
      * the hostname of the current machine, to show the user during the WebAuth flow.
      * @default os.hostname()
      */
-    hostname?: string;
+    hostname?: string | undefined;
 }
 
 export interface ProfileCredentials {
@@ -63,6 +117,24 @@ export interface ProfileCredentials {
     email: string;
 }
 
+export interface ProfileAuthCredentials extends ProfileCredentials {
+    /**
+     * default value for password
+     */
+    password: string;
+}
+
+export interface ProfileAuthToken {
+    /**
+     * String, to be used to authenticate further API calls.
+     */
+    token: string;
+    /**
+     * String, the username the user authenticated as.
+     */
+    username: string;
+}
+
 export interface ProfileData {
     /**
      * two-factor authentication status
@@ -74,23 +146,24 @@ export interface ProfileData {
     created: Date | string;
     updated: Date | string;
     cidr_whitelist: null | string[];
-    fullname?: string;
-    homepage?: string;
-    freenode?: string;
-    twitter?: string;
-    github?: string;
+    fullname?: string | undefined;
+    homepage?: string | undefined;
+    freenode?: string | undefined;
+    twitter?: string | undefined;
+    github?: string | undefined;
 }
 
-export type UpdateProfileData = Partial<Omit<ProfileData, 'tfa' | 'created' | 'updated' | 'email_verified'>> &
-    UpdateOptions;
+export type UpdateProfileData =
+    & Partial<Omit<ProfileData, "tfa" | "created" | "updated" | "email_verified">>
+    & UpdateOptions;
 
 export interface UpdateOptions {
     /**
      * This is used to change your password and is not visible (for obvious reasons) through the get() API.
      * The value should be an object with old and new properties, where the former has the user's current password and the latter has the desired new password.
      */
-    password?: PasswordUpdate;
-    tfa?: TFAStatusUpdate;
+    password?: PasswordUpdate | undefined;
+    tfa?: TFAStatusUpdate | undefined;
 }
 
 export interface PasswordUpdate {
@@ -102,15 +175,15 @@ export type TFAStatus =
     | null
     | false
     | {
-          pending: boolean;
-          [key: string]: any;
-      }
+        pending: boolean;
+        [key: string]: any;
+    }
     | [string, string]
     | string;
 
 export interface TFAStatusUpdate {
     password: string;
-    mode: 'disable' | 'auth-only' | 'auth-and-writes';
+    mode: "disable" | "auth-only" | "auth-and-writes";
 }
 
 export interface FetchProfileError extends Error {
@@ -122,7 +195,7 @@ export interface FetchProfileError extends Error {
     };
     uri: string;
     body: Uint8Array;
-    pkgid?: string;
+    pkgid?: string | undefined;
 }
 
 export interface Token {
@@ -152,13 +225,13 @@ export interface Token {
     cidr_whitelist: string[];
 }
 
-export type LogLevel = 'error' | 'warn' | 'notice' | 'http' | 'timing' | 'info' | 'verbose' | 'silly';
+export type LogLevel = "error" | "warn" | "notice" | "http" | "timing" | "info" | "verbose" | "silly";
 
 declare global {
     namespace NodeJS {
         interface Process {
-            emit(event: 'log', logLevel: LogLevel, ...any: string[]): boolean;
-            on(event: 'log ', listener: (logLevel: LogLevel) => void): this;
+            emit(event: "log", logLevel: LogLevel, ...any: string[]): boolean;
+            on(event: "log ", listener: (logLevel: LogLevel) => void): this;
         }
     }
 }

@@ -7,9 +7,9 @@ import {
     RenderPolicy,
     Variables,
     VariablesOf,
-} from 'relay-runtime';
+} from "relay-runtime";
 
-import { KeyType } from './helpers';
+import { KeyType } from "./helpers";
 
 export type RefetchFn<TQuery extends OperationType, TOptions = Options> = RefetchFnExact<TQuery, TOptions>;
 
@@ -21,7 +21,7 @@ export type RefetchFn<TQuery extends OperationType, TOptions = Options> = Refetc
 export type RefetchFnDynamic<
     TQuery extends OperationType,
     TKey extends KeyType | null,
-    TOptions = Options
+    TOptions = Options,
 > = RefetchInexactDynamicResponse<TQuery, TOptions> & RefetchExactDynamicResponse<TQuery, TOptions>;
 
 export type RefetchInexact<TQuery extends OperationType, TOptions> = (
@@ -60,38 +60,38 @@ export interface ReturnTypeNode<TQuery extends OperationType, TKey extends KeyTy
 }
 
 export interface Options {
-    fetchPolicy?: FetchPolicy;
-    onComplete?: (arg: Error | null) => void;
-    UNSTABLE_renderPolicy?: RenderPolicy;
+    fetchPolicy?: FetchPolicy | undefined;
+    onComplete?: ((arg: Error | null) => void) | undefined;
+    UNSTABLE_renderPolicy?: RenderPolicy | undefined;
 }
 
 export interface InternalOptions extends Options {
-    __environment?: IEnvironment;
+    __environment?: IEnvironment | undefined;
 }
 
 export type Action =
     | {
-          type: 'reset';
-          environment: IEnvironment;
-          fragmentIdentifier: string;
-      }
+        type: "reset";
+        environment: IEnvironment;
+        fragmentIdentifier: string;
+    }
     | {
-          type: 'refetch';
-          refetchVariables: Variables;
-          fetchPolicy?: FetchPolicy;
-          renderPolicy?: RenderPolicy;
-          onComplete?: (args: Error | null) => void;
-          environment?: IEnvironment | null;
-      };
+        type: "refetch";
+        refetchVariables: Variables;
+        fetchPolicy?: FetchPolicy | undefined;
+        renderPolicy?: RenderPolicy | undefined;
+        onComplete?: ((args: Error | null) => void) | undefined;
+        environment?: IEnvironment | null | undefined;
+    };
 
 export interface RefetchState {
-    fetchPolicy?: FetchPolicy;
-    renderPolicy?: RenderPolicy;
+    fetchPolicy?: FetchPolicy | undefined;
+    renderPolicy?: RenderPolicy | undefined;
     mirroredEnvironment: IEnvironment;
     mirroredFragmentIdentifier: string;
-    onComplete?: (arg: Error | null) => void;
-    refetchEnvironment?: IEnvironment | null;
-    refetchVariables?: Variables | null;
+    onComplete?: ((arg: Error | null) => void) | undefined;
+    refetchEnvironment?: IEnvironment | null | undefined;
+    refetchVariables?: Variables | null | undefined;
     refetchGeneration: number;
 }
 
@@ -99,10 +99,9 @@ export interface DebugIDandTypename {
     id: string;
     typename: string;
 }
-
+// eslint-disable-next-line @definitelytyped/no-unnecessary-generics
 export function useRefetchableFragmentNode<TQuery extends OperationType, TKey extends KeyType | null>(
     fragmentNode: ReaderFragment,
     parentFragmentRef: unknown,
     componentDisplayName: string,
-): // tslint:disable-next-line:no-unnecessary-generics
-ReturnTypeNode<TQuery, TKey, InternalOptions>;
+): ReturnTypeNode<TQuery, TKey, InternalOptions>;

@@ -1,11 +1,3 @@
-// Type definitions for Benchmark v2.1.4
-// Project: https://benchmarkjs.com
-// Definitions by: Asana <https://asana.com>
-//                 Charlie Fish <https://github.com/fishcharlie>
-//                 Blair Zajac <https://github.com/blair>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
-
 declare class Benchmark {
     static filter<T>(arr: T[], callback: (value: T) => any, thisArg?: any): T[];
     static filter<T>(arr: T[], filter: string, thisArg?: any): T[];
@@ -33,7 +25,7 @@ declare class Benchmark {
     constructor(options: Benchmark.Options);
 
     id: number;
-    name: string;
+    name?: string;
     count: number;
     cycles: number;
     hz: number;
@@ -64,25 +56,25 @@ declare class Benchmark {
 
 declare namespace Benchmark {
     export interface Options {
-        async?: boolean;
-        defer?: boolean;
-        delay?: number;
-        id?: string;
-        initCount?: number;
-        maxTime?: number;
-        minSamples?: number;
-        minTime?: number;
-        name?: string;
-        onAbort?: Function;
-        onComplete?: Function;
-        onCycle?: Function;
-        onError?: Function;
-        onReset?: Function;
-        onStart?: Function;
-        setup?: Function | string;
-        teardown?: Function | string;
-        fn?: Function | string;
-        queued?: boolean;
+        async?: boolean | undefined;
+        defer?: boolean | undefined;
+        delay?: number | undefined;
+        id?: string | undefined;
+        initCount?: number | undefined;
+        maxTime?: number | undefined;
+        minSamples?: number | undefined;
+        minTime?: number | undefined;
+        name?: string | undefined;
+        onAbort?: Function | undefined;
+        onComplete?: Function | undefined;
+        onCycle?: Function | undefined;
+        onError?: Function | undefined;
+        onReset?: Function | undefined;
+        onStart?: Function | undefined;
+        setup?: Function | string | undefined;
+        teardown?: Function | string | undefined;
+        fn?: Function | string | undefined;
+        queued?: boolean | undefined;
     }
 
     export interface Platform {
@@ -133,23 +125,23 @@ declare namespace Benchmark {
 
     export interface Target {
         options: Options;
-        async?: boolean;
-        defer?: boolean;
-        delay?: number;
-        initCount?: number;
-        maxTime?: number;
-        minSamples?: number;
-        minTime?: number;
-        name?: string;
-        fn?: Function;
+        async?: boolean | undefined;
+        defer?: boolean | undefined;
+        delay?: number | undefined;
+        initCount?: number | undefined;
+        maxTime?: number | undefined;
+        minSamples?: number | undefined;
+        minTime?: number | undefined;
+        name?: string | undefined;
+        fn?: Function | undefined;
         id: number;
-        stats?: Stats;
-        times?: Times;
+        stats?: Stats | undefined;
+        times?: Times | undefined;
         running: boolean;
-        count?: number;
-        compiled?: Function;
-        cycles?: number;
-        hz?: number;
+        count?: number | undefined;
+        compiled?: Function | undefined;
+        cycles?: number | undefined;
+        hz?: number | undefined;
     }
 
     export class Event {
@@ -168,10 +160,12 @@ declare namespace Benchmark {
         static options: { name: string };
 
         constructor(name?: string, options?: Options);
+        constructor(options?: Options);
 
         length: number;
         aborted: boolean;
         running: boolean;
+        name?: string;
 
         abort(): Suite;
         add(name: string, fn: Function | string, options?: Options): Suite;

@@ -1,8 +1,3 @@
-// Type definitions for addressparser 1.0
-// Project: https://github.com/nodemailer/addressparser
-// Definitions by: Anton Panov <https://github.com/risedphantom>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /// <reference types="node" />
 
 /**
@@ -36,7 +31,7 @@ declare namespace addressparser {
         /**
          * An array of grouped addresses.
          */
-        group?: EmailAddress[];
+        group?: EmailAddress[] | undefined;
     }
 }
 

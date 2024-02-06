@@ -1,19 +1,13 @@
-// Type definitions for smartystreets-javascript-sdk 1.6
-// Project: https://github.com/smartystreets/smartystreets-javascript-sdk
-// Definitions by: Keith Kikta <https://github.com/newbish>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 3.9
-
 // <reference types="node" />
 
-import { Request } from 'express';
+import { Request } from "express";
 export namespace core {
     class Batch<T> {
         constructor();
         lookups: T[];
         add(lookup: T): void;
         lookupsHasRoomForLookup(): boolean;
-        lenght(): number;
+        length(): number;
         getByIndex(index: number): T;
         getByInputId(inputId: string): T[];
         clear(): void;
@@ -68,6 +62,10 @@ export namespace core {
         buildUsExtractClient(): Client<usExtract.Lookup, usExtract.Lookup>;
         buildInternationalStreetClient(): Client<internationalStreet.Lookup, internationalStreet.Lookup>;
         buildUsReverseGeoClient(): Client<usReverseGeo.Lookup, usReverseGeo.Lookup>;
+        buildInternationalAddressAutocompleteClient(): Client<
+            internationalAddressAutocomplete.Lookup,
+            internationalAddressAutocomplete.Lookup
+        >;
     }
 
     namespace buildClient {
@@ -92,6 +90,9 @@ export namespace core {
         function usReverseGeo(
             credentials: StaticCredentials | SharedCredentials,
         ): Client<usReverseGeo.Lookup, usReverseGeo.Lookup>;
+        function internationalAddressAutocomplete(
+            credentials: StaticCredentials | SharedCredentials,
+        ): Client<internationalAddressAutocomplete.Lookup, internationalAddressAutocomplete.Lookup>;
     }
 
     namespace Errors {
@@ -216,7 +217,7 @@ export namespace usStreet {
         /** City, state, and ZIP Code combined */
         lastLine: string;
         /** The name of the person or company at this address */
-        adressee: string;
+        addressee: string;
         /** The neighborhood (only Puerto Rican addresses) */
         urbanization: string;
         /**
@@ -280,8 +281,8 @@ export namespace usStreet {
         lastLine: string;
         /** 12-digit POSTNET™ barcode; consists of 5-digit ZIP Code, 4-digit add-on code, 2-digit delivery point, and 1-digit check digit. */
         deliveryPointBarcode: string;
-        /** @see Componenet */
-        components: Componenet;
+        /** @see Component */
+        components: Component;
         /** @see Metadata */
         metadata: Metadata;
         /** @see Analysis */
@@ -363,7 +364,7 @@ export namespace usStreet {
          * - **D** — Confirmed but missing secondary info; the main address is present in the USPS data, but it is missing secondary information (apartment, suite, etc.). (e.g., 122 Mast Rd Lee, NH)
          * - **[blank or null]** — The address is not present in the USPS database.
          */
-        dpvMatchCode?: string;
+        dpvMatchCode?: string | undefined;
         /**
          * Indicates which changes were made to the input address. Footnotes are delimited by a # character. See the [footnotes](https://smartystreets.com/docs/cloud/us-street-api#footnotes) table
          * below for details.
@@ -460,7 +461,7 @@ export namespace usStreet {
          * - **true** — The address was flagged by EWS, preventing a ZIP+4 match.
          * - **[blank]** — Address was not flagged by EWS.
          */
-        isEwsMatch?: boolean;
+        isEwsMatch?: boolean | undefined;
         /**
          * The horizontal component used for geographic positioning. It is the angle between 0° (the equator) and ±90° (north or south) at the poles. It is the first value in an ordered pair of
          * (latitude, longitude). A negative number denotes a location below the equator; a positive number is above the equator. Combining lat/long values enables you to pinpoint addresses on a map.
@@ -503,7 +504,7 @@ export namespace usStreet {
          *
          * Note: For some reason, known only to the US Postal Service, PO Boxes are always marked as "Residential."
          */
-        rdi?: string;
+        rdi?: string | undefined;
         /**
          * Indicates the type of record that was matched. Only given if a DPV match is made.
          * - **F** - Firm; the finest level of match available for an address. (e.g., [Julie Julia 11300 Center Ave Gilroy CA 95020-9257](https://bit.ly/36OLtAj))
@@ -545,11 +546,11 @@ export namespace usStreet {
         zipType: string;
     }
     /**
-     * Componenet
+     * Component
      *
      * https://smartystreets.com/docs/cloud/us-street-api#components
      */
-    interface Componenet {
+    interface Component {
         /** The USPS-preferred city name for this particular address, or an acceptable alternate if provided by the user */
         cityName: string;
         /** The default city name for this 5-digit ZIP Code */
@@ -1162,5 +1163,94 @@ export namespace usReverseGeo {
         distance: number;
         address: ResultAddress;
         coordinate: ResultCoordinate;
+    }
+}
+
+export namespace internationalAddressAutocomplete {
+    class Lookup {
+        constructor(search: string, country: string);
+        result: Suggestion[];
+        /**
+         * Required. The part of the address that has already been typed. Maximum length is 128 bytes.
+         */
+        search: string;
+        /**
+         * Required. The ISO3 Alpha-3 country code where the desired address is located.
+         * Only uppercase values are allowed.
+         * See [supported country codes](https://www.smarty.com/docs/cloud/international-address-autocomplete-api#supported-country-codes). Maximum length is 3 bytes.
+         */
+        country: string;
+        /**
+         * Maximum number of address suggestions to return; range [1, 10].
+         */
+        maxResults: number;
+        /**
+         * When using geolocation=geocodes, and latitude/longitude,
+         * this field specifies the radius in MILES from the geocode point.
+         */
+        distance: number;
+        /**
+         * Use the client's IP address to limit results to the surrounding area.
+         *
+         * The possible options are:
+         * 1. adminarea - Limit results to the client's administrative area (state, province, etc.).
+         * 2. locality - Limit results to the client's locality (city).
+         * 3. postalcode - Limit results to the postal code where the client's IP address is registered.
+         * 4. geocodes - Limit results to an area surrounding the lat/lon where the user's IP address is registered. See also distance.
+         *
+         * See [filtering](https://www.smarty.com/docs/cloud/international-address-autocomplete-api#pro-filtering) for more information.
+         */
+        geolocation: "adminarea" | "locality" | "postalcode" | "geocodes";
+        /**
+         * Limit the results to only the administrative area provided.
+         * An administrative area is like a state in the United States, a province in Canada, or region in France.
+         * Please use the correct postal name for the administrative area (e.g. use "NSW" instead of "New South Wales").
+         *
+         * See [filtering](https://www.smarty.com/docs/cloud/international-address-autocomplete-api#pro-filtering) for more information.
+         * @example 'NSW'
+         */
+        includeOnlyAdministrativeArea: string;
+        /**
+         * Limit the results to only the locality provided.
+         * A locality is a significant population center (i.e. city, town, or village).
+         *
+         * See [filtering](https://www.smarty.com/docs/cloud/international-address-autocomplete-api#pro-filtering) for more information.
+         * @example 'Paris'
+         */
+        includeOnlyLocality: string;
+        /**
+         * Limit the results to only the postal code provided.
+         * When this parameter is used, no include_only_administrative_area and/or include_only_locality parameters can be used.
+         *
+         * See [filtering](https://www.smarty.com/docs/cloud/international-address-autocomplete-api#pro-filtering) for more information.
+         * @example '29200'
+         */
+        includeOnlyPostalCode: string;
+        /**
+         * Limit the results to the surrounding area specified by latitude and longitude. See also distance
+         *
+         * Notes: This must be used with the longitude parameter.
+         *
+         * See [filtering](https://www.smarty.com/docs/cloud/international-address-autocomplete-api#pro-filtering) for more information.
+         * @example '-2.0234'
+         */
+        latitude: string;
+        /**
+         * Limit the results to the surrounding area specified by latitude and longitude. See also distance
+         *
+         * Notes: This must be used with the latitude parameter.
+         *
+         * See [filtering](https://www.smarty.com/docs/cloud/international-address-autocomplete-api#pro-filtering) for more information.
+         * @example '44.0234'
+         */
+        longitude: string;
+    }
+    class Suggestion {
+        constructor(responseData: any);
+        street: string;
+        locality: string;
+        administrativeArea: string;
+        postalCode: string;
+        countryIso3: number;
     }
 }

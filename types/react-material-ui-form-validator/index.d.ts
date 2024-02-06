@@ -1,20 +1,12 @@
-// Type definitions for react-material-ui-form-validator 2.1
-// Project: https://github.com/NewOldMax/react-material-ui-form-validator
-// Definitions by: Frank Brullo <https://github.com/FrankBrullo>
-//                 Ivan Siacho <https://github.com/Ivansiach0>
-//                 J.R <https://github.com/jrguenin>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 3.5
-
-import * as React from 'react';
-import { SelectFieldProps, TextFieldProps } from 'material-ui';
+import { SelectFieldProps, TextFieldProps } from "material-ui";
+import * as React from "react";
 
 export interface ValidatorFormProps {
-    className?: string;
+    className?: string | undefined;
     onSubmit: (event: React.FormEvent) => void;
-    instantValidate?: boolean;
-    onError?: (errors: any[]) => void;
-    debounceTime?: number;
+    instantValidate?: boolean | undefined;
+    onError?: ((errors: any[]) => void) | undefined;
+    debounceTime?: number | undefined;
     [key: string]: any;
 }
 export class ValidatorForm extends React.Component<ValidatorFormProps> {
@@ -25,12 +17,12 @@ export class ValidatorForm extends React.Component<ValidatorFormProps> {
 }
 
 export interface ValidatorComponentProps {
-    errorMessages?: any[] | string;
-    validators?: any[];
+    errorMessages?: any[] | string | undefined;
+    validators?: any[] | undefined;
     name: string;
     value: any;
-    validatorListener?: (isValid: boolean) => void;
-    withRequiredValidator?: boolean;
+    validatorListener?: ((isValid: boolean) => void) | undefined;
+    withRequiredValidator?: boolean | undefined;
     [key: string]: any;
 }
 

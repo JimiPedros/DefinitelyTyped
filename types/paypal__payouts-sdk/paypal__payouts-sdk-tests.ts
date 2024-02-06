@@ -1,4 +1,27 @@
-import { core, payouts } from '@paypal/payouts-sdk';
+import {
+    core,
+    CreateBatchPayoutResponse,
+    CreatePayoutRequestBody,
+    Currency,
+    GetBatchPayoutResponse,
+    GetPayoutsItemResponse,
+    HttpRequest,
+    HttpResponse,
+    LinkDescription,
+    PayoutBatchHeader,
+    PayoutBatchItems,
+    PayoutCurrencyConversion,
+    PayoutHeader,
+    PayoutItem,
+    PayoutItemDetail,
+    payouts,
+    PayoutSenderBatchHeader,
+    PaypalHeader,
+    // type imports are successful
+    RecipientType,
+    RecipientWallet,
+    SenderBatchHeader,
+} from "@paypal/payouts-sdk";
 
 declare const id: string;
 declare const secret: string;
@@ -26,7 +49,7 @@ client
     })
     .then(res => {
         const batchStatus = res?.result?.batch_header?.batch_status;
-        if (batchStatus === 'SUCCESS') {
+        if (batchStatus === "SUCCESS") {
             // payout is successful
         }
         const batchItems = res?.result?.items;
@@ -39,7 +62,7 @@ client
     })
     .then(res => {
         const txStatus = res?.result?.transaction_status;
-        if (txStatus !== 'SUCCESS') {
+        if (txStatus !== "SUCCESS") {
             const itemId = res?.result?.payout_item_id;
             if (itemId) {
                 const reqCancel = new payouts.PayoutsItemCancelRequest(itemId);

@@ -1,21 +1,14 @@
-import { Color } from '../../../../src/math/Color';
-import { Texture } from '../../../../src/textures/Texture';
-import { CubeTexture } from '../../../../src/textures/CubeTexture';
-import { Vector2 } from '../../../../src/math/Vector2';
+import { ShaderMaterialParameters } from "../../../../src/Three.js";
+import Node from "../core/Node.js";
+import NodeMaterial from "./NodeMaterial.js";
 
-import { Node } from '../core/Node';
-import { NodeMaterial } from './NodeMaterial';
+export default class MeshStandardNodeMaterial extends NodeMaterial {
+    readonly isMeshStandardNodeMaterial: true;
 
-export class MeshStandardNodeMaterial extends NodeMaterial {
-    constructor();
+    emissiveNode: Node | null;
 
-    color: Color | Node;
-    roughness: number | Node;
-    metalness: number | Node;
-    map: Texture | Node;
-    normalMap: Texture | Node;
-    normalScale: Vector2 | Node;
-    metalnessMap: Texture | Node;
-    roughnessMap: Texture | Node;
-    envMap: CubeTexture | Node;
+    metalnessNode: Node | null;
+    roughnessNode: Node | null;
+
+    constructor(paramters?: ShaderMaterialParameters);
 }

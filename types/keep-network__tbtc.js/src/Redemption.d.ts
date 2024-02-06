@@ -1,6 +1,6 @@
 /// <reference types="node" />
 import { EventEmitter } from "events";
-import type { DepositBaseClass, RedemptionDetails } from './CommonTypes';
+import type { DepositBaseClass, RedemptionDetails } from "./CommonTypes";
 export interface AutoSubmitState {
     broadcastTransactionID: Promise<string>;
     confirmations: Promise<{
@@ -21,7 +21,7 @@ export default class Redemption {
     withdrawnEmitter: EventEmitter;
     receivedConfirmationEmitter: EventEmitter;
     constructor(deposit: DepositBaseClass, redemptionDetails?: RedemptionDetails);
-    autoSubmittingState?: AutoSubmitState;
+    autoSubmittingState?: AutoSubmitState | undefined;
     autoSubmit(): AutoSubmitState;
     proveWithdrawal(transactionID: string, confirmations: number): Promise<void>;
     onBitcoinTransactionSigned(transactionHandler: (transaction: string) => void): void;

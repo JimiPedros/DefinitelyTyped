@@ -1,32 +1,27 @@
-// Type definitions for jsbarcode 3.11
-// Project: https://github.com/lindell/JsBarcode
-// Definitions by: Domien Bakker <https://github.com/domienbakker>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /// <reference types="node" />
 
 declare namespace JsBarcode {
     function getModule(name: string): () => void;
     interface JsBarcodeOptions {
         format: string;
-        width?: number;
-        height?: number;
-        displayValue?: boolean;
-        text?: string;
-        fontOptions?: string;
-        font?: string;
-        textAlign?: string;
-        textPosition?: string;
-        textMargin?: number;
-        fontSize?: number;
-        background?: string;
-        lineColor?: string;
-        margin?: number;
-        marginTop?: number;
-        marginBottom?: number;
-        marginLeft?: number;
-        marginRight?: number;
-        flat?: boolean;
+        width?: number | undefined;
+        height?: number | undefined;
+        displayValue?: boolean | undefined;
+        text?: string | undefined;
+        fontOptions?: string | undefined;
+        font?: string | undefined;
+        textAlign?: string | undefined;
+        textPosition?: string | undefined;
+        textMargin?: number | undefined;
+        fontSize?: number | undefined;
+        background?: string | undefined;
+        lineColor?: string | undefined;
+        margin?: number | undefined;
+        marginTop?: number | undefined;
+        marginBottom?: number | undefined;
+        marginLeft?: number | undefined;
+        marginRight?: number | undefined;
+        flat?: boolean | undefined;
         valid?(valid: boolean): void;
     }
 }
@@ -41,7 +36,7 @@ declare namespace JsBarcode {
 declare function JsBarcode(
     svg: string | HTMLCanvasElement | HTMLImageElement | SVGElement,
     barcodeText: string,
-    barcodeOptions?: JsBarcode.JsBarcodeOptions
+    barcodeOptions?: JsBarcode.JsBarcodeOptions,
 ): void;
 
 export = JsBarcode;

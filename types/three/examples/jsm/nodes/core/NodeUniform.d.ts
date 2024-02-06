@@ -1,17 +1,17 @@
-import { Node } from './Node';
+import UniformNode from "./UniformNode.js";
 
-export interface NodeUniformParams {
-    name?: string;
-    type?: string;
-    node?: Node;
-    needsUpdate?: boolean;
-}
+export default class NodeUniform<Value> {
+    readonly isNodeUniform: true;
 
-export class NodeUniform {
-    constructor(params?: NodeUniformParams);
-    name: string | undefined;
-    type: string | undefined;
-    node: Node | undefined;
+    name: string;
+    type: string;
+    node: UniformNode<Value>;
     needsUpdate: boolean | undefined;
-    value: any;
+
+    constructor(name: string, type: string, node: UniformNode<Value>, needsUpdate?: boolean);
+
+    get(): Value;
+    set value(val: Value);
+
+    get id(): number;
 }

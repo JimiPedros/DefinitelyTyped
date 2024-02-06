@@ -1,19 +1,14 @@
-// Type definitions for simpleddp 2.2
-// Project: https://gregivy.github.io/simpleddp/
-// Definitions by: SPWizard01 <https://github.com/SPWizard01>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
-import { ddpEvent } from './ddpEvent';
-import { ddpEventListener } from './classes/ddpEventListener';
-import { ddpSubscription } from './classes/ddpSubscription';
-import { ddpCollection } from './classes/ddpCollection';
+import { ddpCollection } from "./classes/ddpCollection";
+import { ddpEventListener } from "./classes/ddpEventListener";
+import { ddpSubscription } from "./classes/ddpSubscription";
+import { ddpEvent } from "./ddpEvent";
 
 export {};
 
 type OptionalSpread<ST> = ST extends undefined ? [] : [ST];
 
 interface SocketProvider {
-    new (url: string): SocketProviderInstance;
+    new(url: string): SocketProviderInstance;
 }
 
 interface SocketProviderInstance {
@@ -42,28 +37,28 @@ export interface simpleDDPOptions {
      * Whether to establish the connection to the server upon instantiation. When false, one can manually establish the connection with the connect method.
      * @defaultValue true
      */
-    autoConnect?: boolean;
+    autoConnect?: boolean | undefined;
     /**
      * Whether to try to reconnect to the server when the socket connection closes, unless the closing was initiated by a call to the disconnect method.
      * @defaultValue true
      */
-    autoReconnect?: boolean;
+    autoReconnect?: boolean | undefined;
     /**
      * The interval in ms between reconnection attempts.
      * @defaultValue 1000
      */
-    reconnectInterval?: number;
+    reconnectInterval?: number | undefined;
 
     /**
      * Whether to clear all collections data after a reconnection. This invokes fake removed messages on every document.
      * @defaultValue true
      */
-    clearDataOnReconnection?: boolean;
+    clearDataOnReconnection?: boolean | undefined;
     /**
      * Maximum wait for a response from the server to the method call. Default no maxTimeout.
      * @defaultValue undefined
      */
-    maxTimeout?: number;
+    maxTimeout?: number | undefined;
 }
 
 export default class simpleDDP {
@@ -94,7 +89,7 @@ export default class simpleDDP {
     /**
      * Exports the data
      */
-    exportData(format?: 'string' | 'raw'): object | string;
+    exportData(format?: "string" | "raw"): object | string;
     /**
      * Exports the data
      */

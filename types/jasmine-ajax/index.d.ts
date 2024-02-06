@@ -1,19 +1,12 @@
-// Type definitions for jasmine-ajax 3.3
-// Project: https://github.com/jasmine/jasmine-ajax
-// Definitions by: Louis Grignon <https://github.com/lgrignon>
-//                 Julian Gonggrijp <https://github.com/jgonggrijp>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.8
-
 interface JasmineAjaxResponse {
-    status?: number;
-    statusText?: string;
-    responseText?: string;
-    response?: string;
-    responseURL?: string;
+    status?: number | undefined;
+    statusText?: string | undefined;
+    responseText?: string | undefined;
+    response?: string | undefined;
+    responseURL?: string | undefined;
     responseJSON?: any;
-    contentType?: string;
-    responseHeaders?: { [key: string]: string };
+    contentType?: string | undefined;
+    responseHeaders?: { [key: string]: string } | undefined;
 }
 
 interface JasmineAjaxRequest extends XMLHttpRequest {
@@ -49,8 +42,8 @@ interface JasmineAjaxRequestTracker {
 type JasmineAjaxRequestStubReturnOptions = JasmineAjaxResponse;
 
 interface JasmineAjaxRequestStubErrorOptions {
-    status?: number;
-    statusText?: string;
+    status?: number | undefined;
+    statusText?: string | undefined;
 }
 
 interface JasmineAjaxRequestStub {

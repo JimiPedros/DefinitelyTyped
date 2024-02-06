@@ -1,29 +1,22 @@
-// Type definitions for bull-arena 3.0
-// Project: https://github.com/bee-queue/arena/
-// Definitions by: Levi Bostian <https://github.com/levibostian>
-//                 Gaurav Sharma <https://github.com/gtpan77>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 4.0
-
 import { RequestHandler } from "express";
-import { ClientOpts } from "redis";
 import { Redis } from "ioredis";
+import { ClientOpts } from "redis";
 
 declare function Arena(
     options: BullArena.MiddlewareOptions,
-    listenOptions?: BullArena.MiddlewareListenOptions
+    listenOptions?: BullArena.MiddlewareListenOptions,
 ): RequestHandler;
 
 declare namespace BullArena {
     interface MiddlewareOptions {
-        Bull?: QueueConstructor;
-        Bee?: QueueConstructor;
-        BullMQ?: QueueConstructor;
+        Bull?: QueueConstructor | undefined;
+        Bee?: QueueConstructor | undefined;
+        BullMQ?: QueueConstructor | undefined;
         queues: Array<QueueOptions & ConnectionOptions>;
     }
 
     interface QueueConstructor {
-        new (queueName: string, opts?: QueueOptions): Queue;
+        new(queueName: string, opts?: QueueOptions): Queue;
     }
 
     interface Queue {
@@ -35,18 +28,18 @@ declare namespace BullArena {
     }
 
     interface MiddlewareListenOptions {
-        port?: number;
-        host?: string;
-        basePath?: string;
-        disableListen?: boolean;
-        useCdn?: boolean;
+        port?: number | undefined;
+        host?: string | undefined;
+        basePath?: string | undefined;
+        disableListen?: boolean | undefined;
+        useCdn?: boolean | undefined;
     }
 
     interface QueueOptions {
         name: string;
-        hostId?: string;
-        type?: "bull" | "bee" | "bullmq" | string;
-        prefix?: "bull" | "bq" | string;
+        hostId?: string | undefined;
+        type?: "bull" | "bee" | "bullmq" | string | undefined;
+        prefix?: "bull" | "bq" | string | undefined;
     }
 
     type ConnectionOptions =
@@ -56,9 +49,9 @@ declare namespace BullArena {
 
     interface PortHostConnectionOptions {
         host: string;
-        port?: number;
-        password?: string;
-        db?: string;
+        port?: number | undefined;
+        password?: string | undefined;
+        db?: string | undefined;
     }
 
     interface RedisUrlConnectionOptions {

@@ -1,8 +1,3 @@
-// Type definitions for find-project-root 1.1
-// Project: https://github.com/kirstein/find-project-root
-// Definitions by: Ika <https://github.com/ikatyang>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /**
  * Finds the project root by custom markers
  */
@@ -13,11 +8,11 @@ declare namespace findProjectRoot {
         /**
          * total number of levels the algorithm can traverse
          */
-        maxDepth?: number;
+        maxDepth?: number | undefined;
         /**
          * markers that it will search for
          */
-        markers?: string[];
+        markers?: string[] | undefined;
     }
 
     const MAX_DEPTH: 9;

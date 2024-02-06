@@ -1,23 +1,16 @@
-// Type definitions for ackee-tracker 5.0
-// Project: https://github.com/electerious/ackee-tracker
-// Definitions by: Pablo Sáez <https://github.com/PabloSzx>
-//                 Spencer Elliott <https://github.com/elliottsj>
-//                 Sebastian Krüger <https://github.com/mathe42>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 export interface TrackingOptions {
     /**
      * Defaults to `true`
      */
-    ignoreLocalhost?: boolean;
+    ignoreLocalhost?: boolean | undefined;
     /**
      * Defaults to `false`
      */
-    detailed?: boolean;
+    detailed?: boolean | undefined;
     /**
      * Defaults to `true`
      */
-    ignoreOwnVisits?: boolean;
+    ignoreOwnVisits?: boolean | undefined;
 }
 
 export interface AckeeTrackingReturn {
@@ -32,7 +25,7 @@ export interface ActionAttributes {
     /**
      * Positive float value that is added to all other numerical values of the key.
      */
-    value?: number;
+    value?: number | undefined;
 }
 
 export interface AckeeInstance {
@@ -67,5 +60,6 @@ export function create(server: string, options?: TrackingOptions): AckeeInstance
 
 export function attributes(detailed?: false): DefaultData;
 export function attributes(detailed: true): DefaultData & DetailedData;
+export function attributes(detailed?: boolean): DefaultData | (DefaultData & DetailedData);
 
 export function detect(): void;

@@ -1,11 +1,6 @@
-// Type definitions for metaget 1.0
-// Project: https://github.com/mrvautin/metaget#readme
-// Definitions by: Florian Imdahl <https://github.com/ffflorian>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 export interface Options {
-    headers?: Record<string, any>;
-    timeout?: number;
+    headers?: Record<string, any> | undefined;
+    timeout?: number | undefined;
 }
 
 export type Result = Record<string, string>;

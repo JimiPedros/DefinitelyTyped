@@ -1,18 +1,25 @@
-import { Material, MaterialParameters } from './Material';
-import { Color } from './../math/Color';
-import { Texture } from './../textures/Texture';
+import { Color, ColorRepresentation } from "../math/Color.js";
+import { Texture } from "../textures/Texture.js";
+import { Material, MaterialParameters } from "./Material.js";
 
 export interface PointsMaterialParameters extends MaterialParameters {
-    color?: Color | string | number;
-    map?: Texture | null;
-    alphaMap?: Texture | null;
-    size?: number;
-    sizeAttenuation?: boolean;
-    morphTargets?: boolean;
+    color?: ColorRepresentation | undefined;
+    map?: Texture | null | undefined;
+    alphaMap?: Texture | null | undefined;
+    size?: number | undefined;
+    sizeAttenuation?: boolean | undefined;
+    fog?: boolean | undefined;
 }
 
 export class PointsMaterial extends Material {
     constructor(parameters?: PointsMaterialParameters);
+
+    /**
+     * Read-only flag to check if a given object is of type {@link PointsMaterial}.
+     * @remarks This is a _constant_ value
+     * @defaultValue `true`
+     */
+    readonly isPointsMaterial: true;
 
     /**
      * @default 'PointsMaterial'
@@ -45,9 +52,10 @@ export class PointsMaterial extends Material {
     sizeAttenuation: boolean;
 
     /**
-     * @default false
+     * Whether the material is affected by fog. Default is true.
+     * @default fog
      */
-    morphTargets: boolean;
+    fog: boolean;
 
     setValues(parameters: PointsMaterialParameters): void;
 }

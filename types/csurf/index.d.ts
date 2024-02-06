@@ -1,9 +1,4 @@
-// Type definitions for csurf 1.11
-// Project: https://www.npmjs.org/package/csurf
-// Definitions by: Hiroki Horiuchi <https://github.com/horiuchi>
-//                 Piotr Błażejewicz <https://github.com/peterblazejewicz>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-import express = require('express-serve-static-core');
+import express = require("express-serve-static-core");
 
 declare global {
     namespace Express {
@@ -14,13 +9,13 @@ declare global {
 }
 
 declare function csurf(options?: {
-    value?: (req: express.Request) => string;
+    value?: ((req: express.Request) => string) | undefined;
     /**
      * @default false
      */
-    cookie?: csurf.CookieOptions | boolean;
-    ignoreMethods?: string[];
-    sessionKey?: string;
+    cookie?: csurf.CookieOptions | boolean | undefined;
+    ignoreMethods?: string[] | undefined;
+    sessionKey?: string | undefined;
 }): express.RequestHandler;
 
 declare namespace csurf {
@@ -28,7 +23,7 @@ declare namespace csurf {
         /**
          * @default '_csrf'
          */
-        key?: string;
+        key?: string | undefined;
     }
 }
 

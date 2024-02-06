@@ -1,7 +1,3 @@
-// Type definitions for webshot-node 0.18
-// Project: https://github.com/architjn/node-webshot#readme
-// Definitions by: Logan Kearsley <https://github.com/gliese1337>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 /// <reference types="node"/>
 
 export = webshot;
@@ -16,35 +12,35 @@ declare namespace webshot {
         windowSize?: {
             width: number;
             height: number;
-        };
+        } | undefined;
         screenSize?: {
             width: number;
             height: number;
-        };
+        } | undefined;
         shotSize?: {
-            width: 'window' | 'all' | number;
-            height: 'window' | 'all' | number;
-        };
+            width: "window" | "all" | number;
+            height: "window" | "all" | number;
+        } | undefined;
         shotOffset?: {
             left: number;
             right: number;
             top: number;
             bottom: number;
-        };
-        phantomPath?: string;
-        phantomConfig?: {[key: string]: any};
-        cookies?: Array<{[key: string]: any}> | null;
-        customHeaders?: Array<{[key: string]: any}> | null;
-        defaultWhiteBackground?: boolean;
-        customCSS?: string;
-        quality?: number;
-        streamType?: 'png' | 'jpg' | 'jpeg';
-        siteType?: 'url' | 'file' | 'html';
-        renderDelay?: number;
-        timeout?: number;
-        takeShotOnCallback?: boolean;
-        errorIfStatusIsNot200?: boolean;
-        errorIfJSException?: boolean;
-        captureSelector?: boolean;
+        } | undefined;
+        phantomPath?: string | undefined;
+        phantomConfig?: { [key: string]: any } | undefined;
+        cookies?: Array<{ [key: string]: any }> | null | undefined;
+        customHeaders?: Array<{ [key: string]: any }> | null | undefined;
+        defaultWhiteBackground?: boolean | undefined;
+        customCSS?: string | undefined;
+        quality?: number | undefined;
+        streamType?: "png" | "jpg" | "jpeg" | undefined;
+        siteType?: "url" | "file" | "html" | undefined;
+        renderDelay?: number | undefined;
+        timeout?: number | undefined;
+        takeShotOnCallback?: boolean | undefined;
+        errorIfStatusIsNot200?: boolean | undefined;
+        errorIfJSException?: boolean | undefined;
+        captureSelector?: boolean | undefined;
     }
 }

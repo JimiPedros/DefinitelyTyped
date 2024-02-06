@@ -5,19 +5,19 @@ import { RadioButtonProps } from "../RadioButton";
 export type TableSelectRowOnChange = (
     value: RadioButtonProps["value"] | InlineCheckboxProps["checked"],
     idOrName: RadioButtonProps["name"] | InlineCheckboxProps["id"],
-    evt: React.ChangeEvent<HTMLInputElement>
+    evt: React.ChangeEvent<HTMLInputElement>,
 ) => void;
 
 export interface TableSelectRowProps {
-    ariaLabel?: string,
-    checked: boolean,
-    className?: string,
-    disabled?: boolean,
-    id: string,
-    name: string,
-    onChange?: TableSelectRowOnChange;
-    onSelect(event: React.MouseEvent<HTMLInputElement>): void,
-    radio?: boolean,
+    ariaLabel?: string | undefined;
+    checked: boolean;
+    className?: string | undefined;
+    disabled?: boolean | undefined;
+    id: string;
+    name: string;
+    onChange?: TableSelectRowOnChange | undefined;
+    onSelect(event: React.MouseEvent<HTMLInputElement>): void;
+    radio?: boolean | undefined;
 }
 
 declare const TableSelectRow: React.FC<TableSelectRowProps>;

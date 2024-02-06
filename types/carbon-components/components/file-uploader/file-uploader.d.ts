@@ -28,14 +28,14 @@ declare class FileUploader extends FileUploader_base {
     _uploadHTML(): string;
     _closeButtonHTML(): string;
     _checkmarkHTML(): string;
-    _changeState: (state: string, detail: { filenameElement?: HTMLElement }, callback?: () => void) => void;
+    _changeState: (state: string, detail: { filenameElement?: HTMLElement | undefined }, callback?: () => void) => void;
     _getStateContainers(): HTMLElement[];
     _displayFilenames(files?: FileList): void;
     _removeState(element?: HTMLElement): void;
     _handleStateChange(elements: HTMLElement[], selectIndex?: number, html?: string): void;
     _handleDeleteButton: (evt: Event) => void;
     _handleDragDrop: (evt: MouseEvent) => void;
-    setState(state: 'edit' | 'update' | 'complete', selectIndex: number): void;
+    setState(state: "edit" | "update" | "complete", selectIndex: number): void;
     static components: WeakMap<object, any>;
     static get options(): FileUploaderOptions;
 }

@@ -1,8 +1,3 @@
-// Type definitions for react-native-square-in-app-payments 1.4
-// Project: https://github.com/square/in-app-payments-react-native-plugin
-// Definitions by: Phillip Sgardelis <https://github.com/Phillip-Cognativ>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 // https://github.com/square/in-app-payments-react-native-plugin/blob/master/docs/reference.md
 
 // Types
@@ -10,39 +5,39 @@
 /** Supported brands for `card` payments accepted during the In-App Payments SDK checkout flow. */
 export type Brand =
     /** Visa Inc. credit or debit card. */
-    | 'VISA'
+    | "VISA"
     /** Mastercard Incorporated credit or debit card. */
-    | 'MASTERCARD'
+    | "MASTERCARD"
     /** American Express Company credit card. */
-    | 'AMERICAN_EXPRESS'
+    | "AMERICAN_EXPRESS"
     /** Discover Financial Services credit card. */
-    | 'DISCOVER'
+    | "DISCOVER"
     /** Diners Club International credit card. */
-    | 'DISCOVER_DINERS'
+    | "DISCOVER_DINERS"
     /** Japan Credit Bureau credit card. */
-    | 'JCB'
+    | "JCB"
     /** China UnionPay credit card. */
-    | 'CHINA_UNION_PAY'
+    | "CHINA_UNION_PAY"
     /** An unexpected card type. */
-    | 'OTHER_BRAND';
+    | "OTHER_BRAND";
 
 /** The type of card (for example, Credit or Debit). Note: This property is experimental and will always return UNKNOWN. */
 export type CardType =
     /** Debit card */
-    | 'DEBIT'
+    | "DEBIT"
     /** Credit Card */
-    | 'CREDIT'
+    | "CREDIT"
     /** Unable to determine type of the card */
-    | 'UNKNOWN';
+    | "UNKNOWN";
 
 /** The prepaid type of the credit card (for example, a Prepaid Gift Card). Note: This property is experimental and will always return UNKNOWN */
 export type CardPrepaidType =
     /** Prepaid Card */
-    | 'PREPAID'
+    | "PREPAID"
     /** Card that is not prepaid */
-    | 'NOT_PREPAID'
+    | "NOT_PREPAID"
     /** Unable to determine whether the card is prepaid or not */
-    | 'UNKNOWN';
+    | "UNKNOWN";
 
 /** Represents the non-confidential details of a card. */
 export interface Card {
@@ -78,27 +73,27 @@ export enum SQIPErrorCodes {
      * In-App Payments SDK was used in an unexpected or unsupported way.
      * Returned by all methods
      */
-    USAGE_ERROR = 'usageError',
+    USAGE_ERROR = "usageError",
     /**
      * In-App Payments SDK could not connect to the network.
      * Returned by: `applePayNonceRequestFailureCallback`, `googlePayNonceRequestFailureCallback`
      */
-    NO_NETWORK = 'noNetwork',
+    NO_NETWORK = "noNetwork",
     /**
      * Square Buyer Verification SDK could not verify the provided card.
      * Returned by: `BuyerVerificationErrorCallback`
      */
-    FAILED = 'failed',
+    FAILED = "failed",
     /**
      * The result when the customer cancels the Square Buyer Verification flow before a card is successfully verified.
      * Returned by: `BuyerVerificationErrorCallback`
      */
-    CANCELED = 'canceled',
+    CANCELED = "canceled",
     /**
      * The version of the Square Buyer Verification SDK used by this application is no longer supported.
      * Returned by: `BuyerVerificationErrorCallback`
      */
-    UNSUPPORTED_SDK_VERSION = 'unsupportedSDKVersion',
+    UNSUPPORTED_SDK_VERSION = "unsupportedSDKVersion",
 }
 
 /** Signals that card entry exception of some sort has occurred. This class is the general class of exceptions produced by failed payment card processing operations. */
@@ -150,67 +145,67 @@ export namespace SQIPCardEntry {
          * The location that is being verified against.
          * Should be specified if calling `startCardEntryFlowWithBuyerVerification` method.
          */
-        squareLocationId?: string;
+        squareLocationId?: string | undefined;
         /**
          * Indicates the action (Charge or Store) that will be performed onto the card after retrieving the verification token.
          * Should be specified if calling `startCardEntryFlowWithBuyerVerification` method.
          */
-        buyerAction?: string;
+        buyerAction?: string | undefined;
         /**
          * Payment amount
          * Should be specified if calling `startCardEntryFlowWithBuyerVerification` method.
          */
-        amount?: number;
+        amount?: number | undefined;
         /**
          * ISO currency code of the payment amount.
          * Should be specified if calling `startCardEntryFlowWithBuyerVerification` method.
          */
-        currencyCode?: string;
+        currencyCode?: string | undefined;
         /**
          * Given name of the contact.
          * Should be specified if calling `startCardEntryFlowWithBuyerVerification` method.
          */
-        givenName?: string;
+        givenName?: string | undefined;
         /**
          * Last name of the contact.
          * Should be specified if calling `startCardEntryFlowWithBuyerVerification` method.
          */
-        familyName?: string;
+        familyName?: string | undefined;
         /**
          * The street address lines of the contact address.
          * Should be specified if calling `startCardEntryFlowWithBuyerVerification` method.
          */
-        addressLines?: string[];
+        addressLines?: string[] | undefined;
         /**
          * The city name of the contact address.
          * Should be specified if calling `startCardEntryFlowWithBuyerVerification` method.
          */
-        city?: string;
+        city?: string | undefined;
         /**
          * A 2-letter string containing the ISO 3166-1 country code of the contact address.
          * Should be specified if calling `startCardEntryFlowWithBuyerVerification` method.
          */
-        countryCode?: string;
+        countryCode?: string | undefined;
         /**
          * Email address of the contact.
          * Should be specified if calling `startCardEntryFlowWithBuyerVerification` method.
          */
-        email?: string;
+        email?: string | undefined;
         /**
          * The telephone number of the contact.
          * Should be specified if calling `startCardEntryFlowWithBuyerVerification` method.
          */
-        phone?: string;
+        phone?: string | undefined;
         /**
          * The postal code of the contact address.
          * Should be specified if calling `startCardEntryFlowWithBuyerVerification` method.
          */
-        postalCode?: string;
+        postalCode?: string | undefined;
         /**
          * The applicable administrative region (e.g., province, state) of the contact address.
          * Should be specified if calling `startCardEntryFlowWithBuyerVerification` method.
          */
-        region?: string;
+        region?: string | undefined;
     }
 
     /** Represents the result of a successful buyer verification request. */
@@ -233,34 +228,34 @@ export namespace SQIPCardEntry {
         b: number;
         a: number;
     }
-    type KeyboardAppearance = 'Light' | string;
+    type KeyboardAppearance = "Light" | string;
 
     /** Encapsulates options used to style the iOS native card entry view controller. */
     interface ThemeIOS {
         /** The text field font. */
-        font?: Font;
+        font?: Font | undefined;
         /** The background color of the card entry view controller. */
-        backgroundColor?: RGBAColor;
+        backgroundColor?: RGBAColor | undefined;
         /** The fill color for text fields. */
-        foregroundColor?: RGBAColor;
+        foregroundColor?: RGBAColor | undefined;
         /** The text field text color. */
-        textColor?: RGBAColor;
+        textColor?: RGBAColor | undefined;
         /** The text field placeholder text color. */
-        placeholderTextColor?: RGBAColor;
+        placeholderTextColor?: RGBAColor | undefined;
         /** The tint color reflected in the text field cursor and submit button background color when enabled. */
-        tintColor?: RGBAColor;
+        tintColor?: RGBAColor | undefined;
         /** The text color used to display informational messages. */
-        messageColor?: RGBAColor;
+        messageColor?: RGBAColor | undefined;
         /** The text color when the text is invalid. */
-        errorColor?: RGBAColor;
+        errorColor?: RGBAColor | undefined;
         /** The text of the entry completion button */
-        saveButtonTitle?: string;
+        saveButtonTitle?: string | undefined;
         /** The save button font. */
-        saveButtonFont?: Font;
+        saveButtonFont?: Font | undefined;
         /** The save button text color when enabled. */
-        saveButtonTextColor?: RGBAColor;
+        saveButtonTextColor?: RGBAColor | undefined;
         /** The appearance of the keyboard. */
-        keyboardAppearance?: KeyboardAppearance;
+        keyboardAppearance?: KeyboardAppearance | undefined;
     }
 
     // Callbacks
@@ -372,7 +367,7 @@ export namespace SQIPApplePay {
         /** ISO currency code of the payment amount. */
         currencyCode: string;
         /** Type of the payment summary item, PaymentTypeFinal for default */
-        paymentType?: ApplePayPaymentType;
+        paymentType?: ApplePayPaymentType | undefined;
     }
 
     // Callbacks

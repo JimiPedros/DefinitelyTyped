@@ -1,15 +1,10 @@
-// Type definitions for streamx 2.9
-// Project: https://github.com/streamxorg/streamx
-// Definitions by: Martin Heidegger <https://github.com/martinheidegger>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /// <reference types="node" />
 
-import { EventEmitter } from 'events';
-import { Writable as NodeJSWritable, Readable as NodeJSReadable, Stream as NodeJSStream } from 'stream';
+import { EventEmitter } from "events";
+import { Readable as NodeJSReadable, Stream as NodeJSStream, Writable as NodeJSWritable } from "stream";
 
 export interface AbortSignalLike {
-    addEventListener: (type: 'abort', listener: (this: AbortSignalLike, event: any) => any) => void;
+    addEventListener: (type: "abort", listener: (this: AbortSignalLike, event: any) => any) => void;
 }
 
 export type AnyStream = NodeJSStream | Stream;
@@ -28,15 +23,15 @@ export interface ResultCallback<T> {
 }
 
 export interface StreamOptions<TStream extends Stream<TByteType>, TByteType = any> {
-    highWaterMark?: number;
-    byteLength?: ByteLengthFunction<TStream, TByteType>;
-    open?: (this: TStream, cb: Callback) => void;
-    destroy?: (this: TStream, cb: Callback) => void;
-    predestroy?: (this: TStream, cb: Callback) => void;
-    signal?: AbortSignalLike;
+    highWaterMark?: number | undefined;
+    byteLength?: ByteLengthFunction<TStream, TByteType> | undefined;
+    open?: ((this: TStream, cb: Callback) => void) | undefined;
+    destroy?: ((this: TStream, cb: Callback) => void) | undefined;
+    predestroy?: ((this: TStream, cb: Callback) => void) | undefined;
+    signal?: AbortSignalLike | undefined;
 }
 
-/* tslint:disable-next-line interface-over-type-literal - cause: https://github.com/microsoft/TypeScript/issues/15300 */
+/* eslint-disable-next-line @typescript-eslint/consistent-type-definitions -- cause: https://github.com/microsoft/TypeScript/issues/15300 */
 export type StreamEvents = {
     open: () => void;
     close: () => void;
@@ -47,15 +42,14 @@ export type Events = { [event: string]: (...args: any[]) => void } | undefined;
 export type EventName<TEvents extends Events> = TEvents extends undefined ? string | symbol : keyof TEvents;
 export type EventListener<TEvents extends Events, TEvent extends string | symbol | number> = TEvents extends undefined
     ? (...args: any[]) => void
-    : TEvent extends keyof TEvents
-    ? TEvents[TEvent]
+    : TEvent extends keyof TEvents ? TEvents[TEvent]
     : (...args: any[]) => void;
 
 export class Stream<
     TByteType = any,
     TReadable extends boolean = false,
     TWritable extends boolean = false,
-    TEvents extends StreamEvents = StreamEvents
+    TEvents extends StreamEvents = StreamEvents,
 > extends EventEmitter {
     constructor(opts?: StreamOptions<Stream<TByteType>, TByteType>);
     _open(cb: Callback): void;
@@ -99,10 +93,10 @@ export interface BaseReadableOptions<
     TStream extends Readable<TType, TMapType, TByteType, any, any>,
     TType,
     TMapType,
-    TByteType
+    TByteType,
 > extends StreamOptions<TStream, TByteType> {
-    read?: (this: TStream, cb: ResultCallback<TType>) => void;
-    byteLengthReadable?: ByteLengthFunction<TStream, TByteType>;
+    read?: ((this: TStream, cb: ResultCallback<TType>) => void) | undefined;
+    byteLengthReadable?: ByteLengthFunction<TStream, TByteType> | undefined;
 }
 
 export type ReadableOptions<
@@ -110,25 +104,23 @@ export type ReadableOptions<
     TType,
     TMapType,
     TByteType,
-    TMapFallback = any
-> = BaseReadableOptions<TStream, TType, TMapType, TByteType> &
-    (
+    TMapFallback = any,
+> =
+    & BaseReadableOptions<TStream, TType, TMapType, TByteType>
+    & (
         | {}
         | {
-              map?: TMapFallback;
-              mapReadable: MapFunction<TStream, TType, TMapType>;
-          }
+            map?: TMapFallback | undefined;
+            mapReadable: MapFunction<TStream, TType, TMapType>;
+        }
         | {
-              map: MapFunction<TStream, TType, TMapType>;
-          }
+            map: MapFunction<TStream, TType, TMapType>;
+        }
     );
 
-type FromType<TData> = TData extends Readable
-    ? TData
-    : TData extends Iterable<infer TType>
-    ? Readable<TType>
-    : TData extends AsyncIterable<infer TType>
-    ? Readable<TType>
+type FromType<TData> = TData extends Readable ? TData
+    : TData extends Iterable<infer TType> ? Readable<TType>
+    : TData extends AsyncIterable<infer TType> ? Readable<TType>
     : Readable<TData>;
 
 export type ReadableEvents<TMapType> = StreamEvents & {
@@ -144,7 +136,7 @@ export class Readable<
     TByteType = TMapType,
     TReadable extends boolean = true,
     TWritable extends boolean = false,
-    TEvents extends ReadableEvents<TMapType> = ReadableEvents<TMapType>
+    TEvents extends ReadableEvents<TMapType> = ReadableEvents<TMapType>,
 > extends Stream<TByteType, TReadable, TWritable, TEvents> {
     constructor(opts?: ReadableOptions<Readable<TType, TMapType>, TType, TMapType, TByteType>);
     _read(cb: ResultCallback<TType>): void;
@@ -168,12 +160,12 @@ export interface BaseWritableOptions<
     TStream extends Writable<TType, TMapType, TByteType, any, any>,
     TType,
     TMapType,
-    TByteType
+    TByteType,
 > extends StreamOptions<TStream, TByteType> {
-    writev?: (this: TStream, batch: TMapType[], cb: Callback) => void;
-    write?: (this: TStream, data: TMapType, cb: Callback) => void;
-    final?: (this: TStream, cb: Callback) => void;
-    byteLengthWritable?: ByteLengthFunction<TStream, TByteType>;
+    writev?: ((this: TStream, batch: TMapType[], cb: Callback) => void) | undefined;
+    write?: ((this: TStream, data: TMapType, cb: Callback) => void) | undefined;
+    final?: ((this: TStream, cb: Callback) => void) | undefined;
+    byteLengthWritable?: ByteLengthFunction<TStream, TByteType> | undefined;
 }
 
 export type WritableOptions<
@@ -181,17 +173,18 @@ export type WritableOptions<
     TType,
     TMapType,
     TByteType,
-    TMapFallback = any
-> = BaseWritableOptions<TStream, TType, TMapType, TByteType> &
-    (
+    TMapFallback = any,
+> =
+    & BaseWritableOptions<TStream, TType, TMapType, TByteType>
+    & (
         | {}
         | {
-              map?: TMapFallback;
-              mapWritable: MapFunction<TStream, TType, TMapType>;
-          }
+            map?: TMapFallback | undefined;
+            mapWritable: MapFunction<TStream, TType, TMapType>;
+        }
         | {
-              map: MapFunction<TStream, TType, TMapType>;
-          }
+            map: MapFunction<TStream, TType, TMapType>;
+        }
     );
 
 export type WritableEvents<TType> = StreamEvents & {
@@ -207,7 +200,7 @@ export class Writable<
     TByteType = TType,
     TReadable extends boolean = false,
     TWritable extends boolean = true,
-    TEvents extends WritableEvents<TType> = WritableEvents<TType>
+    TEvents extends WritableEvents<TType> = WritableEvents<TType>,
 > extends Stream<TByteType, TReadable, TWritable, TEvents> {
     constructor(opts?: WritableOptions<Writable<TType, TMapType, TByteType>, TType, TMapType, TByteType>);
     _writev(batch: TMapType[], cb: Callback): void;
@@ -225,27 +218,29 @@ export type DuplexOptions<
     TInternal = TWriteType,
     TByteType = TWriteType | TReadType,
     TReadable extends boolean = boolean,
-    TWritable extends boolean = boolean
-> = BaseReadableOptions<TStream, TInternal, TReadType, TByteType> &
-    BaseWritableOptions<TStream, TWriteType, TInternal, TInternal> & {
-        map?: MapFunction<TStream, TByteType, TByteType>;
-        mapReadable?: MapFunction<TStream, TInternal, TReadType>;
-        mapWritable?: MapFunction<TStream, TWriteType, TInternal>;
+    TWritable extends boolean = boolean,
+> =
+    & BaseReadableOptions<TStream, TInternal, TReadType, TByteType>
+    & BaseWritableOptions<TStream, TWriteType, TInternal, TInternal>
+    & {
+        map?: MapFunction<TStream, TByteType, TByteType> | undefined;
+        mapReadable?: MapFunction<TStream, TInternal, TReadType> | undefined;
+        mapWritable?: MapFunction<TStream, TWriteType, TInternal> | undefined;
     };
 
 export type DuplexEvents<TWriteType, TReadType> = ReadableEvents<TReadType> & WritableEvents<TWriteType>;
 
 export class Duplex<
-        TWriteType = any,
-        TReadType = TWriteType,
-        TInternal = TWriteType,
-        TByteType = TWriteType | TReadType,
-        TReadable extends boolean = true,
-        TWritable extends boolean = true,
-        TEvents extends DuplexEvents<TWriteType, TReadType> = DuplexEvents<TWriteType, TReadType>
-    >
-    extends Readable<TInternal, TReadType, TByteType, TReadable, TWritable, TEvents>
-    implements Writable<TWriteType, TInternal, TByteType, TReadable, TWritable, TEvents> {
+    TWriteType = any,
+    TReadType = TWriteType,
+    TInternal = TWriteType,
+    TByteType = TWriteType | TReadType,
+    TReadable extends boolean = true,
+    TWritable extends boolean = true,
+    TEvents extends DuplexEvents<TWriteType, TReadType> = DuplexEvents<TWriteType, TReadType>,
+> extends Readable<TInternal, TReadType, TByteType, TReadable, TWritable, TEvents>
+    implements Writable<TWriteType, TInternal, TByteType, TReadable, TWritable, TEvents>
+{
     constructor(
         opts?: DuplexOptions<
             Duplex<TWriteType, TReadType, TInternal, TByteType, TReadable, TWritable>,
@@ -271,10 +266,10 @@ export interface TransformOptions<
     TInternal = TWriteType,
     TByteType = TWriteType | TReadType,
     TReadable extends boolean = true,
-    TWritable extends boolean = true
+    TWritable extends boolean = true,
 > extends DuplexOptions<TStream, TWriteType, TReadType, TInternal, TByteType, TReadable, TWritable> {
-    transform?: (this: TStream, data: TWriteType, cb: ResultCallback<TReadType>) => void;
-    flush?: (this: TStream, cb: Callback) => void;
+    transform?: ((this: TStream, data: TWriteType, cb: ResultCallback<TReadType>) => void) | undefined;
+    flush?: ((this: TStream, cb: Callback) => void) | undefined;
 }
 
 export class Transform<
@@ -283,7 +278,7 @@ export class Transform<
     TInternal = TWriteType,
     TByteType = TWriteType | TReadType,
     TReadable extends boolean = true,
-    TWritable extends boolean = true
+    TWritable extends boolean = true,
 > extends Duplex<TWriteType, TReadType, TInternal, TByteType, TReadable, TWritable> {
     constructor(
         opts?: TransformOptions<

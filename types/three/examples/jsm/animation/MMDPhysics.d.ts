@@ -1,9 +1,9 @@
-import { Bone, Euler, Matrix4, Object3D, Quaternion, SkinnedMesh, Vector3 } from '../../../src/Three';
+import { Bone, Euler, Matrix4, Object3D, Quaternion, SkinnedMesh, Vector3 } from "../../../src/Three.js";
 
 export interface MMDPhysicsParameter {
-    unitStep?: number;
-    maxStepNum?: number;
-    gravity?: Vector3;
+    unitStep?: number | undefined;
+    maxStepNum?: number | undefined;
+    gravity?: Vector3 | undefined;
 }
 
 export class MMDPhysics {
@@ -115,5 +115,10 @@ export class Constraint {
 }
 
 export class MMDPhysicsHelper extends Object3D {
-    constructor();
+    mesh: THREE.SkinnedMesh;
+    physics: MMDPhysics;
+    materials: [THREE.MeshBasicMaterial, THREE.MeshBasicMaterial, THREE.MeshBasicMaterial];
+
+    constructor(mesh: THREE.SkinnedMesh, physics: MMDPhysics);
+    dispose(): void;
 }

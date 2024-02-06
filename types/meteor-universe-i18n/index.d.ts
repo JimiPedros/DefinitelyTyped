@@ -1,16 +1,9 @@
-// Type definitions for non-npm package https://github.com/vazco/meteor-universe-i18n 1.14
-// Project: meteor-universe-i18n
-// Definitions by: Mathias Scherer <https://github.com/mathewmeconry>
-//                 Radosław Miernik <https://github.com/radekmie>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// Minimum TypeScript Version: 3.7
-
 /// <reference types="react" />
 /// <reference types="node" />
 
-// tslint:disable-next-line no-single-declare-module
-declare module 'meteor/universe:i18n' {
-    import { OutgoingHttpHeaders } from 'http';
+// eslint-disable-next-line @definitelytyped/no-single-declare-module
+declare module "meteor/universe:i18n" {
+    import { OutgoingHttpHeaders } from "http";
 
     namespace i18n {
         // component functions
@@ -19,11 +12,11 @@ declare module 'meteor/universe:i18n' {
             locale?: string,
             reactjs?: React.ReactInstance,
             type?: any,
-        ): new () => React.Component<ReactComponentProps>;
+        ): new() => React.Component<ReactComponentProps>;
 
         // translator functions
         function createTranslator(namespace: string, options?: TranslaterOptions): Translator;
-        function createReactiveTranslator(namespace: string, locale: string): new () => React.Component;
+        function createReactiveTranslator(namespace: string, locale: string): new() => React.Component;
 
         // translation setter / getter functions
         function addTranslation(locale: string, namespace: string, translation: string): void;
@@ -59,7 +52,7 @@ declare module 'meteor/universe:i18n' {
 
         // language getters
         let _locales: Readonly<{ [locale: string]: Readonly<i18nLocaleEntry> }>;
-        function getLanguages(type?: 'code' | 'name' | 'nativeNames'): string[];
+        function getLanguages(type?: "code" | "name" | "nativeNames"): string[];
         function getLanguageName(locale?: string): string;
         function getLanguageNativeName(locale?: string): string;
 
@@ -78,12 +71,12 @@ declare module 'meteor/universe:i18n' {
     }
 
     interface ReactComponentProps {
-        _locale?: string;
-        _tagType?: string;
-        _namespace?: string;
-        _props?: React.HTMLAttributes<React.Component>;
-        _translateProps?: string[];
-        _containerType?: string;
+        _locale?: string | undefined;
+        _tagType?: string | undefined;
+        _namespace?: string | undefined;
+        _props?: React.HTMLAttributes<React.Component> | undefined;
+        _translateProps?: string[] | undefined;
+        _containerType?: string | undefined;
     }
 
     type i18nLocaleEntry = [
@@ -101,37 +94,37 @@ declare module 'meteor/universe:i18n' {
         defaultLocale: string;
         open: string;
         close: string;
-        purify?: () => void;
+        purify?: (() => void) | undefined;
         hideMissing: boolean;
         hostUrl: string;
-        translationsHeaders?: OutgoingHttpHeaders;
+        translationsHeaders?: OutgoingHttpHeaders | undefined;
         sameLocaleOnServerConnection: boolean;
     }
 
     interface GetTranslationParams {
-        _locale?: string;
-        _namespace?: string;
+        _locale?: string | undefined;
+        _namespace?: string | undefined;
         [key: string]: any;
     }
 
     interface TranslaterOptions {
-        _locale?: string;
-        _purify?: boolean;
+        _locale?: string | undefined;
+        _purify?: boolean | undefined;
     }
 
     interface LoadLocaleParams {
-        fresh?: boolean;
-        async?: boolean;
-        silent?: boolean;
-        host?: string;
-        pathOnHost?: string;
+        fresh?: boolean | undefined;
+        async?: boolean | undefined;
+        silent?: boolean | undefined;
+        host?: string | undefined;
+        pathOnHost?: string | undefined;
     }
 
     interface LocateParams {
-        noDownload?: boolean;
-        silent?: boolean;
-        async?: boolean;
-        fresh?: boolean;
+        noDownload?: boolean | undefined;
+        silent?: boolean | undefined;
+        async?: boolean | undefined;
+        fresh?: boolean | undefined;
     }
 
     type Translator = (...args: any[]) => string;

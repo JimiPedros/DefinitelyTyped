@@ -1,8 +1,3 @@
-// Type definitions for oboe 2.1
-// Project: https://github.com/jimhigson/oboe.js
-// Definitions by: Jared Klopper <https://github.com/optical>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /// <reference types="node" />
 
 declare namespace oboe {
@@ -33,35 +28,35 @@ declare namespace oboe {
 
         start(callback: (status: number, headers: Object) => void): Oboe;
 
-        abort():void;
+        abort(): void;
 
-        emit(message: 'data' | 'end', data?: string): void;
+        emit(message: "data" | "end", data?: string): void;
 
         source: string;
     }
 
     interface CallbackSignature {
-          (node: any, pathOrHeaders: any, ancestors: Object[]): any;
+        (node: any, pathOrHeaders: any, ancestors: Object[]): any;
     }
 
     interface Options {
         url: string;
-        method?: string;
-        headers?: Object;
+        method?: string | undefined;
+        headers?: Object | undefined;
         body?: any;
-        cached?: boolean;
-        withCredentials?: boolean;
+        cached?: boolean | undefined;
+        withCredentials?: boolean | undefined;
     }
 
     interface FailReason {
-        thrown?: Error;
-        statusCode?: number;
-        body?: string;
-        jsonBody?: Object;
+        thrown?: Error | undefined;
+        statusCode?: number | undefined;
+        body?: string | undefined;
+        jsonBody?: Object | undefined;
     }
 
     interface PatternMap {
-      [pattern: string]: CallbackSignature
+        [pattern: string]: CallbackSignature;
     }
 }
 

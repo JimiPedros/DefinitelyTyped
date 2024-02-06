@@ -1,10 +1,3 @@
-// Type definitions for simplestorage.js 0.2
-// Project: https://github.com/andris9/simpleStorage
-// Definitions by: Áxel Costas Pena <https://github.com/axelcostaspena>
-//                 Michael Ledin <https://github.com/mxl>
-//                 Piotr Błażejewicz <https://github.com/peterblazejewicz>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 export = simpleStorage;
 export as namespace simpleStorage;
 
@@ -20,13 +13,13 @@ export as namespace simpleStorage;
  */
 declare const simpleStorage: simplestoragejs.SimpleStorage;
 
-declare const VERSION = '0.2.1';
+declare const VERSION = "0.2.1";
 
 declare namespace simplestoragejs {
-    type StatusCode = 'OK' | 'LS_NOT_AVAILABLE' | 'LS_DISABLED' | 'LS_QUOTA_EXCEEDED';
+    type StatusCode = "OK" | "LS_NOT_AVAILABLE" | "LS_DISABLED" | "LS_QUOTA_EXCEEDED";
 
     interface SimpleStorageError extends Error {
-        code?: StatusCode;
+        code?: StatusCode | undefined;
     }
 
     /**
@@ -39,7 +32,7 @@ declare namespace simplestoragejs {
     interface SimpleStorage {
         version: typeof VERSION;
 
-        status?: StatusCode | string | number;
+        status?: StatusCode | string | number | undefined;
 
         /**
          * Check if local storage can be used.
@@ -128,6 +121,6 @@ declare namespace simplestoragejs {
          * Sets the time-to-live (TTL) value in milliseconds for the given key/value.
          * @default 0
          */
-        TTL?: number;
+        TTL?: number | undefined;
     }
 }

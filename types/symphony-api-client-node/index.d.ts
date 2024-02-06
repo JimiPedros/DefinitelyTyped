@@ -1,9 +1,3 @@
-// Type definitions for symphony-api-client-node 1.1
-// Project: https://github.com/SymphonyPlatformSolutions/symphony-api-client-node
-// Definitions by: Mike Martinsky <https://github.com/mmartinsky>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.2
-
 import { Token } from "./SymBotAuth";
 
 export * from "./AdminClient";
@@ -29,43 +23,43 @@ export interface AppInfo {
 }
 
 export interface SymphonyConfiguration {
-    sessionAuthHost?: string;
-    sessionAuthPort?: number;
-    sessionAuthContextPath?: string;
-    keyAuthHost?: string;
-    keyAuthPort?: number;
-    keyAuthContextPath?: string;
-    podHost?: string;
-    podPort?: number;
-    podContextPath?: string;
-    agentHost?: string;
-    agentPort?: number;
-    agentContextPath?: string;
-    botUsername?: string;
-    botEmailAddress?: string;
-    botPrivateKeyPath?: string;
-    botPrivateKeyName?: string;
-    botCertPath?: string;
-    botCertName?: string;
-    botCertPassword?: string;
-    appId?: string;
-    appPrivateKeyPath?: string;
-    appPrivateKeyName?: string;
-    appCertPath?: string;
-    appCertName?: string;
-    appCertPassword?: string;
-    podProxyURL?: string;
-    podProxyUsername?: string;
-    podProxyPassword?: string;
-    proxyURL?: string;
-    proxyUsername?: string;
-    proxyPassword?: string;
-    keyManagerProxyURL?: string;
-    keyManagerProxyUsername?: string;
-    keyManagerProxyPassword?: string;
-    nodeTlsRejectUnauthorized?: number;
-    maxRetries?: number;
-    maxWaitInterval?: number;
+    sessionAuthHost?: string | undefined;
+    sessionAuthPort?: number | undefined;
+    sessionAuthContextPath?: string | undefined;
+    keyAuthHost?: string | undefined;
+    keyAuthPort?: number | undefined;
+    keyAuthContextPath?: string | undefined;
+    podHost?: string | undefined;
+    podPort?: number | undefined;
+    podContextPath?: string | undefined;
+    agentHost?: string | undefined;
+    agentPort?: number | undefined;
+    agentContextPath?: string | undefined;
+    botUsername?: string | undefined;
+    botEmailAddress?: string | undefined;
+    botPrivateKeyPath?: string | undefined;
+    botPrivateKeyName?: string | undefined;
+    botCertPath?: string | undefined;
+    botCertName?: string | undefined;
+    botCertPassword?: string | undefined;
+    appId?: string | undefined;
+    appPrivateKeyPath?: string | undefined;
+    appPrivateKeyName?: string | undefined;
+    appCertPath?: string | undefined;
+    appCertName?: string | undefined;
+    appCertPassword?: string | undefined;
+    podProxyURL?: string | undefined;
+    podProxyUsername?: string | undefined;
+    podProxyPassword?: string | undefined;
+    proxyURL?: string | undefined;
+    proxyUsername?: string | undefined;
+    proxyPassword?: string | undefined;
+    keyManagerProxyURL?: string | undefined;
+    keyManagerProxyUsername?: string | undefined;
+    keyManagerProxyPassword?: string | undefined;
+    nodeTlsRejectUnauthorized?: number | undefined;
+    maxRetries?: number | undefined;
+    maxWaitInterval?: number | undefined;
 }
 
 export const MESSAGEML_FORMAT: string;

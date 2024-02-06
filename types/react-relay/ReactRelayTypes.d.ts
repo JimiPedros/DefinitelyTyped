@@ -1,15 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
 
-import {
-    Disposable,
-    Environment,
-    Observer,
-    Variables,
-    _FragmentRefs,
-    _RefType
-} from 'relay-runtime';
+import { _FragmentRefs, _RefType, Disposable, Environment, Observer, Variables } from "relay-runtime";
 
-export { FragmentRef } from 'relay-runtime';
+export { FragmentRef } from "relay-runtime";
 
 export interface RelayProp {
     environment: Environment;
@@ -28,8 +21,8 @@ export interface RelayRefetchProp {
     hasMore: undefined; // ensures no RelayPaginationProp is used with a refetch container
 }
 export interface RefetchOptions {
-    force?: boolean;
-    fetchPolicy?: 'store-or-network' | 'network-only';
+    force?: boolean | undefined;
+    fetchPolicy?: "store-or-network" | "network-only" | undefined;
 }
 
 type ObserverOrCallback = Observer<void> | ((error: Error | null | undefined) => void);
@@ -51,10 +44,8 @@ export interface RelayPaginationProp {
     refetch: undefined; // ensures no RelayRefetchProp is used with a pagination container
 }
 
-export type FragmentOrRegularProp<T> = T extends _RefType<infer U>
-    ? _FragmentRefs<U>
-    : T extends ReadonlyArray<_RefType<infer U>>
-    ? ReadonlyArray<_FragmentRefs<U>>
+export type FragmentOrRegularProp<T> = T extends _RefType<infer U> ? _FragmentRefs<U>
+    : T extends ReadonlyArray<_RefType<infer U>> ? ReadonlyArray<_FragmentRefs<U>>
     : T;
 
 export type MappedFragmentProps<T> = {

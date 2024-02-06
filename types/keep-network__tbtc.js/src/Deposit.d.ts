@@ -2,8 +2,8 @@
 import { EventEmitter } from "events";
 import { FoundTransaction as BitcoinTransaction } from "./BitcoinHelpers.js";
 import Redemption from "./Redemption.js";
-import BN = require('bn.js');
-import type { TBTCConfig, DepositBaseClass, KeyPoint, RedemptionDetails, Contract } from './CommonTypes';
+import BN = require("bn.js");
+import type { Contract, DepositBaseClass, KeyPoint, RedemptionDetails, TBTCConfig } from "./CommonTypes";
 export const DepositStates: {
     START: number;
     AWAITING_SIGNER_SETUP: number;
@@ -67,9 +67,9 @@ export default class Deposit implements DepositBaseClass {
     bitcoinAddress: Promise<string>;
     receivedFundingConfirmationEmitter: EventEmitter;
     constructor(factory: DepositFactory, depositContract: Contract, keepContract: Contract);
-    _fundingTransaction?: Promise<BitcoinTransaction>;
+    _fundingTransaction?: Promise<BitcoinTransaction> | undefined;
     get fundingTransaction(): Promise<BitcoinTransaction>;
-    _fundingConfirmations?: Promise<FundingConfirmations>;
+    _fundingConfirmations?: Promise<FundingConfirmations> | undefined;
     get fundingConfirmations(): Promise<FundingConfirmations>;
     getLotSizeSatoshis(): Promise<BN>;
     getLotSizeTBTC(): Promise<BN>;
@@ -82,24 +82,29 @@ export default class Deposit implements DepositBaseClass {
     inVendingMachine(): Promise<boolean>;
     onBitcoinAddressAvailable(bitcoinAddressHandler: (address: string) => void): void;
     onActive(activeHandler: (deposit: Deposit) => void): void;
-    onReceivedFundingConfirmation(onReceivedFundingConfirmationHandler: (fundingConfirmation: {
-        transactionID: string;
-        confirmations: number;
-    }) => void): void;
+    onReceivedFundingConfirmation(
+        onReceivedFundingConfirmationHandler: (fundingConfirmation: {
+            transactionID: string;
+            confirmations: number;
+        }) => void,
+    ): void;
     mintTBTC(): Promise<string>;
     qualifyAndMintTBTC(): Promise<BN>;
     getRedemptionCost(): Promise<BN>;
     getCurrentRedemption(): Promise<Redemption | null>;
     requestRedemption(redeemerAddress: string): Promise<Redemption>;
     getLatestRedemptionDetails(): Promise<RedemptionDetails | null>;
-    autoSubmittingState?: AutoSubmitState;
+    autoSubmittingState?: AutoSubmitState | undefined;
     autoSubmit(): AutoSubmitState;
     autoMint(): AutoSubmitState;
     findOrWaitForPublicKeyPoint(): Promise<KeyPoint>;
     waitForActiveState(): Promise<boolean>;
     readPublishedPubkeyEvent(): Promise<any>;
     publicKeyPointToBitcoinAddress(publicKeyPoint: KeyPoint): Promise<string>;
-    constructFundingProof(bitcoinTransaction: Omit<BitcoinTransaction, 'value'>, confirmations: number): Promise<[Buffer, Buffer, Buffer, Buffer, number, Buffer, string, Buffer]>;
+    constructFundingProof(
+        bitcoinTransaction: Omit<BitcoinTransaction, "value">,
+        confirmations: number,
+    ): Promise<[Buffer, Buffer, Buffer, Buffer, number, Buffer, string, Buffer]>;
     redemptionDetailsFromEvent(redemptionRequestedEventArgs: {
         _utxoValue: string;
         _redeemerOutputScript: string;
@@ -123,6 +128,12 @@ export default class Deposit implements DepositBaseClass {
     notifyRedemptionSignatureTimedOut(): Promise<void>;
     notifyRedemptionProofTimeout(): Promise<void>;
     wasSignatureApproved(digest: string): Promise<boolean>;
-    provideFundingECDSAFraudProof(v: number, r: string, s: string, signedDigest: string, preimage: string): Promise<void>;
+    provideFundingECDSAFraudProof(
+        v: number,
+        r: string,
+        s: string,
+        signedDigest: string,
+        preimage: string,
+    ): Promise<void>;
     provideECDSAFraudProof(v: number, r: string, s: string, signedDigest: string, preimage: string): Promise<void>;
 }

@@ -1,11 +1,3 @@
-// Type definitions for js-yaml 3.12
-// Project: https://github.com/nodeca/js-yaml
-// Definitions by: Bart van der Schoor <https://github.com/Bartvds>
-//                 Sebastian Clausen <https://github.com/sclausen>
-//                 ExE Boss <https://github.com/ExE-Boss>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.2
-
 export as namespace jsyaml;
 
 export function safeLoad(str: string, opts?: LoadOptions): string | object | undefined;
@@ -13,7 +5,7 @@ export function load(str: string, opts?: LoadOptions): any;
 
 export class Type {
     constructor(tag: string, opts?: TypeConstructorOptions);
-    kind: 'sequence' | 'scalar' | 'mapping' | null;
+    kind: "sequence" | "scalar" | "mapping" | null;
     resolve(data: any): boolean;
     construct(data: any): any;
     instanceOf: object | null;
@@ -41,18 +33,18 @@ export function dump(obj: any, opts?: DumpOptions): string;
 
 export interface LoadOptions {
     /** string to be used as a file path in error/warning messages. */
-    filename?: string;
+    filename?: string | undefined;
     /** function to call on warning messages. */
     onWarning?(this: null, e: YAMLException): void;
     /** specifies a schema to use. */
-    schema?: SchemaDefinition;
+    schema?: SchemaDefinition | undefined;
     /** compatibility with JSON.parse behaviour. */
-    json?: boolean;
+    json?: boolean | undefined;
     /** listener for parse events */
     listener?(this: State, eventType: EventType, state: State): void;
 }
 
-export type EventType = 'open' | 'close';
+export type EventType = "open" | "close";
 
 export interface State {
     input: string;
@@ -74,47 +66,47 @@ export interface State {
 
 export interface DumpOptions {
     /** indentation width to use (in spaces). */
-    indent?: number;
+    indent?: number | undefined;
     /** when true, will not add an indentation level to array elements */
-    noArrayIndent?: boolean;
+    noArrayIndent?: boolean | undefined;
     /** do not throw on invalid types (like function in the safe schema) and skip pairs and single values with such types. */
-    skipInvalid?: boolean;
+    skipInvalid?: boolean | undefined;
     /** specifies level of nesting, when to switch from block to flow style for collections. -1 means block style everwhere */
-    flowLevel?: number;
+    flowLevel?: number | undefined;
     /** Each tag may have own set of styles.    - "tag" => "style" map. */
-    styles?: { [x: string]: any };
+    styles?: { [x: string]: any } | undefined;
     /** specifies a schema to use. */
-    schema?: SchemaDefinition;
+    schema?: SchemaDefinition | undefined;
     /** if true, sort keys when dumping YAML. If a function, use the function to sort the keys. (default: false) */
-    sortKeys?: boolean | ((a: any, b: any) => number);
+    sortKeys?: boolean | ((a: any, b: any) => number) | undefined;
     /** set max line width. (default: 80) */
-    lineWidth?: number;
+    lineWidth?: number | undefined;
     /** if true, don't convert duplicate objects into references (default: false) */
-    noRefs?: boolean;
+    noRefs?: boolean | undefined;
     /** if true don't try to be compatible with older yaml versions. Currently: don't quote "yes", "no" and so on, as required for YAML 1.1 (default: false) */
-    noCompatMode?: boolean;
+    noCompatMode?: boolean | undefined;
     /**
      * if true flow sequences will be condensed, omitting the space between `key: value` or `a, b`. Eg. `'[a,b]'` or `{a:{b:c}}`.
      * Can be useful when using yaml for pretty URL query params as spaces are %-encoded. (default: false).
      */
-    condenseFlow?: boolean;
+    condenseFlow?: boolean | undefined;
 }
 
 export interface TypeConstructorOptions {
-    kind?: 'sequence' | 'scalar' | 'mapping';
-    resolve?: (data: any) => boolean;
-    construct?: (data: any) => any;
-    instanceOf?: object;
-    predicate?: (data: object) => boolean;
-    represent?: ((data: object) => any) | { [x: string]: (data: object) => any };
-    defaultStyle?: string;
-    styleAliases?: { [x: string]: any };
+    kind?: "sequence" | "scalar" | "mapping" | undefined;
+    resolve?: ((data: any) => boolean) | undefined;
+    construct?: ((data: any) => any) | undefined;
+    instanceOf?: object | undefined;
+    predicate?: ((data: object) => boolean) | undefined;
+    represent?: ((data: object) => any) | { [x: string]: (data: object) => any } | undefined;
+    defaultStyle?: string | undefined;
+    styleAliases?: { [x: string]: any } | undefined;
 }
 
 export interface SchemaDefinition {
-    implicit?: any[];
-    explicit?: Type[];
-    include?: Schema[];
+    implicit?: any[] | undefined;
+    explicit?: Type[] | undefined;
+    include?: Schema[] | undefined;
 }
 
 /** only strings, arrays and plain objects: http://www.yaml.org/spec/1.2/spec.html#id2802346 */

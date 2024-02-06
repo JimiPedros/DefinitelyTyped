@@ -1,13 +1,8 @@
-// Type definitions for Vimeo 2.1
-// Project: https://github.com/vimeo/vimeo.js
-// Definitions by: Matthew Leffler <https://github.com/mattleff>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 export type CompleteCallback = (
-    err: string | undefined,
+    err: Error | null,
     result: any,
     statusCode?: number,
-    headers?: object
+    headers?: object,
 ) => void;
 
 export type ProgressCallback = (bytesUploaded: number, bytesTotal: number) => void;
@@ -17,8 +12,8 @@ export type UriCallback = (uri: string) => void;
 export interface RequestOptions {
     method: string;
     path: string;
-    query?: object;
-    headers?: object;
+    query?: object | undefined;
+    headers?: object | undefined;
 }
 
 export class Vimeo {

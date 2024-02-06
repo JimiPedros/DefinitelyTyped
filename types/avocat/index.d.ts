@@ -1,14 +1,9 @@
-// Type definitions for avocat 2.0
-// Project: https://github.com/hapipal/avocat#readme
-// Definitions by: Tim Costa <https://github.com/timcosta>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
-import { ResponseObject } from '@hapi/hapi';
-import { Boom } from '@hapi/boom';
+import { Boom } from "@hapi/boom";
+import { ResponseObject } from "@hapi/hapi";
 
 export interface Options {
-    return?: boolean;
-    includeMessage?: boolean;
+    return?: boolean | undefined;
+    includeMessage?: boolean | undefined;
 }
 
 // the return type has to be any because the following scenarios exist:

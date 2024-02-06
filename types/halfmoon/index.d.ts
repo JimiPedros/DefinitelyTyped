@@ -1,13 +1,8 @@
-// Type definitions for halfmoon 1.0
-// Project: https://github.com/halfmoonui/halfmoon#readme
-// Definitions by: Jadie Wadie <https://github.com/Jadie-Wadie>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 export const pageWrapper: Element;
 export const stickyAlerts: Element;
 
 /** The value of the `darkModeOn` cookie. */
-export let darkModeOn: 'yes' | 'no';
+export let darkModeOn: "yes" | "no";
 
 /**
  * Create a cookie.
@@ -62,12 +57,12 @@ export function toastAlert(alertId: string, timeShown?: number): void;
  * @param param Parameters for the sticky alert.
  */
 export function initStickyAlert(param: {
-    content?: string;
-    title?: string;
-    alertType?: string;
-    fillType?: string;
-    hasDismissButton?: boolean;
-    timeShown?: number;
+    content?: string | undefined;
+    title?: string | undefined;
+    alertType?: string | undefined;
+    fillType?: string | undefined;
+    hasDismissButton?: boolean | undefined;
+    timeShown?: number | undefined;
 }): void;
 
 /** An overridable click handler, to avoid adding another event listener to the DOM */

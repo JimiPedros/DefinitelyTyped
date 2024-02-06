@@ -1,9 +1,3 @@
-// Type definitions for scratch-vm (extension environment) 3.0
-// Project: https://github.com/LLK/scratch-vm#readme
-// Definitions by: Richie Bendall <https://github.com/Richienb>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.9
-
 type ValueOf<ObjectType> = ObjectType[keyof ObjectType];
 
 /** All the metadata needed to register an extension. */
@@ -12,22 +6,22 @@ interface ExtensionMetadata {
     id: string;
 
     /** The human-readable name of this extension. */
-    name?: string;
+    name?: string | undefined;
 
     /** URI for an image to be placed on each block in this extension. Data URI ok. */
-    blockIconURI?: string;
+    blockIconURI?: string | undefined;
 
     /** URI for an image to be placed on this extension's category menu item. Data URI ok. */
-    menuIconURI?: string;
+    menuIconURI?: string | undefined;
 
     /** Link to documentation content for this extension. */
-    docsURI?: string;
+    docsURI?: string | undefined;
 
     /** The blocks provided by this extension and the separators. */
     blocks: Array<ExtensionBlockMetadata | string>;
 
     /** Map of menu name to metadata for each of this extension's menus. */
-    menus?: Record<string, ExtensionMenuMetadata>;
+    menus?: Record<string, ExtensionMenuMetadata> | undefined;
 }
 
 /** All the metadata needed to register an extension block. */
@@ -36,7 +30,7 @@ interface ExtensionBlockMetadata {
     opcode: string;
 
     /** The name of the function implementing this block. Can be shared by other blocks/opcodes. */
-    func?: string;
+    func?: string | undefined;
 
     /** The type of block (command, reporter, etc.) being described. */
     blockType: ValueOf<Scratch.BlockType>;
@@ -45,28 +39,28 @@ interface ExtensionBlockMetadata {
     text: string;
 
     /** Whether this block should not appear in the block palette. */
-    hideFromPalette?: boolean;
+    hideFromPalette?: boolean | undefined;
 
     /** Whether the block ends a stack - no blocks can be connected after it. */
-    isTerminal?: boolean;
+    isTerminal?: boolean | undefined;
 
     /** Whether this block is a reporter but should not allow a monitor. */
-    disableMonitor?: boolean;
+    disableMonitor?: boolean | undefined;
 
     /** If this block is a reporter, this is the scope/context for its value. */
-    reporterScope?: ReporterScope;
+    reporterScope?: ReporterScope | undefined;
 
     /** Whether a hat block is edge-activated. */
-    isEdgeActivated?: boolean;
+    isEdgeActivated?: boolean | undefined;
 
     /** Whether a hat/event block should restart existing threads. */
-    shouldRestartExistingThreads?: boolean;
+    shouldRestartExistingThreads?: boolean | undefined;
 
     /** For flow control blocks, the number of branches/substacks for this block. */
-    branchCount?: number;
+    branchCount?: number | undefined;
 
     /** Map of argument placeholder to metadata about each arg. */
-    arguments?: Record<string, ExtensionArgumentMetadata>;
+    arguments?: Record<string, ExtensionArgumentMetadata> | undefined;
 }
 
 /** All the metadata needed to register an argument for an extension block. */
@@ -78,7 +72,7 @@ interface ExtensionArgumentMetadata {
     defaultValue?: any;
 
     /** The name of the menu to use for this argument, if any. */
-    menu?: string;
+    menu?: string | undefined;
 }
 
 /** All the metadata needed to register an extension drop-down menu. */
@@ -116,7 +110,7 @@ declare enum ReporterScope {
      * This reporter's value is specific to a particular target/sprite.
      * Another target may have a different value or may not even have a value.
      */
-    TARGET = "target"
+    TARGET = "target",
 }
 
 declare namespace Scratch {
@@ -149,7 +143,7 @@ declare namespace Scratch {
         NOTE = "note",
 
         /** Inline image on block (as part of the label). */
-        IMAGE = "image"
+        IMAGE = "image",
     }
 
     /** Types of blocks. */
@@ -185,7 +179,7 @@ declare namespace Scratch {
         LOOP = "loop",
 
         /** General reporter with numeric or string value. */
-        REPORTER = "reporter"
+        REPORTER = "reporter",
     }
 
     /** Default types of target supported by the VM. */
@@ -194,6 +188,6 @@ declare namespace Scratch {
         SPRITE = "sprite",
 
         /** Rendered target which cannot move but can change backdrops. */
-        STAGE = "stage"
+        STAGE = "stage",
     }
 }

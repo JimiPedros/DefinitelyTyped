@@ -1,9 +1,3 @@
-// Type definitions for maildev 1.0.0-rc3
-// Project: https://github.com/djfarrelly/maildev
-// Definitions by: Cyril Schumacher <https://github.com/cyrilschumacher>
-//                 Zak Barbuto <https://github.com/zbarbuto>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /// <reference types="node"/>
 
 /**
@@ -13,72 +7,72 @@ interface MailDevOptions {
     /**
      * IP Address to bind SMTP service to', '0.0.0.0'
      */
-    ip?: string;
+    ip?: string | undefined;
 
     /**
      * SMTP host for outgoing emails
      */
-    outgoingHost?: string;
+    outgoingHost?: string | undefined;
 
     /**
      * SMTP password for outgoing emails
      */
-    outgoingPass?: string;
+    outgoingPass?: string | undefined;
 
     /**
      * SMTP port for outgoing emails.
      */
-    outgoingPort?: number;
+    outgoingPort?: number | undefined;
 
     /**
      * SMTP user for outgoing emails
      */
-    outgoingUser?: string;
+    outgoingUser?: string | undefined;
 
     /**
      * Use SMTP SSL for outgoing emails
      */
-    outgoingSecure?: boolean;
+    outgoingSecure?: boolean | undefined;
 
     /**
      * SMTP port to catch emails.
      */
-    smtp?: number;
+    smtp?: number | undefined;
 
     /**
      * Port to use for web UI
      */
-    web?: number;
+    web?: number | undefined;
 
     /**
      * IP Address to bind HTTP service to
      */
-    webIp?: string;
+    webIp?: string | undefined;
 
     /**
      * Do not start web UI
      */
-    disableWeb?: boolean;
+    disableWeb?: boolean | undefined;
 
     /**
      * Do not output console.log messages
      */
-    silent?: boolean;
+    silent?: boolean | undefined;
 
     /**
      * HTTP user for GUI
      */
-    webUser?: string;
+    webUser?: string | undefined;
 
     /**
      * HTTP password for GUI
      */
-    webPass?: string;
+    webPass?: string | undefined;
 
     /**
      * Open the Web GUI after startup
      */
-    open?: boolean;
+    open?: boolean | undefined;
 }
 
 /**
@@ -88,12 +82,12 @@ interface Mail {
     /**
      * Identifier.
      */
-    id?: string;
+    id?: string | undefined;
 
     /**
      * Client.
      */
-    envelope?: Object;
+    envelope?: Object | undefined;
 }
 
 declare module "maildev" {
@@ -130,7 +124,7 @@ declare module "maildev" {
          *
          * @param callback The error callback.
          */
-        end(callback?: (error: Error) => void): void;
+        close(callback?: (error: Error) => void): void;
 
         /**
          * Accepts e-mail identifier, returns email object.
@@ -150,7 +144,7 @@ declare module "maildev" {
         /**
          * Returns array of all e-mail.
          */
-        getAllEmail(done: (error: Error, emails: Array<Object>) => void): void;
+        getAllEmail(done: (error: Error, emails: Object[]) => void): void;
 
         /**
          * Starts the SMTP server.

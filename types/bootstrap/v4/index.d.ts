@@ -1,10 +1,3 @@
-// Type definitions for Bootstrap 4.6
-// Project: https://github.com/twbs/bootstrap/, https://getbootstrap.com
-// Definitions by: denisname <https://github.com/denisname>
-//                 Piotr Błażejewicz <https://github.com/peterblazejewicz>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.3
-
 /// <reference types="jquery"/>
 
 import * as Popper from "popper.js";
@@ -17,9 +10,15 @@ export as namespace Bootstrap;
 
 export type Placement = "auto" | "top" | "bottom" | "left" | "right";
 
-export type Trigger = "click" | "hover" | "focus" | "manual" |
-    "click hover" | "click focus" | "hover focus" |
-    "click hover focus";
+export type Trigger =
+    | "click"
+    | "hover"
+    | "focus"
+    | "manual"
+    | "click hover"
+    | "click focus"
+    | "hover focus"
+    | "click hover focus";
 
 export interface Delay {
     show: number;
@@ -33,8 +32,8 @@ export interface TooltipInstance<T extends TooltipOption> {
 }
 
 export interface OffsetsExtend {
-    popper?: Partial<Popper.Offset>;
-    reference?: Partial<Popper.Offset>;
+    popper?: Partial<Popper.Offset> | undefined;
+    reference?: Partial<Popper.Offset> | undefined;
 }
 
 // --------------------------------------------------------------------------------------
@@ -47,14 +46,14 @@ export interface CarouselOption {
      *
      * @default 5000
      */
-    interval?: false | number;
+    interval?: false | number | undefined;
 
     /**
      * Whether the carousel should react to keyboard events.
      *
      * @default true
      */
-    keyboard?: boolean;
+    keyboard?: boolean | undefined;
 
     /**
      * Use to easily control the position of the carousel. It accepts the keywords prev or next, which alters the slide position
@@ -62,7 +61,7 @@ export interface CarouselOption {
      *
      * @default false
      */
-    slide?: "next" | "prev" | false;
+    slide?: "next" | "prev" | false | undefined;
 
     /**
      * If set to "hover", pauses the cycling of the carousel on `mouseenter` and resumes the cycling of the carousel on `mouseleave`.
@@ -73,28 +72,28 @@ export interface CarouselOption {
      *
      * @default "hover"
      */
-    pause?: "hover" | false;
+    pause?: "hover" | false | undefined;
 
     /**
      * Autoplays the carousel after the user manually cycles the first item.
      * If `carousel`, autoplays the carousel on load.
      * @default false
      */
-    ride?: 'carousel' | boolean;
+    ride?: "carousel" | boolean | undefined;
 
     /**
      * Whether the carousel should cycle continuously or have hard stops.
      *
      * @default true
      */
-    wrap?: boolean;
+    wrap?: boolean | undefined;
 
     /**
      * Whether the carousel should support left/right swipe interactions on touchscreen devices.
      *
      * @default true
      */
-    touch?: boolean;
+    touch?: boolean | undefined;
 }
 
 export interface CollapseOption {
@@ -105,14 +104,14 @@ export interface CollapseOption {
      *
      * @default ""
      */
-    parent?: string | JQuery | Element;
+    parent?: string | JQuery | Element | undefined;
 
     /**
      * Toggles the collapsible element on invocation.
      *
      * @default true
      */
-    toggle?: boolean;
+    toggle?: boolean | undefined;
 }
 
 export interface DropdownOption {
@@ -122,7 +121,7 @@ export interface DropdownOption {
      *
      * @default 0
      */
-    offset?: number | string | ((this: DropdownOption, offset: OffsetsExtend) => OffsetsExtend);
+    offset?: number | string | ((this: DropdownOption, offset: OffsetsExtend) => OffsetsExtend) | undefined;
 
     /**
      * Allow Dropdown to flip in case of an overlapping on the reference element.
@@ -130,7 +129,7 @@ export interface DropdownOption {
      *
      * @default true
      */
-    flip?: boolean;
+    flip?: boolean | undefined;
 
     /**
      * Overflow constraint boundary of the dropdown menu.
@@ -139,7 +138,7 @@ export interface DropdownOption {
      *
      * @default "scrollParent"
      */
-    boundary?: Popper.Boundary | HTMLElement;
+    boundary?: Popper.Boundary | HTMLElement | undefined;
 
     /**
      * Reference element of the dropdown menu. Accepts the values of 'toggle', 'parent', or an HTMLElement reference.
@@ -147,14 +146,14 @@ export interface DropdownOption {
      *
      * @default "toggle"
      */
-    reference?: "toggle" | "parent" | HTMLElement;
+    reference?: "toggle" | "parent" | HTMLElement | undefined;
 
     /**
      * By default, we use Popper.js for dynamic positioning. Disable this with 'static'.
      *
      * @default "dynamic"
      */
-    display?: "dynamic" | "static";
+    display?: "dynamic" | "static" | undefined;
 }
 
 export interface ModalOption {
@@ -164,28 +163,28 @@ export interface ModalOption {
      *
      * @default true
      */
-    backdrop?: boolean | "static";
+    backdrop?: boolean | "static" | undefined;
 
     /**
      * Closes the modal when escape key is pressed.
      *
      * @default true
      */
-    keyboard?: boolean;
+    keyboard?: boolean | undefined;
 
     /**
      * Puts the focus on the modal when initialized.
      *
      * @default true
      */
-    focus?: boolean;
+    focus?: boolean | undefined;
 
     /**
      * Shows the modal when initialized.
      *
      * @default true
      */
-    show?: boolean;
+    show?: boolean | undefined;
 }
 
 export interface PopoverOption extends TooltipOption {
@@ -196,7 +195,7 @@ export interface PopoverOption extends TooltipOption {
      *
      * @default ""
      */
-    content?: string | Element | ((this: Element) => string | Element);
+    content?: string | Element | JQuery | ((this: Element) => string | Element | JQuery) | undefined;
 }
 
 export interface ScrollspyOption {
@@ -208,14 +207,14 @@ export interface ScrollspyOption {
      *
      * @default "auto"
      */
-    method?: "auto" | "offset" | "position";
+    method?: "auto" | "offset" | "position" | undefined;
 
     /**
      * Pixels to offset from top when calculating position of scroll.
      *
      * @default 10
      */
-    offset?: number;
+    offset?: number | undefined;
 
     /**
      * A selector of the parent element or the parent element itself
@@ -223,7 +222,7 @@ export interface ScrollspyOption {
      *
      * @default ""
      */
-    target?: string | JQuery<Element> | Element;
+    target?: string | JQuery<Element> | Element | undefined;
 }
 
 export interface ToastOption {
@@ -232,21 +231,21 @@ export interface ToastOption {
      *
      * @default true
      */
-    animation?: boolean;
+    animation?: boolean | undefined;
 
     /**
      * Auto hide the toast.
      *
      * @default true
      */
-    autohide?: boolean;
+    autohide?: boolean | undefined;
 
     /**
      * Delay hiding the toast in millisecond.
      *
      * @default 500
      */
-    delay?: number;
+    delay?: number | undefined;
 }
 
 export interface TooltipOption {
@@ -255,7 +254,7 @@ export interface TooltipOption {
      *
      * @default true
      */
-    animation?: boolean;
+    animation?: boolean | undefined;
 
     /**
      * Appends the tooltip or popover to a specific element. Example: `container: 'body'`.
@@ -265,7 +264,7 @@ export interface TooltipOption {
      *
      * @default false
      */
-    container?: string | Element | false;
+    container?: string | Element | false | undefined;
 
     /**
      * Delay showing and hiding the tooltip or popover (ms) - does not apply to manual trigger type.
@@ -274,7 +273,7 @@ export interface TooltipOption {
      *
      * @default 0
      */
-    delay?: number | Delay;
+    delay?: number | Delay | undefined;
 
     /**
      * Allow HTML in the tooltip or popover.
@@ -284,7 +283,7 @@ export interface TooltipOption {
      *
      * @default false
      */
-    html?: boolean;
+    html?: boolean | undefined;
 
     /**
      * How to position the tooltip or popover - auto | top | bottom | left | right.
@@ -296,7 +295,10 @@ export interface TooltipOption {
      *
      * @default tooltip: "top", popover: "right"
      */
-    placement?: Placement | ((this: TooltipInstance<this>, node: HTMLElement, trigger: Element) => Placement);
+    placement?:
+        | Placement
+        | ((this: TooltipInstance<this>, node: HTMLElement, trigger: Element) => Placement)
+        | undefined;
 
     /**
      * If a selector is provided, tooltip or popover objects will be delegated to the specified targets.
@@ -304,7 +306,7 @@ export interface TooltipOption {
      *
      * @default false
      */
-    selector?: string | false;
+    selector?: string | false | undefined;
 
     /**
      * Base HTML to use when creating the tooltip or popover.
@@ -315,7 +317,7 @@ export interface TooltipOption {
      * @default '<div class="tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
      * @default '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
      */
-    template?: string;
+    template?: string | undefined;
 
     /**
      * Default title value if title attribute isn't present.
@@ -324,7 +326,7 @@ export interface TooltipOption {
      *
      * @default ""
      */
-    title?: string | Element | ((this: Element) => string | Element);
+    title?: string | Element | JQuery | ((this: Element) => string | Element | JQuery) | undefined;
 
     /**
      * How tooltip or popover is triggered - click | hover | focus | manual. You may pass multiple triggers; separate them with a space.
@@ -333,7 +335,7 @@ export interface TooltipOption {
      *
      * @default tooltip: "hover focus", popover: "click"
      */
-    trigger?: Trigger;
+    trigger?: Trigger | undefined;
 
     /**
      * Offset of the tooltip or popover relative to its target.
@@ -341,7 +343,7 @@ export interface TooltipOption {
      *
      * @default 0
      */
-    offset?: number | string;
+    offset?: number | string | undefined;
 
     /**
      * Allow to specify which position Popper will use on fallback.
@@ -349,7 +351,7 @@ export interface TooltipOption {
      *
      * @default "flip"
      */
-    fallbackPlacement?: Popper.Behavior | ReadonlyArray<Popper.Behavior>;
+    fallbackPlacement?: Popper.Behavior | readonly Popper.Behavior[] | undefined;
 
     /**
      * Add classes to the tooltip when it is shown. Note that these classes will be added in addition to any classes specified in the template.
@@ -357,7 +359,7 @@ export interface TooltipOption {
      * You can also pass a function that should return a single string containing additional class names.
      * @default ''
      */
-    customClass?: string | (() => string);
+    customClass?: string | (() => string) | undefined;
 
     /**
      * Overflow constraint boundary of the tooltip or popover.
@@ -367,39 +369,41 @@ export interface TooltipOption {
      *
      * @default "scrollParent"
      */
-    boundary?: Popper.Boundary | HTMLElement;
+    boundary?: Popper.Boundary | HTMLElement | undefined;
 
     /**
      * Enable or disable the sanitization. If activated 'template', 'content' and 'title' options will be sanitized.
      *
      * @default true
      */
-    sanitize?: boolean;
+    sanitize?: boolean | undefined;
 
     /**
      * Object which contains allowed attributes and tags.
      */
-    whiteList?: {[key: string]: string[]};
+    whiteList?: { [key: string]: string[] } | undefined;
 
     /**
      * Here you can supply your own sanitize function. This can be useful if you prefer to use a dedicated library to perform sanitization.
      *
      * @default null
      */
-    sanitizeFn?: null | ((input: string) => string);
+    sanitizeFn?: null | ((input: string) => string) | undefined;
 
     /**
      * To change Bootstrap's default Popper.js config,
      * see {@link https://popper.js.org/docs/v1/ Popper.js's configuration}
      */
-    popperConfig?: null | object;
+    popperConfig?: null | object | undefined;
 }
 
 // --------------------------------------------------------------------------------------
 // Events
 // --------------------------------------------------------------------------------------
 
-export interface CarouselEventHandler<TElement> extends JQuery.TriggeredEvent<TElement, undefined, HTMLElement, HTMLElement> {
+export interface CarouselEventHandler<TElement>
+    extends JQuery.TriggeredEvent<TElement, undefined, HTMLElement, HTMLElement>
+{
     /**
      * The carousel dom element.
      */
@@ -426,7 +430,9 @@ export interface CarouselEventHandler<TElement> extends JQuery.TriggeredEvent<TE
     to: number;
 }
 
-export interface DropdownsEventHandler<TElement> extends JQuery.TriggeredEvent<TElement, undefined, HTMLElement, HTMLElement> {
+export interface DropdownsEventHandler<TElement>
+    extends JQuery.TriggeredEvent<TElement, undefined, HTMLElement, HTMLElement>
+{
     /**
      * The the dropdown's toggle and the dropdown menu container (the `.dropdown` element).
      */
@@ -438,7 +444,9 @@ export interface DropdownsEventHandler<TElement> extends JQuery.TriggeredEvent<T
     relatedTarget: HTMLElement;
 }
 
-export interface ModalEventHandler<TElement> extends JQuery.TriggeredEvent<TElement, undefined, HTMLElement, HTMLElement> {
+export interface ModalEventHandler<TElement>
+    extends JQuery.TriggeredEvent<TElement, undefined, HTMLElement, HTMLElement>
+{
     /**
      * The modal dom element.
      */
@@ -451,7 +459,9 @@ export interface ModalEventHandler<TElement> extends JQuery.TriggeredEvent<TElem
     relatedTarget: HTMLElement | undefined;
 }
 
-export interface TapEventHandler<TElement> extends JQuery.TriggeredEvent<TElement, undefined, HTMLElement, HTMLElement> {
+export interface TapEventHandler<TElement>
+    extends JQuery.TriggeredEvent<TElement, undefined, HTMLElement, HTMLElement>
+{
     /**
      * * For `show.bs.tab` and `shown.bs.tab`, is the newly activated tab.
      * * For `hide.bs.tab`, is the current active tab.
@@ -471,12 +481,27 @@ export type AlertEvent = "close.bs.alert" | "closed.bs.alert";
 export type CarouselEvent = "slide.bs.carousel" | "slid.bs.carousel";
 export type CollapseEvent = "show.bs.collapse" | "shown.bs.collapse" | "hide.bs.collapse" | "hidden.bs.collapse";
 export type DropdownEvent = "show.bs.dropdown" | "shown.bs.dropdown" | "hide.bs.dropdown" | "hidden.bs.dropdown";
-export type ModalEvent = "show.bs.modal" | "shown.bs.modal" | "hide.bs.modal" | "hidden.bs.modal" | "hidePrevented.bs.modal";
-export type PopoverEvent = "show.bs.popover" | "shown.bs.popover" | "hide.bs.popover" | "hidden.bs.popover" | "inserted.bs.popover";
+export type ModalEvent =
+    | "show.bs.modal"
+    | "shown.bs.modal"
+    | "hide.bs.modal"
+    | "hidden.bs.modal"
+    | "hidePrevented.bs.modal";
+export type PopoverEvent =
+    | "show.bs.popover"
+    | "shown.bs.popover"
+    | "hide.bs.popover"
+    | "hidden.bs.popover"
+    | "inserted.bs.popover";
 export type ScrollspyEvent = "activate.bs.scrollspy";
 export type TapEvent = "show.bs.tab" | "shown.bs.tab" | "hide.bs.tab" | "hidden.bs.tab";
 export type ToastEvent = "show.bs.toast" | "shown.bs.toast" | "hide.bs.toast" | "hidden.bs.toast";
-export type TooltipEvent = "show.bs.tooltip" | "shown.bs.tooltip" | "hide.bs.tooltip" | "hidden.bs.tooltip" | "inserted.bs.tooltip";
+export type TooltipEvent =
+    | "show.bs.tooltip"
+    | "shown.bs.tooltip"
+    | "hide.bs.tooltip"
+    | "hidden.bs.tooltip"
+    | "inserted.bs.tooltip";
 
 // --------------------------------------------------------------------------------------
 // jQuery
@@ -579,13 +604,15 @@ declare global {
          * Returns to the caller before the popover has actually been shown or hidden (i.e. before the `shown.bs.popover` or `hidden.bs.popover` event occurs).
          * This is considered a "manual" triggering of the popover.
          */
-        popover(action: "show" | "hide" | "toggle" | "dispose" | "enable" | "disable" | "toggleEnabled" | "update"): this;
+        popover(
+            action: "show" | "hide" | "toggle" | "dispose" | "enable" | "disable" | "toggleEnabled" | "update",
+        ): this;
         /**
          * Initializes popovers for an element collection.
          */
         popover(options?: PopoverOption): this;
 
-// tslint:disable:jsdoc-format
+        // tslint:disable:jsdoc-format
         /**
          * Call a method on the scrollspy element:
          * * `refresh` – When using scrollspy in conjunction with adding or removing of elements from the DOM, you'll need to call the refresh, see example.
@@ -598,7 +625,7 @@ $('[data-spy="scroll"]').each(function () {
 })
 ```
          */
-// tslint:enable:jsdoc-format
+        // tslint:enable:jsdoc-format
         scrollspy(action: "refresh" | "dispose"): this;
         /**
          * Add scrollspy behavior to a topbar navigation.
@@ -644,7 +671,9 @@ $('[data-spy="scroll"]').each(function () {
          * Returns to the caller before the tooltip has actually been shown or hidden (i.e. before the `shown.bs.tooltip` or `hidden.bs.tooltip` event occurs).
          * This is considered a "manual" triggering of the tooltip.
          */
-        tooltip(action: "show" | "hide" | "toggle" | "dispose" | "enable" | "disable" | "toggleEnabled" | "update"): this;
+        tooltip(
+            action: "show" | "hide" | "toggle" | "dispose" | "enable" | "disable" | "toggleEnabled" | "update",
+        ): this;
         /**
          * Attaches a tooltip handler to an element collection.
          */
@@ -656,7 +685,7 @@ $('[data-spy="scroll"]').each(function () {
         on(events: TapEvent, handler: JQuery.EventHandlerBase<TElement, TapEventHandler<TElement>>): this;
         on(
             events: AlertEvent | CollapseEvent | PopoverEvent | ScrollspyEvent | ToastEvent | TooltipEvent,
-            handler: JQuery.EventHandler<TElement>
+            handler: JQuery.EventHandler<TElement>,
         ): this;
     }
 }

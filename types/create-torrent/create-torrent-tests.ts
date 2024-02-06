@@ -1,27 +1,31 @@
-import createTorrent = require('create-torrent');
-import fs = require('fs');
+import createTorrent = require("create-torrent");
+import fs = require("fs");
 
-createTorrent('test', (err, torrent) => {
+createTorrent("test", (err, torrent) => {
     if (err) {
         return;
     }
 
-    fs.writeFileSync('test.torrent', torrent);
+    fs.writeFileSync("test.torrent", torrent);
 });
 
 createTorrent(
-    'test',
+    "test",
     {
-        name: 'test',
-        comment: 'test',
-        createdBy: 'test',
+        name: "test",
+        comment: "test",
+        createdBy: "test",
         creationDate: Date.now(),
         private: true,
         pieceLength: 100,
-        announceList: [['test']],
-        urlList: ['test'],
+        announceList: [["test"]],
+        urlList: ["test"],
         info: {
-            test: 'test',
+            test: "test",
+        },
+        onProgress: (b1, b2) => {
+            const percent = Math.round(b1 / b2 * 100);
+            console.info(`${percent} % ${b1} B - ${b2} B`);
         },
     },
     (err, torrent) => {
@@ -29,6 +33,6 @@ createTorrent(
             return;
         }
 
-        fs.writeFileSync('test.torrent', torrent);
+        fs.writeFileSync("test.torrent", torrent);
     },
 );

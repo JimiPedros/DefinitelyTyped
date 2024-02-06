@@ -1,8 +1,3 @@
-// Type definitions for pretty-proptypes 1.1
-// Project: https://github.com/atlassian/extract-react-types#readme
-// Definitions by: Nathan Bierema <https://github.com/Methuselah96>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 import * as React from "react";
 
 export interface Components {
@@ -22,13 +17,13 @@ export const components: Components;
 export type Kind = any;
 
 export interface CommonProps {
-    defaultValue?: string;
-    description?: string;
+    defaultValue?: string | undefined;
+    description?: string | undefined;
     required: boolean;
     name: string;
     typeValue: Kind;
     type: string;
-    shouldCollapse?: boolean;
+    shouldCollapse?: boolean | undefined;
     components: Components;
 }
 
@@ -39,29 +34,29 @@ export interface PropProps extends CommonProps {
 export class Prop extends React.Component<PropProps> {}
 
 export interface Obj {
-    kind: 'object';
+    kind: "object";
     members: any[];
 }
 
 export interface Gen {
-    kind: 'generic';
+    kind: "generic";
     value: any;
 }
 
 export interface Inter {
-    kind: 'intersection';
+    kind: "intersection";
     types: Array<Obj | Gen>;
 }
 
 export interface DynamicPropsProps {
-    components?: Partial<Components>;
-    heading?: string;
-    shouldCollapseProps?: boolean;
+    components?: Partial<Components> | undefined;
+    heading?: string | undefined;
+    shouldCollapseProps?: boolean | undefined;
     overrides?: {
         [key: string]: React.ComponentType<CommonProps>;
-    };
+    } | undefined;
     props: {
-        component?: Obj | Inter;
+        component?: Obj | Inter | undefined;
     };
 }
 

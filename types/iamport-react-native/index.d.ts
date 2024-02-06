@@ -1,136 +1,131 @@
-// Type definitions for iamport-react-native 1.5
-// Project: https://github.com/iamport/iamport-react-native#readme
-// Definitions by: seongjoojin <https://github.com/seongjoojin>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
+import * as React from "react";
 
-import * as React from 'react';
-
-export type IMP_CARRIERS = 'SKT' | 'KTF' | 'LGT' | 'MVNO';
+export type IMP_CARRIERS = "SKT" | "KTF" | "LGT" | "MVNO";
 export type IMP_PG =
-    | 'html5_inicis'
-    | 'inicis'
-    | 'uplus'
-    | 'kcp'
-    | 'kcp_billing'
-    | 'nice'
-    | 'jtnet'
-    | 'kakao'
-    | 'kakaopay'
-    | 'danal'
-    | 'danal_tpay'
-    | 'kicc'
-    | 'settle'
-    | 'mobilians'
-    | 'payco'
-    | 'eximbay'
-    | 'paypal'
-    | 'naverco'
-    | 'naverpay'
-    | 'smilepay'
-    | 'chai'
-    | 'payple'
-    | 'alipay';
+    | "html5_inicis"
+    | "inicis"
+    | "uplus"
+    | "kcp"
+    | "kcp_billing"
+    | "nice"
+    | "jtnet"
+    | "kakao"
+    | "kakaopay"
+    | "danal"
+    | "danal_tpay"
+    | "kicc"
+    | "settle"
+    | "mobilians"
+    | "payco"
+    | "eximbay"
+    | "paypal"
+    | "naverco"
+    | "naverpay"
+    | "smilepay"
+    | "chai"
+    | "payple"
+    | "alipay";
 
 export type IMP_PAY_METHOD =
-    | 'card'
-    | 'trans'
-    | 'vbank'
-    | 'phone'
-    | 'samsung'
-    | 'kpay'
-    | 'cultureland'
-    | 'smartculture'
-    | 'happymoney'
-    | 'booknlife'
-    | 'kakaopay'
-    | 'lpay'
-    | 'payco'
-    | 'ssgpay'
-    | 'tosspay';
+    | "card"
+    | "trans"
+    | "vbank"
+    | "phone"
+    | "samsung"
+    | "kpay"
+    | "cultureland"
+    | "smartculture"
+    | "happymoney"
+    | "booknlife"
+    | "kakaopay"
+    | "lpay"
+    | "payco"
+    | "ssgpay"
+    | "tosspay";
 
-export type IMP_CURRENCY = 'KRW' | 'USD' | 'EUR' | 'JPY';
+export type IMP_CURRENCY = "KRW" | "USD" | "EUR" | "JPY";
 
 // Property Note : https://docs.iamport.kr/tech/imp?lang=en#callback
 export interface CallbackRsp {
-    success?: boolean;
-    error_code?: string;
-    error_msg?: string;
-    imp_uid?: string;
-    merchant_uid?: string;
-    pay_method?: string;
-    paid_amount?: string;
-    status?: string;
-    name?: string;
-    pg_provider?: string;
-    pg_tid?: string;
-    buyer_name?: string;
-    buyer_email?: string;
-    buyer_tel?: string;
-    buyer_addr?: string;
-    buyer_postcode?: string;
-    custom_data?: object;
-    paid_at?: number;
-    receipt_url?: string;
-    apply_num?: string;
-    vbank_num?: string;
-    vbank_name?: string;
-    vbank_holder?: string;
-    vbank_date?: number;
-    imp_success?: string;
+    success?: boolean | undefined;
+    error_code?: string | undefined;
+    error_msg?: string | undefined;
+    imp_uid?: string | undefined;
+    merchant_uid?: string | undefined;
+    pay_method?: string | undefined;
+    paid_amount?: string | undefined;
+    status?: string | undefined;
+    name?: string | undefined;
+    pg_provider?: string | undefined;
+    pg_tid?: string | undefined;
+    buyer_name?: string | undefined;
+    buyer_email?: string | undefined;
+    buyer_tel?: string | undefined;
+    buyer_addr?: string | undefined;
+    buyer_postcode?: string | undefined;
+    custom_data?: object | undefined;
+    paid_at?: number | undefined;
+    receipt_url?: string | undefined;
+    apply_num?: string | undefined;
+    vbank_num?: string | undefined;
+    vbank_name?: string | undefined;
+    vbank_holder?: string | undefined;
+    vbank_date?: number | undefined;
+    imp_success?: string | undefined;
 }
 
 export interface CertificationData {
-    merchant_uid?: string;
-    company?: string;
-    carrier?: IMP_CARRIERS;
-    name?: string;
-    phone?: string;
-    min_age?: string;
-    app_scheme?: string;
+    merchant_uid?: string | undefined;
+    company?: string | undefined;
+    carrier?: IMP_CARRIERS | undefined;
+    name?: string | undefined;
+    phone?: string | undefined;
+    min_age?: string | undefined;
+    app_scheme?: string | undefined;
 }
 
 export interface PaymentData {
-    pg?: IMP_PG;
-    pay_method?: IMP_PAY_METHOD;
-    currency?: IMP_CURRENCY;
-    notice_url?: string | string[];
-    display?: { card_quota?: number };
+    pg?: IMP_PG | undefined;
+    pay_method?: IMP_PAY_METHOD | undefined;
+    currency?: IMP_CURRENCY | undefined;
+    notice_url?: string | string[] | undefined;
+    display?: { card_quota?: number | undefined } | undefined;
     merchant_uid: string;
     amount: number;
     buyer_tel: string;
     app_scheme: string;
-    escrow?: boolean;
-    name?: string;
-    tax_free?: number;
-    buyer_name?: string;
-    buyer_email?: string;
-    buyer_addr?: string;
-    buyer_postcode?: string;
-    custom_data?: object;
-    vbank_due?: string;
-    popup?: boolean;
-    digital?: boolean;
-    m_redirect_url?: string;
-    biz_num?: string;
+    escrow?: boolean | undefined;
+    name?: string | undefined;
+    tax_free?: number | undefined;
+    buyer_name?: string | undefined;
+    buyer_email?: string | undefined;
+    buyer_addr?: string | undefined;
+    buyer_postcode?: string | undefined;
+    custom_data?: object | undefined;
+    vbank_due?: string | undefined;
+    popup?: boolean | undefined;
+    digital?: boolean | undefined;
+    m_redirect_url?: string | undefined;
+    biz_num?: string | undefined;
 }
 
 export interface CertificationProps {
     userCode: string;
-    tierCode?: string;
+    tierCode?: string | undefined;
     data: CertificationData;
     callback: (rsp: CallbackRsp) => void;
-    loading?: object;
+    loading?: object | undefined;
 }
 
 // Property Note : https://docs.iamport.kr/tech/imp?lang=en#param
 export interface PaymentProps {
     userCode: string;
-    tierCode?: string;
+    tierCode?: string | undefined;
     data: PaymentData;
     callback: (rsp: CallbackRsp) => void;
-    loading?: object;
-    handleInicisTrans?: (event: any) => void;
-    open3rdPartyApp?: (iamportUrl: any) => void;
+    loading?: object | undefined;
+    handleInicisTrans?: ((event: any) => void) | undefined;
+    open3rdPartyApp?: ((iamportUrl: any) => void) | undefined;
 }
 
 declare const IMP: {

@@ -1,4 +1,4 @@
-import { ComponentType } from 'react';
+import { ComponentType } from "react";
 
 declare namespace AnglePickerControl {
     interface Props {
@@ -10,7 +10,7 @@ declare namespace AnglePickerControl {
         /**
          * Label to use for the angle picker. If not set the a translated label "Angle" is used.
          */
-        label?: string;
+        label?: string | undefined;
 
         /**
          * A function that receives the new value of the input.

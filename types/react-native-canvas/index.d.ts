@@ -1,33 +1,26 @@
-// Type definitions for react-native-canvas 0.1
-// Project: https://github.com/iddan/react-native-canvas#readme
-// Definitions by: hmajid2301 <https://github.com/hmajid2301>
-//                 Kelvin Chu <https://github.com/ragebill>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 3.1
-
-import * as React from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
+import * as React from "react";
+import { StyleProp, ViewStyle } from "react-native";
 
 export interface CanvasProps {
-    baseUrl?: string;
-    originWhitelist?: string[];
+    baseUrl?: string | undefined;
+    originWhitelist?: string[] | undefined;
     ref: ((canvas: Canvas) => any) | React.RefObject<Canvas>;
-    style?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle> | undefined;
 }
 
 export interface DOMMatrix2DInit {
-    a?: number;
-    b?: number;
-    c?: number;
-    d?: number;
-    e?: number;
-    f?: number;
-    m11?: number;
-    m12?: number;
-    m21?: number;
-    m22?: number;
-    m41?: number;
-    m42?: number;
+    a?: number | undefined;
+    b?: number | undefined;
+    c?: number | undefined;
+    d?: number | undefined;
+    e?: number | undefined;
+    f?: number | undefined;
+    m11?: number | undefined;
+    m12?: number | undefined;
+    m21?: number | undefined;
+    m22?: number | undefined;
+    m41?: number | undefined;
+    m42?: number | undefined;
 }
 
 export interface CanvasGradient {
@@ -166,13 +159,13 @@ export class Path2D {
         },
     ) => void;
 
-    closePath: CanvasRenderingContext2D['closePath'];
-    moveTo: CanvasRenderingContext2D['moveTo'];
-    lineTo: CanvasRenderingContext2D['lineTo'];
-    bezierCurveTo: CanvasRenderingContext2D['bezierCurveTo'];
-    quadraticCurveTo: CanvasRenderingContext2D['quadraticCurveTo'];
-    arc: CanvasRenderingContext2D['arc'];
-    arcTo: CanvasRenderingContext2D['arcTo'];
-    ellipse: CanvasRenderingContext2D['ellipse'];
-    rect: CanvasRenderingContext2D['rect'];
+    closePath: CanvasRenderingContext2D["closePath"];
+    moveTo: CanvasRenderingContext2D["moveTo"];
+    lineTo: CanvasRenderingContext2D["lineTo"];
+    bezierCurveTo: CanvasRenderingContext2D["bezierCurveTo"];
+    quadraticCurveTo: CanvasRenderingContext2D["quadraticCurveTo"];
+    arc: CanvasRenderingContext2D["arc"];
+    arcTo: CanvasRenderingContext2D["arcTo"];
+    ellipse: CanvasRenderingContext2D["ellipse"];
+    rect: CanvasRenderingContext2D["rect"];
 }

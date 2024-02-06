@@ -1,11 +1,6 @@
-// Type definitions for tracery-grammar 2.7
-// Project: https://github.com/v21/tracery#readme
-// Definitions by: Sean S. LeBlanc <https://github.com/seleb>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 interface Settings {
-    raw?: string;
-    type?: number;
+    raw?: string | undefined;
+    type?: number | undefined;
 }
 declare class ArrayWithErrors<T> extends Array<T> {
     errors: string[];
@@ -19,7 +14,7 @@ declare class TraceryNode {
     childIndex: number;
     isExpanded: boolean;
     children: TraceryNode[];
-    finishedText?: string;
+    finishedText?: string | undefined;
     childRule: string;
     raw: string | undefined;
     type: number | undefined;
@@ -27,7 +22,7 @@ declare class TraceryNode {
     modifiers: string[];
     preactions: TraceryNodeAction[];
     postactions: TraceryNodeAction[];
-    action?: TraceryNodeAction;
+    action?: TraceryNodeAction | undefined;
     constructor(parent: TraceryNode | TraceryGrammar | null, childIndex: number, settings: Settings);
     toString(): string;
     expandChildren(childRule: string, preventRecursion: boolean): void;
@@ -51,10 +46,10 @@ declare class TraceryRuleSet {
     raw: string | string[];
     falloff: number;
     defaultRules: string[];
-    defaultUses?: number[];
-    conditionalRule?: string;
-    conditionalValues?: TraceryRuleSet[];
-    shuffledDeck?: number[];
+    defaultUses?: number[] | undefined;
+    conditionalRule?: string | undefined;
+    conditionalValues?: TraceryRuleSet[] | undefined;
+    shuffledDeck?: number[] | undefined;
     constructor(grammar: TraceryGrammar, raw: string | string[]);
     selectRule(errors?: string[]): any;
     clearState(): void;
@@ -64,11 +59,13 @@ declare class TracerySymbol {
     key: string;
     rawRules: ConstructorParameters<typeof TraceryRuleSet>[1];
     baseRules: TraceryRuleSet;
-    stack?: TraceryRuleSet[];
-    uses?: Array<{
-        node?: TraceryNode;
-    }>;
-    isDynamic?: boolean;
+    stack?: TraceryRuleSet[] | undefined;
+    uses?:
+        | Array<{
+            node?: TraceryNode | undefined;
+        }>
+        | undefined;
+    isDynamic?: boolean | undefined;
     constructor(grammar: TraceryGrammar, key: string, rawRules: ConstructorParameters<typeof TraceryRuleSet>[1]);
     clearState(): void;
     pushRules(rawRules: ConstructorParameters<typeof TraceryRuleSet>[1]): void;
@@ -83,7 +80,7 @@ declare class TraceryGrammar {
     symbols: Partial<Record<string, TracerySymbol>>;
     raw: Record<string, string | string[]>;
     subgrammars: TraceryGrammar[];
-    errors?: string[];
+    errors?: string[] | undefined;
     constructor(raw: Record<string, string | string[]>);
     clearState(): void;
     addModifiers(mods: Modifiers): void;

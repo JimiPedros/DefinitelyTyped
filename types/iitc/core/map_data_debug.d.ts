@@ -1,6 +1,15 @@
 /** useful bits to assist debugging map data tiles */
-export type DebugTileState = 'ok' | 'error' | 'cache-fresh' | 'cache-stale' | 'requested' |
-    'retrying' | 'request-fail' | 'tile-fail' | 'tile-timeout' | 'render-queue';
+export type DebugTileState =
+    | "ok"
+    | "error"
+    | "cache-fresh"
+    | "cache-stale"
+    | "requested"
+    | "retrying"
+    | "request-fail"
+    | "tile-fail"
+    | "tile-timeout"
+    | "render-queue";
 
 export class RenderDebugTiles {
     CLEAR_CHECK_TIME: number; // = 0.1;
@@ -9,7 +18,7 @@ export class RenderDebugTiles {
     private debugTileLayer: L.LayerGroup;
     private debugTileToRectangle: {};
     private debugTileClearTimes: {};
-    private timer?: number;
+    private timer?: number | undefined;
 
     reset(): void;
     create(id: string, bounds: L.LatLngBounds): void;

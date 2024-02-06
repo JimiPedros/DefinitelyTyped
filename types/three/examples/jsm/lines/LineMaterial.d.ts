@@ -1,14 +1,17 @@
-import { Color, MaterialParameters, ShaderMaterial, Vector2 } from '../../../src/Three';
+import { Color, ColorRepresentation, MaterialParameters, ShaderMaterial, Vector2 } from "../../../src/Three.js";
 
 export interface LineMaterialParameters extends MaterialParameters {
-    color?: number;
-    dashed?: boolean;
-    dashScale?: number;
-    dashSize?: number;
-    dashOffset?: number;
-    gapSize?: number;
-    linewidth?: number;
-    resolution?: Vector2;
+    alphaToCoverage?: boolean | undefined;
+    color?: ColorRepresentation | undefined;
+    dashed?: boolean | undefined;
+    dashScale?: number | undefined;
+    dashSize?: number | undefined;
+    dashOffset?: number | undefined;
+    gapSize?: number | undefined;
+    linewidth?: number | undefined;
+    resolution?: Vector2 | undefined;
+    wireframe?: boolean | undefined;
+    worldUnits?: boolean | undefined;
 }
 
 export class LineMaterial extends ShaderMaterial {
@@ -24,4 +27,5 @@ export class LineMaterial extends ShaderMaterial {
     linewidth: number;
     resolution: Vector2;
     alphaToCoverage: boolean;
+    worldUnits: boolean;
 }

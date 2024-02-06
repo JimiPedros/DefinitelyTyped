@@ -1,22 +1,22 @@
-import express = require('express');
-import { Store } from 'rdf-js';
-import '@rdfjs/express-handler';
-import 'set-link';
-import 'absolute-url';
-import { Api } from './Api';
-import { ResourceLoader } from '.';
+import express = require("express");
+import { Store } from "@rdfjs/types";
+import "@rdfjs/express-handler";
+import "set-link";
+import "absolute-url";
+import { ResourceLoader } from ".";
+import { Api } from "./Api";
 
 declare namespace middleware {
     interface HydraBoxMiddleware {
-        resource?: express.RequestHandler | express.RequestHandler[];
-        operations?: express.RequestHandler | express.RequestHandler[];
+        resource?: express.RequestHandler | express.RequestHandler[] | undefined;
+        operations?: express.RequestHandler | express.RequestHandler[] | undefined;
     }
 
     interface Options {
-        baseIriFromRequest?: boolean;
-        loader?: ResourceLoader;
-        store?: Store;
-        middleware?: HydraBoxMiddleware;
+        baseIriFromRequest?: boolean | undefined;
+        loader?: ResourceLoader | undefined;
+        store?: Store | undefined;
+        middleware?: HydraBoxMiddleware | undefined;
     }
 }
 

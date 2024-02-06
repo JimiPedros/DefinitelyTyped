@@ -1,17 +1,15 @@
-import { TempNode } from '../core/TempNode';
-import { FunctionNode } from '../core/FunctionNode';
-import { UVNode } from '../accessors/UVNode';
-import { UVTransformNode } from '../utils/UVTransformNode';
+import TempNode from "../core/TempNode.js";
+import { NodeRepresentation, ShaderNodeObject } from "../shadernode/ShaderNode.js";
 
-export class CheckerNode extends TempNode {
-    constructor(uv?: UVNode | UVTransformNode);
+export default class CheckerNode extends TempNode {
+    uvNode: Node;
+    constructor(uvNode?: Node);
+}
 
-    uv: UVNode | UVTransformNode;
-    nodeType: string;
+export const checker: (uvNode?: NodeRepresentation) => ShaderNodeObject<CheckerNode>;
 
-    copy(source: CheckerNode): this;
-
-    static Nodes: {
-        checker: FunctionNode;
-    };
+declare module "../shadernode/ShaderNode.js" {
+    interface NodeElements {
+        checker: typeof checker;
+    }
 }

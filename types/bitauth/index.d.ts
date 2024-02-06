@@ -1,10 +1,5 @@
-// Type definitions for bitauth 0.4
-// Project: https://github.com/bitpay/bitauth#readme
-// Definitions by: Justin Langston <https://github.com/nitsujlangston>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
-import { BinaryLike } from 'crypto';
-import { RequestHandler } from 'express';
+import { BinaryLike } from "crypto";
+import { RequestHandler } from "express";
 
 export as namespace bitauth;
 
@@ -26,10 +21,12 @@ export function verifySignature(
     pubkey: string | Uint8Array,
     hexsignature: string | Uint8Array,
     callback?: callback,
+    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
 ): boolean | void;
+// eslint-disable-next-line @typescript-eslint/no-invalid-void-type
 export function validateSin(sin: string, callback?: callback): boolean | void;
 export function encrypt(password: BinaryLike, str: string): string;
 export function decrypt(password: BinaryLike, str: string): string;
-export function middleware(): RequestHandler;
+export const middleware: RequestHandler;
 
 export {};

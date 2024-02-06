@@ -1,30 +1,35 @@
-import { Color } from './../math/Color';
-import { Texture } from './../textures/Texture';
-import { Vector2 } from './../math/Vector2';
-import { MaterialParameters, Material } from './Material';
-import { NormalMapTypes } from '../constants';
+import { NormalMapTypes } from "../constants.js";
+import { Color, ColorRepresentation } from "../math/Color.js";
+import { Vector2 } from "../math/Vector2.js";
+import { Texture } from "../textures/Texture.js";
+import { Material, MaterialParameters } from "./Material.js";
 
 export interface MeshMatcapMaterialParameters extends MaterialParameters {
-    color?: Color | string | number;
-    matcap?: Texture | null;
-    map?: Texture | null;
-    bumpMap?: Texture | null;
-    bumpScale?: number;
-    normalMap?: Texture | null;
-    normalMapType?: NormalMapTypes;
-    normalScale?: Vector2;
-    displacementMap?: Texture | null;
-    displacementScale?: number;
-    displacementBias?: number;
-    alphaMap?: Texture | null;
-    skinning?: boolean;
-    morphTargets?: boolean;
-    morphNormals?: boolean;
-    flatShading?: boolean;
+    color?: ColorRepresentation | undefined;
+    matcap?: Texture | null | undefined;
+    map?: Texture | null | undefined;
+    bumpMap?: Texture | null | undefined;
+    bumpScale?: number | undefined;
+    normalMap?: Texture | null | undefined;
+    normalMapType?: NormalMapTypes | undefined;
+    normalScale?: Vector2 | undefined;
+    displacementMap?: Texture | null | undefined;
+    displacementScale?: number | undefined;
+    displacementBias?: number | undefined;
+    alphaMap?: Texture | null | undefined;
+    fog?: boolean | undefined;
+    flatShading?: boolean | undefined;
 }
 
 export class MeshMatcapMaterial extends Material {
     constructor(parameters?: MeshMatcapMaterialParameters);
+
+    /**
+     * Read-only flag to check if a given object is of type {@link MeshMatcapMaterial}.
+     * @remarks This is a _constant_ value
+     * @defaultValue `true`
+     */
+    readonly isMeshMatcapMaterial: true;
 
     /**
      * @default 'MeshMatcapMaterial'
@@ -97,25 +102,16 @@ export class MeshMatcapMaterial extends Material {
     alphaMap: Texture | null;
 
     /**
-     * @default false
-     */
-    skinning: boolean;
-
-    /**
-     * @default false
-     */
-    morphTargets: boolean;
-
-    /**
-     * @default false
-     */
-    morphNormals: boolean;
-
-    /**
      * Define whether the material is rendered with flat shading. Default is false.
      * @default false
      */
     flatShading: boolean;
+
+    /**
+     * Whether the material is affected by fog. Default is true.
+     * @default fog
+     */
+    fog: boolean;
 
     setValues(parameters: MeshMatcapMaterialParameters): void;
 }

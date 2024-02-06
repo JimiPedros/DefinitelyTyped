@@ -1,24 +1,19 @@
-// Type definitions for flowjs 2.13
-// Project: https://github.com/flowjs/flow.js
-// Definitions by: Ryan McNamara <https://github.com/ryan10132>
-//                 Martin Nuc <https://github.com/martinnuc>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 declare namespace flowjs {
-    interface Flow {
+    class Flow {
+        constructor(options?: FlowOptions);
         support: boolean;
         supportDirectory: boolean;
         opts: FlowOptions;
         files: FlowFile[];
 
         assignBrowse(
-            domNodes: ReadonlyArray<HTMLElement>,
+            domNodes: readonly HTMLElement[],
             isDirectory?: boolean,
             singleFile?: boolean,
-            attributes?: object
+            attributes?: object,
         ): void;
-        assignDrop(node: HTMLElement | ReadonlyArray<HTMLElement>): void;
-        unAssignDrop(node: HTMLElement | ReadonlyArray<HTMLElement>): void;
+        assignDrop(node: HTMLElement | readonly HTMLElement[]): void;
+        unAssignDrop(node: HTMLElement | readonly HTMLElement[]): void;
         on<T extends EventName>(event: T, callback: (...args: FlowEventMap[T]) => void): void;
         off(event?: EventName, callback?: () => void): void;
         upload(): void;
@@ -59,8 +54,8 @@ declare namespace flowjs {
         chunkRetryInterval?: number;
         progressCallbacksInterval?: number;
         speedSmoothingFactor?: number;
-        successStatuses?: string[];
-        permanentErrors?: string[];
+        successStatuses?: number[];
+        permanentErrors?: number[];
     }
 
     interface FlowFile {
@@ -72,7 +67,7 @@ declare namespace flowjs {
         uniqueIdentifier: string;
         averageSpeed: number;
         currentSpeed: number;
-        chunks: ReadonlyArray<FlowChunk>;
+        chunks: readonly FlowChunk[];
         paused: boolean;
         error: boolean;
 
@@ -146,8 +141,7 @@ declare namespace flowjs {
     type FlowEvent = FlowEventMap[keyof FlowEventMap];
 
     type FlowEventFromEventName<T extends EventName> = FlowEventMap[T];
-    type FlowEventTypeFromFlowEvent<T extends FlowEvent> =
-        T extends FlowEventFromEventName<infer U> ? U : never;
+    type FlowEventTypeFromFlowEvent<T extends FlowEvent> = T extends FlowEventFromEventName<infer U> ? U : never;
 
     type FileSuccessCallbackArguments = [FlowFile, string, FlowChunk];
     type FileProgressCallbackArguments = [FlowFile, FlowChunk];
@@ -164,6 +158,6 @@ declare namespace flowjs {
     type CatchAllCallbackArguments = [Event];
 }
 // use namespace export like in flowjs/index.d.ts. Fix TS2306 "flowjs/index.d.ts not a module"
-// tslint:disable-next-line export-just-namespace
+// eslint-disable-next-line @definitelytyped/export-just-namespace
 export = flowjs;
 export as namespace flowjs;

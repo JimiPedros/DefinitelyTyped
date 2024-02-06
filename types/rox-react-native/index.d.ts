@@ -1,21 +1,10 @@
-// Type definitions for rox-browser 5.0
-// Project: https://rollout.io
-// Definitions by: ahanriat <https://github.com/ahanriat>
-//                 g-guirado <https://github.com/g-guirado>
-//                 glenna <https://github.com/glenna>
-//                 AsafRollout: <https://github.com/asafRollout>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 3.0
-
 /**
- *
  * Official documentation for rox-react-native is available here:
  * https://docs.cloudbees.com/docs/cloudbees-feature-flags-api/latest/api-reference/react-native-api
- *
  */
 
 export interface RoxContainer {
-    [key: string]: Flag |  RoxNumber | RoxString;
+    [key: string]: Flag | RoxNumber | RoxString;
 }
 
 /**
@@ -35,26 +24,26 @@ export function register(roxContainer: RoxContainer): void;
  */
 export function setup(
     apiKey: string,
-    options?: RoxSetupOptions
+    options?: RoxSetupOptions,
 ): Promise<unknown>;
 
 export interface RoxSetupOptions {
-    version?: string;
+    version?: string | undefined;
     // https://docs.cloudbees.com/docs/cloudbees-feature-flags-api/latest/api-reference/react-native-api#_configurationfetchedhandler
     configurationFetchedHandler?(fetcherResult: RoxFetcherResult): void;
-    debugLevel?: 'verbose';
+    debugLevel?: "verbose" | undefined;
     // https://docs.cloudbees.com/docs/cloudbees-feature-flags-api/latest/api-reference/react-native-api#_using_the_impressionhandler_option
     impressionHandler?(reporting: RoxReporting, context: unknown): void;
-    platform?: string;
-    freeze?: FreezeOptions;
-    disableNetworkFetch?: boolean;
-    devModeSecret?: string;
+    platform?: string | undefined;
+    freeze?: FreezeOptions | undefined;
+    disableNetworkFetch?: boolean | undefined;
+    devModeSecret?: string | undefined;
     /**
      * Set Roxy's URL for automated tests or local development.
      *
      * https://docs.cloudbees.com/docs/cloudbees-feature-flags/latest/debugging/microservices-automated-testing-and-local-development
      */
-    roxy?: string;
+    roxy?: string | undefined;
     // https://docs.cloudbees.com/docs/cloudbees-feature-flags-api/latest/api-reference/react-native-api#_asyncstorage
     AsyncStorage?: any; // AsyncStorage from 'react-native' package
     // https://docs.cloudbees.com/docs/cloudbees-feature-flags-api/latest/api-reference/react-native-api#_asyncstorage
@@ -62,24 +51,24 @@ export interface RoxSetupOptions {
 }
 
 export enum RoxFetcherStatus {
-    AppliedFromEmbedded = 'APPLIED_FROM_EMBEDDED',
-    AppliedFromCache = 'APPLIED_FROM_CACHE',
-    AppliedFromNetwork = 'APPLIED_FROM_NETWORK',
-    ErrorFetchFailed = 'ERROR_FETCH_FAILED',
+    AppliedFromEmbedded = "APPLIED_FROM_EMBEDDED",
+    AppliedFromCache = "APPLIED_FROM_CACHE",
+    AppliedFromNetwork = "APPLIED_FROM_NETWORK",
+    ErrorFetchFailed = "ERROR_FETCH_FAILED",
 }
 
 export enum RoxErrorTrigger {
-    DYNAMIC_PROPERTIES_RULE = 'DYNAMIC_PROPERTIES_RULE',
-    CONFIGURATION_FETCHED_HANDLER = 'CONFIGURATION_FETCHED_HANDLER',
-    IMPRESSION_HANDLER = 'IMPRESSION_HANDLER',
-    CUSTOM_PROPERTY_GENERATOR = 'CUSTOM_PROPERTY_GENERATOR'
+    DYNAMIC_PROPERTIES_RULE = "DYNAMIC_PROPERTIES_RULE",
+    CONFIGURATION_FETCHED_HANDLER = "CONFIGURATION_FETCHED_HANDLER",
+    IMPRESSION_HANDLER = "IMPRESSION_HANDLER",
+    CUSTOM_PROPERTY_GENERATOR = "CUSTOM_PROPERTY_GENERATOR",
 }
 
 export interface RoxFetcherResult {
     fetcherStatus: RoxFetcherStatus;
     creationDate: Date;
     hasChanges: boolean;
-    errorDetails?: string;
+    errorDetails?: string | undefined;
 }
 
 export interface RoxReporting {
@@ -94,20 +83,20 @@ export interface RoxReporting {
  */
 export function setCustomNumberProperty(
     name: string,
-    value: number | (() => number)
+    value: number | (() => number),
 ): void;
 export function setCustomStringProperty(
     name: string,
-    value: string | (() => string)
+    value: string | (() => string),
 ): void;
 export function setCustomBooleanProperty(
     name: string,
-    value: boolean | (() => boolean)
+    value: boolean | (() => boolean),
 ): void;
 
 // https://docs.cloudbees.com/docs/cloudbees-feature-flags-api/latest/api-reference/javascript-browser-api#_setuserspaceunhandlederrorhandler
 export function setUserspaceUnhandledErrorHandler(
-    handler: (errorTrigger: RoxErrorTrigger, error: Error) => void
+    handler: (errorTrigger: RoxErrorTrigger, error: Error) => void,
 ): void;
 
 /**
@@ -138,7 +127,7 @@ export enum FreezeOptions {
 }
 
 export interface RoxFlagOptions {
-    freeze?: FreezeOptions;
+    freeze?: FreezeOptions | undefined;
 }
 
 /**
@@ -225,7 +214,7 @@ export namespace overrides {
      *
      * Note that for boolean flag we still give the value as a string.
      */
-    function setOverride(nameSpacedFlagName: string, value: string | 'false' | 'true'): void;
+    function setOverride(nameSpacedFlagName: string, value: string | "false" | "true"): void;
 
     /**
      * Clears the override value from the flag (and the disk).
@@ -264,6 +253,6 @@ export namespace dynamicApi {
      * Getting string value of a number flag
      */
     function getNumber(nameSpacedFlagName: string, defaultValue: number, context?: unknown): number;
-  }
+}
 
-export const flags: ReadonlyArray<Flag>;
+export const flags: readonly Flag[];

@@ -6,7 +6,7 @@ import {
     Observable,
     OperationType,
     VariablesOf,
-} from 'relay-runtime';
+} from "relay-runtime";
 
 /**
  * Fetches the given query and variables on the provided environment,
@@ -62,7 +62,6 @@ import {
  * a second time with the same arguments in the same tick will _NOT_ de-dupe
  * the request given that it will no longer be in-flight.
  *
- *
  * Data Retention:
  * ===============
  * This function will NOT retain query data, meaning that it is not guaranteed
@@ -70,7 +69,6 @@ import {
  * completed.
  * If you need to retain the query data outside of the network request,
  * you need to use `environment.retain()`.
- *
  *
  * Cancelling requests:
  * ====================
@@ -90,7 +88,7 @@ export function fetchQuery<TQuery extends OperationType>(
     query: GraphQLTaggedNode,
     variables: VariablesOf<TQuery>,
     options?: {
-        fetchPolicy?: FetchQueryFetchPolicy;
-        networkCacheConfig?: CacheConfig;
+        fetchPolicy?: FetchQueryFetchPolicy | undefined;
+        networkCacheConfig?: CacheConfig | undefined;
     },
-): Observable<TQuery['response']>;
+): Observable<TQuery["response"]>;

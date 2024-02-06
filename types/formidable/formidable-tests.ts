@@ -1,62 +1,90 @@
-import Formidable = require('formidable');
+import formidable = require("formidable");
 import {
     defaultOptions,
     enabledPlugins,
     File,
-    formidable,
+    Formidable,
+    formidable as formidableAlias,
     IncomingForm,
     MultipartParser,
     Options,
+    Part,
     PersistentFile,
+    plugins,
     VolatileFile,
-} from 'formidable';
-import * as http from 'http';
+} from "formidable";
+import * as http from "http";
 
+// arrange
 const options: Options = {
     allowEmptyFiles: true,
     enabledPlugins: [],
-    encoding: 'utf-8',
-    fileWriteStreamHandler: null,
-    hash: false,
+    encoding: "utf-8",
+    fileWriteStreamHandler: undefined,
+    hashAlgorithm: false,
     keepExtensions: false,
     maxFields: 1000,
     maxFieldsSize: 20 * 1024 * 1024,
+    maxFiles: Infinity,
     maxFileSize: 200 * 1024 * 1024,
+    maxTotalFileSize: 200 * 1024 * 1024,
     minFileSize: 1,
     multiples: false,
-    uploadDir: '/dir',
+    uploadDir: "/dir",
+    createDirsFromUploads: false,
+    filter: (part) => {
+        // $ExpectType Part
+        part;
+        return true;
+    },
 };
 
 const file: File = {
-    hash: 'sha1',
-    lastModifiedDate: new Date(),
-    name: 'name',
-    path: 'path',
+    hashAlgorithm: false,
+    hash: "hash",
+    mtime: new Date(),
+    originalFilename: "name",
+    newFilename: "newfilename",
+    filepath: "path",
     size: 20,
-    type: 'json',
+    mimetype: "json",
     toJSON: () => ({
-        filename: file.name,
+        newFilename: file.newFilename,
         length: 10,
-        mime: 'string',
-        mtime: file.lastModifiedDate,
-        name: file.name,
-        path: file.path,
+        mimetype: file.mimetype,
+        mtime: file.mtime!,
+        originalFilename: file.originalFilename,
+        filepath: file.filepath,
         size: file.size,
-        type: file.type,
     }),
-    toString: () => `File: ${file.name}`,
+    toString: () => `File: ${file.originalFilename}`,
 };
 
-// $ExpectType Options
+// act/assert
+formidable(options); // $ExpectType IncomingForm
+
+formidableAlias(options); // $ExpectType IncomingForm
+
+new IncomingForm(options); // $ExpectType IncomingForm
+
+new Formidable(options); // $ExpectType IncomingForm
+
+// $ExpectType DefaultOptions
 Formidable.DEFAULT_OPTIONS;
 
-// $ExpectType Options
+// $ExpectType DefaultOptions
 defaultOptions;
+defaultOptions.enabledPlugins; // $ExpectType EnabledPlugins
 
-// $ExpectType string[]
+options.fileWriteStreamHandler; // $ExpectType ((file?: VolatileFile | undefined) => Writable) | undefined
+
+// $ExpectType EnabledPlugins
 enabledPlugins;
 
-// $ExpectType PersistentFile
+// $ExpectType EnabledPlugins
+plugins;
+
+// $ExpectType VolatileFile
 new VolatileFile(file);
 
 // $ExpectType PersistentFile
@@ -69,115 +97,125 @@ MultipartParser.stateToString;
 
 MultipartParser.STATES;
 
-evaluateTypes(new Formidable(options));
-evaluateTypes(new Formidable.IncomingForm(options));
-evaluateTypes(new IncomingForm(options));
-evaluateTypes(formidable(options));
-evaluateTypes(Formidable.formidable(options));
+const form = new Formidable(options);
+form.on("data", data => {
+    // $ExpectType EventData
+    data;
 
-function evaluateTypes(form: Formidable) {
-    form.on('data', data => {
-        // $ExpectType EventData
-        data;
+    const { name, key, value, buffer, start, end, formname } = data;
 
-        const { name, key, value, buffer, start, end, formname } = data;
-
-        // $ExpectType EventNames
-        name;
-        // $ExpectType string
-        key;
-        // $ExpectType string
-        value;
-        // $ExpectType string
-        buffer;
-        // $ExpectType string
-        start;
-        // $ExpectType string
-        end;
-        // $ExpectType string
-        formname;
-    });
-
-    form.on('fileBegin', (formname, file) => {
+    // $ExpectType EventNames
+    name;
+    // $ExpectType string
+    key;
+    // $ExpectType string
+    value;
+    // $ExpectType string
+    buffer;
+    // $ExpectType string
+    start;
+    // $ExpectType string
+    end;
+    // $ExpectType string
+    formname;
+})
+    .on("fileBegin", (formname, file) => {
         // $ExpectType string
         formname;
         // $ExpectType File
         file;
 
-        form.emit('data', { name: 'fileBegin', formname, value: file });
-    });
-    form.on('file', (formname, file) => {
+        form.emit("data", { name: "fileBegin", formname, value: file });
+    })
+    .on("file", (formname, file) => {
         // $ExpectType string
         formname;
         // $ExpectType File
         file;
 
-        form.emit('data', { name: 'file', formname, value: file });
-    });
-
-    form.on('progress', (bytesReceived, bytesExpected) => {
+        form.emit("data", { name: "file", formname, value: file });
+    })
+    .on("progress", (bytesReceived, bytesExpected) => {
         // $ExpectType number
         bytesReceived;
         // $ExpectType number
         bytesExpected;
-    });
-
-    form.on('field', (name, value) => {
+    })
+    .on("field", (name, value) => {
         // $ExpectType string
         name;
         // $ExpectType string
         value;
-    });
-
-    form.on('error', err => {
+    })
+    .on("error", err => {
+        // $ExpectType any
+        err;
+    })
+    .on("aborted", () => {})
+    .once("end", () => {})
+    .once("error", err => {
         // $ExpectType any
         err;
     });
 
-    form.on('aborted', () => {});
+form.use((self, options) => {
+    // $ExpectType IncomingForm
+    self;
+    // $ExpectType Partial<Options>
+    options;
+});
 
-    form.once('end', () => {});
-    form.once('error', err => {
+form.onPart = part => {
+    // $ExpectType Part
+    part;
+
+    part.on("data", buffer => {
+        // $ExpectType any
+        buffer;
+    });
+
+    form._handlePart(part);
+};
+
+http.createServer(async req => {
+    // $ExpectType IncomingMessage
+    req;
+
+    form.parse(req, (err, fields, files) => { // testing with callback
         // $ExpectType any
         err;
+        // $ExpectType Fields<string>
+        fields;
+        // $ExpectType Files<string>
+        files;
     });
 
-    form.use((self, options) => {
-        // $ExpectType Formidable
-        self;
-        // $ExpectType Partial<Options>
-        options;
+    form.parse<"name" | "age", "avatar" | "document">(req, (err, fields, files) => { // testing with callback and type arguments
+        // $ExpectType any
+        err;
+        // $ExpectType Fields<"name" | "age">
+        fields;
+        // $ExpectType Files<"avatar" | "document"> || Files<"document" | "avatar">
+        files;
     });
 
-    form.onPart = part => {
-        // $ExpectType Part
-        part;
+    form.parse(req); // testing without callback
 
-        part.on('data', buffer => {
-            // $ExpectType any
-            buffer;
-        });
+    const [fields, files] = await form.parse(req); // testing with promise
+    // $ExpectType Fields<string>
+    fields;
+    // $ExpectType Files<string>
+    files;
 
-        form.handlePart(part);
-    };
+    const [newFields, newFiles] = await form.parse<"name" | "age", "avatar" | "document">(req); // testing with promise and type arguments
+    // $ExpectType Fields<"name" | "age">
+    newFields;
+    // $ExpectType Files<"avatar" | "document"> || Files<"document" | "avatar">
+    newFiles;
+});
 
-    http.createServer(req => {
-        // $ExpectType IncomingMessage
-        req;
+// $ExpectType IncomingForm
+new IncomingForm();
 
-        form.parse(req, (err, fields, files) => {
-            // $ExpectType any
-            err;
-            // $ExpectType Fields
-            fields;
-            // $ExpectType Files
-            files;
-        });
-    });
-}
-
-// $ExpectType Formidable
-new Formidable.IncomingForm();
-
-// $ExpectType Formidable
-Formidable.formidable();
+// $ExpectType IncomingForm
+formidable();

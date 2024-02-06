@@ -16,10 +16,10 @@ interface FloatingMenuOptions {
     }>;
 }
 
-export const DIRECTION_LEFT = 'left';
-export const DIRECTION_TOP = 'top';
-export const DIRECTION_RIGHT = 'right';
-export const DIRECTION_BOTTOM = 'bottom';
+export const DIRECTION_LEFT = "left";
+export const DIRECTION_TOP = "top";
+export const DIRECTION_RIGHT = "right";
+export const DIRECTION_BOTTOM = "bottom";
 export function getFloatingPosition({
     menuSize,
     refPosition,
@@ -38,13 +38,15 @@ export function getFloatingPosition({
         bottom: number;
         left: number;
     }>;
-    offset?: Partial<{
-        left: number;
-        top: number;
-    }>;
-    direction?: string;
-    scrollX?: number;
-    scrollY?: number;
+    offset?:
+        | Partial<{
+            left: number;
+            top: number;
+        }>
+        | undefined;
+    direction?: string | undefined;
+    scrollX?: number | undefined;
+    scrollY?: number | undefined;
 }): any;
 declare const FloatingMenu_base: any;
 declare class FloatingMenu extends FloatingMenu_base {

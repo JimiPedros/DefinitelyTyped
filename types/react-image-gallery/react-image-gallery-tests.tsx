@@ -1,5 +1,5 @@
-import * as React from 'react';
-import ReactImageGallery, { ReactImageGalleryItem, ReactImageGalleryProps } from 'react-image-gallery';
+import * as React from "react";
+import ReactImageGallery, { ReactImageGalleryItem, ReactImageGalleryProps } from "react-image-gallery";
 
 class ImageGallery extends React.Component {
     private gallery: ReactImageGallery | null;
@@ -23,11 +23,16 @@ class ImageGallery extends React.Component {
         );
     }
 
+    handleImageLoad(event: React.SyntheticEvent<HTMLImageElement>) {
+        const message = `Image loaded successfully. Image: ${(event.target as HTMLImageElement).src}`;
+    }
+
     render() {
         const galleryItem: ReactImageGalleryItem = {
-            original: 'http://localhost/logo.jpg',
-            originalTitle: 'My Logo',
-            bulletClass: 'my-bullet-class-name',
+            original: "http://localhost/logo.jpg",
+            originalTitle: "My Logo",
+            bulletClass: "my-bullet-class-name",
+            loading: "lazy",
         };
 
         const props: ReactImageGalleryProps = {
@@ -36,6 +41,7 @@ class ImageGallery extends React.Component {
             showFullscreenButton: false,
             renderThumbInner: this.renderThumbInner,
             disableKeyDown: false,
+            onImageLoad: this.handleImageLoad,
         };
 
         return <ReactImageGallery ref={r => (this.gallery = r)} {...props} />;

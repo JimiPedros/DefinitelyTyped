@@ -1,11 +1,4 @@
-// Type definitions for preact-i18n 2.3
-// Project: https://github.com/synacor/preact-i18n
-// Definitions by:  Lukas Tetzlaff <https://github.com/ltetzlaff>
-//                  Sascha Zarhuber <https://github.com/saschazar21>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 3.5
-
-import { h, Component, Context, VNode, ComponentChild, JSX } from 'preact';
+import { Component, ComponentChild, Context, h, JSX, VNode } from "preact";
 
 interface IntlContext {
     intl: {
@@ -17,19 +10,19 @@ interface IntlContext {
 
 interface IntlProviderProps {
     children: JSX.Element | JSX.Element[];
-    definition?: {};
-    mark?: boolean;
-    scope?: string;
+    definition?: {} | undefined;
+    mark?: boolean | undefined;
+    scope?: string | undefined;
 }
 
 interface LocalizerProps {
     children: JSX.Element | JSX.Element[];
 }
 interface TextProps {
-    children?: string;
+    children?: string | undefined;
     id: string;
-    fields?: {};
-    plural?: number;
+    fields?: {} | undefined;
+    plural?: number | undefined;
 }
 
 export const IntlContext: Context<IntlContext>;
@@ -55,13 +48,13 @@ export function useText(
     mapping: { [key: string]: string | JSX.Element } | string | JSX.Element,
 ): { [key: string]: string };
 
-// tslint:disable-next-line:no-unnecessary-generics
+// eslint-disable-next-line @definitelytyped/no-unnecessary-generics
 export function withText<Props, Context = IntlContext>(mapping: {}): (
     Child: ComponentChild,
-    // tslint:disable-next-line:no-unnecessary-generics
-) => new (props?: Props, context?: Context) => any;
+    // eslint-disable-next-line @definitelytyped/no-unnecessary-generics
+) => new(props?: Props, context?: Context) => any;
 
-export function intl(Child: Component, options?: { scope?: string; definition?: {} }): VNode;
+export function intl(Child: Component, options?: { scope?: string | undefined; definition?: {} | undefined }): VNode;
 
 declare enum Intl {
     intl,

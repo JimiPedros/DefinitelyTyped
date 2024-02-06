@@ -1,9 +1,3 @@
-// Type definitions for the non-npm package sphere-engine-browser 2.0
-// Project: https://github.com/fatcerberus/miniSphere
-// Definitions by: Fat Cerberus <https://github.com/fatcerberus>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// Minimum TypeScript Version: 3.4
-
 /** Provides indirect access to global variables as properties of an object. */
 declare const global: typeof globalThis;
 
@@ -143,7 +137,7 @@ interface DirectoryStreamOptions {
      * from all subdirectories, at any depth. Only file entries will be yielded in this case.
      * @default false
      */
-    recursive?: boolean;
+    recursive?: boolean | undefined;
 }
 
 /**
@@ -156,14 +150,14 @@ interface FontOptions {
      * recommended that this option only be used in high-resolution games.
      * @default false
      */
-    antialias?: boolean;
+    antialias?: boolean | undefined;
 
     /**
      * `true` to enable automatic kerning. Kerning adjusts the spacing between each character so the
      * distance between adjacent characters appears uniform.
      * @default true
      */
-    kern?: boolean;
+    kern?: boolean | undefined;
 }
 
 /**
@@ -176,7 +170,7 @@ interface JobOptions {
      * empty.
      * @default false
      */
-    inBackground?: boolean;
+    inBackground?: boolean | undefined;
 
     /**
      * Job priority. Priority can be positive, negative, or even fractional. Higher priority jobs
@@ -184,14 +178,14 @@ interface JobOptions {
      * things are scheduled within a frame.
      * @default 0.0
      */
-    priority?: number;
+    priority?: number | undefined;
 }
 
 interface MouseEvent {
     key: MouseKey | null;
-    x?: number;
-    y?: number;
-    delta?: number;
+    x?: number | undefined;
+    y?: number | undefined;
+    delta?: number | undefined;
 }
 
 /**
@@ -220,19 +214,19 @@ interface SoundOptions {
      * L/R stereo balance. 0.0 is centered, +/- 1.0 is full right/left respectively.
      * @default 0.0
      */
-    pan?: number;
+    pan?: number | undefined;
 
     /**
      * Playback speed. 1.0 is normal speed.
      * @default 1.0
      */
-    speed?: number;
+    speed?: number | undefined;
 
     /**
      * Volume, as a percentage of the mixer's master volume. Sometimes called "gain".
      * @default 1.0
      */
-    volume?: number;
+    volume?: number | undefined;
 }
 
 /**
@@ -241,10 +235,10 @@ interface SoundOptions {
 interface Vertex {
     x: number;
     y: number;
-    z?: number;
-    u?: number;
-    v?: number;
-    color?: Color;
+    z?: number | undefined;
+    u?: number | undefined;
+    v?: number | undefined;
+    color?: Color | undefined;
 }
 
 /** Specifies the mode to use when opening a file. */
@@ -1742,7 +1736,7 @@ declare class Texture {
      * @param source SphereFS path of the image file to load, or a Surface object whose
      *               contents will be used for the new texture
      */
-    constructor(source: string | Surface)
+    constructor(source: string | Surface);
 
     /**
      * Construct a new texture of a given size and initial contents.
@@ -1860,23 +1854,23 @@ declare namespace Z {
  * Collects all the built-in classes and objects provided as part of the Sphere Runtime into one
  * convenient package.
  */
-declare module 'sphere-runtime' {
-    export { default as Console } from 'console';
-    export { default as DataStream } from 'data-stream';
-    export { default as FocusTarget } from 'focus-target';
-    export { default as from, Query } from 'from';
-    export { default as Logger } from 'logger';
-    export { default as Music } from 'music';
-    export { default as Prim } from 'prim';
-    export { default as Random } from 'random';
-    export { default as Tween, Easing } from 'tween';
-    export { default as Thread } from 'thread';
+declare module "sphere-runtime" {
+    export { default as Console } from "console";
+    export { default as DataStream } from "data-stream";
+    export { default as FocusTarget } from "focus-target";
+    export { default as from, Query } from "from";
+    export { default as Logger } from "logger";
+    export { default as Music } from "music";
+    export { default as Prim } from "prim";
+    export { default as Random } from "random";
+    export { default as Tween, Easing } from "tween";
+    export { default as Thread } from "thread";
 }
 
-declare module 'console' {
+declare module "console" {
     export default Console;
 
-    import Thread from 'thread';
+    import Thread from "thread";
 
     /**
      * Specifies options for creating a console.
@@ -1887,27 +1881,27 @@ declare module 'console' {
          * activation.
          * @default null
          */
-        hotKey?: Key | null;
+        hotKey?: Key | null | undefined;
 
         /**
          * SphereFS path of a file to which all console output will be written, or `null` to disable
          * logging.
          * @default null
          */
-        logFileName?: string | null;
+        logFileName?: string | null | undefined;
 
         /**
          * The mouse button the player can use to display the console, or `null` to disable mouse
          * activation.
          * @default null
          */
-        mouseKey?: MouseKey | null;
+        mouseKey?: MouseKey | null | undefined;
 
         /**
          * Text to show next to the command prompt at the top of the console.
          * @default "$"
          */
-        prompt?: string;
+        prompt?: string | undefined;
     }
 
     /**
@@ -1961,37 +1955,37 @@ declare module 'console' {
 
 interface FieldDescriptor {
     type:
-        | 'bool'
-        | 'float32be'
-        | 'float32le'
-        | 'float64be'
-        | 'float64le'
-        | 'int8'
-        | 'int16be'
-        | 'int16le'
-        | 'int32be'
-        | 'int32le'
-        | 'uint8'
-        | 'uint16be'
-        | 'uint16le'
-        | 'uint32be'
-        | 'uint32le'
-        | 'fstring'
-        | 'lstr8'
-        | 'lstr16be'
-        | 'lstr16le'
-        | 'lstr32be'
-        | 'lstr32le'
-        | 'raw';
-    length?: number;
-    size?: number;
+        | "bool"
+        | "float32be"
+        | "float32le"
+        | "float64be"
+        | "float64le"
+        | "int8"
+        | "int16be"
+        | "int16le"
+        | "int32be"
+        | "int32le"
+        | "uint8"
+        | "uint16be"
+        | "uint16le"
+        | "uint32be"
+        | "uint32le"
+        | "fstring"
+        | "lstr8"
+        | "lstr16be"
+        | "lstr16le"
+        | "lstr32be"
+        | "lstr32le"
+        | "raw";
+    length?: number | undefined;
+    size?: number | undefined;
 }
 
 interface FileDescriptor {
     [key: string]: FieldDescriptor;
 }
 
-declare module 'data-stream' {
+declare module "data-stream" {
     export default DataStream;
 
     /**
@@ -2180,7 +2174,7 @@ declare module 'data-stream' {
     }
 }
 
-declare module 'focus-target' {
+declare module "focus-target" {
     export default FocusTarget;
 
     /**
@@ -2191,7 +2185,7 @@ declare module 'focus-target' {
          * Priority of the focus target. Higher-priority targets can take focus away from
          * lower-priority ones, but not vice versa.
          */
-        priority?: number;
+        priority?: number | undefined;
     }
 
     /**
@@ -2228,7 +2222,7 @@ declare module 'focus-target' {
     }
 }
 
-declare module 'from' {
+declare module "from" {
     export default from;
     export { Query };
 
@@ -2536,7 +2530,7 @@ declare module 'from' {
     }
 }
 
-declare module 'logger' {
+declare module "logger" {
     export default Logger;
 
     /**
@@ -2571,7 +2565,7 @@ declare module 'logger' {
     }
 }
 
-declare module 'music' {
+declare module "music" {
     export default Music;
 
     /**
@@ -2623,7 +2617,7 @@ declare module 'music' {
     }
 }
 
-declare module 'pact' {
+declare module "pact" {
     export default Pact;
 
     /**
@@ -2655,7 +2649,7 @@ declare module 'pact' {
     }
 }
 
-declare module 'prim' {
+declare module "prim" {
     export default Prim;
 
     /**
@@ -2788,7 +2782,7 @@ declare module 'prim' {
     }
 }
 
-declare module 'random' {
+declare module "random" {
     export default Random;
 
     /**
@@ -2840,7 +2834,7 @@ declare module 'random' {
     }
 }
 
-declare module 'thread' {
+declare module "thread" {
     export default Thread;
 
     /**
@@ -2936,7 +2930,7 @@ declare module 'thread' {
     }
 }
 
-declare module 'tween' {
+declare module "tween" {
     export default Tween;
     export { Easing };
 

@@ -1,10 +1,3 @@
-// Type definitions for tinycon 0.6
-// Project: https://github.com/tommoor/tinycon
-// Definitions by: Daniel Waxweiler <https://github.com/dwaxweiler>
-//                 Julian Hundeloh <https://github.com/jaulz>
-//                 Piotr Błażejewicz <https://github.com/peterblazejewicz>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 declare namespace Tinycon {
     interface TinyconStatic {
         setBubble(label: number | string | null, color?: string): TinyconStatic;
@@ -16,29 +9,29 @@ declare namespace Tinycon {
         /**
          * @default true
          */
-        abbreviate?: boolean;
+        abbreviate?: boolean | undefined;
         /**
          * @default '#F03D25'
          */
-        background?: string;
+        background?: string | undefined;
         /**
          * @default '#ffffff'
          */
-        color?: string;
+        color?: string | undefined;
         /**
          * @default true
          */
-        crossOrigin?: boolean;
-        fallback?: boolean | "force";
-        font?: string;
+        crossOrigin?: boolean | undefined;
+        fallback?: boolean | "force" | undefined;
+        font?: string | undefined;
         /**
          * @default 8
          */
-        height?: number;
+        height?: number | undefined;
         /**
          * @default 7
          */
-        width?: number;
+        width?: number | undefined;
     }
 }
 

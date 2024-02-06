@@ -1,8 +1,3 @@
-// Type definitions for typopo 2.4
-// Project: https://github.com/surfinzap/typopo#readme
-// Definitions by: Piotr Błażejewicz <https://github.com/peterblazejewicz>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /**
  * Correct typos
  * @param string - input text for correction
@@ -12,11 +7,15 @@
  */
 export function fixTypos(string: string, locale?: Locale, configuration?: Configuration): string;
 
-export type Locale = 'en-us' | 'de-de' | 'cs' | 'rue' | 'sk';
+export type Locale = "en-us" | "de-de" | "cs" | "rue" | "sk";
 
 export interface Configuration {
-    removeLines?: boolean;
-    removeWhitespacesBeforeMarkdownList?: boolean;
+    /**
+     * keep Markdown code blocks in your Markdown files
+     */
+    keepMarkdownCodeBlocks?: boolean | undefined;
+    removeLines?: boolean | undefined;
+    removeWhitespacesBeforeMarkdownList?: boolean | undefined;
 }
 
 export as namespace typopo;

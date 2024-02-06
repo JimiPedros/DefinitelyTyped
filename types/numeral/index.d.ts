@@ -1,10 +1,3 @@
-// Type definitions for Numeral.js 2.0
-// Project: https://github.com/adamwdraper/Numeral-js
-// Definitions by: Vincent Bortone <https://github.com/vbortone>
-//                 Kenneth Luján <https://github.com/klujanrosas>
-//                 Carlos Quiroga <https://github.com/KarlosQ>
-//                 Piotr Błażejewicz <https://github.com/peterblazejewicz>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 export as namespace numeral;
 
 /**
@@ -12,7 +5,7 @@ export as namespace numeral;
  */
 declare function numeral(input?: any): numeral.Numeral;
 
-type VERSION = '2.0.6';
+type VERSION = "2.0.6";
 
 declare namespace numeral {
     /** compare numeral object */
@@ -24,6 +17,17 @@ declare namespace numeral {
      * Object with all loaded locales
      */
     const locales: NumeralJSLocales;
+
+    /**
+     * Object with all loaded formats
+     */
+    const formats: NumeralJSFormats;
+
+    /**
+     * Object with utility functions
+     */
+    const _: NumeralJSUtils;
+
     /**
      * This function sets the current locale.  If no arguments are passed in,
      * it will simply return the current global locale key.
@@ -57,12 +61,12 @@ declare namespace numeral {
     function register(
         what: RegisterType,
         key: string,
-        value: NumeralJSLocale | NumeralJsFormat,
-    ): NumeralJSLocale | NumeralJsFormat;
+        value: NumeralJSLocale | NumeralJSFormat,
+    ): NumeralJSLocale | NumeralJSFormat;
 
     function validate(value: any, culture: any): boolean;
 
-    const fn: Numeral['prototype'];
+    const fn: Numeral["prototype"];
 
     // http://numeraljs.com/#use-it
     class Numeral {
@@ -113,7 +117,7 @@ declare namespace numeral {
     type RoundingFunction = (value: number) => number;
 
     // http://numeraljs.com/#custom-formats
-    interface NumeralJsFormat {
+    interface NumeralJSFormat {
         regexps: {
             format: RegExp;
             unformat: RegExp;
@@ -122,7 +126,16 @@ declare namespace numeral {
         unformat: (value: string) => number;
     }
 
-    type RegisterType = 'format' | 'locale';
+    interface NumeralJSFormats {
+        [id: string]: NumeralJSFormat;
+    }
+
+    interface NumeralJSUtils {
+        numberToFormat: (value: number, format: string, roundingFunction?: RoundingFunction) => string;
+        stringToNumber: (string: string) => number;
+    }
+
+    type RegisterType = "format" | "locale";
 }
 
 export = numeral;

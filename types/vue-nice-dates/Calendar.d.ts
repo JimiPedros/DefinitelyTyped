@@ -1,5 +1,5 @@
-import { VueConstructor } from 'vue';
-import { DateLocale, Modifiers, ModifiersClassNames } from './shared.d';
+import { VueConstructor } from "vue";
+import { DateLocale, Modifiers, ModifiersClassNames } from "./shared.d";
 
 export const Calendar: Calendar;
 
@@ -7,7 +7,7 @@ export interface Calendar extends VueConstructor {
     props: {
         locale: DateLocale;
         date: Date | string;
-        initialDate?: Date;
+        initialDate?: Date | undefined;
         enableGridSwitch: boolean;
         modifiers: Modifiers;
         modifiersClassNames: ModifiersClassNames;

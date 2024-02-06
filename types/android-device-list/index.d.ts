@@ -1,8 +1,3 @@
-// Type definitions for android-device-list 1.2
-// Project: https://github.com/pbakondy/android-device-list#readme
-// Definitions by: Piotr Błażejewicz <https://github.com/peterblazejewicz>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /**
  * Returns the full device list
  */
@@ -38,13 +33,13 @@ export interface Options {
      * do not care of case type
      * @default false
      */
-    caseInsensitive?: boolean;
+    caseInsensitive?: boolean | undefined;
 
     /**
      * return partial (substring) results too
      * @default false
      */
-    contains?: boolean;
+    contains?: boolean | undefined;
 }
 
 export interface Device {

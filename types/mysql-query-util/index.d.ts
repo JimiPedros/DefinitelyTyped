@@ -1,8 +1,3 @@
-// Type definitions for mysql-query-util 0.2
-// Project: https://github.com/uchennaemeruche/mysql-util#readme
-// Definitions by: Uchenna Emeruche <https://github.com/uchennaemeruche>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /// <reference types="node" />
 
 declare function _delete(options: IterableOptions): Promise<any>;
@@ -25,9 +20,9 @@ export function query(queryType: string, tableName: string, fields?: any, data?:
 
 export interface IterableOptions {
     tableName: string;
-    fields?: string[];
-    params?: Array<Array<string | number>>;
-    data?: object;
+    fields?: string[] | undefined;
+    params?: Array<Array<string | number>> | undefined;
+    data?: object | undefined;
 }
 
 export interface connectionString {
@@ -50,5 +45,5 @@ export interface connectionString {
     /**
      * The maximum number of connections to create at once. (Default: 10)
      */
-    connectionLimit?: number;
+    connectionLimit?: number | undefined;
 }

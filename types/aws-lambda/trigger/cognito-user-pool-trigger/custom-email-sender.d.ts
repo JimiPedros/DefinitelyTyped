@@ -1,24 +1,16 @@
-import { Handler } from '../../handler';
-import {
-    BaseTriggerEvent,
-    StringMap,
-} from './_common';
+import { Handler } from "../../handler";
+import { BaseTriggerEvent, StringMap } from "./_common";
 
 export interface BaseCustomEmailSenderTriggerEvent<T extends string> extends BaseTriggerEvent<T> {
     request: {
         type: string;
         code: string | null;
         userAttributes: StringMap;
-        clientMetadata?: StringMap;
+        clientMetadata?: StringMap | undefined;
     };
 }
 
-export type AccountTakeOverActionType =
-    | 'BLOCK'
-    | 'NO_ACTION'
-    | 'MFA'
-    | 'MFA_IF_CONFIGURED'
-    | 'MFA_REQUIRED';
+export type AccountTakeOverActionType = "BLOCK" | "NO_ACTION" | "MFA" | "MFA_IF_CONFIGURED" | "MFA_REQUIRED";
 
 export interface CustomEmailSender_AccountTakeOverNotification_UserAttributes {
     EVENT_ID: string;
@@ -29,43 +21,43 @@ export interface CustomEmailSender_AccountTakeOverNotification_UserAttributes {
     ONE_CLICK_LINK_INVALID: string;
     LOGIN_TIME: string;
     FEEDBACK_TOKEN: string;
-    CITY?: string;
-    COUNTRY?: string;
-    DEVICE_NAME?: string;
+    CITY?: string | undefined;
+    COUNTRY?: string | undefined;
+    DEVICE_NAME?: string | undefined;
 }
 
-export interface CustomEmailSenderSignUpTriggerEvent extends BaseCustomEmailSenderTriggerEvent<
-    'CustomEmailSender_SignUp'
-> {}
+export interface CustomEmailSenderSignUpTriggerEvent
+    extends BaseCustomEmailSenderTriggerEvent<"CustomEmailSender_SignUp">
+{}
 
-export interface CustomEmailSenderResendCodeTriggerEvent extends BaseCustomEmailSenderTriggerEvent<
-    'CustomEmailSender_ResendCode'
-> {}
+export interface CustomEmailSenderResendCodeTriggerEvent
+    extends BaseCustomEmailSenderTriggerEvent<"CustomEmailSender_ResendCode">
+{}
 
-export interface CustomEmailSenderForgotPasswordTriggerEvent extends BaseCustomEmailSenderTriggerEvent<
-    'CustomEmailSender_ForgotPassword'
-> {}
+export interface CustomEmailSenderForgotPasswordTriggerEvent
+    extends BaseCustomEmailSenderTriggerEvent<"CustomEmailSender_ForgotPassword">
+{}
 
-export interface CustomEmailSenderUpdateUserAttributeTriggerEvent extends BaseCustomEmailSenderTriggerEvent<
-    'CustomEmailSender_UpdateUserAttribute'
-> {}
+export interface CustomEmailSenderUpdateUserAttributeTriggerEvent
+    extends BaseCustomEmailSenderTriggerEvent<"CustomEmailSender_UpdateUserAttribute">
+{}
 
-export interface CustomEmailSenderVerifyUserAttributeTriggerEvent extends BaseCustomEmailSenderTriggerEvent<
-    'CustomEmailSender_VerifyUserAttribute'
-> {}
+export interface CustomEmailSenderVerifyUserAttributeTriggerEvent
+    extends BaseCustomEmailSenderTriggerEvent<"CustomEmailSender_VerifyUserAttribute">
+{}
 
-export interface CustomEmailSenderAdminCreateUserTriggerEvent extends BaseCustomEmailSenderTriggerEvent<
-    'CustomEmailSender_AdminCreateUser'
-> {}
+export interface CustomEmailSenderAdminCreateUserTriggerEvent
+    extends BaseCustomEmailSenderTriggerEvent<"CustomEmailSender_AdminCreateUser">
+{}
 
-export interface CustomEmailSenderAccountTakeOverNotificationTriggerEvent extends BaseTriggerEvent<
-    'CustomEmailSender_AccountTakeOverNotification'
-> {
+export interface CustomEmailSenderAccountTakeOverNotificationTriggerEvent
+    extends BaseTriggerEvent<"CustomEmailSender_AccountTakeOverNotification">
+{
     request: {
         type: string;
         code: string | null;
         userAttributes: CustomEmailSender_AccountTakeOverNotification_UserAttributes;
-        clientMetadata?: StringMap;
+        clientMetadata?: StringMap | undefined;
     };
 }
 
@@ -81,6 +73,4 @@ export type CustomEmailSenderTriggerEvent =
     | CustomEmailSenderAdminCreateUserTriggerEvent
     | CustomEmailSenderAccountTakeOverNotificationTriggerEvent;
 
-export type CustomEmailSenderTriggerHandler = Handler<
-    CustomEmailSenderTriggerEvent
->;
+export type CustomEmailSenderTriggerHandler = Handler<CustomEmailSenderTriggerEvent>;

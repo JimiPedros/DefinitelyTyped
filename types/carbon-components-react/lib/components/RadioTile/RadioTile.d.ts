@@ -7,14 +7,14 @@ export type RadioTileChangeEvent = React.ChangeEvent<HTMLInputElement> | React.K
 type ExcludedAttributes = "onChange" | "onKeyDown" | "type" | "value";
 
 export interface RadioTileProps extends Omit<ReactInputAttr, ExcludedAttributes> {
-    defaultChecked?: boolean,
+    defaultChecked?: boolean | undefined;
     /**
      * @deprecated
      */
-    iconDescription?: string,
-    light?: boolean,
-    onChange?(value: RadioTileProps["value"], name: RadioTileProps["name"], event: RadioTileChangeEvent): void,
-    value: RadioButtonValue,
+    iconDescription?: string | undefined;
+    light?: boolean | undefined;
+    onChange?(value: RadioTileProps["value"], name: RadioTileProps["name"], event: RadioTileChangeEvent): void;
+    value: RadioButtonValue;
 }
 
 declare const RadioTile: React.FC<RadioTileProps>;

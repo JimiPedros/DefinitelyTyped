@@ -1,8 +1,3 @@
-// Type definitions for jrf-pip 1.0
-// Project: https://github.com/jirufik/jrf-pip#readme
-// Definitions by: rufus <https://github.com/jirufik>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 interface ParallelProcessingParams<T> {
     arrayValues: T[];
 
@@ -10,9 +5,9 @@ interface ParallelProcessingParams<T> {
 
     nextValueFn?(params: NextValueFnParams<T>): boolean | Promise<boolean>;
 
-    cycleTimeout?: number;
-    parallel?: number;
-    awaitRes?: boolean;
+    cycleTimeout?: number | undefined;
+    parallel?: number | undefined;
+    awaitRes?: boolean | undefined;
 
     cb?(stackError: StackError<T>): void | Promise<void>;
 }

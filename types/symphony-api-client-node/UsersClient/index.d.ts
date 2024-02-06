@@ -9,13 +9,13 @@ export interface User {
     firstName: string;
     lastName: string;
     displayName: string;
-    title?: string;
-    company?: string;
-    department?: string;
-    accountType?: string;
-    location?: string;
-    username?: string;
-    avatars?: Avatar[];
+    title?: string | undefined;
+    company?: string | undefined;
+    department?: string | undefined;
+    accountType?: string | undefined;
+    location?: string | undefined;
+    username?: string | undefined;
+    avatars?: Avatar[] | undefined;
 }
 
 export interface UsersList {
@@ -23,9 +23,9 @@ export interface UsersList {
 }
 
 export interface UserFilter {
-    title?: string;
-    location?: string;
-    company?: string;
+    title?: string | undefined;
+    location?: string | undefined;
+    company?: string | undefined;
 }
 
 export interface SearchUserResponse extends UsersList {
@@ -45,4 +45,10 @@ export function getUsersFromEmailList(commaSeparatedEmails: string, local?: bool
 
 export function getUsersFromIdList(commaSeparatedIds: string, local?: boolean): Promise<UsersList>;
 
-export function searchUsers(query: string, local?: boolean, skip?: number, limit?: number, filter?: UserFilter): Promise<SearchUserResponse>;
+export function searchUsers(
+    query: string,
+    local?: boolean,
+    skip?: number,
+    limit?: number,
+    filter?: UserFilter,
+): Promise<SearchUserResponse>;

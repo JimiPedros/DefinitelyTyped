@@ -1,9 +1,3 @@
-// Type definitions for are.na 0.1
-// Project: https://github.com/ivangreene/arena-js
-// Definitions by: Hunter Caron <https://github.com/huntercaron>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 4.1
-
 /**
  * Timestamp in ISO 8601 format, eg. "2020-06-20T15:59:04.796Z"
  */
@@ -34,7 +28,7 @@ interface CustomRequestHandler {
     method: string;
     url: string;
     data?: any;
-    options?: Params;
+    options?: Params | undefined;
 }
 
 /**
@@ -55,10 +49,10 @@ declare class Arena {
      * @param requestHandler - Custom request handler
      */
     constructor(config?: {
-        accessToken?: string;
-        baseURL?: string;
-        authToken?: string;
-        requestHandler?: CustomRequestHandler;
+        accessToken?: string | undefined;
+        baseURL?: string | undefined;
+        authToken?: string | undefined;
+        requestHandler?: CustomRequestHandler | undefined;
     });
 
     /**
@@ -143,7 +137,9 @@ declare class Arena {
          * If title is not set, an error will occur.
          * If status is not set, it will default to "public".
          */
-        update(params: { title?: string; status?: Arena.ChannelStatus }): Promise<Arena.Channel>;
+        update(
+            params: { title?: string | undefined; status?: Arena.ChannelStatus | undefined },
+        ): Promise<Arena.Channel>;
         /**
          * Add collaborators to a channel. Pass userIds as an Array or multiple arguments.
          */
@@ -195,7 +191,7 @@ declare class Arena {
          * Update a block. Pass an object with one or more of content,
          * title or description fields to update those fields.
          */
-        update(params: { content?: any; title?: string; description?: string }): Promise<void>;
+        update(params: { content?: any; title?: string | undefined; description?: string | undefined }): Promise<void>;
     };
 
     /**
@@ -252,9 +248,9 @@ declare class Arena {
         all(
             params?: Params,
         ): Promise<{
-            channels?: Arena.Channel[];
-            blocks?: Arena.Block[];
-            users?: Arena.User[];
+            channels?: Arena.Channel[] | undefined;
+            blocks?: Arena.Block[] | undefined;
+            users?: Arena.User[] | undefined;
         }>;
         /**
          * Search for users.
@@ -278,37 +274,37 @@ declare namespace Arena {
     /**
      * The type of block.
      */
-    type BlockType = 'Image' | 'Text' | 'Link' | 'Media' | 'Attachment';
+    type BlockType = "Image" | "Text" | "Link" | "Media" | "Attachment";
 
     /**
      * Either "default" (a standard channel) or "profile" the default channel of a user
      */
-    type ChannelKind = 'default' | 'profile';
+    type ChannelKind = "default" | "profile";
 
     /**
      * Can be "private" (only open for reading and adding to the channel by channel author and collaborators),
      * "closed" (open for reading by everyone, only channel author and collaborators can add) or "public"
      * (everyone can read and add to the channel)
      */
-    type ChannelStatus = 'private' | 'closed' | 'open';
+    type ChannelStatus = "private" | "closed" | "open";
 
     /**
      * Representation of a block's source
      */
     interface Source {
-        provider?: { name?: string; url?: string };
-        title?: string;
-        url?: string;
+        provider?: { name?: string | undefined; url?: string | undefined } | undefined;
+        title?: string | undefined;
+        url?: string | undefined;
     }
 
     /**
      * Representation of a channel the block appears in
      */
     interface Connection extends Partial<Channel> {
-        id?: number;
-        title?: string;
-        added_to_at?: Timestamp;
-        updated_at?: Timestamp;
+        id?: number | undefined;
+        title?: string | undefined;
+        added_to_at?: Timestamp | undefined;
+        updated_at?: Timestamp | undefined;
     }
 
     interface Image {
@@ -466,14 +462,14 @@ declare namespace Arena {
         /**
          * An array of User representations of each of the channels the block appears in
          */
-        connections?: Connection[];
+        connections?: Connection[] | undefined;
     }
 
     /**
      * Block of type "Text"
      */
     interface TextBlock extends Block {
-        class: 'Text';
+        class: "Text";
         content: string;
         content_html: string;
         image: null;
@@ -483,7 +479,7 @@ declare namespace Arena {
      * Block of type "Image"
      */
     interface ImageBlock extends Block {
-        class: 'Image';
+        class: "Image";
         content: null;
         content_html: null;
         image: Image;
@@ -493,7 +489,7 @@ declare namespace Arena {
      * Block of type "Link"
      */
     interface LinkBlock extends Block {
-        class: 'Link';
+        class: "Link";
         content: null;
         content_html: null;
         image: Image;
@@ -503,7 +499,7 @@ declare namespace Arena {
      * Block of type "Media"
      */
     interface MediaBlock extends Block {
-        class: 'Media';
+        class: "Media";
         content: null;
         content_html: null;
         image: null;
@@ -513,7 +509,7 @@ declare namespace Arena {
      * Block of type "Attachment"
      */
     interface AttachmentBlock extends Block {
-        class: 'Attachment';
+        class: "Attachment";
         content: null;
         content_html: null;
         image: null;
@@ -665,15 +661,15 @@ declare namespace Arena {
         /**
          * Currently this will be equivalent to "full_name"
          */
-        username?: string;
+        username?: string | undefined;
         /**
          * Will always be "User"
          */
-        class?: string;
+        class?: string | undefined;
         /**
          * The initials of a user. Derived from the user's first and last name
          */
-        initials?: string;
+        initials?: string | undefined;
     }
 
     interface Search {

@@ -1,32 +1,40 @@
-import { Color } from './../math/Color';
-import { Texture } from './../textures/Texture';
-import { MaterialParameters, Material } from './Material';
-import { Combine } from '../constants';
+import { Combine } from "../constants.js";
+import { Color, ColorRepresentation } from "../math/Color.js";
+import { Texture } from "../textures/Texture.js";
+import { Material, MaterialParameters } from "./Material.js";
 /**
  * parameters is an object with one or more properties defining the material's appearance.
  */
 export interface MeshBasicMaterialParameters extends MaterialParameters {
-    color?: Color | string | number;
-    opacity?: number;
-    map?: Texture | null;
-    aoMap?: Texture | null;
-    aoMapIntensity?: number;
-    specularMap?: Texture | null;
-    alphaMap?: Texture | null;
-    envMap?: Texture | null;
-    combine?: Combine;
-    reflectivity?: number;
-    refractionRatio?: number;
-    wireframe?: boolean;
-    wireframeLinewidth?: number;
-    wireframeLinecap?: string;
-    wireframeLinejoin?: string;
-    skinning?: boolean;
-    morphTargets?: boolean;
+    color?: ColorRepresentation | undefined;
+    opacity?: number | undefined;
+    map?: Texture | null | undefined;
+    lightMap?: Texture | null;
+    lightMapIntensity?: number | undefined;
+    aoMap?: Texture | null | undefined;
+    aoMapIntensity?: number | undefined;
+    specularMap?: Texture | null | undefined;
+    alphaMap?: Texture | null | undefined;
+    fog?: boolean | undefined;
+    envMap?: Texture | null | undefined;
+    combine?: Combine | undefined;
+    reflectivity?: number | undefined;
+    refractionRatio?: number | undefined;
+    wireframe?: boolean | undefined;
+    wireframeLinewidth?: number | undefined;
+    wireframeLinecap?: string | undefined;
+    wireframeLinejoin?: string | undefined;
 }
 
 export class MeshBasicMaterial extends Material {
     constructor(parameters?: MeshBasicMaterialParameters);
+
+    /**
+     * Read-only flag to check if a given object is of type {@link MeshBasicMaterial}.
+     * @remarks This is a _constant_ value
+     * @defaultValue `true`
+     */
+    readonly isMeshBasicMaterial: true;
 
     /**
      * @default 'MeshBasicMaterial'
@@ -42,6 +50,16 @@ export class MeshBasicMaterial extends Material {
      * @default null
      */
     map: Texture | null;
+
+    /**
+     * @default null
+     */
+    lightMap: Texture | null;
+
+    /**
+     * @default 1
+     */
+    lightMapIntensity: number;
 
     /**
      * @default null
@@ -104,14 +122,10 @@ export class MeshBasicMaterial extends Material {
     wireframeLinejoin: string;
 
     /**
-     * @default false
+     * Whether the material is affected by fog. Default is true.
+     * @default fog
      */
-    skinning: boolean;
-
-    /**
-     * @default false
-     */
-    morphTargets: boolean;
+    fog: boolean;
 
     setValues(parameters: MeshBasicMaterialParameters): void;
 }

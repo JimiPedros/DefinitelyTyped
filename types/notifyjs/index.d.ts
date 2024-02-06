@@ -1,10 +1,3 @@
-// Type definitions for notifyjs 3.0.0
-// Project: https://github.com/alexgibson/notify.js
-// Definitions by: soundTricker <https://github.com/soundTricker>
-//                 NateScarlet <https://github.com/NateScarlet>
-//                 eikendev <https://github.com/eikendev>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 declare class Notify {
     constructor(title: string, options?: Notify.NotifyOption);
 
@@ -62,27 +55,27 @@ declare namespace Notify {
         /**
          * notification message body
          */
-        body?: string;
+        body?: string | undefined;
 
         /**
          * path for icon to display in notification
          */
-        icon?: string;
+        icon?: string | undefined;
 
         /**
          * unique identifier to stop duplicate notifications
          */
-        tag?: string;
+        tag?: string | undefined;
 
         /**
          * number of seconds to close the notification automatically
          */
-        timeout?: number;
+        timeout?: number | undefined;
 
         /**
          * whether this notification should be silent or not
          */
-        silent?: boolean;
+        silent?: boolean | undefined;
 
         /**
          * callback when notification is shown
@@ -91,29 +84,29 @@ declare namespace Notify {
         /**
          * callback when notification is closed
          */
-        notifyClose?: Function;
+        notifyClose?: Function | undefined;
         /**
          * callback when notification is clicked
          */
-        notifyClick?: Function;
+        notifyClick?: Function | undefined;
         /**
          * callback when notification throws an error
          */
-        notifyError?: Function;
+        notifyError?: Function | undefined;
         /**
          *  callback when user has granted permission
          */
-        permissionGranted?: Function;
+        permissionGranted?: Function | undefined;
         /**
          * callback when user has denied permission
          */
-        permissionDenied?: Function;
+        permissionDenied?: Function | undefined;
 
         /**
          * whether we expect for user interaction or not
          * in case value is true the timeout for closing the notification won't be set
          */
-        requireInteraction?: boolean;
+        requireInteraction?: boolean | undefined;
     }
 }
 

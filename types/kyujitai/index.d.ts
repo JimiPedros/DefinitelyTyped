@@ -1,7 +1,3 @@
-// Type definitions for kyujitai 1.3
-// Project: https://github.com/hakatashi/kyujitai.js
-// Definitions by: Piotr Błażejewicz <https://github.com/peterblazejewicz>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 export as namespace Kyujitai;
 
 /**
@@ -31,9 +27,9 @@ declare namespace Kyujitai {
          * Valid only in browser.
          * Default is the same directory to the ivs.js file.
          */
-        ivd?: string;
+        ivd?: string | undefined;
 
-        kyujitai?: string;
+        kyujitai?: string | undefined;
     }
 
     /**
@@ -46,7 +42,7 @@ declare namespace Kyujitai {
          * `true` if you want to allow IVS for the encoded string
          * @default false
          */
-        IVD?: boolean;
+        IVD?: boolean | undefined;
     }
 
     /** unused */

@@ -1,10 +1,4 @@
-// Type definitions for express-sitemap-xml 3.0
-// Project: https://github.com/feross/express-sitemap-xml
-// Definitions by: Florian Imdahl <https://github.com/ffflorian>
-//                 Piotr Błażejewicz <https://github.com/peterblazejewicz>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
-import express = require('express');
+import express = require("express");
 
 /**
  * Create a sitemap.xml middleware.
@@ -22,9 +16,9 @@ declare function expressSitemapXml(
 
 declare namespace expressSitemapXml {
     interface LeafObject {
-        changeFreq?: string;
+        changeFreq?: string | undefined;
         /** specify `true` for today's date */
-        lastMod?: string | Date | true;
+        lastMod?: string | Date | true | undefined;
         url: string;
     }
 

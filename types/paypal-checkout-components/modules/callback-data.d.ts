@@ -1,6 +1,6 @@
 export enum LineItemKind {
-    Debit = 'debit',
-    Credit = 'credit',
+    Debit = "debit",
+    Credit = "credit",
 }
 
 export interface LineItem {
@@ -49,12 +49,12 @@ export enum ShippingOptionType {
     /**
      * The payer intends to receive the items at a specified address.
      */
-    Shipping = 'SHIPPING',
+    Shipping = "SHIPPING",
 
     /**
      * The payer intends to pick up the items at a specified address. For example, a store address.
      */
-    Pickup = 'PICKUP',
+    Pickup = "PICKUP",
 }
 
 export interface CurrencyAmount {
@@ -113,7 +113,7 @@ export interface Address {
     /**
      * Extended address.
      */
-    line2?: string;
+    line2?: string | undefined;
 
     /**
      * City or locality.
@@ -138,12 +138,12 @@ export interface Address {
     /**
      * Phone number.
      */
-    phone?: string;
+    phone?: string | undefined;
 
     /**
      * Recipient of postage.
      */
-    recipientName?: string;
+    recipientName?: string | undefined;
 }
 
 export interface CreditFinancingOptions {
@@ -183,23 +183,23 @@ export interface AuthorizationResponseDetails {
     payerId: string;
     firstName: string;
     lastName: string;
-    countryCode?: string;
-    phone?: string;
+    countryCode?: string | undefined;
+    phone?: string | undefined;
 
     /**
      * User's shipping address details, only available if shipping address is enabled.
      */
-    shippingAddress?: Address;
+    shippingAddress?: Address | undefined;
 
     /**
      * User's billing address details.
      */
-    billingAddress?: Address;
+    billingAddress?: Address | undefined;
 
     /**
      * This property will only be present when the customer pays with PayPal Credit.
      */
-    creditFinancingOffered?: CreditFinancingOptions;
+    creditFinancingOffered?: CreditFinancingOptions | undefined;
 }
 
 export interface AuthorizationResponse {
@@ -223,39 +223,39 @@ export enum FlowType {
     /**
      * Used to store the payment method for future use, ie subscriptions
      */
-    Vault = 'vault',
+    Vault = "vault",
 
     /**
      * Used for one-time checkout
      */
-    Checkout = 'checkout',
+    Checkout = "checkout",
 }
 
 export enum Intent {
     /**
      * Submits the transaction for authorization but not settlement.
      */
-    Authorize = 'authorize',
+    Authorize = "authorize",
 
     /**
      * Validates the transaction without an authorization (i.e. without holding funds).
      * Useful for authorizing and capturing funds up to 90 days after the order has been placed.
      * Only available for Checkout flow.
      */
-    Order = 'order',
+    Order = "order",
 
     /**
      * Payment will be immediately submitted for settlement upon creating a transaction.
      * `sale` can be used as an alias for this value.
      */
-    Capture = 'capture',
+    Capture = "capture",
 }
 
 export interface AuthorizationData {
     payerId: string;
-    paymentId?: string;
-    billingToken?: string;
-    vault?: boolean;
+    paymentId?: string | undefined;
+    billingToken?: string | undefined;
+    vault?: boolean | undefined;
 }
 
 export interface CancellationData {

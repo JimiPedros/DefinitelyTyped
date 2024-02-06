@@ -1,12 +1,7 @@
-// Type definitions for s3-streams 0.4
-// Project: https://github.com/izaakschroeder/s3-streams
-// Definitions by: Carl Fürstenberg <https://github.com/azatoth>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /// <reference types="node" />
 
-import { S3 } from 'aws-sdk';
-import { Readable, Writable } from 'stream';
+import { S3 } from "aws-sdk2-types";
+import { Readable, Writable } from "stream";
 
 export interface StreamOptions {
     /**
@@ -16,7 +11,7 @@ export interface StreamOptions {
      * @default 4MB for {@link ReadStream}
      * @default 10MB for {@link WriteStream}
      */
-    highWaterMark?: number;
+    highWaterMark?: number | undefined;
 }
 
 export class ReadStream extends Readable {

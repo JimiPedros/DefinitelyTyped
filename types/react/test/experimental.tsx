@@ -1,80 +1,11 @@
 /// <reference types="../experimental"/>
 
-import React = require('react');
+import React = require("react");
 
-function useExperimentalHooks() {
-    const [toggle, setToggle] = React.useState(false);
-
-    const [startTransition, done] = React.unstable_useTransition();
-    // $ExpectType boolean
-    done;
-
-    // $ExpectType boolean
-    const deferredToggle = React.unstable_useDeferredValue(toggle);
-
-    const [func] = React.useState(() => () => 0);
-
-    // $ExpectType () => number
-    func;
-    // $ExpectType () => number
-    const deferredFunc = React.unstable_useDeferredValue(func);
-
-    class Constructor {}
-    // $ExpectType typeof Constructor
-    const deferredConstructor = React.unstable_useDeferredValue(Constructor);
-
-    // $ExpectType () => string
-    const deferredConstructible = React.unstable_useDeferredValue(Constructible);
-
-    return () => {
-        startTransition(() => {
-            setToggle(toggle => !toggle);
-        });
-
-        // The function must be synchronous, even if it can start an asynchronous update
-        // it's no different from an useEffect callback in this respect
-        // $ExpectError
-        startTransition(async () => {});
-
-        // Unlike Effect callbacks, though, there is no possible destructor to return
-        // $ExpectError
-        startTransition(() => () => {});
-    };
-
-    function Constructible() {
-        return '';
-    }
-}
-
-function Dialog() {
-    const nameId = React.unstable_useOpaqueIdentifier();
-
-    return (
-        <div role="dialog" aria-labelledby={nameId}>
-            <h2 id={nameId}></h2>
-        </div>
-    );
-}
-
-function InvalidOpaqueIdentifierUsage() {
-    const id = React.unstable_useOpaqueIdentifier();
-    // undesired, would warn in React should not type-check
-    const stringified1: string = id.toString();
-    // undesired, would warn in React should not type-check
-    const stringified2: string = id + '';
-
-    return null;
-}
-
-function startTransitionTest() {
-    function transitionToPage(page: string) {}
-
-    React.unstable_startTransition(() => {
-        transitionToPage('/');
-    });
-
-    // $ExpectError
-    React.unstable_startTransition(async () => {});
+// NOTE: forward declarations for tests
+declare var console: Console;
+interface Console {
+    log(...args: any[]): void;
 }
 
 function suspenseTest() {
@@ -89,4 +20,130 @@ function suspenseTest() {
             </React.Suspense>
         );
     }
+}
+
+// Unsupported `revealOrder` triggers a runtime warning
+// @ts-expect-error
+<React.unstable_SuspenseList revealOrder="something">
+    <React.Suspense fallback="Loading">Content</React.Suspense>
+</React.unstable_SuspenseList>;
+
+<React.unstable_SuspenseList revealOrder="backwards">
+    <React.Suspense fallback="Loading">A</React.Suspense>
+    <React.Suspense fallback="Loading">B</React.Suspense>
+</React.unstable_SuspenseList>;
+
+<React.unstable_SuspenseList revealOrder="forwards">
+    <React.Suspense fallback="Loading">A</React.Suspense>
+    <React.Suspense fallback="Loading">B</React.Suspense>
+</React.unstable_SuspenseList>;
+
+<React.unstable_SuspenseList revealOrder="together">
+    <React.Suspense fallback="Loading">A</React.Suspense>
+    <React.Suspense fallback="Loading">B</React.Suspense>
+</React.unstable_SuspenseList>;
+
+function useEvent() {
+    // Implicit any
+    // @ts-expect-error
+    const anyEvent = React.experimental_useEffectEvent(value => {
+        // $ExpectType any
+        return value;
+    });
+    // $ExpectType any
+    anyEvent({});
+    // $ExpectType (value: string) => number
+    const typedEvent = React.experimental_useEffectEvent((value: string) => {
+        return Number(value);
+    });
+    // $ExpectType number
+    typedEvent("1");
+    // Argument of type '{}' is not assignable to parameter of type 'string'.
+    // @ts-expect-error
+    typedEvent({});
+
+    function useContextuallyTypedEvent(fn: (event: Event) => string) {}
+    useContextuallyTypedEvent(
+        React.experimental_useEffectEvent(event => {
+            // $ExpectType Event
+            event;
+            return String(event);
+        }),
+    );
+}
+
+// ReactNode tests
+{
+    // @ts-expect-error
+    const render: React.ReactNode = () => React.createElement("div");
+    // @ts-expect-error
+    const emptyObject: React.ReactNode = {};
+    // @ts-expect-error
+    const plainObject: React.ReactNode = { dave: true };
+    const promise: React.ReactNode = Promise.resolve("React");
+    // @ts-expect-error plain objects are not allowed
+    <div>{{ dave: true }}</div>;
+    <div>{Promise.resolve("React")}</div>;
+}
+
+function elementTypeTests() {
+    const ReturnPromise = () => Promise.resolve("React");
+    const FCPromise: React.FC = ReturnPromise;
+    class RenderPromise extends React.Component {
+        render() {
+            return Promise.resolve("React");
+        }
+    }
+
+    <ReturnPromise />;
+    React.createElement(ReturnPromise);
+    <RenderPromise />;
+    React.createElement(RenderPromise);
+}
+
+function taintTests() {
+    const taintUniqueValue = React.experimental_taintUniqueValue;
+    const taintObjectReference = React.experimental_taintObjectReference;
+
+    const process = {
+        env: {
+            SECRET: "0967af1802d2a516e88c7c42e0b8ef95",
+        },
+    };
+    const user = {
+        name: "Sebbie",
+    };
+
+    taintUniqueValue("Cannot pass a secret token to the client", process, process.env.SECRET);
+    taintUniqueValue(undefined, process, process.env.SECRET);
+    // @ts-expect-error Probably meant `taintObjectReference`
+    taintUniqueValue(
+        undefined,
+        user,
+    );
+    taintUniqueValue(
+        undefined,
+        process,
+        // @ts-expect-error should use taintObjectReference instead
+        process.env,
+    );
+    taintUniqueValue(
+        undefined,
+        process,
+        // @ts-expect-error Not unique
+        5,
+    );
+
+    taintObjectReference("Don't pass the raw user object to the client", user);
+    taintObjectReference(undefined, user);
+    taintObjectReference(
+        undefined,
+        // @ts-expect-error Not a reference
+        process.env.SECRET,
+    );
+    taintObjectReference(
+        undefined,
+        // @ts-expect-error Not a reference
+        true,
+    );
 }

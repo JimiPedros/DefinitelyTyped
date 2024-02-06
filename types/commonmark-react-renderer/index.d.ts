@@ -1,17 +1,12 @@
-// Type definitions for commonmark-react-renderer 4.3
-// Project: https://github.com/rexxars/commonmark-react-renderer#readme
-// Definitions by: Nathan Bierema <https://github.com/Methuselah96>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
-import * as React from "react";
 import { Node } from "commonmark";
+import * as React from "react";
 
 declare namespace ReactRenderer {
     interface CommonProps {
         nodeKey: string;
         literal: string | null;
         children: React.ReactElement;
-        "data-sourcepos"?: string;
+        "data-sourcepos"?: string | undefined;
     }
 
     interface HtmlInlineBlockProps extends CommonProps {
@@ -21,8 +16,8 @@ declare namespace ReactRenderer {
     }
 
     interface CodeBlockProps extends CommonProps {
-        language?: string;
-        codeinfo?: string[];
+        language?: string | undefined;
+        codeinfo?: string[] | undefined;
     }
 
     interface CodeProps extends CommonProps {
@@ -40,7 +35,7 @@ declare namespace ReactRenderer {
     interface LinkProps extends CommonProps {
         href: string;
         title: string | undefined;
-        target?: string;
+        target?: string | undefined;
     }
 
     interface ImageProps extends CommonProps {
@@ -76,18 +71,20 @@ declare namespace ReactRenderer {
     }
 
     interface Options {
-        sourcePos?: boolean;
-        escapeHtml?: boolean;
-        skipHtml?: boolean;
-        softBreak?: string;
-        allowedTypes?: string[];
-        disallowedTypes?: string[];
-        unwrapDisallowed?: boolean;
-        allowNode?: (node: { type: string; renderer: string; props: unknown; children: unknown[] }) => unknown;
-        renderers?: Partial<Renderers>;
-        transformLinkUri?: ((uri: string) => string) | null;
-        transformImageUri?: ((uri: string) => string) | null;
-        linkTarget?: string;
+        sourcePos?: boolean | undefined;
+        escapeHtml?: boolean | undefined;
+        skipHtml?: boolean | undefined;
+        softBreak?: string | undefined;
+        allowedTypes?: string[] | undefined;
+        disallowedTypes?: string[] | undefined;
+        unwrapDisallowed?: boolean | undefined;
+        allowNode?:
+            | ((node: { type: string; renderer: string; props: unknown; children: unknown[] }) => unknown)
+            | undefined;
+        renderers?: Partial<Renderers> | undefined;
+        transformLinkUri?: ((uri: string) => string) | null | undefined;
+        transformImageUri?: ((uri: string) => string) | null | undefined;
+        linkTarget?: string | undefined;
     }
 
     interface Renderer {
@@ -109,7 +106,7 @@ declare namespace ReactRenderer {
 }
 
 interface ReactRenderer {
-    new (options?: ReactRenderer.Options): ReactRenderer.Renderer;
+    new(options?: ReactRenderer.Options): ReactRenderer.Renderer;
     uriTransformer: (uri: string) => string;
     types: string[];
     renderers: ReactRenderer.Renderers;

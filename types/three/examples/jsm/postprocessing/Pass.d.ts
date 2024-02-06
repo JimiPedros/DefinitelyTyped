@@ -1,7 +1,9 @@
-import { Material, WebGLRenderer, WebGLRenderTarget } from '../../../src/Three';
+import { Material, WebGLRenderer, WebGLRenderTarget } from "../../../src/Three.js";
 
 export class Pass {
     constructor();
+
+    isPass: boolean;
     enabled: boolean;
     needsSwap: boolean;
     clear: boolean;
@@ -15,15 +17,15 @@ export class Pass {
         deltaTime: number,
         maskActive: boolean,
     ): void;
+
+    dispose(): void;
 }
 
-export namespace Pass {
-    class FullScreenQuad {
-        constructor(material?: Material);
+export class FullScreenQuad {
+    constructor(material?: Material);
 
-        render(renderer: WebGLRenderer): void;
-        dispose(): void;
+    render(renderer: WebGLRenderer): void;
+    dispose(): void;
 
-        material: Material;
-    }
+    material: Material;
 }

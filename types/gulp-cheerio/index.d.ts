@@ -1,14 +1,9 @@
-// Type definitions for gulp-cheerio
-// Project: https://github.com/KenPowers/gulp-cheerio
-// Definitions by: Qubo <https://github.com/tkQubo>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /// <reference types="cheerio" />
 /// <reference types="node" />
 /// <reference types="vinyl" />
 
-import Vinyl = require('vinyl');
-import cheerio = require('cheerio');
+import Vinyl = require("vinyl");
+import cheerio = require("cheerio");
 
 declare namespace gulpCheerio {
     interface GulpCheerio {
@@ -21,9 +16,9 @@ declare namespace gulpCheerio {
     }
 
     interface Option {
-        run?: Callback;
-        parserOptions?: cheerio.CheerioParserOptions;
-        cheerio?: cheerio.Root;
+        run?: Callback | undefined;
+        parserOptions?: cheerio.CheerioParserOptions | undefined;
+        cheerio?: cheerio.Root | undefined;
     }
 }
 

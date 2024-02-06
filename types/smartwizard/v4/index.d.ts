@@ -1,58 +1,52 @@
-// Type definitions for smartwizard 4.3
-// Project: https://github.com/techlab/SmartWizard
-// Definitions by: Stan Kurek <https://github.com/stankurek>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.3
-
 /// <reference types="jquery"/>
 
 declare namespace JQuerySmartwizard {
-    type TransitionEffect = 'none' | 'slide' | 'fade';
-    type ToolbarPosition = 'none' | 'top' | 'bottom' | 'both';
-    type ToolbarButtonPosition = 'left' | 'right';
+    type TransitionEffect = "none" | "slide" | "fade";
+    type ToolbarPosition = "none" | "top" | "bottom" | "both";
+    type ToolbarButtonPosition = "left" | "right";
 
     interface ToolbarSettings {
-        toolbarPosition?: ToolbarPosition;
-        toolbarButtonPosition?: ToolbarButtonPosition;
-        showNextButton?: boolean;
-        showPreviousButton?: boolean;
-        toolbarExtraButtons?: JQuery[];
+        toolbarPosition?: ToolbarPosition | undefined;
+        toolbarButtonPosition?: ToolbarButtonPosition | undefined;
+        showNextButton?: boolean | undefined;
+        showPreviousButton?: boolean | undefined;
+        toolbarExtraButtons?: JQuery[] | undefined;
     }
 
     interface AnchorSettings {
-        anchorClickable?: boolean;
-        enableAllAnchors?: boolean;
-        markDoneStep?: boolean;
-        markAllPreviousStepsAsDone?: boolean;
-        removeDoneStepOnNavigateBack?: boolean;
-        enableAnchorOnDoneStep?: boolean;
+        anchorClickable?: boolean | undefined;
+        enableAllAnchors?: boolean | undefined;
+        markDoneStep?: boolean | undefined;
+        markAllPreviousStepsAsDone?: boolean | undefined;
+        removeDoneStepOnNavigateBack?: boolean | undefined;
+        enableAnchorOnDoneStep?: boolean | undefined;
     }
 
     interface Lang {
-        next?: string;
-        previous?: string;
+        next?: string | undefined;
+        previous?: string | undefined;
     }
 
     interface SmartWizardOptions {
-        selected?: number;
-        keyNavigation?: boolean;
-        autoAdjustHeight?: boolean;
-        cycleSteps?: boolean;
-        backButtonSupport?: boolean;
-        useURLhash?: boolean;
-        showStepURLhash?: boolean;
-        contentURL?: null | string;
-        contentCache?: boolean;
-        ajaxSettings?: JQueryAjaxSettings;
-        disabledSteps?: number[];
-        errorSteps?: number[];
-        hiddenSteps?: number[];
-        theme?: string;
-        transitionEffect?: TransitionEffect;
-        transitionSpeed?: string | number;
-        toolbarSettings?: ToolbarSettings;
-        anchorSettings?: AnchorSettings;
-        lang?: Lang;
+        selected?: number | undefined;
+        keyNavigation?: boolean | undefined;
+        autoAdjustHeight?: boolean | undefined;
+        cycleSteps?: boolean | undefined;
+        backButtonSupport?: boolean | undefined;
+        useURLhash?: boolean | undefined;
+        showStepURLhash?: boolean | undefined;
+        contentURL?: null | string | undefined;
+        contentCache?: boolean | undefined;
+        ajaxSettings?: JQueryAjaxSettings | undefined;
+        disabledSteps?: number[] | undefined;
+        errorSteps?: number[] | undefined;
+        hiddenSteps?: number[] | undefined;
+        theme?: string | undefined;
+        transitionEffect?: TransitionEffect | undefined;
+        transitionSpeed?: string | number | undefined;
+        toolbarSettings?: ToolbarSettings | undefined;
+        anchorSettings?: AnchorSettings | undefined;
+        lang?: Lang | undefined;
     }
 }
 

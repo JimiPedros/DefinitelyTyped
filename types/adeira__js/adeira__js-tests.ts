@@ -1,14 +1,35 @@
-import { invariant, warning, sprintf, isObject, isObjectEmpty, isNumeric, nullthrows, isBrowser } from '@adeira/js';
+import {
+    invariant,
+    isBrowser,
+    isNumeric,
+    isObject,
+    isObjectEmpty,
+    nullthrows,
+    rangeMap,
+    sprintf,
+    warning,
+} from "@adeira/js";
 
-invariant(true, 'message');
-invariant('true', 'message'); // $ExpectError
+invariant(true, "message");
+// @ts-expect-error
+invariant("true", "message");
 
-warning(true, 'message');
-warning('true', 'message'); // $ExpectError
+const calc = (value: number | undefined, operation: "*" | "+") => {
+    invariant(value != null, "Expected value to be defined");
+    if (operation === "*") {
+        return value * value;
+    }
+    return value + value;
+};
 
-sprintf('Oh, %s', 'yeah!');
-sprintf('%j', {});
-sprintf(1, {}); // $ExpectError
+warning(true, "message");
+// @ts-expect-error
+warning("true", "message");
+
+sprintf("Oh, %s", "yeah!");
+sprintf("%j", {});
+// @ts-expect-error
+sprintf(1, {});
 
 isObject({});
 isObject(null);
@@ -18,12 +39,18 @@ isObjectEmpty({});
 isObjectEmpty(null);
 isObjectEmpty(new Date());
 
-isNumeric('42');
+isNumeric("42");
 isNumeric(42);
 isNumeric(null);
 
 nullthrows(null);
 nullthrows(1);
-nullthrows('1');
+nullthrows("1");
 
 isBrowser();
+
+rangeMap<string>(5, i => i.toString());
+// @ts-expect-error
+rangeMap<number>(5, i => i.toString());
+// @ts-expect-error
+rangeMap<string>("5", i => i.toString());

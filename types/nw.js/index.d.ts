@@ -1,16 +1,11 @@
-// Type definitions for nw.js 0.13
-// Project: http://nwjs.io
-// Definitions by: Alireza Dabiri Nejad <https://github.com/alirdn>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /// <reference types="node" />
-import { EventEmitter } from 'events';
+import { EventEmitter } from "events";
 
 declare global {
     /**
      * Helpers class and interfaces defined here, to make `nw` module cleaner.
      */
-    module NWJS_Helpers {
+    namespace NWJS_Helpers {
         /**
          * The clipboard object.
          */
@@ -64,12 +59,12 @@ declare global {
             /**
              * {Boolean} (Optional) do not populate the Edit menu
              */
-            hideEdit?: boolean;
+            hideEdit?: boolean | undefined;
 
             /**
              * {Boolean} (Optional) do not populate the Window menu
              */
-            hideWindow?: boolean;
+            hideWindow?: boolean | undefined;
         }
 
         /**
@@ -79,52 +74,52 @@ declare global {
             /**
              * {string} (Optional) Label for normal item or checkbox
              */
-            label?: string;
+            label?: string | undefined;
 
             /**
              * {string} (Optional) Icon for normal item or checkbox
              */
-            icon?: string;
+            icon?: string | undefined;
 
             /**
              * {string} (Optional) Tooltip for normal item or checkbox
              */
-            tooltip?: string;
+            tooltip?: string | undefined;
 
             /**
              * {string} (Optional) The type of the item. Three types are accepted: normal, checkbox, separator
              */
-            type?: string | 'normal' | 'checkbox' | 'separator';
+            type?: string | "normal" | "checkbox" | "separator" | undefined;
 
             /**
              * {Function} (Optional) The callback function when item is triggered by mouse click or keyboard shortcut
              */
-            click?: Function;
+            click?: Function | undefined;
 
             /**
              * {boolean} (Optional) Whether the item is enabled or disabled. It"s set to true by default.
              */
-            enabled?: boolean;
+            enabled?: boolean | undefined;
 
             /**
              * {boolean} (Optional) Whether the checkbox is checked or not. It"s set to false by default.
              */
-            checked?: boolean;
+            checked?: boolean | undefined;
 
             /**
              * {nw.Menu} (Optional) A submenu
              */
-            submenu?: nw.Menu;
+            submenu?: nw.Menu | undefined;
 
             /**
              * {string} (Optional) The key of the shortcut
              */
-            key?: string;
+            key?: string | undefined;
 
             /**
              * {string} (Optional) The modifiers of the shortcut
              */
-            modifiers?: string;
+            modifiers?: string | undefined;
         }
 
         /**
@@ -208,7 +203,7 @@ declare global {
              * - (optional) primary {boolean} This will be true if the source is the primary monitor. (Windows OS only)
              */
             on(
-                event: 'added',
+                event: "added",
                 listener: (id?: string, name?: string, order?: number, type?: string, primary?: boolean) => any,
             ): this;
 
@@ -219,7 +214,7 @@ declare global {
              * @param listener {Function(order?)} The callback that handles the `remove` event.
              * - (optional) order {number} Is the order of the media source that is no longer capturable.
              */
-            on(event: 'removed', listener: (order?: number) => any): this;
+            on(event: "removed", listener: (order?: number) => any): this;
 
             /**
              * Emit when the Z-order of a source changed (this may change for windows as others are focused).
@@ -230,7 +225,7 @@ declare global {
              * - (optional) new_order {number} Is the new z-order.
              * - (optional) old_order {number} Is the old z-order.
              */
-            on(event: 'orderchanged', listener: (id?: string, new_order?: number, old_order?: number) => any): this;
+            on(event: "orderchanged", listener: (id?: string, new_order?: number, old_order?: number) => any): this;
 
             /**
              * Emit when the name of the source has changed. This can happen when a window changes title.
@@ -240,7 +235,7 @@ declare global {
              * - (optional) id {string} Is the media id of the screen or window that has a name changed.
              * - (optional) name {string} Is the new name of the screen or window.
              */
-            on(event: 'namechanged', listener: (id?: string, name?: string) => any): this;
+            on(event: "namechanged", listener: (id?: string, name?: string) => any): this;
 
             /**
              * Emit when the thumbnail of a source changed.
@@ -250,7 +245,7 @@ declare global {
              * - (optional) id {string} Is the media id of the screen or window that has an updated thumbnail.
              * - (optional) name {string} Is the base64 encoded png of the thumbnail.
              */
-            on(event: 'thumbnailchanged', listener: (id?: string, thumbnail?: string) => any): this;
+            on(event: "thumbnailchanged", listener: (id?: string, thumbnail?: string) => any): this;
         }
 
         /**
@@ -282,32 +277,32 @@ declare global {
             /**
              * {string} title
              */
-            title?: string;
+            title?: string | undefined;
 
             /**
              * {string} tooltip
              */
-            tooltip?: string;
+            tooltip?: string | undefined;
 
             /**
              * {string} icon
              */
-            icon?: string;
+            icon?: string | undefined;
 
             /**
              * {string} alternate
              */
-            alticon?: string;
+            alticon?: string | undefined;
 
             /**
              * {boolean} whether icons are templates
              */
-            iconsAreTemplates?: boolean;
+            iconsAreTemplates?: boolean | undefined;
 
             /**
              * {Menu} popup menu
              */
-            menu?: nw.Menu;
+            menu?: nw.Menu | undefined;
         }
 
         /**
@@ -353,12 +348,12 @@ declare global {
             /**
              * (Optional) The image format used to generate the image. It supports two formats: "png" and "jpeg". If ignored, it’s "jpeg" by default.
              */
-            format?: string;
+            format?: string | undefined;
 
             /**
              *  (Optional) It supports three types: "raw", "buffer" and "datauri". If ignored, it’s "datauri" by default.
              */
-            datatype?: string;
+            datatype?: string | undefined;
         }
 
         /**
@@ -457,7 +452,7 @@ declare global {
             /**
              * The cookie's same-site status (i.e. whether the cookie is sent with cross-site requests).
              */
-            sameSite: string | 'no_restriction' | 'lax' | 'strict';
+            sameSite: string | "no_restriction" | "lax" | "strict";
 
             /**
              * True if the cookie is a session cookie, as opposed to a persistent cookie with an expiration date.
@@ -467,7 +462,7 @@ declare global {
             /**
              * (Optional) The expiration date of the cookie as the number of seconds since the UNIX epoch. Not provided for session cookies.
              */
-            expirationDate?: number;
+            expirationDate?: number | undefined;
 
             /**
              * The ID of the cookie store containing this cookie.
@@ -502,27 +497,27 @@ declare global {
             /**
              * Restricts the retrieved cookies to those that would match the given URL.
              */
-            url?: string;
+            url?: string | undefined;
 
             /**
              * Filters the cookies by name.
              */
-            name?: string;
+            name?: string | undefined;
 
             /**
              * Restricts the retrieved cookies to those whose domains match or are subdomains of this one.
              */
-            domain?: string;
+            domain?: string | undefined;
 
             /**
              * Restricts the retrieved cookies to those whose path exactly matches this string.
              */
-            path?: string;
+            path?: string | undefined;
 
             /**
              * Filters the cookies by their Secure property.
              */
-            secure?: boolean;
+            secure?: boolean | undefined;
 
             /**
              * Filters out session vs. persistent cookies.
@@ -532,7 +527,7 @@ declare global {
             /**
              * The cookie store to retrieve cookies from. If omitted, the current execution context's cookie store will be used.
              */
-            storeId?: string;
+            storeId?: string | undefined;
         }
 
         /**
@@ -547,47 +542,47 @@ declare global {
             /**
              * The name of the cookie. Empty by default if omitted.
              */
-            name?: string;
+            name?: string | undefined;
 
             /**
              * The value of the cookie. Empty by default if omitted.
              */
-            value?: string;
+            value?: string | undefined;
 
             /**
              * The domain of the cookie. If omitted, the cookie becomes a host-only cookie.
              */
-            domain?: string;
+            domain?: string | undefined;
 
             /**
              * The path of the cookie. Defaults to the path portion of the url parameter.
              */
-            path?: string;
+            path?: string | undefined;
 
             /**
              * Whether the cookie should be marked as Secure. Defaults to false.
              */
-            secure?: boolean;
+            secure?: boolean | undefined;
 
             /**
              * Whether the cookie should be marked as HttpOnly. Defaults to false.
              */
-            httpOnly?: boolean;
+            httpOnly?: boolean | undefined;
 
             /**
              * The cookie's same-site status: defaults to 'no_restriction'.
              */
-            sameSite?: string | 'no_restriction' | 'lax' | 'strict';
+            sameSite?: string | "no_restriction" | "lax" | "strict" | undefined;
 
             /**
              * The expiration date of the cookie as the number of seconds since the UNIX epoch. If omitted, the cookie becomes a session cookie.
              */
-            expirationDate?: number;
+            expirationDate?: number | undefined;
 
             /**
              * The ID of the cookie store in which to set the cookie. By default, the cookie is set in the current execution context's cookie store.
              */
-            storeId?: string;
+            storeId?: string | undefined;
         }
 
         /**
@@ -647,7 +642,7 @@ declare global {
             /**
              * The underlying reason behind the cookie's change.
              */
-            cause: string | 'evicted' | 'expired' | 'explicit' | 'expired_overwrite' | 'overwrite';
+            cause: string | "evicted" | "expired" | "explicit" | "expired_overwrite" | "overwrite";
         }
 
         /**
@@ -682,7 +677,7 @@ declare global {
             /**
              * Control the options for the new popup window.
              *
-             *@param m {Object} The object is in the same format as the Window subfields in manifest format.
+             * @param m {Object} The object is in the same format as the Window subfields in manifest format.
              */
             setNewWindowManifest(m: WindowOption): void;
         }
@@ -694,124 +689,124 @@ declare global {
             /**
              * The id used to identify the window.
              */
-            id?: string;
+            id?: string | undefined;
 
             /**
              * The default title of window created by NW.js
              */
-            title?: string;
+            title?: string | undefined;
 
             /**
              * The initial width of the main window.
              */
-            width?: number;
+            width?: number | undefined;
 
             /**
              * The initial height of the main window.
              */
-            height?: number;
+            height?: number | undefined;
 
             /**
              * Path to window’s icon
              */
-            icon?: string;
+            icon?: string | undefined;
 
             /**
              * Controls where window will be put, be `null` or `center` or `mouse`
              */
-            position?: string;
+            position?: string | undefined;
 
             /**
              * Minimum width of window
              */
-            min_width?: number;
+            min_width?: number | undefined;
 
             /**
              * Minimum height of window
              */
-            min_height?: number;
+            min_height?: number | undefined;
 
             /**
              * Maximum width of window
              */
-            max_width?: number;
+            max_width?: number | undefined;
 
             /**
              * Maximum height of window
              */
-            max_height?: number;
+            max_height?: number | undefined;
 
             /**
              * Show as desktop background window under X11 environment
              */
-            as_desktop?: boolean;
+            as_desktop?: boolean | undefined;
 
             /**
              * Whether window is resizable
              */
-            resizable?: boolean;
+            resizable?: boolean | undefined;
 
             /**
              * Whether the window should always stay on top of other windows.
              */
-            always_on_top?: boolean;
+            always_on_top?: boolean | undefined;
 
             /**
              * Whether the window should be visible on all workspaces simultaneously (on platforms that support multiple workspaces, currently Mac OS X and Linux).
              */
-            visible_on_all_workspaces?: boolean;
+            visible_on_all_workspaces?: boolean | undefined;
 
             /**
              * Whether window is fullscreen
              */
-            fullscreen?: boolean;
+            fullscreen?: boolean | undefined;
 
             /**
              * Whether the window is shown in taskbar or dock. The default is true.
              */
-            show_in_taskbar?: boolean;
+            show_in_taskbar?: boolean | undefined;
 
             /**
              * Specify it to false to make the window frameless
              */
-            frame?: boolean;
+            frame?: boolean | undefined;
 
             /**
              * Specify it to false if you want your app to be hidden on startup
              */
-            show?: boolean;
+            show?: boolean | undefined;
 
             /**
              * Whether to use Kiosk mode.
              */
-            kiosk?: boolean;
+            kiosk?: boolean | undefined;
 
             /**
              * Whether to turn on transparent window mode.
              */
-            transparent?: boolean;
+            transparent?: boolean | undefined;
         }
 
         interface WindowOpenOption extends WindowOption {
             /**
              * (Optional) Whether to open a new window in a separate render process.
              */
-            new_instance?: boolean;
+            new_instance?: boolean | undefined;
 
             /**
              * (Optional) The script to be injected before document loaded.
              */
-            inject_js_start?: string;
+            inject_js_start?: string | undefined;
 
             /**
              * (Optional) The script to be injected before document unloaded.
              */
-            inject_js_end?: string;
+            inject_js_end?: string | undefined;
 
             /**
              * (Optional) The id used to identify the window.
              */
-            id?: string;
+            id?: string | undefined;
         }
 
         /**
@@ -1151,7 +1146,7 @@ declare global {
              * @param listener {function(byCommandQ?)} The callback that handles the `close` event.
              * - (optional) byCommandQ {string} Whether it’s being closed by ⌘+Q.
              */
-            on(event: 'close', listener: (byCommandQ?: string | any) => any): this;
+            on(event: "close", listener: (byCommandQ?: string | any) => any): this;
 
             /**
              * The closed event is emitted after corresponding window is closed.
@@ -1159,7 +1154,7 @@ declare global {
              * @param event {string} Event name
              * @param listener {function} The callback that handles the `closed` event.
              */
-            on(event: 'closed', listener: () => any): this;
+            on(event: "closed", listener: () => any): this;
 
             /**
              * Emitted when the window starts to reload, normally you cannot catch this event because usually it’s emitted before you actually setup the callback.
@@ -1167,7 +1162,7 @@ declare global {
              * @param event {string} Event name
              * @param listener {function} The callback that handles the `loading` event.
              */
-            on(event: 'loading', listener: () => any): this;
+            on(event: "loading", listener: () => any): this;
 
             /**
              * Emitted when the window is fully loaded, this event behaves the same with window.onload, but doesn’t rely on the DOM.
@@ -1175,7 +1170,7 @@ declare global {
              * @param event {string} Event name
              * @param listener {function} The callback that handles the `loaded` event.
              */
-            on(event: 'loaded', listener: () => any): this;
+            on(event: "loaded", listener: () => any): this;
 
             /**
              * Emitted when the document object in this window or a child iframe is available, after all files are loaded, but before DOM is constructed or any script is run.
@@ -1184,7 +1179,7 @@ declare global {
              * @param listener {function(byCommandQ?)} The callback that handles the `document-start` event.
              * - (optional) frame {HTMLIFrameElement|any} Is the iframe object, or null if the event is for the window..
              */
-            on(event: 'document-start', listener: (frame: HTMLIFrameElement | any) => any): this;
+            on(event: "document-start", listener: (frame: HTMLIFrameElement | any) => any): this;
 
             /**
              * Emitted when the document object in this window or a child iframe is unloaded, but before the onunload event is emitted.
@@ -1193,7 +1188,7 @@ declare global {
              * @param listener {function(byCommandQ?)} The callback that handles the `document-end` event.
              * - (optional) frame {HTMLIFrameElement|any} Is the iframe object, or null if the event is for the window..
              */
-            on(event: 'document-end', listener: (frame: HTMLIFrameElement | any) => any): this;
+            on(event: "document-end", listener: (frame: HTMLIFrameElement | any) => any): this;
 
             /**
              * Emitted when window gets focus.
@@ -1201,7 +1196,7 @@ declare global {
              * @param event {string} Event name
              * @param listener {function} The callback that handles the `focus` event.
              */
-            on(event: 'focus', listener: () => any): this;
+            on(event: "focus", listener: () => any): this;
 
             /**
              * Emitted when window loses focus.
@@ -1209,7 +1204,7 @@ declare global {
              * @param event {string} Event name
              * @param listener {function} The callback that handles the `blur` event.
              */
-            on(event: 'blur', listener: () => any): this;
+            on(event: "blur", listener: () => any): this;
 
             /**
              * Emitted when window is minimized.
@@ -1217,7 +1212,7 @@ declare global {
              * @param event {string} Event name
              * @param listener {function} The callback that handles the `minimize` event.
              */
-            on(event: 'minimize', listener: () => any): this;
+            on(event: "minimize", listener: () => any): this;
 
             /**
              * Emitted when window is restored from minimize, maximize and fullscreen state.
@@ -1225,7 +1220,7 @@ declare global {
              * @param event {string} Event name
              * @param listener {function} The callback that handles the `restore` event.
              */
-            on(event: 'restore', listener: () => any): this;
+            on(event: "restore", listener: () => any): this;
 
             /**
              * Emitted when window is maximized.
@@ -1233,7 +1228,7 @@ declare global {
              * @param event {string} Event name
              * @param listener {function} The callback that handles the `maximize` event.
              */
-            on(event: 'maximize', listener: () => any): this;
+            on(event: "maximize", listener: () => any): this;
 
             /**
              * Emitted after window is moved.
@@ -1243,7 +1238,7 @@ declare global {
              * - (optional) x {Integer} The new location of the left corner of the window.
              * - (optional) y {Integer} The new location of the top corner of the window.
              */
-            on(event: 'move', listener: (x?: number, y?: number) => any): this;
+            on(event: "move", listener: (x?: number, y?: number) => any): this;
 
             /**
              * Emitted after window is resized.
@@ -1253,7 +1248,7 @@ declare global {
              * - (optional) width {Integer} The new width of the window.
              * - (optional) height {Integer} The new height of the window.
              */
-            on(event: 'resize', listener: (width?: number, height?: number) => any): this;
+            on(event: "resize", listener: (width?: number, height?: number) => any): this;
 
             /**
              * Emitted when window enters fullscreen state.
@@ -1261,7 +1256,7 @@ declare global {
              * @param event {string} Event name
              * @param listener {function} The callback that handles the `enter-fullscreen` event.
              */
-            on(event: 'enter-fullscreen', listener: () => any): this;
+            on(event: "enter-fullscreen", listener: () => any): this;
 
             /**
              * Emitted when window zooming changed.
@@ -1270,7 +1265,7 @@ declare global {
              * @param listener {function(byCommandQ?)} The callback that handles the `zoom` event.
              * - (optional) zoom {Integer} Indicating the new zoom level
              */
-            on(event: 'zoom', listener: (zoom?: number) => any): this;
+            on(event: "zoom", listener: (zoom?: number) => any): this;
 
             /**
              * Emitted after Devtools is closed.
@@ -1278,7 +1273,7 @@ declare global {
              * @param event {string} Event name
              * @param listener {function} The callback that handles the `devtools-closed` event.
              */
-            on(event: 'devtools-closed', listener: () => any): this;
+            on(event: "devtools-closed", listener: () => any): this;
 
             /**
              * Emitted when a new window is requested from this window or a child iframe.
@@ -1290,7 +1285,7 @@ declare global {
              * - (optional) policy {Object} Is an object contain window policy.
              */
             on(
-                event: 'new-win-policy',
+                event: "new-win-policy",
                 listener: (frame?: HTMLIFrameElement | any, url?: string, policy?: WinPolicy) => any,
             ): this;
 
@@ -1304,7 +1299,7 @@ declare global {
              * - (optional) policy {Object} Is an object contain window policy.
              */
             on(
-                event: 'navigation',
+                event: "navigation",
                 listener: (frame?: HTMLIFrameElement | any, url?: string, policy?: WinNavigationPolicy) => any,
             ): this;
         }
@@ -1434,7 +1429,7 @@ declare global {
              * @param listener {Function(args?)} The callback that handles the `open` event.
              * - (optional) args {string} the full command line of the program.
              */
-            on(event: 'open', listener: (args?: string) => any): this;
+            on(event: "open", listener: (args?: string) => any): this;
 
             /**
              * This event is sent when the user clicks the dock icon for an already running application. This is a Mac specific feature.
@@ -1442,7 +1437,7 @@ declare global {
              * @param event {string} Event name
              * @param listener {Function} The callback that handles the `reopen` event.
              */
-            on(event: 'reopen', listener: () => any): this;
+            on(event: "reopen", listener: () => any): this;
         }
 
         /* Clipboard: http://docs.nwjs.io/en/latest/References/Clipboard/ */
@@ -1541,7 +1536,7 @@ declare global {
             /**
              * Get or set the `label` of a `MenuItem`
              */
-            lable: string;
+            label: string;
 
             /**
              * Get or set the `icon` of a `MenuItem`
@@ -1596,7 +1591,7 @@ declare global {
              * @param event {string} Event name
              * @param listener {Function} The callback that handles the `click` event.
              */
-            on(event: 'click', listener: () => any): this;
+            on(event: "click", listener: () => any): this;
         }
 
         /* Screen: http://docs.nwjs.io/en/latest/References/Screen/ */
@@ -1616,7 +1611,6 @@ declare global {
             screens: NWJS_Helpers.screen[];
 
             /**
-             *
              * @param sources {string[]} Array of source types.
              * @param callback {Function} callback function with chosed streamId.
              * - (optional) streamId {string}  streamId will be false if failed to execute or existing session is alive.
@@ -1637,7 +1631,7 @@ declare global {
              * @param listener {Function(screen?)} The callback that handles the `displayBoundsChanged` event.
              * - (optional) screen {screen} screen object
              */
-            on(event: 'displayBoundsChanged', listener: (screen: NWJS_Helpers.screen) => any): this;
+            on(event: "displayBoundsChanged", listener: (screen: NWJS_Helpers.screen) => any): this;
 
             /**
              * Emitted when a new screen added.
@@ -1646,7 +1640,7 @@ declare global {
              * @param listener {Function(screen?)} The callback that handles the `displayAdded` event.
              * - (optional) screen {screen} screen object
              */
-            on(event: 'displayAdded ', listener: (screen: NWJS_Helpers.screen) => any): this;
+            on(event: "displayAdded ", listener: (screen: NWJS_Helpers.screen) => any): this;
 
             /**
              * Emitted when existing screen removed.
@@ -1655,7 +1649,7 @@ declare global {
              * @param listener {Function(screen?)} The callback that handles the `displayRemoved` event.
              * - (optional) screen {screen} screen object
              */
-            on(event: 'displayRemoved ', listener: (screen: NWJS_Helpers.screen) => any): this;
+            on(event: "displayRemoved ", listener: (screen: NWJS_Helpers.screen) => any): this;
         }
 
         /* Shell: http://docs.nwjs.io/en/latest/References/Shell/ */
@@ -1722,7 +1716,7 @@ declare global {
              * @param event {string} Event name
              * @param listener {Function} The callback that handles the `active` event.
              */
-            on(event: 'active', listener: () => any): this;
+            on(event: "active", listener: () => any): this;
 
             /**
              * Get or set the failed callback of a Shortcut. It will be called when application passes an invalid key, or failed to register the key.
@@ -1731,7 +1725,7 @@ declare global {
              * @param listener {Function(msg?)} The callback that handles the `failed` event.
              * - (optional) msg {string} Failure message
              */
-            on(event: 'failed', listener: (msg?: string) => any): this;
+            on(event: "failed", listener: (msg?: string) => any): this;
         }
 
         /* Tray: http://docs.nwjs.io/en/latest/References/Tray/ */
@@ -1788,7 +1782,7 @@ declare global {
              * @param event {string} Event name
              * @param listener {Function} The callback that handles the `click` event.
              */
-            on(event: 'click ', listener: () => any): this;
+            on(event: "click ", listener: () => any): this;
         }
 
         /* Window: http://docs.nwjs.io/en/latest/References/Window/ */
@@ -1835,7 +1829,7 @@ declare global {
     }
 }
 
-declare module 'nw.gui' {
+declare module "nw.gui" {
     export class Menu extends nw.Menu {}
     export class MenuItem extends nw.MenuItem {}
     export class Shortcut extends nw.Shortcut {}

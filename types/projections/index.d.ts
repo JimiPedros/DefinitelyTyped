@@ -1,8 +1,3 @@
-// Type definitions for projections 1.0
-// Project: https://github.com/juliuste/projections#readme
-// Definitions by: LiamAttClarke <https://github.com/LiamAttClarke>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /**
  * Braun Stereographic
  * - Reference: https://en.wikipedia.org/wiki/Gall_stereographic_projection#Braun_stereographic_projection
@@ -100,15 +95,15 @@ export interface ProjectionOptions {
      * Latitude of the central meridian
      * @default 0
      */
-    meridian?: number;
+    meridian?: number | undefined;
     /**
      * maximum latitude in degrees < 90
      * @default 85
      */
-    latLimit?: number;
+    latLimit?: number | undefined;
     /**
      * longitude of the standard parallel(s)
      * @default 0
      */
-    standardParallel?: number;
+    standardParallel?: number | undefined;
 }

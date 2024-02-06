@@ -1,15 +1,14 @@
-import { Loader, LoadingManager, Group, Material } from '../../../src/Three';
+import { Group, Loader, LoadingManager, Material } from "../../../src/Three.js";
 
-export class LDrawLoader extends Loader {
+export class LDrawLoader extends Loader<Group> {
+    materials: Material[];
+    materialsLibrary: Record<string, Material>;
+    fileMap: Record<string, string>;
+    smoothNormals: boolean;
+
     constructor(manager?: LoadingManager);
 
-    load(
-        url: string,
-        onLoad: (data: Group) => void,
-        onProgress?: (event: ProgressEvent) => void,
-        onError?: (event: ErrorEvent) => void,
-    ): void;
-    loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Group>;
+    preloadMaterials(url: string): Promise<void>;
     setFileMap(fileMap: Record<string, string>): void;
     setMaterials(materials: Material[]): void;
 

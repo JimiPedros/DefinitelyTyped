@@ -1,4 +1,4 @@
-import { ComponentType, ElementType, ReactNode } from 'react';
+import { ComponentType, ElementType, ReactNode } from "react";
 
 /**
  * Renders the results of a data-driven dependency fetched with the `@match`
@@ -65,21 +65,20 @@ import { ComponentType, ElementType, ReactNode } from 'react';
  *   the value passed here.
  * - `loader`: A function to load a module given a reference (whatever
  *   your server returns for the `js(moduleName: String)` field).
- *
  */
 
 type TypenameOnlyPointer = Readonly<{ __typename: string }>;
 export type MatchPointer = Readonly<{
-    __fragmentPropName?: string | null;
-    __module_component?: unknown;
-    ' $fragmentRefs': unknown;
+    __fragmentPropName?: string | null | undefined;
+    __module_component?: unknown | undefined;
+    " $fragmentRefs": unknown;
 }>;
 
 export type MatchContainerProps<TProps = {}, TFallback = ReactNode> = Readonly<{
-    fallback?: TFallback | null;
+    fallback?: TFallback | null | undefined;
     loader: (module: unknown) => ComponentType<TProps>;
-    match?: MatchPointer | TypenameOnlyPointer | null;
-    props?: TProps;
+    match?: MatchPointer | TypenameOnlyPointer | null | undefined;
+    props?: TProps | undefined;
 }>;
 
 export function MatchContainer<TProps = {}, TFallback = ReactNode>(

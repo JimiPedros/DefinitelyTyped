@@ -1,8 +1,3 @@
-// Type definitions for hosted-git-info 3.0
-// Project: https://github.com/npm/hosted-git-info
-// Definitions by: Jason <https://github.com/OiyouYeahYou>, Michael <https://github.com/Ovyerus>, Daniel Cassidy <https://github.com/djcsdy>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 declare class GitHost {
     constructor(
         type: GitHost.Hosts,
@@ -16,14 +11,14 @@ declare class GitHost {
 
     type: GitHost.Hosts;
     user: string;
-    auth?: string;
+    auth?: string | undefined;
     project: string;
-    committish?: string;
-    default?: string;
+    committish?: string | undefined;
+    default?: string | undefined;
     opts: GitHost.Options;
     protocols: string[];
     domain: string;
-    treepath?: string;
+    treepath?: string | undefined;
 
     // Templates
     sshtemplate: string;
@@ -36,7 +31,7 @@ declare class GitHost {
     shortcuttemplate: string;
     pathtemplate: string;
     bugstemplate: string;
-    gittemplate?: string;
+    gittemplate?: string | undefined;
     tarballtemplate: string;
 
     pathmatch: RegExp;
@@ -65,33 +60,33 @@ declare namespace GitHost {
     function fromUrl(gitUrl: string, opts?: Options): GitHost | undefined;
 
     interface Options {
-        noCommittish?: boolean;
-        noGitPlus?: boolean;
+        noCommittish?: boolean | undefined;
+        noGitPlus?: boolean | undefined;
     }
 
     interface FillOptions extends Options {
-        path?: string;
-        auth?: string;
-        fragment?: string;
-        committish?: string;
-        treepath?: string;
+        path?: string | undefined;
+        auth?: string | undefined;
+        fragment?: string | undefined;
+        committish?: string | undefined;
+        treepath?: string | undefined;
     }
 
-    type Hosts = 'github' | 'bitbucket' | 'gitlab' | 'gist';
+    type Hosts = "github" | "bitbucket" | "gitlab" | "gist";
 
     type Representation =
-        | 'hash'
-        | 'ssh'
-        | 'sshurl'
-        | 'browse'
-        | 'docs'
-        | 'bugs'
-        | 'https'
-        | 'git'
-        | 'shortcut'
-        | 'path'
-        | 'tarball'
-        | 'file';
+        | "hash"
+        | "ssh"
+        | "sshurl"
+        | "browse"
+        | "docs"
+        | "bugs"
+        | "https"
+        | "git"
+        | "shortcut"
+        | "path"
+        | "tarball"
+        | "file";
 }
 
 export = GitHost;

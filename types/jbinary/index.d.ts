@@ -1,10 +1,3 @@
-// Type definitions for jBinary 2.1
-// Project: https://github.com/jDataView/jBinary
-// Definitions by: Tim Bureck <https://github.com/tbureck>
-//                 Krisztián Balla <https://github.com/krisztianb>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 3.4
-
 // Additional notes:
 // Method stubs and types are taken from the official jBinary documentation, which can be found here:
 // https://github.com/jDataView/jBinary/wiki/jBinary-Constructor
@@ -45,9 +38,9 @@ declare namespace jBinary {
      * @see https://github.com/jDataView/jBinary/wiki/Typesets
      */
     type TypeSet = DataTypeSet & {
-        "jBinary.all"?: string;
-        "jBinary.littleEndian"?: boolean;
-        "jBinary.mimeType"?: string;
+        "jBinary.all"?: string | undefined;
+        "jBinary.littleEndian"?: boolean | undefined;
+        "jBinary.mimeType"?: string | undefined;
     };
 
     /**
@@ -58,10 +51,10 @@ declare namespace jBinary {
     type CustomTypeConfig = {
         read: (this: any, context: any) => unknown;
         write: (this: any, data: any, context: any) => void;
-        setParams?: (this: any, ...params: any[]) => void;
-        resolve?: (this: any, getType: (...params: any[]) => any) => void;
-        params?: string[];
-        typeParams?: string[];
+        setParams?: ((this: any, ...params: any[]) => void) | undefined;
+        resolve?: ((this: any, getType: (...params: any[]) => any) => void) | undefined;
+        params?: string[] | undefined;
+        typeParams?: string[] | undefined;
     };
 }
 
@@ -130,7 +123,7 @@ declare class jBinary {
      * @param data The binary data as a numeric array.
      * @param typeSet Typeset object with all the defined types.
      */
-    constructor(data: Array<number>, typeSet?: jBinary.TypeSet);
+    constructor(data: number[], typeSet?: jBinary.TypeSet);
 
     /**
      * Creates a new jBinary instance with a jDataView object as data.

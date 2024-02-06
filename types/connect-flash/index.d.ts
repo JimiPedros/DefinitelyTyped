@@ -1,10 +1,3 @@
-// Type definitions for connect-flash
-// Project: https://github.com/jaredhanson/connect-flash
-// Definitions by: Andreas Gassmann <https://github.com/AndreasGassmann>
-//                 Drew Lemmy <https://github.com/Lemmmy>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.3
-
 /// <reference types="express" />
 
 declare namespace Express {
@@ -17,9 +10,9 @@ declare namespace Express {
 }
 
 declare module "connect-flash" {
-    import express = require('express');
+    import express = require("express");
     interface IConnectFlashOptions {
-        unsafe?: boolean;
+        unsafe?: boolean | undefined;
     }
     function e(options?: IConnectFlashOptions): express.RequestHandler;
     export = e;

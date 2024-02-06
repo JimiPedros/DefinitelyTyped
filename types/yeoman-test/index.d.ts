@@ -1,15 +1,8 @@
-// Type definitions for yeoman-test 4.0
-// Project: https://github.com/yeoman/yeoman-test, http://yeoman.io/authoring/testing.html
-// Definitions by: Ika <https://github.com/ikatyang>
-//                 Manuel Thalmann <https://github.com/manuth>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 3.3
-
-import { EventEmitter } from 'events';
-import Generator = require('yeoman-generator');
-import Environment = require('yeoman-environment');
-import { Store } from 'mem-fs';
-import { Editor } from 'mem-fs-editor';
+import { EventEmitter } from "events";
+import Generator = require("yeoman-generator");
+import Environment = require("yeoman-environment");
+import { Store } from "mem-fs";
+import { Editor } from "mem-fs-editor";
 
 /**
  * Represents a dictionary.
@@ -22,7 +15,7 @@ export interface Dictionary<T> {
  * Represents a constructor.
  */
 export interface Constructor<T> {
-    new (...args: any[]): T;
+    new(...args: any[]): T;
 }
 
 /**
@@ -48,7 +41,6 @@ export type Dependency = string | [Generator, string];
 export function setUpTestDirectory(dir: string): (done: (...args: any[]) => void) => void;
 
 /**
- *
  * Generates a new Gruntfile.js in the current working directory based on
  * options hash passed in.
  *
@@ -115,7 +107,12 @@ export function createDummyGenerator(): Generator;
  *            ];
  * var angular = createGenerator('angular:app', deps);
  */
-export function createGenerator(name: string, dependencies: Dependency[], args?: string | string[], options?: Dictionary<any>): Generator;
+export function createGenerator(
+    name: string,
+    dependencies: Dependency[],
+    args?: string | string[],
+    options?: Dictionary<any>,
+): Generator;
 
 /**
  * Register a list of dependent generators into the provided env.
@@ -137,7 +134,11 @@ export function run(GeneratorOrNamespace: string | Constructor<Generator>, setti
  * @param  settings - Generator settings
  * @param  envOptions - Environment options
  */
-export function create(GeneratorOrNamespace: string | Constructor<Generator>, settings?: RunContextSettings, envOptions?: Environment.Options): RunContext;
+export function create(
+    GeneratorOrNamespace: string | Constructor<Generator>,
+    settings?: RunContextSettings,
+    envOptions?: Environment.Options,
+): RunContext;
 
 /**
  * Provides settings for creating a `RunContext`.
@@ -147,18 +148,18 @@ export interface RunContextSettings {
      * Automatically run this generator in a tmp dir
      * @default true
      */
-    tmpdir?: boolean;
+    tmpdir?: boolean | undefined;
 
     /**
      * File path to the generator (only used if Generator is a constructor)
      */
-    resolved?: string;
+    resolved?: string | undefined;
 
     /**
      * Namespace (only used if Generator is a constructor)
      * @default 'gen:test'
      */
-    namespace?: string;
+    namespace?: string | undefined;
 }
 
 /**
@@ -172,7 +173,7 @@ export interface RunContextConstructor {
      *                                      is provided, then namespace is assumed to be
      *                                      'gen:test' in all cases
      */
-    new (Generator: string | Constructor<Generator>, settings?: RunContextSettings): RunContext;
+    new(Generator: string | Constructor<Generator>, settings?: RunContextSettings): RunContext;
 }
 
 /**

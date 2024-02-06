@@ -1,13 +1,4 @@
-// Type definitions for radium 0.24.0
-// Project: https://github.com/formidablelabs/radium
-// Definitions by: Alex Gorbatchev <https://github.com/alexgorbatchev>
-//                 Philipp Holzer <https://github.com/nupplaphil>
-//                 Alexey Svetliakov <https://github.com/asvetliakov>
-//                 Christopher Frewin <https://github.com/princefishthrower>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.8
-
-import * as React from 'react';
+import * as React from "react";
 
 export default Radium;
 
@@ -33,7 +24,7 @@ declare namespace Radium {
          * Use to scope styles in the component to a particular element. A good use case might be to generate a unique
          * ID for a component to scope any styles to the particular component that owns the <Style> component instance.
          */
-        scopeSelector?: string;
+        scopeSelector?: string | undefined;
     }
 
     /**
@@ -46,7 +37,7 @@ declare namespace Radium {
      * StyleRoot component properties
      */
     export interface StyleRootProps extends React.HTMLProps<StyleRoot> {
-         radiumConfig?: RadiumConfig
+        radiumConfig?: RadiumConfig | undefined;
     }
     /**
      * <StyleRoot />
@@ -62,16 +53,16 @@ declare namespace Radium {
          * Allow to replace matchMedia function that Radium uses. The default one is window.matchMedia
          * @param mediaQuery
          */
-        matchMedia?: (mediaQuery: string) => MediaQueryList;
+        matchMedia?: ((mediaQuery: string) => MediaQueryList) | undefined;
         /**
          * Set the user agent passed to inline-style-prefixer to perform prefixing on style objects.
          * Mainly used during server rendering
          */
-        userAgent?: string;
+        userAgent?: string | undefined;
         /**
          * List of plugins
          */
-        plugins?: Array<any>;
+        plugins?: any[] | undefined;
     }
 
     /**
@@ -114,5 +105,4 @@ declare namespace Radium {
     }
 
     var TestMode: RadiumTestMode;
-
 }

@@ -1,8 +1,3 @@
-// Type definitions for mv 2.1
-// Project: https://github.com/andrewrk/node-mv
-// Definitions by: Miloslav Nenadál <https://github.com/nenadalm>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /**
  * `fs.rename` but works across devices. same as the unix utility `mv`
  */
@@ -14,15 +9,15 @@ declare namespace mv {
         /**
          * @default false
          */
-        mkdirp?: boolean;
+        mkdirp?: boolean | undefined;
         /**
          * @default false
          */
-        clobber?: boolean;
+        clobber?: boolean | undefined;
         /**
          * @default 16
          */
-        limit?: number;
+        limit?: number | undefined;
     }
 }
 

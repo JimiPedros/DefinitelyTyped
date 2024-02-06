@@ -1,13 +1,7 @@
-// Type definitions for easy-session
-// Project: https://github.com/DeadAlready/node-easy-session
-// Definitions by: Karl Düüna <https://github.com/DeadAlready>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.3
+import express = require("express");
+import expressSession = require("express-session");
 
-import express = require('express');
-import expressSession = require('express-session');
-
-declare module 'express-session' {
+declare module "express-session" {
     interface Session {
         login(callback: Function): void;
         login(extend: Object, callback: (err?: any) => void): void;
@@ -24,10 +18,10 @@ declare module 'express-session' {
 }
 
 export interface SessionOptions {
-    ipCheck?: boolean;
-    uaCheck?: boolean;
-    freshTimeout?: number;
-    maxFreshTimeout?: number;
+    ipCheck?: boolean | undefined;
+    uaCheck?: boolean | undefined;
+    freshTimeout?: number | undefined;
+    maxFreshTimeout?: number | undefined;
 }
 
 export function main(session: typeof expressSession, options?: SessionOptions): express.RequestHandler;

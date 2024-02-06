@@ -1,8 +1,3 @@
-// Type definitions for jstoxml 2.0
-// Project: http://github.com/davidcalhoun/jstoxml
-// Definitions by: Steven Snoeijen <https://github.com/stevensnoeijen>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 interface XmlAttrs {
     [name: string]: unknown;
 }
@@ -11,17 +6,17 @@ export interface XmlElement {
     /**
      * Element's name
      */
-    _name?: string;
+    _name?: string | undefined;
 
     /**
      * Element's attributes.
      */
-    _attrs?: XmlAttrs | XmlAttrs[];
+    _attrs?: XmlAttrs | XmlAttrs[] | undefined;
 
     /**
      * Element's content.
      */
-    _content?: XmlElement | XmlElement[] | unknown;
+    _content?: XmlElement | XmlElement[] | unknown | undefined;
 
     /**
      * Another way to create (sub)-elements (like in _content).
@@ -34,25 +29,25 @@ export interface XmlOptions {
      * Tree depth.
      * @default 0
      */
-    depth?: number;
+    depth?: number | undefined;
 
     /**
      * By default elements are intented with 1 whitespace per depth.
      * @default " "
      */
-    indent?: string;
+    indent?: string | undefined;
 
     /**
      * Set Custom XML header when given a string,
      * when setting to true the default xml header will be added.
      * @default false
      */
-    header?: string | boolean;
+    header?: string | boolean | undefined;
 
     /**
      * Custom filter for XML entities.
      */
-    filter?: { [char: string]: string };
+    filter?: { [char: string]: string } | undefined;
 
     /**
      * Custom filter for XML attributes
@@ -67,13 +62,13 @@ export interface XmlOptions {
      * </code>
      * Setting this to `false` disables attribute filters.
      */
-    attributesFilter?: {};
+    attributesFilter?: {} | undefined;
 
     /**
      * If for some reason you want to avoid self-closing tags, you can pass in a special config option _selfCloseTag.
      * @default true
      */
-    _selfCloseTag?: boolean;
+    _selfCloseTag?: boolean | undefined;
 }
 
 export function toXML(obj?: XmlElement | XmlElement[], options?: XmlOptions): string;

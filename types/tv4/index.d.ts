@@ -1,22 +1,17 @@
-// Type definitions for Tiny Validator tv4 1.2.5
-// Project: https://github.com/geraintluff/tv4
-// Definitions by: Bart van der Schoor <https://github.com/Bartvds>, Peter Snider <https://github.com/psnider>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 declare namespace tv4 {
     // Note that every top-level property is optional in json-schema
     export interface JsonSchema {
         [key: string]: any;
-        title?: string; // used for humans only, and not used for computation
-        description?: string; // used for humans only, and not used for computation
-        id?: string;
-        $schema?: string;
-        type?: string | string[];
+        title?: string | undefined; // used for humans only, and not used for computation
+        description?: string | undefined; // used for humans only, and not used for computation
+        id?: string | undefined;
+        $schema?: string | undefined;
+        type?: string | string[] | undefined;
         items?: any;
         properties?: any;
         patternProperties?: any;
-        additionalProperties?: boolean;
-        required?: string[];
+        additionalProperties?: boolean | undefined;
+        required?: string[] | undefined;
         definitions?: any;
         default?: any;
     }
@@ -31,9 +26,9 @@ declare namespace tv4 {
     export interface ValidationError {
         code: number;
         message: any;
-        dataPath?: string;
-        schemaPath?: string;
-        subErrors?: ValidationError[];
+        dataPath?: string | undefined;
+        schemaPath?: string | undefined;
+        subErrors?: ValidationError[] | undefined;
     }
     export interface ErrorVar extends ValidationError {
         params: any;

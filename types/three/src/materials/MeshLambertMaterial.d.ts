@@ -1,35 +1,49 @@
-import { Color } from './../math/Color';
-import { Texture } from './../textures/Texture';
-import { MaterialParameters, Material } from './Material';
-import { Combine } from '../constants';
+import { Combine, NormalMapTypes } from "../constants.js";
+import { Color, ColorRepresentation } from "../math/Color.js";
+import { Texture } from "../textures/Texture.js";
+import { Vector2 } from "../Three.js";
+import { Material, MaterialParameters } from "./Material.js";
 
 export interface MeshLambertMaterialParameters extends MaterialParameters {
-    color?: Color | string | number;
-    emissive?: Color | string | number;
-    emissiveIntensity?: number;
-    emissiveMap?: Texture | null;
-    map?: Texture | null;
-    lightMap?: Texture | null;
-    lightMapIntensity?: number;
-    aoMap?: Texture | null;
-    aoMapIntensity?: number;
-    specularMap?: Texture | null;
-    alphaMap?: Texture | null;
-    envMap?: Texture | null;
-    combine?: Combine;
-    reflectivity?: number;
-    refractionRatio?: number;
-    wireframe?: boolean;
-    wireframeLinewidth?: number;
-    wireframeLinecap?: string;
-    wireframeLinejoin?: string;
-    skinning?: boolean;
-    morphTargets?: boolean;
-    morphNormals?: boolean;
+    bumpMap?: Texture | undefined;
+    bumpScale?: number | undefined;
+    color?: ColorRepresentation | undefined;
+    displacementMap?: Texture | undefined;
+    displacementScale?: number | undefined;
+    displacementBias?: number | undefined;
+    emissive?: ColorRepresentation | undefined;
+    emissiveIntensity?: number | undefined;
+    emissiveMap?: Texture | null | undefined;
+    flatShading?: boolean | undefined;
+    map?: Texture | null | undefined;
+    lightMap?: Texture | null | undefined;
+    lightMapIntensity?: number | undefined;
+    normalMap?: Texture | undefined;
+    normalScale?: Vector2 | undefined;
+    aoMap?: Texture | null | undefined;
+    aoMapIntensity?: number | undefined;
+    specularMap?: Texture | null | undefined;
+    alphaMap?: Texture | null | undefined;
+    envMap?: Texture | null | undefined;
+    combine?: Combine | undefined;
+    reflectivity?: number | undefined;
+    refractionRatio?: number | undefined;
+    wireframe?: boolean | undefined;
+    wireframeLinewidth?: number | undefined;
+    wireframeLinecap?: string | undefined;
+    wireframeLinejoin?: string | undefined;
+    fog?: boolean | undefined;
 }
 
 export class MeshLambertMaterial extends Material {
     constructor(parameters?: MeshLambertMaterialParameters);
+
+    /**
+     * Read-only flag to check if a given object is of type {@link MeshLambertMaterial}.
+     * @remarks This is a _constant_ value
+     * @defaultValue `true`
+     */
+    readonly isMeshLambertMaterial: true;
 
     /**
      * @default 'MeshLambertMaterial'
@@ -40,6 +54,31 @@ export class MeshLambertMaterial extends Material {
      * @default new THREE.Color( 0xffffff )
      */
     color: Color;
+
+    /**
+     * @default null
+     */
+    bumpMap: Texture | null;
+
+    /**
+     * @default 1
+     */
+    bumpScale: number;
+
+    /**
+     * @default null
+     */
+    displacementMap: Texture | null;
+
+    /**
+     * @default 1
+     */
+    displacementScale: number;
+
+    /**
+     * @default 0
+     */
+    displacementBias: number;
 
     /**
      * @default new THREE.Color( 0x000000 )
@@ -57,6 +96,11 @@ export class MeshLambertMaterial extends Material {
     emissiveMap: Texture | null;
 
     /**
+     * @default false
+     */
+    flatShading: boolean;
+
+    /**
      * @default null
      */
     map: Texture | null;
@@ -70,6 +114,18 @@ export class MeshLambertMaterial extends Material {
      * @default 1
      */
     lightMapIntensity: number;
+
+    /**
+     * @default null
+     */
+    normalMap: Texture | null;
+
+    normalMapType: NormalMapTypes;
+
+    /**
+     * @default new THREE.Vector2( 1, 1 )
+     */
+    normalScale: Vector2;
 
     /**
      * @default null
@@ -132,19 +188,10 @@ export class MeshLambertMaterial extends Material {
     wireframeLinejoin: string;
 
     /**
-     * @default false
+     * Whether the material is affected by fog. Default is true.
+     * @default fog
      */
-    skinning: boolean;
-
-    /**
-     * @default false
-     */
-    morphTargets: boolean;
-
-    /**
-     * @default false
-     */
-    morphNormals: boolean;
+    fog: boolean;
 
     setValues(parameters: MeshLambertMaterialParameters): void;
 }

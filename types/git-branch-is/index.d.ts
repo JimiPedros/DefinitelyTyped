@@ -1,8 +1,3 @@
-// Type definitions for git-branch-is 4.0
-// Project: https://github.com/kevinoid/git-branch-is
-// Definitions by: Piotr Błażejewicz <https://github.com/peterblazejewicz>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /**
  * Checks that the current branch of a git repository has a given name
  */
@@ -63,24 +58,24 @@ declare namespace gitBranchIs {
          * tested
          * @default ''
          */
-        cwd?: string;
+        cwd?: string | undefined;
         /**
          * Extra arguments to pass to git
          * @default []
          */
-        gitArgs?: string[];
+        gitArgs?: string[] | undefined;
         /**
          * Path to the repository (i.e.
          * <code>--git-dir=</code> option to <code>git</code>).
          * @default ''
          */
-        gitDir?: string;
+        gitDir?: string | undefined;
         /**
          * Git binary name or path to use (default:
          * <code>'git'</code>).
          * @default 'git'
          */
-        gitPath?: string;
+        gitPath?: string | undefined;
     }
 }
 

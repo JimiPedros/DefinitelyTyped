@@ -1,10 +1,5 @@
-// Type definitions for react-native-tags 2.2
-// Project: https://github.com/peterp/react-native-tags#readme
-// Definitions by: IdaszakDaniel <https://github.com/IdaszakDaniel>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
-import * as React from 'react';
-import { ViewStyle, TextStyle } from 'react-native';
+import * as React from "react";
+import { TextStyle, ViewStyle } from "react-native";
 
 interface RenderTag {
     tag: string;
@@ -29,19 +24,19 @@ interface TagsProps {
     /**
      * The input element's text
      */
-    initialText?: string;
+    initialText?: string | undefined;
     /**
      * Initial tags
      * ```javascript
      * initialTags={["dog", "cat", "chicken"]}
      * ```
      */
-    initialTags?: string[];
+    initialTags?: string[] | undefined;
     /**
      * Triggers new tag creation
      */
-    createTagOnString?: string[];
-    createTagOnReturn?: boolean;
+    createTagOnString?: string[] | undefined;
+    createTagOnReturn?: boolean | undefined;
     /**
      * Fires when tags are added or removed
      * ```javascript
@@ -52,15 +47,15 @@ interface TagsProps {
     /**
      * Tags cannot be modified
      */
-    readonly?: boolean;
+    readonly?: boolean | undefined;
     /**
      * The max number of tags that can be entered
      */
-    maxNumberOfTags?: number;
+    maxNumberOfTags?: number | undefined;
     /**
      * Remove the tag when pressed
      */
-    deleteTagOnPress?: boolean;
+    deleteTagOnPress?: boolean | undefined;
     /**
      * Manage the rendering of your own Tag
      * * tag - text of the tag
@@ -78,7 +73,7 @@ interface TagsProps {
     /**
      * Fires when tags are pressed
      */
-    onTagPress?: (index: number, tagLabel: string, event: any, deleted: boolean) => void;
+    onTagPress?: ((index: number, tagLabel: string, event: any, deleted: boolean) => void) | undefined;
     /**
      * Forward props to the textInput
      * ```javascript
@@ -87,13 +82,13 @@ interface TagsProps {
      * }}
      * ```
      */
-    textInputProps?: TextInputProps;
-    containerStyle?: ViewStyle;
-    style?: ViewStyle;
-    inputContainerStyle?: TextStyle;
-    inputStyle?: TextStyle;
-    tagContainerStyle?: ViewStyle;
-    tagTextStyle?: TextStyle;
+    textInputProps?: TextInputProps | undefined;
+    containerStyle?: ViewStyle | undefined;
+    style?: ViewStyle | undefined;
+    inputContainerStyle?: TextStyle | undefined;
+    inputStyle?: TextStyle | undefined;
+    tagContainerStyle?: ViewStyle | undefined;
+    tagTextStyle?: TextStyle | undefined;
 }
 
 export {};

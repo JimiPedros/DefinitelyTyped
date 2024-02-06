@@ -1,9 +1,4 @@
-// Type definitions for leaflet-freedraw 2.13
-// Project: https://github.com/Wildhoney/Leaflet.FreeDraw
-// Definitions by: Jean-Baptiste Zeller <https://github.com/Esurnir>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
-import { FeatureGroup, LatLng, Polygon, LeafletEvent } from 'leaflet';
+import { FeatureGroup, LatLng, LeafletEvent, Polygon } from "leaflet";
 
 export as namespace LeafletFreeDraw;
 
@@ -59,12 +54,11 @@ declare class FreeDraw extends FeatureGroup {
     constructor(options?: FreeDrawOptions);
 
     /**
-     *
      * @param latlngs Pre-made polygon to add to the map
      * @param [options={concavePolgygons: false}] FreeDraw options, by default concavePolygons : false
      * @returns Polygon added to the FreeDraw instance
      */
-    create(latlngs: ReadonlyArray<LatLng>, options?: FreeDrawOptions): Polygon;
+    create(latlngs: readonly LatLng[], options?: FreeDrawOptions): Polygon;
 
     /**
      * Removes the layer from the map it is currently active on.
@@ -114,68 +108,70 @@ export interface FreeDrawOptions {
      * Modifies the default mode.
      * @default ALL
      */
-    mode?: number;
+    mode?: number | undefined;
 
     /**
      * By how much to smooth the polygons.
      * @default 0.3
      */
-    smoothFactor?: number;
+    smoothFactor?: number | undefined;
 
     /**
      * Factor to determine when to delete or when to append an edge.
      * @default 10
      */
-    elbowDistance?: number;
+    elbowDistance?: number | undefined;
 
     /**
      * By how much to simplify the polygon.
      * @default 1.1
      */
-    simplifyFactor?: number;
+    simplifyFactor?: number | undefined;
 
     /**
      * Whether to attempt merging of polygons that intersect.
      * @default true
      */
-    mergePolygons?: boolean;
+    mergePolygons?: boolean | undefined;
 
     /**
      * Whether to apply the concaving algorithm to the polygons.
      * @default true
      */
-    concavePolygon?: boolean;
+    concavePolygon?: boolean | undefined;
 
     /**
      * Maximum number of polygons to be added to the map layer.
      * @default Infinity
      */
-    maximumPolygons?: number;
+    maximumPolygons?: number | undefined;
 
     /**
      * Whether to defer markers event until after exiting EDIT mode.
      * @default false
      */
-    notifyAfterEditExit?: boolean;
+    notifyAfterEditExit?: boolean | undefined;
 
     /**
      * Whether to exit CREATE mode after each polygon creation.
      * @default false
      */
-    leaveModeAfterCreate?: boolean;
+    leaveModeAfterCreate?: boolean | undefined;
 
     /**
      * Size of the stroke when drawing.
      * @default 2
      */
-    strokeWidth?: number;
+    strokeWidth?: number | undefined;
 }
 
 /**
  * Event payload sent by markers
  */
 export interface MarkerEvent extends LeafletEvent {
-    type: 'markers';
+    type: "markers";
+
+    eventType: "create" | "remove" | "clear";
 
     /**
      * Polygons currently stored in the FreeDraw Instance being listened to
@@ -190,8 +186,8 @@ export type MarkerEventHandler = (event: MarkerEvent) => void;
 
 declare module "leaflet" {
     interface Evented {
-        on(type: 'markers', fn: MarkerEventHandler, context?: any): this;
-        off(type: 'markers', fn?: MarkerEventHandler, context?: any): this;
+        on(type: "markers", fn: MarkerEventHandler, context?: any): this;
+        off(type: "markers", fn?: MarkerEventHandler, context?: any): this;
     }
 }
 

@@ -1,23 +1,24 @@
-import * as React from 'react';
-// tslint:disable-next-line strict-export-declare-modifiers interface-over-type-literal
+import * as React from "react";
+// tslint:disable:interface-over-type-literal
+// eslint-disable-next-line @definitelytyped/strict-export-declare-modifiers
 declare type ScrollOptions = {
-    y?: number;
-    animated?: boolean;
+    y?: number | undefined;
+    animated?: boolean | undefined;
 };
-// tslint:disable-next-line strict-export-declare-modifiers interface-over-type-literal
+// eslint-disable-next-line @definitelytyped/strict-export-declare-modifiers
 declare type ScrollableView = {
     scrollToTop(): void;
 } | {
     scrollTo(options: ScrollOptions): void;
 } | {
     scrollToOffset(options: {
-        offset?: number;
-        animated?: boolean;
+        offset?: number | undefined;
+        animated?: boolean | undefined;
     }): void;
 } | {
     scrollResponderScrollTo(options: ScrollOptions): void;
 };
-// tslint:disable-next-line strict-export-declare-modifiers
+// eslint-disable-next-line @definitelytyped/strict-export-declare-modifiers
 declare type ScrollableWrapper = {
     getScrollResponder(): React.ReactNode;
 } | {

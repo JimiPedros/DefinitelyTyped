@@ -1,12 +1,16 @@
-import { TempNode, TempNodeParams } from './TempNode';
-import { NodeBuilder } from './NodeBuilder';
+import { NodeTypeOption } from "./constants.js";
+import Node from "./Node.js";
+import NodeBuilder from "./NodeBuilder.js";
 
-export class InputNode extends TempNode {
-    constructor(type: string, params?: TempNodeParams);
+export type Precision = "low" | "medium" | "high";
 
-    readonly: boolean;
+export default abstract class InputNode<Value> extends Node {
+    isInputNode: true;
+    value: Value;
+    precision: Precision | null;
 
-    setReadonly(value: boolean): this;
-    getReadonly(builder: NodeBuilder): boolean;
-    copy(source: InputNode): this;
+    constructor(value: Value, nodeType?: NodeTypeOption | null);
+
+    getInputType(builder: NodeBuilder): string | null;
+    setPrecision(precision: Precision): this;
 }

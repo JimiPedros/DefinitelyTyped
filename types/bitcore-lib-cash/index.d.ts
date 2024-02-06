@@ -1,21 +1,17 @@
-// Type definitions for bitcore-lib-cash 8.23
-// Project: https://github.com/bitpay/bitcore/packages/bitcore-lib-cash
-// Definitions by: James Cramer <https://github.com/jcramer>
-//                 Jt Freeman <https://github.com/blockparty-sh>
-//                 Rosco Kalis <https://github.com/rkalis>
-//                 Jason Dreyzehner <https://github.com/bitjson>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 // TypeScript Version: 2.2
 
 /// <reference types="node" />
 
 export namespace crypto {
-    class BN {}
+    class BN {
+        constructor(n: number);
+        static fromNumber(n: number): BN;
+        toNumber(): number;
+    }
 
     namespace ECDSA {
         function sign(message: Buffer, key: PrivateKey): Signature;
-        function verify(hashbuf: Buffer, sig: Signature, pubkey: PublicKey, endian?: 'little'): boolean;
+        function verify(hashbuf: Buffer, sig: Signature, pubkey: PublicKey, endian?: "little"): boolean;
     }
 
     namespace Hash {
@@ -39,7 +35,8 @@ export namespace crypto {
     class Signature {
         static fromDER(sig: Buffer): Signature;
         static fromString(data: string): Signature;
-        SIGHASH_ALL: number;
+        static SIGHASH_ALL: number;
+        static SIGHASH_FORKID: number;
         toString(): string;
     }
 
@@ -230,7 +227,7 @@ export namespace Transaction {
         readonly outputIndex: number;
         readonly sequenceNumber: number;
         readonly script: Script;
-        readonly output?: Output;
+        readonly output?: Output | undefined;
 
         constructor(params: object);
 
@@ -258,6 +255,19 @@ export namespace Transaction {
         lockForSeconds(seconds: number): this;
         lockUntilBlockHeight(heightDiff: number): this;
         getLockTime(): Date | number;
+    }
+
+    namespace sighash {
+        function sign(
+            transaction: Transaction,
+            privateKey: PrivateKey,
+            sighashType: number,
+            inputIndex: number,
+            subscript: Script,
+            inputSatoshis: crypto.BN,
+            flags: number,
+            signingMethod: "ecdsa" | "schnorr",
+        ): crypto.Signature;
     }
 }
 
@@ -293,7 +303,11 @@ export class Transaction {
     fee(amount: number): this;
     feePerKb(amount: number): this;
     feePerByte(amount: number): this;
-    sign(privateKey: Array<PrivateKey | string> | PrivateKey | string, sigtype?: number, signingMethod?: string): this;
+    sign(
+        privateKey: Array<PrivateKey | string> | PrivateKey | string,
+        sigtype?: number | null,
+        signingMethod?: string,
+    ): this;
     getSignatures(
         privKey: PrivateKey | string,
         sigtype?: number,

@@ -1,9 +1,3 @@
-// Type definitions for ratelimiter 3.4
-// Project: https://github.com/tj/node-ratelimiter
-// Definitions by: Aya Morisawa <https://github.com/AyaMorisawa>
-//                 Piotr Błażejewicz <https://github.com/peterblazejewicz>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 interface RedisClient {
     multi(operations: any[][]): { exec(cb: (err: any, res: any) => unknown): void };
 }
@@ -38,13 +32,13 @@ declare namespace Limiter {
          * Max requests within duration
          * @default 2500
          */
-        max?: number;
+        max?: number | undefined;
 
         /**
          * Duration of limit in milliseconds
          * @default 3600000
          */
-        duration?: number;
+        duration?: number | undefined;
     }
 
     /**

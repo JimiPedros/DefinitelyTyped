@@ -1,30 +1,27 @@
-// Type definitions for react-scramble 0.4
-// Project: https://github.com/cettoana/react-scramble#readme
-// Definitions by: fes300 <https://github.com/fes300>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
-import * as React from 'react';
+import * as React from "react";
 
 export interface Step {
     /**
      * Action of the step, + as scramble, - as descramble and leave blank to do nothing.
      */
-    action: '+' | '-';
+    action: "+" | "-";
     /**
      * Times of action in the step.
      */
-    roll?: number;
+    roll?: number | undefined;
     /**
      * Change the original text.
      */
-    text?: string;
+    text?: string | undefined;
     /**
      * Scramble/descrmble type of the step.
      */
-    type?: 'all' | 'random' | 'forward';
+    type?: "all" | "random" | "forward" | undefined;
 }
 
 export interface AnimationControls {
+    reset: () => void;
+    restart: () => void;
     start: () => void;
     pause: () => void;
 }
@@ -33,15 +30,15 @@ export interface Props {
     /**
      * Set true to auto start animation after render.
      */
-    autoStart?: boolean;
+    autoStart?: boolean | undefined;
     /**
      * Scramble the text after render.
      */
-    preScramble?: boolean;
+    preScramble?: boolean | undefined;
     /**
      * Speed of scramble per second.
      */
-    speed?: 'slow' | 'medium' | 'fast';
+    speed?: "slow" | "medium" | "fast" | undefined;
     /**
      * Original text.
      */
@@ -53,19 +50,19 @@ export interface Props {
     /**
      * Using no-break space or not.
      */
-    noBreakSpace?: boolean;
+    noBreakSpace?: boolean | undefined;
     /**
      * Event trigger type when mouse enter.
      */
-    mouseEnterTrigger?: 'start' | 'pause' | 'reset' | 'restart';
+    mouseEnterTrigger?: "start" | "pause" | "reset" | "restart" | undefined;
     /**
      * Event trigger type when mouse leave.
      */
-    mouseLeaveTrigger?: 'start' | 'pause' | 'reset' | 'restart';
+    mouseLeaveTrigger?: "start" | "pause" | "reset" | "restart" | undefined;
     /**
      * Method binding callback function.
      */
-    bindMethod?: (c: AnimationControls) => void;
+    bindMethod?: ((c: AnimationControls) => void) | undefined;
 }
 
 /**

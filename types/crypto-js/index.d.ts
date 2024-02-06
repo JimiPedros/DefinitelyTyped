@@ -1,11 +1,3 @@
-// Type definitions for crypto-js v4.0.0
-// Project: https://github.com/brix/crypto-js
-// Definitions by: Michael Zabka <https://github.com/misak113>
-//                 Max Lysenko <https://github.com/maximlysenko>
-//                 Brendan Early <https://github.com/mymindstorm>
-//                 Doma <https://github.com/SevenOutman>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 export = CryptoJS;
 
 type WordArray = CryptoJS.lib.WordArray;
@@ -141,7 +133,7 @@ interface Hasher {
      *     var hash = hasher.finalize('message');
      *     var hash = hasher.finalize(wordArray);
      */
-    finalize(messaegUpdate?: WordArray | string): WordArray;
+    finalize(messageUpdate?: WordArray | string): WordArray;
 }
 
 interface HasherStatic {
@@ -281,8 +273,8 @@ interface CipherOption {
     /**
      * The IV to use for this operation.
      */
-    iv?: WordArray;
-    format?: Format;
+    iv?: WordArray | undefined;
+    format?: Format | undefined;
     [key: string]: any;
 }
 
@@ -503,15 +495,15 @@ interface KDFOption {
     /**
      * The key size in words to generate.
      */
-    keySize?: number;
+    keySize?: number | undefined;
     /**
      * The hasher to use.
      */
-    hasher?: HasherStatic;
+    hasher?: HasherStatic | undefined;
     /**
      * The number of iterations to perform.
      */
-    iterations?: number;
+    iterations?: number | undefined;
 }
 
 declare global {
@@ -641,7 +633,21 @@ declare global {
                  *     var wordArray = CryptoJS.lib.WordArray.create([0x00010203, 0x04050607]);
                  *     var wordArray = CryptoJS.lib.WordArray.create([0x00010203, 0x04050607], 6);
                  */
-                create(words?: number[], sigBytes?: number): WordArray;
+                create(
+                    words?:
+                        | number[]
+                        | ArrayBuffer
+                        | Uint8Array
+                        | Int8Array
+                        | Uint8ClampedArray
+                        | Int16Array
+                        | Uint16Array
+                        | Int32Array
+                        | Uint32Array
+                        | Float32Array
+                        | Float64Array,
+                    sigBytes?: number,
+                ): WordArray;
                 /**
                  * Creates a word array filled with random bytes.
                  *
@@ -968,7 +974,13 @@ declare global {
                  *     var derivedParams = CryptoJS.kdf.OpenSSL.execute('Password', 256/32, 128/32);
                  *     var derivedParams = CryptoJS.kdf.OpenSSL.execute('Password', 256/32, 128/32, 'saltsalt');
                  */
-                execute(password: string, keySize: number, ivSize: number, salt?: WordArray | string): CipherParams;
+                execute(
+                    password: string,
+                    keySize: number,
+                    ivSize: number,
+                    salt?: WordArray | string,
+                    hasher?: Hasher,
+                ): CipherParams;
             };
         }
 
@@ -1048,6 +1060,10 @@ declare global {
              * Base64 encoding strategy.
              */
             const Base64: Encoder;
+            /**
+             * Base64url encoding strategy.
+             */
+            const Base64url: Encoder;
         }
 
         /**
@@ -1190,7 +1206,7 @@ declare global {
                  *     var kdf = CryptoJS.algo.EvpKDF.create({ keySize: 8 });
                  *     var kdf = CryptoJS.algo.EvpKDF.create({ keySize: 8, iterations: 1000 });
                  */
-                static create(cfg?: { keySize: number; hasher?: HasherStatic; iterations: number }): EvpKDF;
+                static create(cfg?: { keySize: number; hasher?: HasherStatic | undefined; iterations: number }): EvpKDF;
 
                 /**
                  * Derives a key from a password.
@@ -1704,6 +1720,16 @@ declare global {
         export const RabbitLegacy: CipherHelper;
 
         /**
+         * Shortcut functions to the cipher's object interface.
+         *
+         * @example
+         *
+         *     var ciphertext = CryptoJS.Blowfish.encrypt(message, key, cfg);
+         *     var plaintext  = CryptoJS.Blowfish.decrypt(ciphertext, key, cfg);
+         */
+        export const Blowfish: CipherHelper;
+
+        /**
          * Derives a key from a password.
          *
          * @param password The password.
@@ -1723,7 +1749,7 @@ declare global {
             salt: WordArray | string,
             cfg?: {
                 keySize: number;
-                hasher?: HasherStatic;
+                hasher?: HasherStatic | undefined;
                 iterations: number;
             },
         ): WordArray;

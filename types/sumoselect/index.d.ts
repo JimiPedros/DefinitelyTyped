@@ -1,11 +1,6 @@
-// Type definitions for sumoselect 3.0
-// Project: https://github.com/HemantNegi/jquery.sumoselect#readme
-// Definitions by: nagamejun <https://github.com/nagamejun>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /// <reference types="jquery" />
 
-type SumoSelectEvents = 'sumo:opening' | 'sumo:opened' | 'sumo:closing' | 'sumo:closed';
+type SumoSelectEvents = "sumo:opening" | "sumo:opened" | "sumo:closing" | "sumo:closed";
 
 type Option = Partial<{
     /**
@@ -92,6 +87,14 @@ type Option = Partial<{
      * @default true
      */
     showTitle: boolean;
+    /**
+     * @default null
+     */
+    max: number | null;
+    /**
+     * @default (li: JQuery, originalOption: JQuery) => JQuery
+     */
+    renderLi(li: JQuery, originalOption: JQuery): JQuery;
 }>;
 
 interface Methods {
@@ -99,6 +102,8 @@ interface Methods {
     add(value: string, index?: number): HTMLSelectElement;
     add(value: string, text?: string, index?: number): HTMLSelectElement;
     remove(index: number): void;
+    removeAll(): void;
+    find(value: string): number;
     selectItem(indexOrValue: number | string): void;
     unSelectItem(indexOrValue: number | string): void;
     disableItem(index: number): void;

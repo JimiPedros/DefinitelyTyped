@@ -1,6 +1,6 @@
 import ILanguageRequest from "./ILanguageRequest";
 
-// tslint:disable-next-line interface-name
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export default interface IGetListRequest {
     listName: string;
     selectFields: string;
@@ -11,7 +11,7 @@ export default interface IGetListRequest {
     viewXml: string;
     rowLimit: number;
     isPagedResult: boolean;
-    language?: ILanguageRequest;
+    language?: ILanguageRequest | undefined;
     queryFilter?: any;
     orderBy?: any;
     PageManager?: any;

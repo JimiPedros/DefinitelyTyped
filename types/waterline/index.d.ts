@@ -1,13 +1,6 @@
-// Type definitions for waterline 0.13
-// Project: https://github.com/balderdashy/waterline
-// Definitions by: Alexandro Libertino <https://github.com/arvitaly>
-//                 Keith Kikta <https://github.com/newbish>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 3.2
-
 /// <reference types="node" />
 
-import BluebirdPromise = require('bluebird');
+import BluebirdPromise = require("bluebird");
 declare namespace Waterline {
     type Adapter = Object;
 
@@ -49,6 +42,7 @@ declare namespace Waterline {
         loadCollection(collection: CollectionClass): void;
         registerModel(collection: CollectionClass): void;
         initialize: (config: Config, cb: (err: Error, ontology: Ontology) => any) => any;
+        teardown(done?: Function): void;
         collections: any;
     }
 
@@ -58,59 +52,72 @@ declare namespace Waterline {
 
     // used this comment https://github.com/balderdashy/waterline/issues/1154#issuecomment-167262575
     export type LifecycleCallbacks = {
-        beforeValidate?: { (vaues: any, next: Function): void }[] | { (vaues: any, next: Function): void };
-        beforeCreate?: { (values: any, next: Function): void }[] | { (vaues: any, next: Function): void };
+        beforeValidate?:
+            | Array<{ (vaues: any, next: Function): void }>
+            | { (vaues: any, next: Function): void }
+            | undefined;
+        beforeCreate?:
+            | Array<{ (values: any, next: Function): void }>
+            | { (vaues: any, next: Function): void }
+            | undefined;
         afterCreate?:
-        | { (newlyCreatedRecord: any, next: Function): void }[]
-        | { (newlyCreatedRecord: any, next: Function): void };
+            | Array<{ (newlyCreatedRecord: any, next: Function): void }>
+            | { (newlyCreatedRecord: any, next: Function): void }
+            | undefined;
         beforeUpdate?:
-        | { (valuesToUpdate: any, next: Function): void }[]
-        | { (valuesToUpdate: any, next: Function): void };
+            | Array<{ (valuesToUpdate: any, next: Function): void }>
+            | { (valuesToUpdate: any, next: Function): void }
+            | undefined;
         afterUpdate?:
-        | { (valuesToUpdate: any, next: Function): void }[]
-        | { (valuesToUpdate: any, next: Function): void };
-        beforeDestroy?: { (criteria: any, next: Function): void }[] | { (valuesToUpdate: any, next: Function): void };
+            | Array<{ (valuesToUpdate: any, next: Function): void }>
+            | { (valuesToUpdate: any, next: Function): void }
+            | undefined;
+        beforeDestroy?:
+            | Array<{ (criteria: any, next: Function): void }>
+            | { (valuesToUpdate: any, next: Function): void }
+            | undefined;
         afterDestroy?:
-        | { (destroyedInstance: any, next: Function): void }[]
-        | { (destroyedInstance: any, next: Function): void };
+            | Array<{ (destroyedInstance: any, next: Function): void }>
+            | { (destroyedInstance: any, next: Function): void }
+            | undefined;
     };
 
     export type CollectionDefinition = LifecycleCallbacks & {
-        attributes?: Attributes;
-        connection?: string;
-        identity?: string;
-        tableName?: string;
-        migrate?: 'alter' | 'drop' | 'safe';
-        schema?: boolean;
+        attributes?: Attributes | undefined;
+        connection?: string | undefined;
+        identity?: string | undefined;
+        tableName?: string | undefined;
+        migrate?: "alter" | "drop" | "safe" | undefined;
+        schema?: boolean | undefined;
         types?: any;
-        datastore?: string;
-        primaryKey?: string;
+        datastore?: string | undefined;
+        primaryKey?: string | undefined;
         dataEncryptionKeys?: any;
     };
 
     export type Collection = CollectionDefinition;
 
     export type Attributes = { [index: string]: Attribute } & {
-        toJSON?: () => string;
-        toObject?: () => any;
+        toJSON?: (() => string) | undefined;
+        toObject?: (() => any) | undefined;
     };
 
     export type FunctionAttribute = () => any;
 
     // Data types https://github.com/balderdashy/waterline-docs/blob/master/models/data-types-attributes.md#data-types
     export type AttributeType =
-        | 'string'
-        | 'text'
-        | 'number'
-        | 'integer'
-        | 'float'
-        | 'date'
-        | 'time'
-        | 'datetime'
-        | 'boolean'
-        | 'binary'
-        | 'array'
-        | 'json';
+        | "string"
+        | "text"
+        | "number"
+        | "integer"
+        | "float"
+        | "date"
+        | "time"
+        | "datetime"
+        | "boolean"
+        | "binary"
+        | "array"
+        | "json";
 
     export type Attribute =
         | string
@@ -134,73 +141,73 @@ declare namespace Waterline {
     export type DefaultsToFn<T> = () => T;
 
     export type BaseAttribute<T> = {
-        type?: string;
-        primaryKey?: boolean;
-        unique?: boolean;
-        required?: boolean;
-        enum?: Array<T>;
-        size?: number;
-        columnName?: string;
-        index?: boolean;
-        defaultsTo?: T | DefaultsToFn<T>;
-        allowNull?: boolean;
-        validations?: AttributeValidations;
-        autoCreatedAt?: boolean;
-        autoUpdatedAt?: boolean;
+        type?: string | undefined;
+        primaryKey?: boolean | undefined;
+        unique?: boolean | undefined;
+        required?: boolean | undefined;
+        enum?: T[] | undefined;
+        size?: number | undefined;
+        columnName?: string | undefined;
+        index?: boolean | undefined;
+        defaultsTo?: T | DefaultsToFn<T> | undefined;
+        allowNull?: boolean | undefined;
+        validations?: AttributeValidations | undefined;
+        autoCreatedAt?: boolean | undefined;
+        autoUpdatedAt?: boolean | undefined;
     };
 
     export type StringAttribute = BaseAttribute<string> & {
-        type: 'string';
+        type: "string";
     };
 
     export type EmailAttribute = BaseAttribute<string> & {
-        type: 'email';
+        type: "email";
     };
 
     export type TextAttribute = BaseAttribute<string> & {
-        type: 'text';
+        type: "text";
     };
 
     export type IntegerAttribute = BaseAttribute<number> & {
-        type: 'integer';
-        autoIncrement?: boolean;
+        type: "integer";
+        autoIncrement?: boolean | undefined;
     };
 
     export type NumberAttribute = BaseAttribute<number> & {
-        type: 'number';
-        autoIncrement?: boolean;
+        type: "number";
+        autoIncrement?: boolean | undefined;
     };
 
     export type FloatAttribute = BaseAttribute<number> & {
-        type: 'float';
+        type: "float";
     };
 
     export type DateAttribute = BaseAttribute<Date> & {
-        type: 'date';
+        type: "date";
     };
 
     export type TimeAttribute = BaseAttribute<Date> & {
-        type: 'time';
+        type: "time";
     };
 
     export type DatetimeAttribute = BaseAttribute<Date> & {
-        type: 'datetime';
+        type: "datetime";
     };
 
     export type BooleanAttribute = BaseAttribute<boolean> & {
-        type: 'boolean';
+        type: "boolean";
     };
 
     export type BinaryAttribute = BaseAttribute<any> & {
-        type: 'binary';
+        type: "binary";
     };
 
     export type ArrayAttribute = BaseAttribute<any> & {
-        type: 'array';
+        type: "array";
     };
 
     export type JsonAttribute = BaseAttribute<any> & {
-        type: 'json';
+        type: "json";
     };
 
     export type OneToOneAttribute = BaseAttribute<any> & {
@@ -215,7 +222,7 @@ declare namespace Waterline {
     export type ManyToManyAttribute = BaseAttribute<any> & {
         collection: string;
         via: string;
-        dominant?: boolean;
+        dominant?: boolean | undefined;
     };
 
     type AttributeValidationSyncFn<T> = () => T;
@@ -225,27 +232,27 @@ declare namespace Waterline {
     export type AttributeValidation<T> = T | AttributeValidationSyncFn<T> | AttributeValidationAsyncFn<T>;
 
     export interface AttributeValidations {
-        custom?: AttributeValidation<Function>;
-        isAfter?: AttributeValidation<Date>;
-        isBefore?: AttributeValidation<Date>;
-        isBoolean?: AttributeValidation<boolean>;
-        isCreditCard?: AttributeValidation<boolean>;
-        isEmail?: AttributeValidation<boolean>;
-        isHexColor?: AttributeValidation<boolean>;
-        isIn?: AttributeValidation<string[]>;
-        isInteger?: AttributeValidation<boolean>;
-        isIP?: AttributeValidation<boolean>;
-        isNotEmptyString?: AttributeValidation<boolean>;
-        isNotIn?: AttributeValidation<string[]>;
-        isNumber?: AttributeValidation<boolean>;
-        isString?: AttributeValidation<boolean>;
-        isURL?: AttributeValidation<boolean>;
-        isUUID?: AttributeValidation<boolean>;
-        max?: AttributeValidation<number>;
-        maxLength?: AttributeValidation<number>;
-        min?: AttributeValidation<number>;
-        minLength?: AttributeValidation<number>;
-        regex?: AttributeValidation<RegExp>;
+        custom?: AttributeValidation<Function> | undefined;
+        isAfter?: AttributeValidation<Date> | undefined;
+        isBefore?: AttributeValidation<Date> | undefined;
+        isBoolean?: AttributeValidation<boolean> | undefined;
+        isCreditCard?: AttributeValidation<boolean> | undefined;
+        isEmail?: AttributeValidation<boolean> | undefined;
+        isHexColor?: AttributeValidation<boolean> | undefined;
+        isIn?: AttributeValidation<string[]> | undefined;
+        isInteger?: AttributeValidation<boolean> | undefined;
+        isIP?: AttributeValidation<boolean> | undefined;
+        isNotEmptyString?: AttributeValidation<boolean> | undefined;
+        isNotIn?: AttributeValidation<string[]> | undefined;
+        isNumber?: AttributeValidation<boolean> | undefined;
+        isString?: AttributeValidation<boolean> | undefined;
+        isURL?: AttributeValidation<boolean> | undefined;
+        isUUID?: AttributeValidation<boolean> | undefined;
+        max?: AttributeValidation<number> | undefined;
+        maxLength?: AttributeValidation<number> | undefined;
+        min?: AttributeValidation<number> | undefined;
+        minLength?: AttributeValidation<number> | undefined;
+        regex?: AttributeValidation<RegExp> | undefined;
     }
 
     type WaterlinePromise<T> = BluebirdPromise<T> & {
@@ -256,7 +263,9 @@ declare namespace Waterline {
         where(condition: any): QueryBuilder<T>;
         limit(lim: number): QueryBuilder<T>;
         skip(num: number): QueryBuilder<T>;
-        sort(criteria: string | { [attribute: string]: string } | { [attribute: string]: string }[]): QueryBuilder<T>;
+        sort(
+            criteria: string | { [attribute: string]: string } | Array<{ [attribute: string]: string }>,
+        ): QueryBuilder<T>;
         paginate(pagination?: { page: number; limit: number }): QueryBuilder<T>;
         populate(association: string): QueryBuilder<T>;
         populate(association: string, filter: any): QueryBuilder<T>;
@@ -277,9 +286,9 @@ declare namespace Waterline {
     };
 
     interface ModelInstance {
-        id?: number | string;
-        createdAt?: Date;
-        updatedAt?: Date;
+        id?: number | string | undefined;
+        createdAt?: Date | undefined;
+        updatedAt?: Date | undefined;
         toJSON(): any;
         save(): WaterlinePromise<this>;
     }
@@ -307,6 +316,13 @@ declare namespace Waterline {
         native(cb: (err: Error, collection: any) => void): void;
         stream(criteria: any, writeEnd: any): NodeJS.WritableStream | Error;
     }
+
+    export interface StartOptions {
+        adapters: Record<string, Adapter>;
+        datastores: Record<string, DatastoreConfig & { identity?: undefined }>;
+        models: Record<string, CollectionDefinition>;
+        defaultModelSettings?: CollectionDefinition;
+    }
 }
 
 declare interface WaterlineStatic {
@@ -317,6 +333,11 @@ declare interface WaterlineStatic {
         extend: (params: Waterline.CollectionDefinition) => Waterline.CollectionClass;
     };
     new(): Waterline.Waterline;
+    start<CB extends (err: Error | undefined, orm: Waterline.Waterline) => unknown>(
+        options: Waterline.StartOptions,
+        done: CB,
+    ): CB;
+    stop<CB extends (err: Error | undefined) => unknown>(orm: Waterline.Waterline, done: CB): ReturnType<CB>;
 }
 
 declare var Waterline: WaterlineStatic;

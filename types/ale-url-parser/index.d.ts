@@ -1,9 +1,3 @@
-// Type definitions for ale-url-parser 0.13
-// Project: https://github.com/msn0/ale-url-parser#readme
-// Definitions by: Michał Jezierski <https://github.com/msn0>
-//                 Piotr Błażejewicz <https://github.com/peterblazejewicz>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 export interface QueryParams {
     [key: string]: any;
 }
@@ -12,20 +6,20 @@ export interface UrlObject {
     /**
      * @default 'http'
      */
-    protocol?: string;
+    protocol?: string | undefined;
     /**
      * @default '''
      */
-    host?: string;
+    host?: string | undefined;
     /**
      * @default []
      */
-    path?: string[];
+    path?: string[] | undefined;
     /**
      * @default {}
      */
-    query?: QueryParams;
-    hash?: string;
+    query?: QueryParams | undefined;
+    hash?: string | undefined;
 }
 
 export interface Options {
@@ -33,7 +27,7 @@ export interface Options {
      * Sorting query params is disabled by default.
      * You can define your own sorting method
      */
-    compareFunction?: (a: string, b: string) => number;
+    compareFunction?: ((a: string, b: string) => number) | undefined;
 }
 
 /**

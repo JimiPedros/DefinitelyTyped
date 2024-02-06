@@ -8,22 +8,14 @@
         "noImplicitThis": true,
         "strictFunctionTypes": true,
         "strictNullChecks": true,
-        "baseUrl": "../",
-        "typeRoots": [
-            "../"
-        ],
         "types": [],
-        "paths": {
-            "@architect/*": [
-                "architect__*"
-            ]
-        },
         "noEmit": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.d.ts",
         "test/http-tests.ts",
-        "test/tables-tests.ts"
+        "test/tables-tests.ts",
+        "test/web-socket-tests.ts"
     ]
 }

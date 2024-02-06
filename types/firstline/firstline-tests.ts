@@ -1,15 +1,10 @@
-import firstline = require('firstline');
-
-// Imagine the file content is:
-// abc
-// def
-// ghi
-//
+import firstline = require("firstline");
 
 // $ExpectType: Promise<string>
-firstline('./my-file.txt');
-// -> Returns a promise that will be fulfilled with 'abc'.
-
+firstline("./my-file.txt");
 // $ExpectType: Promise<string>
-firstline('./my-file.txt', { lineEnding: '\r' });
-// -> Same as above, but using '\r' as line ending.
+firstline("./my-file.txt", { lineEnding: "\r" });
+// $ExpectType: Promise<string>
+firstline("./my-file.txt", { lineEnding: "\r", encoding: "ascii" });
+// @ts-expect-error
+firstline("./my-file.txt", { lineEnding: "\r", encoding: "utf88" });

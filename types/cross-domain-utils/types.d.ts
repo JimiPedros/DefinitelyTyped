@@ -7,10 +7,10 @@ export interface CrossDomainWindowType {
     open: (url?: string, target?: string, features?: string) => CrossDomainWindowType | null;
     close: () => void;
     focus: () => void;
-    top: CrossDomainWindowType;
+    top: CrossDomainWindowType | null;
     frames: CrossDomainWindowType;
     opener: CrossDomainWindowType | null;
-    parent: CrossDomainWindowType;
+    parent: CrossDomainWindowType | null;
     length: number;
     postMessage: (a: string, b: string) => void;
 }
@@ -22,12 +22,12 @@ export interface SameDomainWindowType {
     open: (url?: string, target?: string, features?: string) => CrossDomainWindowType | null;
     close: () => void;
     focus: () => void;
-    XMLHttpRequest?: typeof XMLHttpRequest;
+    XMLHttpRequest?: typeof XMLHttpRequest | undefined;
     document: Document;
     navigator: {
         userAgent: string;
-        mockUserAgent?: string;
+        mockUserAgent?: string | undefined;
     };
 }
 
-export type DomainMatcher = string | ReadonlyArray<string> | RegExp;
+export type DomainMatcher = string | readonly string[] | RegExp;

@@ -1,13 +1,17 @@
-import { Toast } from 'bootstrap';
-import * as $ from 'jquery';
+import { Toast } from "bootstrap";
+import * as $ from "jquery";
 
 const element = new Element();
 
 // $ExpectType Toast
-new Toast(element, { animation: false });
+const toast = new Toast(element, { animation: false });
+// $ExpectType boolean
+toast.isShown();
 
-// $ExpectType Toast
+// $ExpectType Toast | null
 Toast.getInstance(element);
+// $ExpectType Toast
+Toast.getOrCreateInstance(element);
 
 // $ExpectType string
 Toast.VERSION;
@@ -31,11 +35,11 @@ element.addEventListener(Toast.Events.shown, event => {
     // do something…
 });
 
-// $ExpectType void
-$('.alert').toast();
+// $ExpectType JQuery<HTMLElement>
+$(".alert").toast();
 
-// $ExpectType void
-$('.alert').toast({ animation: false });
+// $ExpectType JQuery<HTMLElement>
+$(".alert").toast({ animation: false });
 
-$('.alert').toast('hide'); // $ExpectType void
-$('.alert').toast('show'); // $ExpectType void
+$(".alert").toast("hide"); // $ExpectType JQuery<HTMLElement>
+$(".alert").toast("show"); // $ExpectType JQuery<HTMLElement>

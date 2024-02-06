@@ -9,18 +9,21 @@ import {
     SelectorStoreUpdater,
     UploadableMap,
     VariablesOf,
-} from 'relay-runtime';
+} from "relay-runtime";
 
 export interface UseMutationConfig<TMutation extends MutationParameters> {
     variables: VariablesOf<TMutation>;
-    updater?: SelectorStoreUpdater<TMutation['response']> | null;
-    uploadables?: UploadableMap;
-    optimisticUpdater?: SelectorStoreUpdater<TMutation['response']> | null;
-    optimisticResponse?: TMutation['rawResponse'];
-    configs?: DeclarativeMutationConfig[];
-    onError?: (error: Error) => void | null;
-    onCompleted?: (response: TMutation['response'], errors: PayloadError[] | null) => void | null;
-    onUnsubscribe?: () => void | null;
+    updater?: SelectorStoreUpdater<TMutation["response"]> | null | undefined;
+    uploadables?: UploadableMap | undefined;
+    optimisticUpdater?: SelectorStoreUpdater<TMutation["response"]> | null | undefined;
+    optimisticResponse?: TMutation["rawResponse"] | undefined;
+    configs?: DeclarativeMutationConfig[] | undefined;
+    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+    onError?: ((error: Error) => void | null) | undefined;
+    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+    onCompleted?: ((response: TMutation["response"], errors: PayloadError[] | null) => void | null) | undefined;
+    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+    onUnsubscribe?: (() => void | null) | undefined;
 }
 
 export function useMutation<TMutation extends MutationParameters>(

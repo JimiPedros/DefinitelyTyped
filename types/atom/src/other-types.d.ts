@@ -1,7 +1,7 @@
 // This file holds the types that don't belong to a specific file.
 // Please don't import types from this file directly as its content might change in other versions.
 
-import { AtomEnvironment, DecorationOptions, MarkerLayer, Pane, Point, TextEditor } from '../index';
+import { AtomEnvironment, DecorationOptions, MarkerLayer, Pane, Point, TextEditor } from "../index";
 
 export interface PixelPosition {
     left: number;
@@ -49,7 +49,7 @@ export interface FileSavedEvent {
 }
 
 export interface FilesystemChangeBasic<
-    Action extends 'created' | 'modified' | 'deleted' | 'renamed' = 'created' | 'modified' | 'deleted'
+    Action extends "created" | "modified" | "deleted" | "renamed" = "created" | "modified" | "deleted",
 > {
     /** A string describing the filesystem action that occurred. */
     action: Action;
@@ -58,7 +58,7 @@ export interface FilesystemChangeBasic<
     path: string;
 }
 
-export interface FilesystemChangeRename extends FilesystemChangeBasic<'renamed'> {
+export interface FilesystemChangeRename extends FilesystemChangeBasic<"renamed"> {
     /**
      *  For rename events, a string containing the filesystem entry's former
      *  absolute path.
@@ -92,65 +92,65 @@ export interface BuildEnvironmentOptions {
      *  An object responsible for Atom's interaction with the browser process and host OS.
      *  Use buildDefaultApplicationDelegate for a default instance.
      */
-    applicationDelegate?: object;
+    applicationDelegate?: object | undefined;
 
     /** A window global. */
-    window?: Window;
+    window?: Window | undefined;
 
     /** A document global. */
-    document?: Document;
+    document?: Document | undefined;
 
     /** A path to the configuration directory (usually ~/.atom). */
-    configDirPath?: string;
+    configDirPath?: string | undefined;
 
     /**
      *  A boolean indicating whether the Atom environment should save or load state
      *  from the file system. You probably want this to be false.
      */
-    enablePersistence?: boolean;
+    enablePersistence?: boolean | undefined;
 }
 
 export interface HistoryTransactionOptions {
     /** When provided, skip taking snapshot for other selections markerLayers except given one. */
-    selectionsMarkerLayer?: MarkerLayer;
+    selectionsMarkerLayer?: MarkerLayer | undefined;
 }
 
 export interface HistoryTraversalOptions {
     /** Restore snapshot of selections marker layer to given selectionsMarkerLayer. */
-    selectionsMarkerLayer?: MarkerLayer;
+    selectionsMarkerLayer?: MarkerLayer | undefined;
 }
 
 export interface ReadonlyEditOptions {
     /** Whether the readonly protections on the text editor should be ignored. */
-    bypassReadOnly?: boolean;
+    bypassReadOnly?: boolean | undefined;
 }
 
 export interface TextEditOptions {
     /** If true, all line endings will be normalized to match the editor's current mode. */
-    normalizeLineEndings?: boolean;
+    normalizeLineEndings?: boolean | undefined;
 
     /**
      * If skip, skips the undo stack for this operation.
      * @deprecated Call groupLastChanges() on the TextBuffer afterward instead.
      */
-    undo?: 'skip';
+    undo?: "skip" | undefined;
 }
 
 export interface TextInsertionOptions extends TextEditOptions {
     /** If true, selects the newly added text. */
-    select?: boolean;
+    select?: boolean | undefined;
 
     /** If true, indents all inserted text appropriately. */
-    autoIndent?: boolean;
+    autoIndent?: boolean | undefined;
 
     /** If true, indent newline appropriately. */
-    autoIndentNewline?: boolean;
+    autoIndentNewline?: boolean | undefined;
 
     /**
      *  If true, decreases indent level appropriately (for example, when a closing
      *  bracket is inserted).
      */
-    autoDecreaseIndent?: boolean;
+    autoDecreaseIndent?: boolean | undefined;
 
     /**
      *  By default, when pasting multiple lines, Atom attempts to preserve the relative
@@ -158,7 +158,7 @@ export interface TextInsertionOptions extends TextEditOptions {
      *  level of the first line has changed from the copied text. If this option is
      *  true, this behavior is suppressed.
      */
-    preserveTrailingLineIndentation?: boolean;
+    preserveTrailingLineIndentation?: boolean | undefined;
 }
 
 /** An interface which all custom test runners should implement. */
@@ -169,71 +169,71 @@ export interface CancellablePromise<T> extends Promise<T> {
 }
 
 export type FileEncoding =
-    | 'iso88596' // Arabic (ISO 8859-6)
-    | 'windows1256' // Arabic (Windows 1256)
-    | 'iso88594' // Baltic (ISO 8859-4)
-    | 'windows1257' // Baltic (Windows 1257)
-    | 'iso885914' // Celtic (ISO 8859-14)
-    | 'iso88592' // Central European (ISO 8859-2)
-    | 'windows1250' // Central European (Windows 1250)
-    | 'gb18030' // Chinese (GB18030)
-    | 'gbk' // Chinese (GBK)
-    | 'cp950' // Traditional Chinese (Big5)
-    | 'big5hkscs' // Traditional Chinese (Big5-HKSCS)
-    | 'cp866' // Cyrillic (CP 866)
-    | 'iso88595' // Cyrillic (ISO 8859-5)
-    | 'koi8r' // Cyrillic (KOI8-R)
-    | 'koi8u' // Cyrillic (KOI8-U)
-    | 'windows1251' // Cyrillic (Windows 1251)
-    | 'cp437' // DOS (CP 437)
-    | 'cp850' // DOS (CP 850)
-    | 'iso885913' // Estonian (ISO 8859-13)
-    | 'iso88597' // Greek (ISO 8859-7)
-    | 'windows1253' // Greek (Windows 1253)
-    | 'iso88598' // Hebrew (ISO 8859-8)
-    | 'windows1255' // Hebrew (Windows 1255)
-    | 'cp932' // Japanese (CP 932)
-    | 'eucjp' // Japanese (EUC-JP)
-    | 'shiftjis' // Japanese (Shift JIS)
-    | 'euckr' // Korean (EUC-KR)
-    | 'iso885910' // Nordic (ISO 8859-10)
-    | 'iso885916' // Romanian (ISO 8859-16)
-    | 'iso88599' // Turkish (ISO 8859-9)
-    | 'windows1254' // Turkish (Windows 1254)
-    | 'utf8' // Unicode (UTF-8)
-    | 'utf16le' // Unicode (UTF-16 LE)
-    | 'utf16be' // Unicode (UTF-16 BE)
-    | 'windows1258' // Vietnamese (Windows 1258)
-    | 'iso88591' // Western (ISO 8859-1)
-    | 'iso88593' // Western (ISO 8859-3)
-    | 'iso885915' // Western (ISO 8859-15)
-    | 'macroman' // Western (Mac Roman)
-    | 'windows1252'; // Western (Windows 1252)
+    | "iso88596" // Arabic (ISO 8859-6)
+    | "windows1256" // Arabic (Windows 1256)
+    | "iso88594" // Baltic (ISO 8859-4)
+    | "windows1257" // Baltic (Windows 1257)
+    | "iso885914" // Celtic (ISO 8859-14)
+    | "iso88592" // Central European (ISO 8859-2)
+    | "windows1250" // Central European (Windows 1250)
+    | "gb18030" // Chinese (GB18030)
+    | "gbk" // Chinese (GBK)
+    | "cp950" // Traditional Chinese (Big5)
+    | "big5hkscs" // Traditional Chinese (Big5-HKSCS)
+    | "cp866" // Cyrillic (CP 866)
+    | "iso88595" // Cyrillic (ISO 8859-5)
+    | "koi8r" // Cyrillic (KOI8-R)
+    | "koi8u" // Cyrillic (KOI8-U)
+    | "windows1251" // Cyrillic (Windows 1251)
+    | "cp437" // DOS (CP 437)
+    | "cp850" // DOS (CP 850)
+    | "iso885913" // Estonian (ISO 8859-13)
+    | "iso88597" // Greek (ISO 8859-7)
+    | "windows1253" // Greek (Windows 1253)
+    | "iso88598" // Hebrew (ISO 8859-8)
+    | "windows1255" // Hebrew (Windows 1255)
+    | "cp932" // Japanese (CP 932)
+    | "eucjp" // Japanese (EUC-JP)
+    | "shiftjis" // Japanese (Shift JIS)
+    | "euckr" // Korean (EUC-KR)
+    | "iso885910" // Nordic (ISO 8859-10)
+    | "iso885916" // Romanian (ISO 8859-16)
+    | "iso88599" // Turkish (ISO 8859-9)
+    | "windows1254" // Turkish (Windows 1254)
+    | "utf8" // Unicode (UTF-8)
+    | "utf16le" // Unicode (UTF-16 LE)
+    | "utf16be" // Unicode (UTF-16 BE)
+    | "windows1258" // Vietnamese (Windows 1258)
+    | "iso88591" // Western (ISO 8859-1)
+    | "iso88593" // Western (ISO 8859-3)
+    | "iso885915" // Western (ISO 8859-15)
+    | "macroman" // Western (Mac Roman)
+    | "windows1252"; // Western (Windows 1252)
 
 export interface Invisibles {
     /**
      *  Character used to render newline characters (\n) when the `Show Invisibles`
      *  setting is enabled.
      */
-    eol?: boolean | string;
+    eol?: boolean | string | undefined;
 
     /**
      *  Character used to render leading and trailing space characters when the
      *  `Show Invisibles` setting is enabled.
      */
-    space?: boolean | string;
+    space?: boolean | string | undefined;
 
     /**
      *  Character used to render hard tab characters (\t) when the `Show Invisibles`
      *  setting is enabled.
      */
-    tab?: boolean | string;
+    tab?: boolean | string | undefined;
 
     /**
      *  Character used to render carriage return characters (for Microsoft-style line
      *  endings) when the `Show Invisibles` setting is enabled.
      */
-    cr?: boolean | string;
+    cr?: boolean | string | undefined;
 }
 
 export interface TestRunnerParams {

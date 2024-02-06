@@ -1,145 +1,169 @@
-// Type definitions for json-api-serializer 2.6
-// Project: https://github.com/danivek/json-api-serializer#readme
-// Definitions by: Emric <https://github.com/Istanful>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 declare namespace JSONAPISerializer {
-  type TypeCallback = (
-    relationshipData: { [key: string]: RelationshipOptions },
-    data: unknown
-  ) => unknown;
+    type TypeCallback = (
+        relationshipData: { [key: string]: RelationshipOptions },
+        data: unknown,
+    ) => unknown;
 
-  type LinksCallback = (data: unknown, extraData?: unknown) => string | LinksObject;
+    type LinksCallback = (data: unknown, extraData?: unknown) => string | LinksObject;
 
-  type MetaCallback = (data: unknown, extraData?: unknown) => unknown;
+    type MetaCallback = (data: unknown, extraData?: unknown) => unknown;
 
-  type BeforeSerializeCallback = (data: unknown) => unknown;
+    type BeforeSerializeCallback = (data: unknown) => unknown;
 
-  type AfterDeseralizeCallback = (data: unknown) => unknown;
+    type AfterDeseralizeCallback = (data: unknown) => unknown;
 
-  interface RelationshipOptions {
-    type: string | TypeCallback;
-    alternativeKey?: string;
-    schema?: string;
-    links?: LinksObject | LinksCallback;
-    meta?: MetaCallback | unknown;
-    beforeSerialize?: BeforeSerializeCallback;
-  }
+    interface RelationshipOptions {
+        type: string | TypeCallback;
+        alternativeKey?: string | undefined;
+        schema?: string | undefined;
+        links?: LinksObject | LinksCallback | undefined;
+        meta?: MetaCallback | Meta | undefined;
+        beforeSerialize?: BeforeSerializeCallback | undefined;
+    }
 
-  type Case = 'kebab-case' | 'snake_case' | 'camelCase';
+    type Case = "kebab-case" | "snake_case" | "camelCase";
 
-  interface Options {
-    id?: string;
-    blacklist?: string[];
-    whitelist?: string[];
-    jsonapiObject?: boolean;
-    links?: LinksObject | LinksCallback;
-    topLevelLinks?: LinksCallback | LinksObject;
-    topLevelMeta?: MetaCallback | unknown;
-    meta?: MetaCallback | unknown;
-    relationships?: {
-      [key: string]: RelationshipOptions;
+    interface Options {
+        id?: string | undefined;
+        blacklist?: string[] | undefined;
+        whitelist?: string[] | undefined;
+        jsonapiObject?: boolean | undefined;
+        links?: LinksObject | LinksCallback | undefined;
+        topLevelLinks?: LinksCallback | LinksObject | undefined;
+        topLevelMeta?: MetaCallback | unknown | undefined;
+        meta?: MetaCallback | Meta | undefined;
+        relationships?: {
+            [key: string]: RelationshipOptions;
+        } | undefined;
+        blacklistOnDeserialize?: string[] | undefined;
+        whitelistOnDeserialize?: string[] | undefined;
+        convertCase?: Case | undefined;
+        unconvertCase?: Case | undefined;
+        convertCaseCacheSize?: number | undefined;
+        beforeSerialize?: BeforeSerializeCallback | undefined;
+        afterDeserialize?: AfterDeseralizeCallback | undefined;
+    }
+
+    interface DynamicTypeOptions {
+        id?: string | undefined;
+        jsonapiObject?: boolean | undefined;
+        topLevelLinks?: LinksObject | LinksCallback | undefined;
+        topLevelMeta?: unknown | MetaCallback | undefined;
+    }
+
+    interface LinkObject {
+        href: string;
+        meta?: Meta;
+    }
+
+    interface LinksObject {
+        self?: LinkObject | LinksCallback | string | null;
+        related?: LinkObject | LinksCallback | string | null;
+    }
+
+    interface ResourceObject<T> {
+        id: string;
+        type: string;
+        attributes?: Omit<T, "id"> | undefined;
+        relationships?: {
+            [key: string]: Relationship;
+        } | undefined;
+        links?: LinksObject | LinksCallback | undefined;
+    }
+
+    type Relationship = {
+        links?: LinksObject | LinksCallback | undefined;
+        data: Linkage | Linkage[];
+        meta?: Meta;
+    } | {
+        links?: LinksObject | LinksCallback | undefined;
+        data?: Linkage | Linkage[];
+        meta: Meta;
+    } | {
+        links: LinksObject | LinksCallback | undefined;
+        data?: Linkage | Linkage[];
+        meta?: Meta;
     };
-    blacklistOnDeserialize?: string[];
-    whitelistOnDeserialize?: string[];
-    convertCase?: Case;
-    unconvertCase?: Case;
-    convertCaseCacheSize?: number;
-    beforeSerialize?: BeforeSerializeCallback;
-    afterDeserialize?: AfterDeseralizeCallback;
-  }
 
-  interface DynamicTypeOptions {
-    id?: string;
-    jsonapiObject?: boolean;
-    topLevelLinks?: LinksObject | LinksCallback;
-    topLevelMeta?: unknown | MetaCallback;
-  }
+    interface Meta {
+        [name: string]: unknown;
+    }
 
-  interface LinkObject {
-    href: string;
-    meta: unknown;
-  }
+    interface Linkage {
+        type: string;
+        id: string;
+        meta?: Meta;
+    }
 
-  interface LinksObject {
-    [name: string]: LinkObject | LinksCallback | string | null;
-  }
+    interface JsonApiObject {
+        version: string;
+    }
 
-  interface ResourceObject<T> {
-    id: string;
-    type: string;
-    attributes?: Omit<T, 'id'>;
-    relationships?: {
-      [key: string]: { data: ResourceObject<any> | Array<ResourceObject<any>> };
-    };
-    links?: LinksObject | LinksCallback;
-  }
+    interface ErrorObject {
+        id?: string | undefined;
+        links?:
+            | LinksObject & {
+                about: LinkObject | string;
+            }
+            | undefined;
+        status?: string | undefined;
+        code?: string | undefined;
+        title?: string | undefined;
+        detail?: string | undefined;
+        source?: unknown | undefined;
+        meta?: Meta | undefined;
+    }
 
-  interface JsonApiObject {
-    version: string;
-  }
-
-  interface ErrorObject {
-    id?: string;
-    links?: LinksObject & {
-      about: LinkObject | string;
-    };
-    status?: string;
-    code?: string;
-    title?: string;
-    detail?: string;
-    source?: unknown;
-    meta?: unknown;
-  }
-
-  interface JSONAPIDocument {
-    jsonapi?: JsonApiObject;
-    links?: LinksObject;
-    data?: ResourceObject<unknown> | Array<ResourceObject<unknown>>;
-    errors?: ErrorObject[];
-    meta?: { [key: string]: unknown };
-    included?: Array<ResourceObject<unknown>>;
-  }
+    interface JSONAPIDocument {
+        jsonapi?: JsonApiObject | undefined;
+        links?: LinksObject | undefined;
+        data?: ResourceObject<unknown> | Array<ResourceObject<unknown>> | undefined;
+        errors?: ErrorObject[] | undefined;
+        meta?: Meta | undefined;
+        included?: Array<ResourceObject<unknown>> | undefined;
+    }
 }
 
 declare class JSONAPISerializer {
-  register(type: string, schema?: string | JSONAPISerializer.Options, opts?: JSONAPISerializer.Options): void;
+    constructor(opts?: JSONAPISerializer.Options);
 
-  serialize(type: string, data: unknown, topLevelMeta?: unknown): JSONAPISerializer.JSONAPIDocument;
+    register(type: string, schema?: string | JSONAPISerializer.Options, opts?: JSONAPISerializer.Options): void;
 
-  serialize(
-    type: string,
-    data: unknown,
-    schema?: string | JSONAPISerializer.Options,
-    topLevelMeta?: unknown,
-    excludeTopLevelMeta?: boolean,
-    overrideSchemaOptions?: { [type: string]: JSONAPISerializer.Options }
-  ): JSONAPISerializer.JSONAPIDocument;
+    serialize(type: string, data: unknown, topLevelMeta?: unknown): JSONAPISerializer.JSONAPIDocument;
 
-  serializeAsync(
-    type: string | JSONAPISerializer.DynamicTypeOptions,
-    data: unknown | unknown[],
-    schema?: string,
-    topLevelMeta?: unknown,
-    excludeTopLevelMeta?: boolean,
-    overrideSchemaOptions?: { [type: string]: JSONAPISerializer.Options }
-  ): Promise<JSONAPISerializer.JSONAPIDocument>;
+    serialize(
+        type: string,
+        data: unknown,
+        schema?: string | JSONAPISerializer.Options,
+        topLevelMeta?: unknown,
+        excludeTopLevelMeta?: boolean,
+        overrideSchemaOptions?: { [type: string]: JSONAPISerializer.Options },
+    ): JSONAPISerializer.JSONAPIDocument;
 
-  deserialize(
-    type: string | JSONAPISerializer.DynamicTypeOptions,
-    data: JSONAPISerializer.JSONAPIDocument,
-    schema?: string
-  ): any;
+    serializeAsync(
+        type: string | JSONAPISerializer.DynamicTypeOptions,
+        data: unknown | unknown[],
+        schema?: string,
+        topLevelMeta?: unknown,
+        excludeTopLevelMeta?: boolean,
+        overrideSchemaOptions?: { [type: string]: JSONAPISerializer.Options },
+    ): Promise<JSONAPISerializer.JSONAPIDocument>;
 
-  deserializeAsync(
-    type: string | JSONAPISerializer.DynamicTypeOptions,
-    data: JSONAPISerializer.JSONAPIDocument,
-    schema?: string
-  ): Promise<any>;
+    deserialize(
+        type: string | JSONAPISerializer.DynamicTypeOptions,
+        data: JSONAPISerializer.JSONAPIDocument,
+        schema?: string,
+    ): any;
 
-  serializeError(
-    error: JSONAPISerializer.ErrorObject | JSONAPISerializer.ErrorObject[] | Error | Error[]
-  ): JSONAPISerializer.ErrorObject;
+    deserializeAsync(
+        type: string | JSONAPISerializer.DynamicTypeOptions,
+        data: JSONAPISerializer.JSONAPIDocument,
+        schema?: string,
+    ): Promise<any>;
+
+    serializeError(
+        error: JSONAPISerializer.ErrorObject | JSONAPISerializer.ErrorObject[] | Error | Error[],
+    ): JSONAPISerializer.ErrorObject;
 }
 
 export = JSONAPISerializer;

@@ -1,17 +1,10 @@
-// Type definitions for workerb-api 1.0
-// Project: https://workerb.io/
-// Definitions by: workerB <https://github.com/workerb-io>
-//                Saurabh Garg <https://github.com/s-garg>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// Minimum TypeScript Version: 4.1
-
-type QueryMethods = 'text' | 'regex' | 'id' | 'xpath' | 'query_selector';
+type QueryMethods = "text" | "regex" | "id" | "xpath" | "query_selector";
 
 declare type clickQueryMethods = `by_${QueryMethods}`;
 
-declare type getAttributeQueryMethods = `by_${QueryMethods | 'query_selector_all'}`;
+declare type getAttributeQueryMethods = `by_${QueryMethods | "query_selector_all"}`;
 
-declare type typeQueryMethods = `by_${QueryMethods | 'label' | 'placeholder'}`;
+declare type typeQueryMethods = `by_${QueryMethods | "label" | "placeholder"}`;
 declare interface SetVarsVariable {
     name: string;
     value: string;
@@ -21,11 +14,11 @@ declare interface QueryOptions {
     /**
      *  A number which specifies after how many milliseconds the runtime will try to find the target element. The default value is 200.
      */
-    retryDuration?: number;
+    retryDuration?: number | undefined;
     /**
      *  A number number which specifies how many times the script runner will try to find the target element. The default value is 10.
      */
-    numberOfTries?: number;
+    numberOfTries?: number | undefined;
 }
 
 declare interface ClickQueryOptions extends QueryOptions {
@@ -37,15 +30,14 @@ declare interface ClickQueryOptions extends QueryOptions {
      * * by_id - finds the target element by id
      * * by_xpath - finds the target element by an [xpath](https://developer.mozilla.org/en-US/docs/Web/XPath) query
      * * by_query_selector - finds the target element using a query selector
-     *
      */
-    method?: clickQueryMethods;
+    method?: clickQueryMethods | undefined;
 
     /**
      *  A boolean to indicate if script runner should expect the page to reload.
      *  If set to true, the script execution will pause after executing the click. It will resume after the page reloads. The default value is false.
      */
-    expectReload?: boolean;
+    expectReload?: boolean | undefined;
 }
 
 declare interface GetAttributeQueryOptions extends QueryOptions {
@@ -59,7 +51,7 @@ declare interface GetAttributeQueryOptions extends QueryOptions {
      * * by_query_selector - finds the target element using a query selector
      * * by_query_selector_all - finds all the elements using a query selector
      */
-    method?: getAttributeQueryMethods;
+    method?: getAttributeQueryMethods | undefined;
 }
 
 declare interface SelectQueryOptions extends QueryOptions {
@@ -72,7 +64,7 @@ declare interface SelectQueryOptions extends QueryOptions {
      * * by_xpath - finds the target element by an [xpath](https://developer.mozilla.org/en-US/docs/Web/XPath) query
      * * by_query_selector finds - the target element using a query selector
      */
-    method?: clickQueryMethods;
+    method?: clickQueryMethods | undefined;
 
     /**
      * Specify if the provided value is a label or value of the option needs to be selected. The default value is label.
@@ -92,7 +84,7 @@ declare interface TypeQueryInterface extends QueryOptions {
      * * by_label - finds the target input using a label.
      * * by_placeholder - finds the target input using a placeholder.
      */
-    method?: typeQueryMethods;
+    method?: typeQueryMethods | undefined;
 }
 
 declare interface APIResponse {
@@ -111,19 +103,19 @@ declare interface EventConfig {
      * A string value used to the specify the type of the event.
      */
     eventType:
-        | 'keydown'
-        | 'keyup'
-        | 'mousedown'
-        | 'mouseenter'
-        | 'mouseleave'
-        | 'mousemove'
-        | 'mouseout'
-        | 'mouseover'
-        | 'mouseup';
+        | "keydown"
+        | "keyup"
+        | "mousedown"
+        | "mouseenter"
+        | "mouseleave"
+        | "mousemove"
+        | "mouseout"
+        | "mouseover"
+        | "mouseup";
     /**
      * An object used to specify the event properties. For key related event types, KeyboardEvent is supported. For mouse related event types, MouseEvent is supported.
      */
-    eventProps?: object;
+    eventProps?: object | undefined;
 }
 
 // global variables
@@ -158,7 +150,7 @@ declare function click(query: string, options?: ClickQueryOptions): undefined;
  *
  * @returns undefined
  */
-declare function notify(message: string, type: 'error' | 'success', timeout: number): undefined;
+declare function notify(message: string, type: "error" | "success", timeout: number): undefined;
 
 /**
  * The type function writes a given string to a target input field. The input field can be specified using different query methods.
@@ -322,7 +314,7 @@ declare function getAttribute(
  *
  * @returns undefined
  */
-declare function logging(state: 'on' | 'off'): undefined;
+declare function logging(state: "on" | "off"): undefined;
 
 /**
  * The httpGet function can be used to make http get requests.

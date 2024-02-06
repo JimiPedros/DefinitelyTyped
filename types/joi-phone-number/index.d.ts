@@ -1,18 +1,22 @@
-// Type definitions for joi-phone-number 5.0
-// Project: https://github.com/Salesflare/joi-phone-number
-// Definitions by: Marvin Witt <https://github.com/NurMarvin/>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
+/// <reference types="node" />
+import { Extension, Reference, Root, StringSchema } from "joi";
 
-import 'joi';
-
-declare module 'joi' {
+declare module "joi" {
     interface PhoneNumberOptions {
-        defaultCountry?: string[] | string;
-        strict?: boolean;
-        format?: 'e164' | 'international' | 'national' | 'rfc3966';
+        defaultCountry?: string[] | string | Reference | undefined;
+        strict?: boolean | Reference | undefined;
+        format?: "e164" | "international" | "national" | "rfc3966" | Reference | undefined;
     }
 
-    interface StringSchema extends AnySchema {
+    interface StringSchema {
         phoneNumber(options?: PhoneNumberOptions): this;
     }
 }
+
+interface StringExtension extends Extension {
+    type: "string";
+    base: StringSchema;
+}
+
+declare function JoiStringFactory(joi: Root): StringExtension;
+export = JoiStringFactory;

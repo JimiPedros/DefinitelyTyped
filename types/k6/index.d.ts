@@ -1,17 +1,6 @@
-// Type definitions for k6 0.31
-// Project: https://k6.io/docs
-// Definitions by: MajorBreakfast <https://github.com/MajorBreakfast>
-//                 Book Moons <https://github.com/bookmoons>
-//                 na-- <https://github.com/na-->
-//                 Pepe Cano <https://github.com/ppcano>
-//                 Simon Aronsson <https://github.com/simskij>
-//                 Ivan Mirić <https://github.com/imiric>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 3.4
-
 /**
  * k6 JavaScript API.
- * https://k6.io/docs
+ * https://grafana.com/docs/k6/latest/
  *
  * @privateRemarks
  * Uses a branding pattern throughout to reflect the custom classes exposed by
@@ -28,26 +17,35 @@
  * @packageDocumentation
  */
 
-import './global'; // Type global environment
+import "./global"; // Type global environment
 
 // Expose everything to autoimport
-import './crypto';
-import './data';
-import './encoding';
-import './html';
-import './http';
-import './metrics';
-import './options';
-import './ws';
-import './net/grpc';
+import "./crypto";
+import "./data";
+import "./encoding";
+import "./execution";
+import "./html";
+import "./http";
+import "./metrics";
+import "./options";
+import "./experimental/browser";
+import "./experimental/fs";
+import "./experimental/redis";
+import "./experimental/timers";
+import "./experimental/tracing";
+import "./experimental/webcrypto";
+import "./experimental/websockets";
+import "./experimental/grpc";
+import "./ws";
+import "./net/grpc";
 
 // === Main ===
 // ------------
 
 /**
  * Run checks on a value.
- * https://k6.io/docs/javascript-api/k6/check-val-sets-tags
- * @typeParam VT - Value type.
+ * https://grafana.com/docs/k6/latest/javascript-api/k6/check/
+ * @template VT - Value type.
  * @param val - Value to test.
  * @param sets - Tests (checks) to run on the value.
  * @param tags - Extra tags to attach to metrics emitted.
@@ -62,7 +60,7 @@ export function check<VT>(val: VT, sets: Checkers<VT>, tags?: object): boolean;
 
 /**
  * Immediately throw an error, aborting the current script iteration.
- * https://k6.io/docs/javascript-api/k6/fail-err
+ * https://grafana.com/docs/k6/latest/javascript-api/k6/fail/
  * @param err - Error message that gets printed to stderr.
  * @example
  * fail("abort current iteration");
@@ -71,8 +69,8 @@ export function fail(err?: string): never;
 
 /**
  * Run code inside a group.
- * https://k6.io/docs/javascript-api/k6/group-name-fn
- * @typeParam RT - Return type.
+ * https://grafana.com/docs/k6/latest/javascript-api/k6/group/
+ * @template RT - Return type.
  * @param name - Name of the group.
  * @param fn - Group body. Code to be executed in the group context.
  * @returns The return value of `fn`.
@@ -84,8 +82,17 @@ export function fail(err?: string): never;
 export function group<RT>(name: string, fn: () => RT): RT;
 
 /**
+ * Set seed to get a reproducible pseudo-random number using Math.random.
+ * https://grafana.com/docs/k6/latest/javascript-api/k6/randomseed/
+ * @param int - The seed value.
+ * @example
+ * randomSeed(123456789);
+ */
+export function randomSeed(int: number): void;
+
+/**
  * Suspend VU execution for the specified duration.
- * https://k6.io/docs/javascript-api/k6/sleep-t
+ * https://grafana.com/docs/k6/latest/javascript-api/k6/sleep/
  * @param t - Duration, in seconds.
  * @example
  * sleep(3);
@@ -94,7 +101,7 @@ export function sleep(t: number): void;
 
 /**
  * Check procedure.
- * @typeParam VT - Value type.
+ * @template VT - Value type.
  */
 export interface Checker<VT> {
     /**
@@ -107,7 +114,7 @@ export interface Checker<VT> {
 
 /**
  * Named check procedures.
- * @typeParam VT - Value type.
+ * @template VT - Value type.
  */
 export interface Checkers<VT> {
     [description: string]: Checker<VT>;

@@ -1,10 +1,4 @@
-// Type definitions for dotenv-safe 8.1
-// Project: https://github.com/rolodato/dotenv-safe
-// Definitions by: Stan Goldmann <https://github.com/krenor>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.2
-
-import dotenv = require('dotenv');
+import dotenv = require("dotenv");
 
 export interface MissingEnvVarsError extends Error {
     /**
@@ -23,19 +17,19 @@ export interface DotenvSafeOptions extends dotenv.DotenvConfigOptions {
      * Path to example environment file. (Option 1)
      * @default ".env.example"
      */
-    example?: string;
+    example?: string | undefined;
 
     /**
      * Path to example environment file. (Option 2 -- example takes precedence)
      * @default ".env.example"
      */
-    sample?: string;
+    sample?: string | undefined;
 
     /**
      * Enabling this option will not throw an error after loading.
      * @default false
      */
-    allowEmptyValues?: boolean;
+    allowEmptyValues?: boolean | undefined;
 }
 
 export interface DotenvSafeConfigOutput extends dotenv.DotenvConfigOutput {

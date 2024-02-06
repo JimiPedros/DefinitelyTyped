@@ -1,11 +1,3 @@
-// Type definitions for i18n-node 0.13
-// Project: http://github.com/mashpie/i18n-node
-// Definitions by: Maxime LUCE <https://github.com/SomaticIT>
-//                 FindQ <https://github.com/FindQ>
-//                 Martin Badin <https://github.com/martin-badin>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 4.1
-
 declare namespace i18n {
     interface Response extends i18nAPI {
         locals: Partial<i18nAPI>;
@@ -16,7 +8,7 @@ declare namespace i18n {
          * Setup some locales - other locales default to en silently
          * @default []
          */
-        locales?: string[];
+        locales?: string[] | undefined;
 
         /**
          * Language fallback map
@@ -24,115 +16,115 @@ declare namespace i18n {
          */
         fallbacks?: {
             [locale: string]: string;
-        };
+        } | undefined;
 
         /**
          * Alter a site wide default locale
          * @default "en"
          */
-        defaultLocale?: string;
+        defaultLocale?: string | undefined;
 
         /**
          * Will return translation from defaultLocale in case current locale doesn't provide it
          * @default false
          */
-        retryInDefaultLocale?: boolean;
+        retryInDefaultLocale?: boolean | undefined;
 
         /**
          * Sets a custom cookie name to parse locale settings from
          * @default null
          */
-        cookie?: string;
+        cookie?: string | undefined;
 
         /**
          * Sets a custom header name to read the language preference from - accept-language header by default
          * @default 'accept-language'
          */
-        header?: string;
+        header?: string | undefined;
 
         /**
          * Query parameter to switch locale (ie. /home?lang=ch)
          * @default null
          */
-        queryParameter?: string;
+        queryParameter?: string | undefined;
 
         /**
          * Where to store json files, relative to modules directory
          * @default "./locales"
          */
-        directory?: string;
+        directory?: string | undefined;
 
         /**
          * Control mode on directory creation. Setting has no effect on win.
          * @default null
          */
-        directoryPermissions?: string;
+        directoryPermissions?: string | undefined;
 
         /**
          * Watch for changes in json files to reload locale on updates
          * @default false
          */
-        autoReload?: boolean;
+        autoReload?: boolean | undefined;
 
         /**
          * Whether to write new locale information to disk
          * @default true
          */
-        updateFiles?: boolean;
+        updateFiles?: boolean | undefined;
 
         /**
          * Sync locale information across all files
          * @default false
          */
-        syncFiles?: boolean;
+        syncFiles?: boolean | undefined;
 
         /**
          * What to use as the indentation unit
          * @default "\t"
          */
-        indent?: string;
+        indent?: string | undefined;
 
         /**
          * Setting extension of json files (you might want to set this to '.js' according to webtranslateit)
          * @default ".json"
          */
-        extension?: string;
+        extension?: string | undefined;
 
         /**
          * Setting prefix of json files name (in case you use different locale files naming scheme (webapp-en.json), rather then just en.json)
          * @default ""
          */
-        prefix?: string;
+        prefix?: string | undefined;
 
         /**
          * Enable object notation
          * @default false
          */
-        objectNotation?: boolean;
+        objectNotation?: boolean | undefined;
 
         /**
          * Setting of log level DEBUG
          * @default require("debug")("i18n:debug")
          */
-        logDebugFn?: (msg: string) => void;
+        logDebugFn?: ((msg: string) => void) | undefined;
 
         /**
          * Setting of log level WARN
          * @default require("debug")("i18n:warn")
          */
-        logWarnFn?: (msg: string) => void;
+        logWarnFn?: ((msg: string) => void) | undefined;
 
         /**
          * Setting of log level ERROR
          * @default require("debug")("i18n:error")
          */
-        logErrorFn?: (msg: string) => void;
+        logErrorFn?: ((msg: string) => void) | undefined;
 
         /**
          * Function to provide missing translations.
          * @since 0.10.0
          */
-        missingKeyFn?: (locale: string, value: string) => string;
+        missingKeyFn?: ((locale: string, value: string) => string) | undefined;
 
         /**
          * object or [obj1, obj2] to bind the i18n api and current locale to
@@ -147,14 +139,14 @@ declare namespace i18n {
          */
         api?: {
             [method: string]: string;
-        };
+        } | undefined;
 
         /**
          * Downcase locale when passed on queryParam; e.g. lang=en-US becomes en-us.
          * When set to false, the queryParam value will be used as passed; e.g. lang=en-US remains en-US.
          * @default true
          */
-        preserveLegacyCase?: boolean;
+        preserveLegacyCase?: boolean | undefined;
 
         /**
          * Static translation catalog. Setting this option overrides `locales`.
@@ -162,7 +154,7 @@ declare namespace i18n {
          * **NOTE**: Enabling `staticCatalog` disables all other fs realated options such as `updateFiles`, `autoReload` and `syncFiles`.
          * @since 0.10.0
          */
-        staticCatalog?: GlobalCatalog;
+        staticCatalog?: GlobalCatalog | undefined;
 
         /**
          * Use mustache with customTags (https://www.npmjs.com/package/mustache#custom-delimiters) or disable mustache entirely
@@ -171,29 +163,44 @@ declare namespace i18n {
             /**
              * @default ['{{', '}}']
              */
-            tags?: [string, string];
+            tags?: [string, string] | undefined;
             /**
              * @default false
              */
-            disable?: boolean;
-        };
+            disable?: boolean | undefined;
+        } | undefined;
+
+        /**
+         * Parser can be any object that responds to .parse & .stringify
+         */
+        parser?: ParserOptions | undefined;
+    }
+    interface ParserOptions {
+        parse: (src: string, options?: any) => any;
+        stringify: (value: any, options?: any) => string;
     }
     interface TranslateOptions {
         phrase: string;
-        locale?: string;
+        locale?: string | undefined;
     }
     interface PluralOptions {
         singular: string;
         plural: string;
-        count?: number;
-        locale?: string;
+        count?: number | undefined;
+        locale?: string | undefined;
     }
     interface Replacements {
         [key: string]: string;
     }
-
-    interface LocaleCatalog {
+    /**
+     * This interface represents a plural translation.
+     * e.g. { one: "you have 1 friend", other: "you have many friends" }
+     */
+    interface Plurals {
         [key: string]: string;
+    }
+    interface LocaleCatalog {
+        [key: string]: string | Plurals;
     }
     interface GlobalCatalog {
         [key: string]: LocaleCatalog;
@@ -217,7 +224,7 @@ declare namespace i18n {
      */
     function init(request: Express.Request, response: Express.Response, next?: () => void): void;
 
-    //#region __()
+    // #region __()
 
     /**
      * Translate the given phrase using locale configuration
@@ -233,9 +240,9 @@ declare namespace i18n {
      */
     function __(phraseOrOptions: string | TranslateOptions, replacements: Replacements): string;
 
-    //#endregion
+    // #endregion
 
-    //#region __n()
+    // #region __n()
 
     /**
      * Translate with plural condition the given phrase and count using locale configuration
@@ -260,10 +267,18 @@ declare namespace i18n {
      * @returns The translated phrase
      */
     function __n(singular: string, plural: string, count: number | string): string;
+    /**
+     * Translate with plural condition the given phrase and count using locale configuration
+     * @param phrase - The phrase to translate or a flattened key path in locale json file
+     * @param count - The number which allow to select from plural to singular
+     * @param replacements - An object containing replacements
+     * @returns The translated phrase
+     */
+    function __n(phrase: string, count: number | string, replacements: Replacements): string;
 
-    //#endregion
+    // #endregion
 
-    //#region __mf()
+    // #region __mf()
 
     /**
      * Translate the given phrase using locale configuration and MessageFormat
@@ -279,9 +294,9 @@ declare namespace i18n {
      */
     function __mf(phraseOrOptions: string | TranslateOptions, replacements: Replacements): string;
 
-    //#endregion
+    // #endregion
 
-    //#region __l()
+    // #region __l()
 
     /**
      * Returns a list of translations for a given phrase in each language.
@@ -290,9 +305,9 @@ declare namespace i18n {
      */
     function __l(phrase: string): string[];
 
-    //#endregion
+    // #endregion
 
-    //#region __h()
+    // #region __h()
 
     /**
      * Returns a hashed list of translations for a given phrase in each language.
@@ -301,9 +316,9 @@ declare namespace i18n {
      */
     function __h(phrase: string): HashedList[];
 
-    //#endregion
+    // #endregion
 
-    //#region Locale
+    // #region Locale
 
     /**
      * Change the current active locale
@@ -316,7 +331,11 @@ declare namespace i18n {
      * @param locale - The locale to set as default
      * @param [inheritance=false] - Disables inheritance if true
      */
-    function setLocale(requestOrResponse: Express.Request | Express.Response, locale: string, inheritance?: boolean): void;
+    function setLocale(
+        requestOrResponse: Express.Request | Express.Response,
+        locale: string,
+        inheritance?: boolean,
+    ): void;
     /**
      * Change the current active locale for specified response
      * @param objects - The object(s) to change locale on
@@ -342,9 +361,9 @@ declare namespace i18n {
 
     function removeLocale(locale: string): void;
 
-    //#endregion
+    // #endregion
 
-    //#region Catalog
+    // #region Catalog
 
     /**
      * Get the current global catalog
@@ -365,7 +384,7 @@ declare namespace i18n {
      */
     function getCatalog(request: Express.Request, locale?: string): LocaleCatalog;
 
-    //#endregion
+    // #endregion
 
     /**
      * Override the current request locale by using the query param (?locale=en)
@@ -379,6 +398,8 @@ declare namespace i18n {
     const version: string;
 
     class I18n {
+        constructor(options?: ConfigurationOptions);
+
         configure(options: ConfigurationOptions): void;
 
         init(request: Express.Request, response: Express.Response, next?: () => void): void;
@@ -432,7 +453,7 @@ declare namespace i18n {
 interface i18nAPI {
     locale: string;
 
-    //#region __()
+    // #region __()
 
     /**
      * Translate the given phrase using locale configuration
@@ -448,9 +469,9 @@ interface i18nAPI {
      */
     __(phraseOrOptions: string | i18n.TranslateOptions, replacements: i18n.Replacements): string;
 
-    //#endregion
+    // #endregion
 
-    //#region __n()
+    // #region __n()
 
     /**
      * Translate with plural condition the given phrase and count using locale configuration
@@ -476,9 +497,9 @@ interface i18nAPI {
      */
     __n(singular: string, plural: string, count: number | string): string;
 
-    //#endregion
+    // #endregion
 
-    //#region __mf()
+    // #region __mf()
 
     /**
      * Translate the given phrase using locale configuration and MessageFormat
@@ -494,9 +515,9 @@ interface i18nAPI {
      */
     __mf(phraseOrOptions: string | i18n.TranslateOptions, replacements: i18n.Replacements): string;
 
-    //#endregion
+    // #endregion
 
-    //#region __l()
+    // #region __l()
 
     /**
      * Returns a list of translations for a given phrase in each language.
@@ -505,9 +526,9 @@ interface i18nAPI {
      */
     __l(phrase: string): string[];
 
-    //#endregion
+    // #endregion
 
-    //#region __h()
+    // #region __h()
 
     /**
      * Returns a hashed list of translations for a given phrase in each language.
@@ -516,7 +537,7 @@ interface i18nAPI {
      */
     __h(phrase: string): i18n.HashedList[];
 
-    //#endregion
+    // #endregion
 
     /**
      * Get the current active locale
@@ -548,11 +569,11 @@ declare module "i18n" {
 }
 
 declare namespace Express {
-    // tslint:disable-next-line:no-empty-interface
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface Request extends i18nAPI {
     }
 
-    // tslint:disable-next-line:no-empty-interface
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface Response extends i18nAPI {
     }
 }

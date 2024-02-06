@@ -1,35 +1,27 @@
-// Type definitions for Nodemailer 6.4
-// Project: https://github.com/nodemailer/nodemailer, https://nodemailer.com
-// Definitions by: Rogier Schouten <https://github.com/rogierschouten>
-//                 Piotr Roszatycki <https://github.com/dex4er>
-//                 Daniel Chao <https://github.com/bioball>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 3.3
-
 /// <reference types="node" />
 
-import JSONTransport = require('./lib/json-transport');
-import Mail = require('./lib/mailer');
-import MailMessage = require('./lib/mailer/mail-message');
-import SendmailTransport = require('./lib/sendmail-transport');
-import SESTransport = require('./lib/ses-transport');
-import SMTPPool = require('./lib/smtp-pool');
-import SMTPTransport = require('./lib/smtp-transport');
-import StreamTransport = require('./lib/stream-transport');
+import JSONTransport = require("./lib/json-transport");
+import Mail = require("./lib/mailer");
+import MailMessage = require("./lib/mailer/mail-message");
+import SendmailTransport = require("./lib/sendmail-transport");
+import SESTransport = require("./lib/ses-transport");
+import SMTPPool = require("./lib/smtp-pool");
+import SMTPTransport = require("./lib/smtp-transport");
+import StreamTransport = require("./lib/stream-transport");
 
 export type SendMailOptions = Mail.Options;
 
+export type Transporter<T = any> = Mail<T>;
+
 export type SentMessageInfo = any;
 
-export type Transporter = Mail;
-
-export interface Transport {
-    mailer?: Transporter;
+export interface Transport<T = any> {
+    mailer?: Transporter<T> | undefined;
 
     name: string;
     version: string;
 
-    send(mail: MailMessage, callback: (err: Error | null, info: SentMessageInfo) => void): void;
+    send(mail: MailMessage<T>, callback: (err: Error | null, info: T) => void): void;
 
     verify?(callback: (err: Error | null, success: true) => void): void;
     verify?(): Promise<true>;
@@ -38,7 +30,7 @@ export interface Transport {
 }
 
 export interface TransportOptions {
-    component?: string;
+    component?: string | undefined;
 }
 
 export interface TestAccount {
@@ -53,25 +45,31 @@ export interface TestAccount {
 export function createTransport(
     transport?: SMTPTransport | SMTPTransport.Options | string,
     defaults?: SMTPTransport.Options,
-): Transporter;
-export function createTransport(transport: SMTPPool | SMTPPool.Options, defaults?: SMTPPool.Options): Transporter;
+): Transporter<SMTPTransport.SentMessageInfo>;
+export function createTransport(
+    transport: SMTPPool | SMTPPool.Options,
+    defaults?: SMTPPool.Options,
+): Transporter<SMTPPool.SentMessageInfo>;
 export function createTransport(
     transport: SendmailTransport | SendmailTransport.Options,
     defaults?: SendmailTransport.Options,
-): Transporter;
+): Transporter<SendmailTransport.SentMessageInfo>;
 export function createTransport(
     transport: StreamTransport | StreamTransport.Options,
     defaults?: StreamTransport.Options,
-): Transporter;
+): Transporter<StreamTransport.SentMessageInfo>;
 export function createTransport(
     transport: JSONTransport | JSONTransport.Options,
     defaults?: JSONTransport.Options,
-): Transporter;
+): Transporter<JSONTransport.SentMessageInfo>;
 export function createTransport(
     transport: SESTransport | SESTransport.Options,
     defaults?: SESTransport.Options,
-): Transporter;
-export function createTransport(transport: Transport | TransportOptions, defaults?: TransportOptions): Transporter;
+): Transporter<SESTransport.SentMessageInfo>;
+export function createTransport<T>(
+    transport: Transport<T> | TransportOptions,
+    defaults?: TransportOptions,
+): Transporter<T>;
 
 export function createTestAccount(
     apiUrl: string,

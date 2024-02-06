@@ -1,13 +1,12 @@
-import { TempNode } from './TempNode';
-import { NodeBuilder } from './NodeBuilder';
+import { ShaderNodeObject } from "../shadernode/ShaderNode.js";
+import { NodeTypeOption } from "./constants.js";
+import Node from "./Node.js";
+import NodeBuilder from "./NodeBuilder.js";
 
-export class AttributeNode extends TempNode {
-    constructor(name: string, type?: string);
-
-    name: string;
-    nodeType: string;
-
-    getAttributeType(builder: NodeBuilder): string;
-    getType(builder: NodeBuilder): string;
-    copy(source: AttributeNode): this;
+export default class AttributeNode extends Node {
+    constructor(attributeName: string, nodeType?: NodeTypeOption | null);
+    setAttributeName(attributeName: string): this;
+    getAttributeName(builder: NodeBuilder): string;
 }
+
+export const attribute: (name: string, nodeType: NodeTypeOption) => ShaderNodeObject<Node>;

@@ -1,8 +1,3 @@
-// Type definitions for tsv 0.2
-// Project: https://github.com/ricardobeat/TSV
-// Definitions by: Zlatko Andonovski <https://github.com/Goldsmith42>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 export as namespace TSV;
 
 declare namespace TSV {
@@ -10,9 +5,9 @@ declare namespace TSV {
         header: boolean;
         sep: string;
 
-        constructor(sep: string, options?: { header?: boolean });
+        constructor(sep: string, options?: { header?: boolean | undefined });
 
-        stringify(data: ReadonlyArray<any>): string;
+        stringify(data: readonly any[]): string;
         parse(tsv: string): any[];
     }
 

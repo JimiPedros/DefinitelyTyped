@@ -1,10 +1,3 @@
-// Type definitions for supports-color 8.1
-// Project: https://github.com/chalk/supports-color
-// Definitions by: Melvin Groenhoff <https://github.com/mgroenhoff>
-//                 Matt Traynham <https://github.com/mtraynham>
-//                 Piotr Błażejewicz <https://github.com/peterblazejewicz>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 export namespace supportsColor {
     interface Level {
         level: number;
@@ -20,8 +13,8 @@ export namespace supportsColor {
          * If `false`, then `process.argv` is not considered when determining color support.
          * @default true
          */
-        sniffFlags?: boolean;
-        isTTY?: boolean;
+        sniffFlags?: boolean | undefined;
+        isTTY?: boolean | undefined;
     }
 
     type SupportsColor = false | Level;
@@ -29,7 +22,7 @@ export namespace supportsColor {
 
 export function supportsColor(
     stream: {
-        isTTY?: boolean;
+        isTTY?: boolean | undefined;
     },
     options?: supportsColor.Options,
 ): supportsColor.SupportsColor;

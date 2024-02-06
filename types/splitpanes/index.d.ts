@@ -1,9 +1,4 @@
-// Type definitions for splitPanes 2.2
-// Project: https://github.com/antoniandre/splitpanes
-// Definitions by: n0k0 <https://github.com/n0k0>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 3.5
-import { VueConstructor } from 'vue';
+import { VueConstructor } from "vue";
 
 // Misc
 export interface ContainerType {
@@ -37,9 +32,9 @@ export interface SumsPanesType {
 
 export interface RequestUpdateType {
     target: Pane;
-    min?: number;
-    max?: number;
-    size?: number;
+    min?: number | undefined;
+    max?: number | undefined;
+    size?: number | undefined;
 }
 
 export interface RemovedPaneType {
@@ -49,8 +44,8 @@ export interface RemovedPaneType {
 }
 
 export interface ChangedPaneType {
-    addedPane?: Pane;
-    removedPane?: RemovedPaneType;
+    addedPane?: Pane | undefined;
+    removedPane?: RemovedPaneType | undefined;
 }
 
 // Splitpane
@@ -80,10 +75,10 @@ export interface SplitpaneIndexedType {
 }
 
 export interface SplitpaneProps {
-    horizontal: boolean;        // false
-    pushOtherPanes: boolean;    // true
-    dblClickSplitter: boolean;  // true
-    firstSplitter: boolean;     // false
+    horizontal: boolean; // false
+    pushOtherPanes: boolean; // true
+    dblClickSplitter: boolean; // true
+    firstSplitter: boolean; // false
 }
 
 export interface SplitpaneData {
@@ -107,6 +102,7 @@ export interface SplitPaneMethods {
     onMouseMove: (event: Event) => void;
     onMouseUp: () => void;
     onSplitterClick: (event: Event, splitterIndex: number) => void;
+    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
     onSplitterDblClick: (event: Event, splitterIndex: number) => Pane | void;
     onPaneClick: (event: Event, splitterIndex: number) => void;
     getCurrentMouseDrag: (event: Event) => CoordinateType;

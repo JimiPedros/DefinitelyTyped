@@ -1,11 +1,7 @@
-// Type definitions for express-locale 2.0
-// Project: https://github.com/smhg/express-locale#readme
-// Definitions by: Piotr Błażejewicz <https://github.com/peterblazejewicz>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-import express = require('express');
-import { RequestHandler, Request } from 'express';
+import express = require("express");
+import { Request, RequestHandler } from "express";
 
-declare module 'express-serve-static-core' {
+declare module "express-serve-static-core" {
     interface Request {
         locale: locale.Locale;
     }
@@ -29,7 +25,7 @@ declare namespace locale {
          * The first lookup to return a full locale will be the final result.
          * @default ['accept-language', 'default']
          */
-        priority?: string[];
+        priority?: string[] | undefined;
 
         /**
          * Add custom lookups or overwrite the default ones
@@ -37,7 +33,7 @@ declare namespace locale {
          */
         lookups?: {
             [key: string]: (req: Request) => string;
-        };
+        } | undefined;
 
         /**
          * The name of the cookie that contains the locale for the cookie lookup.
@@ -50,7 +46,7 @@ declare namespace locale {
          */
         cookie?: {
             [key: string]: unknown;
-        };
+        } | undefined;
 
         /**
          * The name of the query string parameter that contains the locale for the query lookup.
@@ -58,7 +54,7 @@ declare namespace locale {
          */
         query?: {
             [key: string]: unknown;
-        };
+        } | undefined;
 
         /**
          * A mapping of hostnames to locales for the hostname lookup.
@@ -66,7 +62,7 @@ declare namespace locale {
          */
         hostname?: {
             [locale: string]: string;
-        };
+        } | undefined;
 
         /**
          * Maps lookup results that return only a language to a full locale.
@@ -74,25 +70,25 @@ declare namespace locale {
          */
         map?: {
             [language: string]: string;
-        };
+        } | undefined;
 
         /**
          * The default locale for the default lookup.
          * @default 'en-GB'
          */
-        default?: string;
+        default?: string | undefined;
 
         /**
          * Lookup results are validated against this list of allowed locales if provided.
          * @default undefined
          */
-        allowed?: string[];
+        allowed?: string[] | undefined;
 
         /**
          * By default, the locale is attached to `req.locale` but can be configured with the `requestProperty` option.
          * @default 'locale'
          */
-        requestProperty?: string;
+        requestProperty?: string | undefined;
     }
 
     /**

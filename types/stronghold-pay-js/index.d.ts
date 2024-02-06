@@ -1,10 +1,3 @@
-// Type definitions for non-npm package stronghold-pay-js-browser 2.0
-// Project: https://docs.strongholdpay.com/stronghold-pay-js/
-// Definitions by: Adrien Etienne <https://github.com/AdrienEtienne>
-//                Sean Bennett <https://github.com/itsseanbennett>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 3.7
-
 /// <reference types="jquery" />
 
 export = Stronghold;
@@ -16,21 +9,21 @@ declare global {
          */
         enum ENVIRONMENT {
             sandbox = "sandbox",
-            live = "live"
+            live = "live",
         }
         const HOST = "https://api.strongholdpay.com";
         enum EVENT {
             EXIT = "exit",
             SUCCESS = "success",
             ERROR = "error",
-            READY = "ready"
+            READY = "ready",
         }
         enum ERROR_TYPE {
             API_ERROR = "api_error",
             AUTH_ERROR = "auth_error",
             INVALID_REQUEST_ERROR = "invalid_request_error",
             OBJECT_ERROR = "object_error",
-            VALIDATION_ERROR = "validation_error"
+            VALIDATION_ERROR = "validation_error",
         }
         enum ERROR_CODE {
             SERVER_ERROR = "server_error",
@@ -60,12 +53,12 @@ declare global {
             INVALID_CHARGE_AMOUNT = "invalid_charge_amount",
             MISSING_FIELD = "missing_field",
             INVALID_FIELD = "invalid_field",
-            VALUE_TAKEN = "value_taken"
+            VALUE_TAKEN = "value_taken",
         }
         enum ERROR_MESSAGE {
             AMOUNT_BAD_FORMAT = "The 'amount' option was unable to be parsed as number.",
             BAD_ENVIRONMENT = "Invalid environment provided. Expect \"live\" or \"sandbox\".",
-            ATTRIBUTE_REQUIRED = "Attribute is required."
+            ATTRIBUTE_REQUIRED = "Attribute is required.",
         }
         class StrongholdPayError extends Error {
             type: ERROR_TYPE;
@@ -76,7 +69,7 @@ declare global {
         interface ClientOptions {
             environment: ENVIRONMENT;
             publishableKey: string;
-            host?: string;
+            host?: string | undefined;
         }
         type AddPaymentSourceOnSuccess = (paymentSource: PaymentSource) => void;
         type UpdatePaymentSourceOnSuccess = (paymentSource: PaymentSource) => void;
@@ -87,27 +80,27 @@ declare global {
         type OnError = (error: StrongholdPayError) => void;
         type OnEvent = (event: StrongholdMessageEvent) => void;
         interface Options {
-            onExit?: OnExit;
-            onError?: OnError;
-            onEvent?: OnEvent;
-            onReady?: OnReady;
+            onExit?: OnExit | undefined;
+            onError?: OnError | undefined;
+            onEvent?: OnEvent | undefined;
+            onReady?: OnReady | undefined;
         }
         interface AddPaymentSourceOptions extends Options {
             onSuccess: AddPaymentSourceOnSuccess;
         }
         interface UpdatePaymentSourceOptions extends Options {
-            onSuccess?: UpdatePaymentSourceOnSuccess;
+            onSuccess?: UpdatePaymentSourceOnSuccess | undefined;
             paymentSourceId: string;
         }
         interface ChargeOptions extends Options {
             charge: ChargeDropin;
-            tip?: TipDataDropin;
-            authorizeOnly?: boolean;
+            tip?: TipDataDropin | undefined;
+            authorizeOnly?: boolean | undefined;
             onSuccess: ChargeOnSuccess;
         }
         interface TipOptions extends Options {
             tip: TipDropin;
-            authorizeOnly?: boolean;
+            authorizeOnly?: boolean | undefined;
             onSuccess: TipOnSuccess;
         }
         interface StrongholdMessageEvent extends MessageEvent {
@@ -125,7 +118,7 @@ declare global {
              */
             amount: number;
             paymentSourceId: string;
-            externalId?: string;
+            externalId?: string | undefined;
         }
         interface TipDataDropin {
             /**
@@ -134,10 +127,10 @@ declare global {
             amount: number;
             beneficiaryName: string;
             details?: {
-                displayMessage?: string;
-                terminalId?: string;
-                drawerId?: string;
-            };
+                displayMessage?: string | undefined;
+                terminalId?: string | undefined;
+                drawerId?: string | undefined;
+            } | undefined;
         }
         interface TipDropin extends TipDataDropin {
             chargeId: string;
@@ -145,12 +138,12 @@ declare global {
         }
         interface PaymentSource {
             id: string;
-            type: 'bank';
+            type: "bank";
             label: string;
         }
         enum CHARGE_TYPE {
             BANK_DEBIT = "bank_debit",
-            BANK_DEBIT_CUSTOMER_NOT_PRESENT = "bank_debit_cnp"
+            BANK_DEBIT_CUSTOMER_NOT_PRESENT = "bank_debit_cnp",
         }
         enum CHARGE_STATUS {
             CREATED = "created",
@@ -161,7 +154,7 @@ declare global {
             CAPTURE_FAILED = "capture_failed",
             DISPUTED = "disputed",
             REFUND_PENDING = "refund_pending",
-            REFUNDED = "refunded"
+            REFUNDED = "refunded",
         }
         interface Charge {
             id: string;
@@ -176,10 +169,10 @@ declare global {
             amount: number;
             beneficiary_name: string;
             details?: {
-                display_message?: string;
-                terminal_id?: string;
-                drawer_id?: string;
-            };
+                display_message?: string | undefined;
+                terminal_id?: string | undefined;
+                drawer_id?: string | undefined;
+            } | undefined;
             charge_id: string;
             payment_source_id: string;
         }

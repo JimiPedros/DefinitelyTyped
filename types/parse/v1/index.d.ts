@@ -1,14 +1,3 @@
-// Type definitions for parse 1.11
-// Project: https://parseplatform.org/
-// Definitions by:  Ullisen Media Group <http://ullisenmedia.com>
-//                  David Poetzsch-Heffter <https://github.com/dpoetzsch>
-//                  Cedric Kemp <https://github.com/jaeggerr>
-//                  Flavio Negrão <https://github.com/flavionegrao>
-//                  Wes Grimes <https://github.com/wesleygrimes>
-//                  Otherwise SAS <https://github.com/owsas>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.8
-
 /// <reference types="node" />
 /// <reference types="jquery" />
 /// <reference types="underscore" />
@@ -22,22 +11,22 @@ declare namespace Parse {
     let VERSION: string;
 
     interface SuccessOption {
-        success?: Function;
+        success?: Function | undefined;
     }
 
     interface ErrorOption {
-        error?: Function;
+        error?: Function | undefined;
     }
 
     interface SuccessFailureOptions extends SuccessOption, ErrorOption {}
 
     interface SignUpOptions {
-        useMasterKey?: boolean;
-        installationId?: string;
+        useMasterKey?: boolean | undefined;
+        installationId?: string | undefined;
     }
 
     interface SessionTokenOption {
-        sessionToken?: string;
+        sessionToken?: string | undefined;
     }
 
     interface WaitOption {
@@ -45,14 +34,14 @@ declare namespace Parse {
          * Set to true to wait for the server to confirm success
          * before triggering an event.
          */
-        wait?: boolean;
+        wait?: boolean | undefined;
     }
 
     interface UseMasterKeyOption {
         /**
          * In Cloud Code and Node only, causes the Master Key to be used for this request.
          */
-        useMasterKey?: boolean;
+        useMasterKey?: boolean | undefined;
     }
 
     interface ScopeOptions extends SessionTokenOption, UseMasterKeyOption {}
@@ -61,7 +50,7 @@ declare namespace Parse {
         /**
          * Set to true to avoid firing the event.
          */
-        silent?: boolean;
+        silent?: boolean | undefined;
     }
 
     /**
@@ -78,7 +67,6 @@ declare namespace Parse {
      * </pre></p>
      *
      * @see Parse.Promise.prototype.then
-     * @class
      */
 
     interface IPromise<T> {
@@ -95,8 +83,8 @@ declare namespace Parse {
         static as<U>(resolvedValue: U): Promise<U>;
         static error(error: any): Promise<any>;
         static is(possiblePromise: any): Boolean;
-        static when(promises: IPromise<any>[]): Promise<any>;
-        static when(...promises: IPromise<any>[]): Promise<any>;
+        static when(promises: Array<IPromise<any>>): Promise<any>;
+        static when(...promises: Array<IPromise<any>>): Promise<any>;
 
         always(callback: Function): Promise<T>;
         done(callback: Function): Promise<T>;
@@ -134,7 +122,6 @@ declare namespace Parse {
      * If the argument is any other JSON object, that object will be interpretted
      *   as a serialized ACL created with toJSON().
      * @see Parse.Object#setACL
-     * @class
      *
      * <p>An ACL, or Access Control List can be added to any
      * <code>Parse.Object</code> to restrict access to only a subset of users
@@ -176,7 +163,6 @@ declare namespace Parse {
     /**
      * A Parse.File is a local representation of a file that is saved to the Parse
      * cloud.
-     * @class
      * @param name {String} The file's name. This will be prefixed by a unique
      *     value once the file has finished saving. The file name must begin with
      *     an alphanumeric character, and consist of alphanumeric characters,
@@ -218,7 +204,6 @@ declare namespace Parse {
      *   new GeoPoint({latitude: 30, longitude: 30})
      *   new GeoPoint()  // defaults to (0, 0)
      *   </pre>
-     * @class
      *
      * <p>Represents a latitude / longitude point that may be associated
      * with a key in a ParseObject or used as a reference point for geo queries.
@@ -251,7 +236,6 @@ declare namespace Parse {
      * — you should use the reference to <code>Parse.history</code>
      * that will be created for you automatically if you make use of
      * Routers with routes.
-     * @class
      *
      * <p>A fork of Backbone.History, provided for your convenience.  If you
      * use this class, you must also include jQuery, or another library
@@ -286,14 +270,14 @@ declare namespace Parse {
 
         constructor(parent?: S, key?: string);
 
-        //Adds a Parse.Object or an array of Parse.Objects to the relation.
-        add(object: T | Array<T>): void;
+        // Adds a Parse.Object or an array of Parse.Objects to the relation.
+        add(object: T | T[]): void;
 
         // Returns a Parse.Query that is limited to objects in this relation.
         query(): Query<T>;
 
         // Removes a Parse.Object or an array of Parse.Objects from this relation.
-        remove(object: T | Array<T>): void;
+        remove(object: T | T[]): void;
     }
 
     /**
@@ -318,8 +302,6 @@ declare namespace Parse {
      *     object.  The only option currently supported is "collection".
      * @see Parse.Object.extend
      *
-     * @class
-     *
      * <p>The fundamental unit of Parse data, which implements the Backbone Model
      * interface.</p>
      */
@@ -342,7 +324,7 @@ declare namespace Parse {
         static fetchAllIfNeeded<T extends Object>(list: T[], options: Object.FetchAllOptions): Promise<T[]>;
         static destroyAll<T>(list: T[], options?: Object.DestroyAllOptions): Promise<T[]>;
         static saveAll<T extends Object>(list: T[], options?: Object.SaveAllOptions): Promise<T[]>;
-        static registerSubclass<T extends Object>(className: string, clazz: new (options?: any) => T): void;
+        static registerSubclass<T extends Object>(className: string, clazz: new(options?: any) => T): void;
         static createWithoutData<T extends Object>(id: string): T;
 
         initialize(): void;
@@ -435,8 +417,6 @@ declare namespace Parse {
      *
      * @see Parse.Collection.extend
      *
-     * @class
-     *
      * <p>Provides a standard collection class for our sets of models, ordered
      * or unordered.  For more information, see the
      * <a href="http://documentcloud.github.com/backbone/#Collection">Backbone
@@ -469,16 +449,16 @@ declare namespace Parse {
 
     namespace Collection {
         interface Options {
-            model?: Object;
-            query?: Query<Object>;
-            comparator?: string;
+            model?: Object | undefined;
+            query?: Query<Object> | undefined;
+            comparator?: string | undefined;
         }
 
         interface AddOptions extends SilentOption {
             /**
              * The index at which to add the models.
              */
-            at?: number;
+            at?: number | undefined;
         }
 
         interface CreateOptions extends SuccessFailureOptions, WaitOption, SilentOption, ScopeOptions {}
@@ -493,8 +473,6 @@ declare namespace Parse {
     }
 
     /**
-     * @class
-     *
      * <p>Parse.Events is a fork of Backbone's Events module, provided for your
      * convenience.</p>
      *
@@ -532,7 +510,6 @@ declare namespace Parse {
      * Creates a new parse Parse.Query for the given Parse.Object subclass.
      * @param objectClass -
      *   An instance of a subclass of Parse.Object, or a Parse className string.
-     * @class
      *
      * <p>Parse.Query defines a query that is used to fetch Parse.Objects. The
      * most common use case is finding all objects that match a query through the
@@ -589,9 +566,9 @@ declare namespace Parse {
         className: string;
 
         constructor(objectClass: string);
-        constructor(objectClass: new (...args: any[]) => T);
+        constructor(objectClass: new(...args: any[]) => T);
 
-        static or<U extends Object>(...var_args: Query<U>[]): Query<U>;
+        static or<U extends Object>(...var_args: Array<Query<U>>): Query<U>;
 
         aggregate(pipeline: Query.AggregationOptions | Query.AggregationOptions[]): Query<T>;
         addAscending(key: string): Query<T>;
@@ -651,22 +628,31 @@ declare namespace Parse {
 
         // According to http://docs.parseplatform.org/rest/guide/#aggregate-queries
         interface AggregationOptions {
-            group?: { objectId?: string; [key: string]: any };
-            match?: { [key: string]: any };
-            project?: { [key: string]: any };
-            limit?: number;
-            skip?: number;
+            group?: { objectId?: string | undefined; [key: string]: any } | undefined;
+            match?: { [key: string]: any } | undefined;
+            project?: { [key: string]: any } | undefined;
+            limit?: number | undefined;
+            skip?: number | undefined;
             // Sort documentation https://docs.mongodb.com/v3.2/reference/operator/aggregation/sort/#pipe._S_sort
-            sort?: { [key: string]: 1 | -1 };
+            sort?: { [key: string]: 1 | -1 } | undefined;
             // Sample documentation: https://docs.mongodb.com/v3.2/reference/operator/aggregation/sample/
-            sample?: { size: number };
+            sample?: { size: number } | undefined;
+            // Unwind documentation: https://www.mongodb.com/docs/v3.2/reference/operator/aggregation/unwind/#pipe._S_unwind
+            unwind?:
+                | {
+                    path: string;
+                    includeArrayIndex?: string;
+                    preserveNullAndEmptyArrays?: boolean;
+                }
+                | string
+                | undefined;
         }
 
         // According to https://parseplatform.org/Parse-SDK-JS/api/2.1.0/Parse.Query.html#fullText
         interface FullTextOptions {
-            language?: string;
-            caseSensitive?: boolean;
-            diacriticSensitive?: boolean;
+            language?: string | undefined;
+            caseSensitive?: boolean | undefined;
+            diacriticSensitive?: boolean | undefined;
         }
     }
 
@@ -679,7 +665,7 @@ declare namespace Parse {
      *
      * <p>Roles must have a name (which cannot be changed after creation of the
      * role), and must specify an ACL.</p>
-     * @class
+     *
      * A Parse.Role is a local representation of a role persisted to the Parse
      * cloud.
      */
@@ -710,7 +696,6 @@ declare namespace Parse {
     /**
      * Routers map faux-URLs to actions, and fire events when routes are
      * matched. Creating a new one sets its `routes` hash, if not set statically.
-     * @class
      *
      * <p>A fork of Backbone.Router, provided for your convenience.
      * For more information, see the
@@ -740,13 +725,11 @@ declare namespace Parse {
         }
 
         interface NavigateOptions {
-            trigger?: boolean;
+            trigger?: boolean | undefined;
         }
     }
 
     /**
-     * @class
-     *
      * <p>A Parse.User object is a local representation of a user persisted to the
      * Parse cloud. This class is a subclass of a Parse.Object, and retains the
      * same functionality of a Parse.Object, but also extends it with various
@@ -781,7 +764,6 @@ declare namespace Parse {
     /**
      * Creating a Parse.View creates its initial element outside of the DOM,
      * if an existing element is not provided...
-     * @class
      *
      * <p>A fork of Backbone.View, provided for your convenience.  If you use this
      * class, you must also include jQuery, or another library that provides a
@@ -820,10 +802,10 @@ declare namespace Parse {
             model?: any;
             collection?: any;
             el?: any;
-            id?: string;
-            className?: string;
-            tagName?: string;
-            attributes?: Attribute[];
+            id?: string | undefined;
+            className?: string | undefined;
+            tagName?: string | undefined;
+            attributes?: Attribute[] | undefined;
         }
 
         interface Attribute {
@@ -857,21 +839,21 @@ declare namespace Parse {
      */
     namespace Cloud {
         interface CookieOptions {
-            domain?: string;
-            expires?: Date;
-            httpOnly?: boolean;
-            maxAge?: number;
-            path?: string;
-            secure?: boolean;
+            domain?: string | undefined;
+            expires?: Date | undefined;
+            httpOnly?: boolean | undefined;
+            maxAge?: number | undefined;
+            path?: string | undefined;
+            secure?: boolean | undefined;
         }
 
         interface HttpResponse {
-            buffer?: Buffer;
+            buffer?: Buffer | undefined;
             cookies?: any;
             data?: any;
             headers?: any;
-            status?: number;
-            text?: string;
+            status?: number | undefined;
+            text?: string | undefined;
         }
 
         interface JobRequest {
@@ -879,16 +861,16 @@ declare namespace Parse {
         }
 
         interface JobStatus {
-            error?: (response: any) => void;
-            message?: (response: any) => void;
-            success?: (response: any) => void;
+            error?: ((response: any) => void) | undefined;
+            message?: ((response: any) => void) | undefined;
+            success?: ((response: any) => void) | undefined;
         }
 
         interface FunctionRequest {
-            installationId?: String;
-            master?: boolean;
+            installationId?: String | undefined;
+            master?: boolean | undefined;
             params?: any;
-            user?: User;
+            user?: User | undefined;
         }
 
         interface FunctionResponse {
@@ -898,21 +880,21 @@ declare namespace Parse {
         }
 
         interface Cookie {
-            name?: string;
-            options?: CookieOptions;
-            value?: string;
+            name?: string | undefined;
+            options?: CookieOptions | undefined;
+            value?: string | undefined;
         }
 
         interface TriggerRequest {
-            installationId?: String;
-            master?: boolean;
-            user?: User;
+            installationId?: String | undefined;
+            master?: boolean | undefined;
+            user?: User | undefined;
             ip: string;
             headers: any;
             triggerName: string;
             log: any;
             object: Object;
-            original?: Parse.Object;
+            original?: Parse.Object | undefined;
         }
 
         interface AfterSaveRequest extends TriggerRequest {}
@@ -926,18 +908,18 @@ declare namespace Parse {
 
         // Read preference describes how MongoDB driver route read operations to the members of a replica set.
         enum ReadPreferenceOption {
-            Primary = 'PRIMARY',
-            PrimaryPreferred = 'PRIMARY_PREFERRED',
-            Secondary = 'SECONDARY',
-            SecondaryPreferred = 'SECONDARY_PREFERRED',
-            Nearest = 'NEAREST',
+            Primary = "PRIMARY",
+            PrimaryPreferred = "PRIMARY_PREFERRED",
+            Secondary = "SECONDARY",
+            SecondaryPreferred = "SECONDARY_PREFERRED",
+            Nearest = "NEAREST",
         }
 
         interface BeforeFindRequest extends TriggerRequest {
             query: Query;
             count: boolean;
             isGet: boolean;
-            readPreference?: ReadPreferenceOption;
+            readPreference?: ReadPreferenceOption | undefined;
         }
 
         interface AfterFindRequest extends TriggerRequest {
@@ -970,7 +952,7 @@ declare namespace Parse {
          *
          *     import Buffer = require("buffer").Buffer;
          */
-        let HTTPOptions: new () => HTTPOptions;
+        let HTTPOptions: new() => HTTPOptions;
         interface HTTPOptions {
             /**
              * The body of the request.
@@ -978,21 +960,23 @@ declare namespace Parse {
              * You can also set this to a Buffer object to send raw bytes.
              * If you use a Buffer, you should also set the Content-Type header explicitly to describe what these bytes represent.
              */
-            body?: string | Buffer | Object;
+            body?: string | Buffer | Object | undefined;
             /**
              * Defaults to 'false'.
              */
-            followRedirects?: boolean;
+            followRedirects?: boolean | undefined;
             /**
              * The headers for the request.
              */
-            headers?: {
-                [headerName: string]: string | number | boolean;
-            };
+            headers?:
+                | {
+                    [headerName: string]: string | number | boolean;
+                }
+                | undefined;
             /**
-             *The method of the request (i.e GET, POST, etc).
+             * The method of the request (i.e GET, POST, etc).
              */
-            method?: string;
+            method?: string | undefined;
             /**
              * The query portion of the url.
              */
@@ -1002,8 +986,8 @@ declare namespace Parse {
              */
             url: string;
 
-            success?: (response: any) => void;
-            error?: (response: any) => void;
+            success?: ((response: any) => void) | undefined;
+            error?: ((response: any) => void) | undefined;
         }
     }
 
@@ -1076,7 +1060,6 @@ declare namespace Parse {
     }
 
     /**
-     * @class
      * A Parse.Op is an atomic operation that can be applied to a field in a
      * Parse.Object. For example, calling <code>object.set("foo", "bar")</code>
      * is an example of a Parse.Op.Set. Calling <code>object.unset("foo")</code>
@@ -1121,21 +1104,21 @@ declare namespace Parse {
         function send<T>(data: PushData, options?: SendOptions): Promise<T>;
 
         interface PushData {
-            channels?: string[];
-            push_time?: Date;
-            expiration_time?: Date;
-            expiration_interval?: number;
-            where?: Query<Installation>;
+            channels?: string[] | undefined;
+            push_time?: Date | undefined;
+            expiration_time?: Date | undefined;
+            expiration_interval?: number | undefined;
+            where?: Query<Installation> | undefined;
             data?: any;
-            alert?: string;
-            badge?: string;
-            sound?: string;
-            title?: string;
+            alert?: string | undefined;
+            badge?: string | undefined;
+            sound?: string | undefined;
+            title?: string | undefined;
         }
 
         interface SendOptions extends UseMasterKeyOption {
-            success?: () => void;
-            error?: (error: Error) => void;
+            success?: (() => void) | undefined;
+            error?: ((error: Error) => void) | undefined;
         }
     }
 
@@ -1155,16 +1138,21 @@ declare namespace Parse {
     function setAsyncStorage(AsyncStorage: any): void;
 }
 
-declare module 'parse/node' {
+// eslint-disable-next-line @definitelytyped/no-declare-current-package
+declare module "parse/node" {
     export = Parse;
 }
 
-declare module 'parse' {
-    import * as parse from 'parse/node';
+// eslint-disable-next-line @definitelytyped/no-declare-current-package
+declare module "parse" {
+    // eslint-disable-next-line @definitelytyped/no-self-import
+    import * as parse from "parse/node";
     export = parse;
 }
 
-declare module 'parse/react-native' {
-    import * as parse from 'parse/node';
+// eslint-disable-next-line @definitelytyped/no-declare-current-package
+declare module "parse/react-native" {
+    // eslint-disable-next-line @definitelytyped/no-self-import
+    import * as parse from "parse/node";
     export = parse;
 }

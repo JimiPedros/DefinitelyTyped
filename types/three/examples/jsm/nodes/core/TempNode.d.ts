@@ -1,23 +1,11 @@
-import { Node } from './Node';
-import { NodeBuilder } from './NodeBuilder';
+import { NodeTypeOption } from "./constants.js";
+import Node from "./Node.js";
+import NodeBuilder from "./NodeBuilder.js";
 
-export interface TempNodeParams {
-    shared?: boolean;
-    unique?: boolean;
-}
+export default class TempNode extends Node {
+    isTempNode: true;
 
-export class TempNode extends Node {
-    constructor(type: string, params?: TempNodeParams);
+    constructor(type: NodeTypeOption | null);
 
-    shared: boolean;
-    unique: boolean;
-    label: string | undefined;
-
-    build(builder: NodeBuilder, output: string, uuid?: string, ns?: string): string;
-    getShared(builder: NodeBuilder, output: string): boolean;
-    getUnique(builder: NodeBuilder, output: string): boolean;
-    setLabel(name: string): this;
-    getLabel(builder: NodeBuilder): string;
-    getUuid(unique: boolean): string;
-    getTemp(builder: NodeBuilder, uuid: string): string | undefined;
+    hasDependencies(builder: NodeBuilder): void;
 }

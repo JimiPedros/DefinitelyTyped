@@ -1,8 +1,3 @@
-// Type definitions for node-netstat 1.8
-// Project: https://github.com/danielkrainas/node-netstat#readme
-// Definitions by: Nick Glazer <https://github.com/nickglazer>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /// <reference types="node" />
 
 export = nodeNetstat;
@@ -41,18 +36,19 @@ declare namespace nodeNetstat {
         port: number | null;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
     type LineHandler = (item: ParsedItem) => boolean | void;
     type RecursivePartial<T> = {
         [P in keyof T]?: RecursivePartial<T[P]>;
     };
 
     interface Options {
-        sync?: boolean;
-        done?: (error?: string) => void;
-        platform?: string;
-        limit?: number;
-        filter?: Filter;
-        watch?: boolean;
+        sync?: boolean | undefined;
+        done?: ((error?: string) => void) | undefined;
+        platform?: string | undefined;
+        limit?: number | undefined;
+        filter?: Filter | undefined;
+        watch?: boolean | undefined;
     }
 
     type SyncResult = any;
@@ -67,7 +63,7 @@ declare namespace nodeNetstat {
         remote: Address;
         state: State;
         pid: number;
-        processName?: string;
+        processName?: string | undefined;
     }
 
     interface RawItem {
@@ -76,23 +72,26 @@ declare namespace nodeNetstat {
         remote: string;
         state: string;
         pid: string;
-        processName?: string;
+        processName?: string | undefined;
     }
 
     type Filter = RecursivePartial<ParsedItem>;
 
     interface ParserFactoryOptions {
-        parseName?: boolean;
+        parseName?: boolean | undefined;
     }
     type ParserFactory = (options?: ParserFactoryOptions) => Parser;
 
+    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
     type Parser = (line: string, callback: LineHandler) => boolean | void;
 
     const commands: Commands;
     const version: string;
 
     namespace filters {
+        // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
         function conditional(callback: LineHandler, conditions: Filter): boolean | void;
+        // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
         function limit(callback: LineHandler, limit: number): boolean | void;
     }
 

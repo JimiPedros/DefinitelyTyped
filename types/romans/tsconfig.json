@@ -8,17 +8,12 @@
         "noImplicitThis": true,
         "strictFunctionTypes": true,
         "strictNullChecks": true,
-        "baseUrl": "../",
-        "typeRoots": [
-            "../"
-        ],
         "types": [],
         "noEmit": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.d.ts",
-        "test/romans-tests.cjs.ts",
-        "test/romans-tests.global.ts"
+        "romans-tests.ts"
     ]
 }

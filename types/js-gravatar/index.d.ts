@@ -1,8 +1,3 @@
-// Type definitions for js-gravatar 1.1
-// Project: https://github.com/chukwumaijem/js-gravatar#readme
-// Definitions by: Piotr Błażejewicz <https://github.com/peterblazejewicz>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /**
  * JS Gravatar
  * {@link https://github.com/chukwumaijem/js-gravatar#js-gravatar}
@@ -14,11 +9,20 @@ declare namespace jsGravatar {
         /**
          * The size of the image to be displayed. Should be from 1 to 2048
          */
-        size?: number;
+        size?: number | undefined;
         /**
          *  What image should be used if email does not have a gravatar
          */
-        defaultImage?: '404' | 'mp' | 'identicon' | 'monsterid' | 'wavatar' | 'retro' | 'robohash' | 'blank';
+        defaultImage?:
+            | "404"
+            | "mp"
+            | "identicon"
+            | "monsterid"
+            | "wavatar"
+            | "retro"
+            | "robohash"
+            | "blank"
+            | undefined;
         /**
          * Email address of the user to generate gravatar for
          */
@@ -27,7 +31,7 @@ declare namespace jsGravatar {
          *  Optional: MD5 hash of the email above.
          * If email is provided, md5hash will be ignored. If neither email nor md5hash is provided, the library will throw en error
          */
-        md5Hash?: string;
+        md5Hash?: string | undefined;
     }
 
     function buildQueryStringFromOptions(options: Options): string;

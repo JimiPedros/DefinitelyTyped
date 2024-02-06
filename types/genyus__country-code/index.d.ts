@@ -1,8 +1,3 @@
-// Type definitions for @genyus/country-code 1.0
-// Project: https://github.com/lwhiteley/cc#readme
-// Definitions by: Piotr Błażejewicz <https://github.com/peterblazejewicz>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /**
  * Country Code utility Library
  */
@@ -23,8 +18,8 @@ export interface Options {
      * number from 0 - 1, a percentage of accuracy for the search
      * @default 1
      */
-    accuracy?: number;
-    name?: string;
+    accuracy?: number | undefined;
+    name?: string | undefined;
 }
 
 export const countries: {

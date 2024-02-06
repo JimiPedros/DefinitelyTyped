@@ -1,26 +1,21 @@
-// Type definitions for postcss-normalize 9.0
-// Project: https://github.com/csstools/postcss-normalize#readme
-// Definitions by: Piotr Kuczynski <https://github.com/pkuczynski>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
-import { Plugin } from 'postcss';
+import { Plugin } from "postcss";
 
 declare namespace Normalize {
     interface Options {
         /**
          * @default false
          */
-        allowDuplicates?: boolean;
+        allowDuplicates?: boolean | undefined;
 
         /**
          * @default null
          */
-        forceImport?: boolean | string;
+        forceImport?: boolean | string | undefined;
 
         /**
          * @default null
          */
-        browsers?: string;
+        browsers?: string | undefined;
     }
 
     type NormalizePlugin = Plugin<Options>;

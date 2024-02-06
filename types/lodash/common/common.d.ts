@@ -1,10 +1,10 @@
 import _ = require("../index");
-// tslint:disable-next-line:strict-export-declare-modifiers
+// eslint-disable-next-line @definitelytyped/strict-export-declare-modifiers
 type GlobalPartial<T> = Partial<T>;
 declare module "../index" {
     type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
     type PartialObject<T> = GlobalPartial<T>;
-    type Many<T> = T | ReadonlyArray<T>;
+    type Many<T> = T | readonly T[];
     type ImpChain<T> =
         T extends { __trapAny: any } ? Collection<any> & Function<any> & Object<any> & Primitive<any> & String :
         T extends null | undefined ? never :
@@ -116,23 +116,23 @@ declare module "../index" {
         /**
         * The "escape" delimiter.
         **/
-        escape?: RegExp;
+        escape?: RegExp | undefined;
         /**
         * The "evaluate" delimiter.
         **/
-        evaluate?: RegExp;
+        evaluate?: RegExp | undefined;
         /**
         * An object to import into the template as local variables.
         */
-        imports?: Dictionary<any>;
+        imports?: Dictionary<any> | undefined;
         /**
         * The "interpolate" delimiter.
         */
-        interpolate?: RegExp;
+        interpolate?: RegExp | undefined;
         /**
         * Used to reference the data object in the template text.
         */
-        variable?: string;
+        variable?: string | undefined;
     }
     /**
      * Creates a cache object to store key/value pairs.
@@ -166,7 +166,7 @@ declare module "../index" {
         /**
          * Removes all key-value entries from the map.
          */
-        clear?: () => void;
+        clear?: (() => void) | undefined;
     }
     interface MapCacheConstructor {
         new (): MapCache;

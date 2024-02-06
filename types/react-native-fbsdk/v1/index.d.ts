@@ -1,62 +1,54 @@
-// Type definitions for react-native-fbsdk 1.1
-// Project: https://github.com/facebook/react-native-fbsdk
-// Definitions by: Ifiok Jr. <https://github.com/ifiokjr>
-//                 Thibault Malbranche <https://github.com/titozzz>
-//                 Stuart Forrest <https://github.com/stuartforrest-infinity>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.8
-
-import { ComponentClass, Component } from 'react';
-import { ViewStyle } from 'react-native';
+import { Component, ComponentClass } from "react";
+import { ViewStyle } from "react-native";
 
 /**
  * Commonly used Facebook permissions
  */
 export type Permissions =
-    | 'public_profile'
-    | 'user_friends'
-    | 'email'
-    | 'user_about_me'
-    | 'user_actions.books'
-    | 'user_actions.fitness'
-    | 'user_actions.music'
-    | 'user_actions.news'
-    | 'user_actions.video'
-    | 'user_birthday'
-    | 'user_education_history'
-    | 'user_events'
-    | 'user_games_activity'
-    | 'user_hometown'
-    | 'user_likes'
-    | 'user_location'
-    | 'user_managed_groups'
-    | 'user_photos'
-    | 'user_posts'
-    | 'user_relationships'
-    | 'user_relationship_details'
-    | 'user_religion_politics'
-    | 'user_tagged_places'
-    | 'user_videos'
-    | 'user_website'
-    | 'user_work_history'
-    | 'read_custom_friendlists'
-    | 'read_insights'
-    | 'read_audience_network_insights'
-    | 'read_page_mailboxes'
-    | 'manage_pages'
-    | 'publish_pages'
-    | 'publish_actions'
-    | 'rsvp_event'
-    | 'pages_show_list'
-    | 'pages_manage_cta'
-    | 'pages_manage_instant_articles'
-    | 'ads_read'
-    | 'ads_management'
-    | 'business_management'
-    | 'pages_messaging'
-    | 'pages_messaging_subscriptions'
-    | 'pages_messaging_payments'
-    | 'pages_messaging_phone_number'
+    | "public_profile"
+    | "user_friends"
+    | "email"
+    | "user_about_me"
+    | "user_actions.books"
+    | "user_actions.fitness"
+    | "user_actions.music"
+    | "user_actions.news"
+    | "user_actions.video"
+    | "user_birthday"
+    | "user_education_history"
+    | "user_events"
+    | "user_games_activity"
+    | "user_hometown"
+    | "user_likes"
+    | "user_location"
+    | "user_managed_groups"
+    | "user_photos"
+    | "user_posts"
+    | "user_relationships"
+    | "user_relationship_details"
+    | "user_religion_politics"
+    | "user_tagged_places"
+    | "user_videos"
+    | "user_website"
+    | "user_work_history"
+    | "read_custom_friendlists"
+    | "read_insights"
+    | "read_audience_network_insights"
+    | "read_page_mailboxes"
+    | "manage_pages"
+    | "publish_pages"
+    | "publish_actions"
+    | "rsvp_event"
+    | "pages_show_list"
+    | "pages_manage_cta"
+    | "pages_manage_instant_articles"
+    | "ads_read"
+    | "ads_management"
+    | "business_management"
+    | "pages_messaging"
+    | "pages_messaging_subscriptions"
+    | "pages_messaging_payments"
+    | "pages_messaging_phone_number"
     | string;
 
 /**
@@ -64,9 +56,9 @@ export type Permissions =
  */
 export type AppGroupPrivacy =
     // Anyone can see the group, who's in in and what members post.
-    | 'Open'
+    | "Open"
     // Anyone can see the group and who's in it, but only members can see posts.
-    | 'Closed';
+    | "Closed";
 
 /**
  * A model for app groups.
@@ -96,7 +88,7 @@ export interface AppInviteContent {
      * A URL to a preview image that will be displayed with the app invite.
      * This is optional. If you don't include it, a fallback image will be used.
      */
-    previewImageUrl?: string;
+    previewImageUrl?: string | undefined;
 
     /**
      * An app link target that will be used as a target when the user accepts the invite.
@@ -108,29 +100,29 @@ export interface AppInviteContent {
      * This is optional. This can be between 0 and 10 characters long and can contain
      * alphanumeric characters only. To set a promo code, you need to set promo text.
      */
-    promotionCode?: string;
+    promotionCode?: string | undefined;
 
     /**
      * Promotional text to be displayed while sending and receiving the invite.
      * This is optional. This can be between 0 and 80 characters long and can contain
      * alphanumeric and spaces only.
      */
-    promotionText?: string;
+    promotionText?: string | undefined;
 }
 
 export type GameRequestActionType =
     // The user is sending an object to their friends.
-    | 'send'
+    | "send"
     // The user is asking for an object from friends.
-    | 'askfor'
+    | "askfor"
     // It is the turn of the friends to play against the user in a match.
-    | 'turn';
+    | "turn";
 
 export type GameRequestFilters =
     // Friends using the app can be displayed.
-    | 'app_users'
+    | "app_users"
     // Friends not using the app can be displayed.
-    | 'app_non_users';
+    | "app_non_users";
 
 /**
  * A model for a game request.
@@ -145,42 +137,42 @@ export interface GameRequestContent {
      * Used when defining additional context about the nature of the request.
      * The parameter 'objectID' is required if the action type is either 'send' or 'ask-for'.
      */
-    actionType?: GameRequestActionType;
+    actionType?: GameRequestActionType | undefined;
 
     /**
      * Additional freeform data you may pass for tracking. The maximum length is 255 characters.
      */
-    data?: string;
+    data?: string | undefined;
 
     /**
      * Controls the set of friends someone sees if a multi-friend selector is shown.
      */
-    filters?: GameRequestFilters;
+    filters?: GameRequestFilters | undefined;
 
     /**
      * The Open Graph object ID of the object being sent/asked for. This cannot be null for ActionType SEND and
      * ASKFOR.
      */
-    objectId?: string;
+    objectId?: string | undefined;
 
     /**
      * An array of user IDs, usernames or invite tokens of people to send requests to.
      */
-    recipients?: string[];
+    recipients?: string[] | undefined;
 
     /**
      * An array of user IDs that will be included in the dialog as the first suggested friends.
      * Can't be used together with filters.
      */
-    suggestions?: string[];
+    suggestions?: string[] | undefined;
 
     /**
      * The title for the dialog.
      */
-    title?: string;
+    title?: string | undefined;
 }
 
-export type ObjectIdActionType = 'unknown' | 'open_graph' | 'page';
+export type ObjectIdActionType = "unknown" | "open_graph" | "page";
 
 /**
  * A base interface for content to be shared.
@@ -206,23 +198,23 @@ export interface ShareContentCommonParameters {
     /**
      * List of IDs for taggable people to tag with this content.
      */
-    peopleIds?: string[];
+    peopleIds?: string[] | undefined;
 
     /**
      * The ID for a place to tag with this content.
      */
-    placeId?: string;
+    placeId?: string | undefined;
 
     /**
      * A value to be added to the referrer URL when a person follows a link from
      * this shared content on feed.
      */
-    ref?: string;
+    ref?: string | undefined;
 
     /**
      * A hashtag to be added to the share interface. The hashtag must be 32 characters or less.
      */
-    hashtag?: string;
+    hashtag?: string | undefined;
 }
 
 /**
@@ -232,12 +224,12 @@ export interface ShareLinkContent {
     /**
      * The type of content to be shared is link.
      */
-    contentType: 'link';
+    contentType: "link";
 
     /**
      * Common parameters for share content;
      */
-    commonParameters?: ShareContentCommonParameters;
+    commonParameters?: ShareContentCommonParameters | undefined;
 
     /**
      * URL for the content being shared.
@@ -251,27 +243,27 @@ export interface ShareLinkContent {
      * @deprecated `contentDescription` is deprecated from Graph API 2.9.
      * For more information, see https://developers.facebook.com/docs/apps/changelog#v2_9_deprecations.
      */
-    contentDescription?: string;
+    contentDescription?: string | undefined;
 
     /**
      * The title to display for this link.
      * @deprecated `contentTitle` is deprecated from Graph API 2.9.
      * For more information, see https://developers.facebook.com/docs/apps/changelog#v2_9_deprecations.
      */
-    contentTitle?: string;
+    contentTitle?: string | undefined;
 
     /**
      * The URL of a picture to attach to this comment.
      * @deprecated `imageUrl` is deprecated from Graph API 2.9.
      * For more information, see https://developers.facebook.com/docs/apps/changelog#v2_9_deprecations.
      */
-    imageUrl?: string;
+    imageUrl?: string | undefined;
 
     /**
      * The predefined quote to attach to this comment.
      * If specified, the quote text will render with custom styling on top of the link.
      */
-    quote?: string;
+    quote?: string | undefined;
 }
 
 export interface OpenGraphProperties {
@@ -284,7 +276,7 @@ export interface OpenGraphValue {
     value: any;
 }
 
-export type OpenGraphValueType = 'number' | 'open-graph-object' | 'photo' | 'string';
+export type OpenGraphValueType = "number" | "open-graph-object" | "photo" | "string";
 
 export interface ShareOpenGraphValueContainer {
     /**
@@ -341,17 +333,17 @@ export interface ShareOpenGraphContent {
     /**
      * The type of content to be shared is open graph content.
      */
-    contentType: 'open-graph';
+    contentType: "open-graph";
 
     /**
      * Common parameters for share content;
      */
-    commonParameters?: ShareContentCommonParameters;
+    commonParameters?: ShareContentCommonParameters | undefined;
 
     /**
      * URL for the content being shared.
      */
-    contentUrl?: string;
+    contentUrl?: string | undefined;
 
     /**
      * Open Graph Action to be shared.
@@ -383,14 +375,14 @@ export interface SharePhoto {
     /**
      * Specifies whether the photo was generated by the user or the application.
      */
-    userGenerated?: boolean;
+    userGenerated?: boolean | undefined;
 
     /**
      * The user generated caption for the photo.  Note that the 'caption' must
      * come from the user, as pre-filled content is forbidden by the platform
      * Policies (2.3).
      */
-    caption?: string;
+    caption?: string | undefined;
 }
 
 /**
@@ -400,17 +392,17 @@ export interface SharePhotoContent {
     /**
      * The type of content to be shared is photo.
      */
-    contentType: 'photo';
+    contentType: "photo";
 
     /**
      * Common parameters for share content;
      */
-    commonParameters?: ShareContentCommonParameters;
+    commonParameters?: ShareContentCommonParameters | undefined;
 
     /**
      * URL for the content being shared.
      */
-    contentUrl?: string;
+    contentUrl?: string | undefined;
 
     /**
      * Photos to be shared.
@@ -435,17 +427,17 @@ export interface ShareVideoContent {
     /**
      * The type of content to be shared is photo.
      */
-    contentType: 'video';
+    contentType: "video";
 
     /**
      * Common parameters for share content;
      */
-    commonParameters?: ShareContentCommonParameters;
+    commonParameters?: ShareContentCommonParameters | undefined;
 
     /**
      * URL for the content being shared.
      */
-    contentUrl?: string;
+    contentUrl?: string | undefined;
 
     /**
      * Video to be shared.
@@ -455,17 +447,17 @@ export interface ShareVideoContent {
     /**
      *  Description of the video.
      */
-    contentDescription?: string;
+    contentDescription?: string | undefined;
 
     /**
      * Title of the video.
      */
-    contentTitle?: string;
+    contentTitle?: string | undefined;
 
     /**
      * The photo that represents the video.
      */
-    previewPhoto?: SharePhoto;
+    previewPhoto?: SharePhoto | undefined;
 }
 
 export interface AccessTokenMap {
@@ -475,7 +467,7 @@ export interface AccessTokenMap {
     permissions: Permissions[];
     declinedPermissions: Permissions[];
     expiredPermissions: Permissions[];
-    accessTokenSource?: string;
+    accessTokenSource?: string | undefined;
     expirationTime: number;
     lastRefreshTime: number;
     dataAccessExpirationTime: number;
@@ -514,7 +506,7 @@ export class AccessToken {
      * The source of access token.
      * @platform android
      */
-    accessTokenSource?: string;
+    accessTokenSource?: string | undefined;
 
     /**
      * The expiration time of the access token.
@@ -595,11 +587,11 @@ export type AppEventsFlushBehavior =
      * Flush automatically: periodically (every 15 seconds or after every 100 events), and
      * always at app reactivation. This is the default value.
      */
-    | 'auto'
+    | "auto"
     /**
      * Only flush when AppEventsLogger.flush() is explicitly invoked.
      */
-    | 'explicitly-only';
+    | "explicitly-only";
 
 export interface Params {
     [key: string]: string | number;
@@ -611,16 +603,16 @@ export interface Params {
  * more info about the expected format of each field.
  */
 export interface UserData {
-    email?: string;
-    firstName?: string;
-    lastName?: string;
-    phone?: string;
-    dateOfBirth?: string;
-    gender?: 'm' | 'f';
-    city?: string;
-    state?: string;
-    zip?: string;
-    country?: string;
+    email?: string | undefined;
+    firstName?: string | undefined;
+    lastName?: string | undefined;
+    phone?: string | undefined;
+    dateOfBirth?: string | undefined;
+    gender?: "m" | "f" | undefined;
+    city?: string | undefined;
+    state?: string | undefined;
+    zip?: string | undefined;
+    country?: string | undefined;
 }
 export namespace AppEventsLogger {
     /**
@@ -696,19 +688,19 @@ export interface GraphRequestConfig {
     /**
      * The httpMethod to use for the request, for example "GET" or "POST".
      */
-    httpMethod?: string;
+    httpMethod?: string | undefined;
     /**
      * The Graph API version to use (e.g., "v2.0")
      */
-    version?: string;
+    version?: string | undefined;
     /**
      * The request parameters.
      */
-    parameters?: GraphRequestParameters;
+    parameters?: GraphRequestParameters | undefined;
     /**
      * The access token used by the request.
      */
-    accessToken?: string;
+    accessToken?: string | undefined;
 }
 
 export interface GraphRequestParameters {
@@ -727,12 +719,12 @@ export class GraphRequest {
     /**
      * The optional config for the request.
      */
-    config?: GraphRequestConfig;
+    config?: GraphRequestConfig | undefined;
 
     /**
      * Called upon completion or failure of the request.
      */
-    callback?: GraphRequestCallback;
+    callback?: GraphRequestCallback | undefined;
 
     /**
      * Constructs a new Graph API request.
@@ -776,17 +768,17 @@ export class GraphRequestManager {
     start(timeout?: number): void;
 }
 
-export type AuxiliaryViewPosition = 'top' | 'bottom' | 'inline';
-export type HorizontalAlignment = 'center' | 'left' | 'right';
+export type AuxiliaryViewPosition = "top" | "bottom" | "inline";
+export type HorizontalAlignment = "center" | "left" | "right";
 
-export type TooltipBehaviorIOS = 'auto' | 'force_display' | 'disable';
+export type TooltipBehaviorIOS = "auto" | "force_display" | "disable";
 
 export interface LoginButtonProps {
     /**
      * Represents the permissions to request when the login button
      * is pressed.
      */
-    permissions?: Permissions[];
+    permissions?: Permissions[] | undefined;
 
     /**
      * The callback invoked upon error/completion of a login request.
@@ -802,29 +794,29 @@ export interface LoginButtonProps {
      * The behavior to use when attempting a login.
      * @platform android
      */
-    loginBehaviorAndroid?: LoginBehaviorAndroid;
+    loginBehaviorAndroid?: LoginBehaviorAndroid | undefined;
 
     /**
      * The behavior to use when attempting a login.
      * @platform ios
      */
-    loginBehaviorIOS?: LoginBehaviorIOS;
+    loginBehaviorIOS?: LoginBehaviorIOS | undefined;
 
     /**
      * The default audience to target when attempting a login.
      */
-    defaultAudience?: DefaultAudience;
+    defaultAudience?: DefaultAudience | undefined;
 
     /**
      * For iOS only, the desired tooltip behavior.
      * @platform ios
      */
-    tooltipBehaviorIOS?: TooltipBehaviorIOS;
+    tooltipBehaviorIOS?: TooltipBehaviorIOS | undefined;
 
     /**
      * View style, if any.
      */
-    style?: ViewStyle;
+    style?: ViewStyle | undefined;
 }
 
 export class LoginButton extends Component<LoginButtonProps, any> {
@@ -836,11 +828,11 @@ export class LoginButton extends Component<LoginButtonProps, any> {
  */
 export type DefaultAudience =
     // Indicates that the user's friends are able to see posts made by the application.
-    | 'friends'
+    | "friends"
     // Indicates that all Facebook users are able to see posts made by the application.
-    | 'everyone'
+    | "everyone"
     // Indicates that only the user is able to see posts made by the application.
-    | 'only_me';
+    | "only_me";
 
 export type LoginBehavior = LoginBehaviorIOS | LoginBehaviorAndroid;
 
@@ -849,18 +841,18 @@ export type LoginBehavior = LoginBehaviorIOS | LoginBehaviorAndroid;
  */
 export type LoginBehaviorAndroid =
     // Attempt login in using the Facebook App, and if that does not work fall back to web dialog auth.
-    | 'native_with_fallback'
+    | "native_with_fallback"
     // Only attempt to login using the Facebook App.
-    | 'native_only'
+    | "native_only"
     // Only the web dialog auth should be used.
-    | 'web_only';
+    | "web_only";
 
 /**
  * Indicate how Facebook Login should be attempted on iOS.
  */
 export type LoginBehaviorIOS =
     // Attempts log in through the Safari browser.
-    'browser';
+    "browser";
 
 /**
  * Shows the results of a login operation.
@@ -868,8 +860,8 @@ export type LoginBehaviorIOS =
 export interface LoginResult {
     error: any;
     isCancelled: boolean;
-    grantedPermissions?: Permissions[];
-    declinedPermissions?: Permissions[];
+    grantedPermissions?: Permissions[] | undefined;
+    declinedPermissions?: Permissions[] | undefined;
 }
 
 export namespace LoginManager {
@@ -930,7 +922,7 @@ export interface SendButtonProps {
     /**
      * View style, if any.
      */
-    style?: ViewStyle;
+    style?: ViewStyle | undefined;
 }
 
 export class SendButton extends Component<SendButtonProps, any> {}
@@ -964,7 +956,7 @@ export interface ShareButtonProps {
     /**
      * View style, if any.
      */
-    style?: ViewStyle;
+    style?: ViewStyle | undefined;
 }
 
 export class ShareButton extends Component<ShareButtonProps, any> {}
@@ -974,32 +966,32 @@ export type ShareDialogModeAndroid =
     /**
      * The mode is determined automatically.
      */
-    | 'automatic'
+    | "automatic"
     /**
      * The native dialog is used.
      */
-    | 'native'
+    | "native"
     /**
      * The web dialog is used.
      */
-    | 'web'
+    | "web"
     /**
      * The feed dialog is used.
      */
-    | 'feed';
+    | "feed";
 export type ShareDialogModeIOS =
     /*
      * Acts with the most appropriate mode that is available.
      */
-    | 'automatic'
+    | "automatic"
     /*
      * Displays the dialog in Safari.
      */
-    | 'browser'
+    | "browser"
     /*
      * Displays the dialog in a UIWebView within the app.
      */
-    | 'webview';
+    | "webview";
 
 export namespace ShareDialog {
     /**

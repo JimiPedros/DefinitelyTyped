@@ -1,11 +1,5 @@
-// Type definitions for react-router-transition 2.1
-// Project: https://github.com/maisano/react-router-transition, https://www.npmjs.com/package/react-router-transition
-// Definitions by: TheDSCPL <https://github.com/TheDSCPL>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.1
-
-import * as React from 'react';
-import { OpaqueConfig, SpringHelperConfig, TransitionStyle } from 'react-motion';
+import * as React from "react";
+import { OpaqueConfig, SpringHelperConfig, TransitionStyle } from "react-motion";
 import { RouteProps } from "react-router-dom";
 
 /**
@@ -17,11 +11,13 @@ export interface Styles extends React.CSSProperties {
 /**
  * Object containing animated styles
  */
-export type AnimatableStyles = {
-    [x in keyof React.CSSProperties]: React.CSSProperties[x] | OpaqueConfig;
-} & {
-    [x: string]: any;
-};
+export type AnimatableStyles =
+    & {
+        [x in keyof React.CSSProperties]: React.CSSProperties[x] | OpaqueConfig;
+    }
+    & {
+        [x: string]: any;
+    };
 
 // I don't want to export CommonProps because it's here for DRY reasons
 export {};
@@ -41,11 +37,11 @@ interface CommonProps {
     /**
      * A class name to apply to the root node of the transition.
      */
-    className?: string;
+    className?: string | undefined;
     /**
      * Triggers when an element has disappeared.
      */
-    didLeave?: (styleThatLeft: TransitionStyle) => void;
+    didLeave?: ((styleThatLeft: TransitionStyle) => void) | undefined;
     /**
      * An optional function for transforming values that don't map 1:1 with styles
      * (e.g. `translateX` or other values of the `transform` style property).
@@ -53,18 +49,18 @@ interface CommonProps {
      * Converts the style object to a strict CSSProperties object
      * @param originalStylesObject styles object to be mapped to an actual styles object
      */
-    mapStyles?: (originalStylesObject: any) => AnimatableStyles;
+    mapStyles?: ((originalStylesObject: any) => AnimatableStyles) | undefined;
     /**
      * A boolean flag to signal whether or not to apply a transition to the child component while mounting the parent.
      * Default: false
      */
-    runOnMount?: boolean;
+    runOnMount?: boolean | undefined;
     /**
      * The element type (`'div'`, `'span'`, etc.) to wrap the transitioning routes with.
      * Use `false` to transition child components themselves, though <u>this requires
      * consuming a `style` prop that gets injected into your component</u>.
      */
-    wrapperComponent?: false | keyof HTMLElementTagNameMap | React.Component;
+    wrapperComponent?: false | keyof HTMLElementTagNameMap | React.Component | undefined;
 }
 
 /**
@@ -72,7 +68,7 @@ interface CommonProps {
  * http://maisano.github.io/react-router-transition/animated-switch/props
  */
 export interface AnimatedSwitchProps extends CommonProps {
-    children: React.ReactNode|React.ReactNodeArray|React.ReactChildren;
+    children: React.ReactNode;
 }
 
 /**
@@ -96,9 +92,11 @@ export const RouteTransition: React.ComponentClass<RouteTransitionProps>;
  * AnimatedRoute's props. Extends RouteProps except `location`.
  * http://maisano.github.io/react-router-transition/animated-route/props
  */
-export interface AnimatedRouteProps extends
-    CommonProps,
-    Pick<RouteProps, "children"|"component"|"exact"|"path"|"render"|"sensitive"|"strict"> {}
+export interface AnimatedRouteProps
+    extends
+        CommonProps,
+        Pick<RouteProps, "children" | "component" | "exact" | "path" | "render" | "sensitive" | "strict">
+{}
 /**
  * A <Route />, but with mounting & unmounting transitions.
  * http://maisano.github.io/react-router-transition/animated-route

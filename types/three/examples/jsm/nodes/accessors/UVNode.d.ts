@@ -1,10 +1,11 @@
-import { TempNode } from '../core/TempNode';
+import AttributeNode from "../core/AttributeNode.js";
+import { ShaderNodeObject } from "../shadernode/ShaderNode.js";
 
-export class UVNode extends TempNode {
-    constructor(index?: number);
-
+export default class UVNode extends AttributeNode {
+    isUVNode: true;
     index: number;
-    nodeType: string;
 
-    copy(source: UVNode): this;
+    constructor(index?: number);
 }
+
+export const uv: (index?: number) => ShaderNodeObject<UVNode>;

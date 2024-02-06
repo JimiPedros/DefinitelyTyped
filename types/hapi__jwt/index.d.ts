@@ -1,12 +1,8 @@
-// Type definitions for @hapi/jwt 2.0
-// Project: https://github.com/hapijs/jwt
-// Definitions by: Sergio Sánchez <https://github.com/ssanchezmarc>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 4.2
+/// <reference types="node" />
 
-import { Plugin, ResponseToolkit, Request, ResponseObject } from '@hapi/hapi';
+import { Plugin, Request, ResponseObject, ResponseToolkit } from "@hapi/hapi";
 
-declare module '@hapi/hapi' {
+declare module "@hapi/hapi" {
     interface ServerAuth {
         /**
          * Function to define the server authentication strategy to be used.
@@ -15,7 +11,7 @@ declare module '@hapi/hapi' {
          * @param scheme jwt for this plugin.
          * @param options jwt plugin options.
          */
-        strategy(name: string, scheme: 'jwt', options?: hapiJwt.Options): void;
+        strategy(name: string, scheme: "jwt", options?: hapiJwt.Options): void;
     }
 }
 
@@ -23,19 +19,19 @@ declare namespace hapiJwt {
     // Common definitions
 
     type SupportedAlgorithm =
-        | 'RS256'
-        | 'RS384'
-        | 'RS512'
-        | 'PS256'
-        | 'PS384'
-        | 'PS512'
-        | 'ES256'
-        | 'ES384'
-        | 'ES512'
-        | 'HS256'
-        | 'HS384'
-        | 'HS512';
-    type NoAlgorithm = 'none';
+        | "RS256"
+        | "RS384"
+        | "RS512"
+        | "PS256"
+        | "PS384"
+        | "PS512"
+        | "ES256"
+        | "ES384"
+        | "ES512"
+        | "HS256"
+        | "HS384"
+        | "HS512";
+    type NoAlgorithm = "none";
 
     interface StandardKey {
         /**
@@ -45,11 +41,11 @@ declare namespace hapiJwt {
         /**
          * Array of accepted algorithms
          */
-        algorithms?: SupportedAlgorithm[];
+        algorithms?: SupportedAlgorithm[] | undefined;
         /**
          * String representing the key ID header.
          */
-        kid?: string;
+        kid?: string | undefined;
     }
 
     interface JWKSKey {
@@ -60,15 +56,15 @@ declare namespace hapiJwt {
         /**
          * Boolean that determines if TLS flag indicating whether the client should reject a response from a server with invalid certificates. Default is true.
          */
-        rejectUnauthorized?: boolean;
+        rejectUnauthorized?: boolean | undefined;
         /**
          * Object containing the request headers to send to the uri.
          */
-        header?: object;
+        header?: object | undefined;
         /**
          * Array of accepted algorithms.
          */
-        algorithms?: SupportedAlgorithm[];
+        algorithms?: SupportedAlgorithm[] | undefined;
     }
 
     type Key = StandardKey | JWKSKey;
@@ -85,7 +81,7 @@ declare namespace hapiJwt {
             /**
              *  The token type.
              */
-            typ?: 'JWT';
+            typ?: "JWT" | undefined;
         };
         /**
          *  An object containing the payload.
@@ -128,7 +124,7 @@ declare namespace hapiJwt {
         /**
          * An array of information about key(s) used for authentication.
          */
-        keys?: StandardKey[];
+        keys?: StandardKey[] | undefined;
     }
 
     // Plugin definitions
@@ -149,19 +145,19 @@ declare namespace hapiJwt {
         /**
          * Boolean to determine if the "Not Before" NumericDate of the token should be validated. Default is true.
          */
-        nbf?: boolean;
+        nbf?: boolean | undefined;
         /**
          * Boolean to determine if the "Expiration Time" NumericDate of the token should be validated. Default is true.
          */
-        exp?: boolean;
+        exp?: boolean | undefined;
         /**
          * Integer to determine the maximum age of the token in seconds. Default is 0.
          */
-        maxAgeSec?: number;
+        maxAgeSec?: number | undefined;
         /**
          * Integer to adust exp and maxAgeSec to account for server time drift in seconds. Default is 0.
          */
-        timeSkewSec?: number;
+        timeSkewSec?: number | undefined;
     }
 
     interface ValidationResult {
@@ -172,11 +168,11 @@ declare namespace hapiJwt {
         /**
          * Object passed back to the application in request.auth.credentials.
          */
-        credentials?: object;
+        credentials?: object | undefined;
         /**
          * Will be used immediately as a takeover response. isValid and credentials are ignored if provided.
          */
-        response?: ResponseObject;
+        response?: ResponseObject | undefined;
     }
 
     interface Options {
@@ -191,11 +187,11 @@ declare namespace hapiJwt {
         /**
          * String the represents the Authentication Scheme. Default is 'Bearer'.
          */
-        httpAuthScheme?: string;
+        httpAuthScheme?: string | undefined;
         /**
          * String passed directly to Boom.unauthorized if no custom err is thrown. Defaults to undefined.
          */
-        unauthorizedAttributes?: string;
+        unauthorizedAttributes?: string | undefined;
         /**
          * Function that allows additional validation based on the decoded payload and to put specific credentials in the request object. Can be set to false if no additional validation is needed.
          *
@@ -216,35 +212,35 @@ declare namespace hapiJwt {
         /**
          * The "iss" (issuer) claim identifies the principal that issued the JWT. Expressed in a string.
          */
-        iss?: string;
+        iss?: string | undefined;
         /**
          * The "sub" (subject) claim identifies the principal that is the subject of the JWT. Expressed in a string.
          */
-        sub?: string;
+        sub?: string | undefined;
         /**
          * The "aud" (audience) claim identifies the recipients that the JWT is intended for. Expressed in a string.
          */
-        aud?: string;
+        aud?: string | undefined;
         /**
          * The "exp" (expiration time) claim identifies the expiration time on or after which the JWT MUST NOT be accepted for processing. Expressed in NumericDate.
          */
-        exp?: number;
+        exp?: number | undefined;
         /**
          * The "nbf" (not before) claim identifies the time before which the JWT MUST NOT be accepted for processing. Expressed in NumericDate.
          */
-        nbf?: number;
+        nbf?: number | undefined;
         /**
          * The "iat" (issued at) claim identifies the time at which the JWT was issued. Expressed in NumericDate.
          */
-        iat?: number;
+        iat?: number | undefined;
         /**
          * The "jti" (JWT ID) claim provides a unique identifier for the JWT. Expressed in a string.
          */
-        jti?: string;
+        jti?: string | undefined;
         /**
          * While nonce is not an RFC 7519 Registered Claim, it is used on Open ID for the ID Tokens.
          */
-        nonce?: string;
+        nonce?: string | undefined;
     }
 
     type Secret = string | Buffer | { key: string | Buffer; algorithm: SupportedAlgorithm | NoAlgorithm };
@@ -253,31 +249,31 @@ declare namespace hapiJwt {
         /**
          * Object to put additional key/value pairs in the header of the token in addition to alg and typ.
          */
-        header?: object;
+        header?: object | undefined;
         /**
          * Boolean if set to false typ: 'JWT' is not included in the header.
          */
-        typ?: boolean;
+        typ?: boolean | undefined;
         /**
          * Integer as an alternative way to set iat claim. Takes JavaScript style epoch time (with ms). iat claim must not be set and iat option must not be false. Milliseconds are truncated.
          */
-        now?: number;
+        now?: number | undefined;
         /**
          * Integer as an alternative way to set exp claim. exp is set to be iat + ttlSec. exp claim must not be set.
          */
-        ttlSec?: number;
+        ttlSec?: number | undefined;
         /**
          * Boolean if set to false typ: 'JWT' is not included in the header.
          */
-        iat?: boolean;
+        iat?: boolean | undefined;
         /**
          * String to set the encoding use for stringify the payload. Default is utf8.
          */
-        encoding?: string;
+        encoding?: string | undefined;
         /**
          * Boolean if set to true will decode a valid headless token. Default is false.
          */
-        headless?: boolean;
+        headless?: boolean | undefined;
     }
 
     interface DecodeOptions {
@@ -303,34 +299,34 @@ declare namespace hapiJwt {
         /**
          * String or array of strings that matches the JWT ID of the token.
          */
-        jti?: string | string[];
+        jti?: string | string[] | undefined;
         /**
          * String or array of strings that matches the nonce of the token. nonce is used on Open ID for the ID Tokens.
          */
-        nonce?: string | string[];
+        nonce?: string | string[] | undefined;
         /**
          * Integer that represents the "Not Before" NumericDate of the token.
          */
-        nbf?: number;
+        nbf?: number | undefined;
     }
 
     interface TimeOptions {
         /**
          * Integer that represents the current time in JavaScript epoch format (with msecs). When evaluated the msecs are truncated, not rounded. Either this or nowSec need to be defined.
          */
-        now?: number;
+        now?: number | undefined;
         /**
          * Integer that represents the "Expiration Time" NumericDate of the token.
          */
-        exp?: number;
+        exp?: number | undefined;
         /**
          * Integer to determine the maximum age of the token in seconds. This is time validation using the "Issued At" NumericDate (iat).
          */
-        maxAgeSec?: number;
+        maxAgeSec?: number | undefined;
         /**
          * Integer to adjust exp and maxAgeSec to account for server time drift in seconds.
          */
-        timeSkewSec?: number;
+        timeSkewSec?: number | undefined;
     }
 
     interface Token {

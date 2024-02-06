@@ -1,8 +1,3 @@
-// Type definitions for react-native-aws3 0.0
-// Project: https://github.com/benjreinhart/react-native-aws3#readme
-// Definitions by: Shirsh Zibbu <https://github.com/zhirzh>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 export interface File {
     /**
      * File system URI, can be assets library path or file:// path
@@ -25,12 +20,12 @@ export interface Options {
      * The Access Control List of this object
      * @default "public-read"
      */
-    acl?: string;
+    acl?: string | undefined;
 
     /**
      * Prefix, or path to the file on S3, i.e. uploads/ (note the trailing slash)
      */
-    keyPrefix?: string;
+    keyPrefix?: string | undefined;
 
     /**
      * Your S3 bucket
@@ -56,19 +51,19 @@ export interface Options {
      * HTTP response status if successful
      * @default 201
      */
-    successActionStatus?: number;
+    successActionStatus?: number | undefined;
 
     /**
      * AWS S3 url
      * @default "s3.amazonaws.com"
      */
-    awsUrl?: string;
+    awsUrl?: string | undefined;
 
     /**
      * Devices time offset from world clock in milliseconds
      * @default 0
      */
-    timeDelta?: number;
+    timeDelta?: number | undefined;
 }
 
 export interface Progress {
@@ -98,8 +93,8 @@ export interface Request {
     send(): this;
     abort(): this;
     progress(callback: (progress: Progress) => any): this;
-    then(...args: Parameters<this['_promise']['then']>): this;
-    catch(...args: Parameters<this['_promise']['catch']>): this;
+    then(...args: Parameters<this["_promise"]["then"]>): this;
+    catch(...args: Parameters<this["_promise"]["catch"]>): this;
 }
 
 export interface Response {

@@ -1,13 +1,13 @@
-import { Notification } from './Notification';
-import { Values } from './Values';
+import { Notification } from "./Notification";
+import { Values } from "./Values";
 
 export interface Notifications_Options {
-    container?: JQuery;
-    alt?: boolean;
+    container?: JQuery | undefined;
+    alt?: boolean | undefined;
 }
 
 export interface Notifications_Get_Options {
-    sort?: boolean;
+    sort?: boolean | undefined;
 }
 
 export class Notifications extends Values<Notification> {

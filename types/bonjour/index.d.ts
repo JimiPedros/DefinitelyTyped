@@ -1,11 +1,6 @@
-// Type definitions for bonjour 3.5
-// Project: https://github.com/watson/bonjour
-// Definitions by: Quentin Lampin <https://github.com/quentin-ol>, Nicolas Voigt <https://github.com/octo-sniffle>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /// <reference types="node" />
 
-import { RemoteInfo } from 'dgram';
+import { RemoteInfo } from "dgram";
 
 declare function bonjour(opts?: bonjour.BonjourOptions): bonjour.Bonjour;
 export = bonjour;
@@ -29,27 +24,27 @@ declare namespace bonjour {
         start(): void;
         update(): void;
         stop(): void;
-        on(event: 'up' | 'down', listener: (service: RemoteService) => void): this;
-        once(event: 'up' | 'down', listener: (service: RemoteService) => void): this;
-        removeListener(event: 'up' | 'down', listener: (service: RemoteService) => void): this;
-        removeAllListeners(event?: 'up' | 'down'): this;
+        on(event: "up" | "down", listener: (service: RemoteService) => void): this;
+        once(event: "up" | "down", listener: (service: RemoteService) => void): this;
+        removeListener(event: "up" | "down", listener: (service: RemoteService) => void): this;
+        removeAllListeners(event?: "up" | "down"): this;
     }
     interface BrowserOptions {
-        type?: string;
-        subtypes?: string[];
-        protocol?: string;
-        txt?: { [key: string]: string };
+        type?: string | undefined;
+        subtypes?: string[] | undefined;
+        protocol?: string | undefined;
+        txt?: { [key: string]: string } | undefined;
     }
 
     interface ServiceOptions {
         name: string;
-        host?: string;
+        host?: string | undefined;
         port: number;
         type: string;
-        subtypes?: string[];
-        protocol?: 'udp'|'tcp';
-        txt?: { [key: string]: string };
-        probe?: boolean;
+        subtypes?: string[] | undefined;
+        protocol?: "udp" | "tcp" | undefined;
+        txt?: { [key: string]: string } | undefined;
+        probe?: boolean | undefined;
     }
 
     interface BaseService {
@@ -75,14 +70,14 @@ declare namespace bonjour {
         start(): void;
     }
     interface BonjourOptions {
-        type?: 'udp4' | 'udp6';
-        multicast?: boolean;
-        interface?: string;
-        port?: number;
-        ip?: string;
-        ttl?: number;
-        loopback?: boolean;
-        reuseAddr?: boolean;
+        type?: "udp4" | "udp6" | undefined;
+        multicast?: boolean | undefined;
+        interface?: string | undefined;
+        port?: number | undefined;
+        ip?: string | undefined;
+        ttl?: number | undefined;
+        loopback?: boolean | undefined;
+        reuseAddr?: boolean | undefined;
     }
     interface Bonjour {
         (opts?: BonjourOptions): Bonjour;

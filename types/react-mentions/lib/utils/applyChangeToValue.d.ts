@@ -4,14 +4,14 @@
  * change
  */
 
-import { MentionProps } from '../../index';
+import { MentionProps } from "../../index";
 
-export type Config = Pick<MentionProps, 'markup' | 'regex' | 'displayTransform'>;
+export type Config = Pick<MentionProps, "markup" | "regex" | "displayTransform">;
 
 export interface Options {
-    selectionStartBefore?: number;
-    selectionEndBefore?: number;
-    selectionEndAfter?: number;
+    selectionStartBefore?: number | undefined;
+    selectionEndBefore?: number | undefined;
+    selectionEndAfter?: number | undefined;
 }
 
 export function applyChangeToValue(

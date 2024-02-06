@@ -1,12 +1,5 @@
-// Type definitions for koa-helmet 6.0
-// Project: https://github.com/venables/koa-helmet#readme
-// Definitions by: Nick Simmons <https://github.com/nsimmons>
-//                 Jan Dolezel <https://github.com/dolezel>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.3
-
-import helmet = require('helmet');
-import { Middleware, Context } from 'koa';
+import helmet = require("helmet");
+import { Context, Middleware } from "koa";
 
 type HelmetOptions = Required<Parameters<typeof helmet>>[0];
 
@@ -16,42 +9,43 @@ declare namespace koaHelmet {
     type KoaHelmetCspDirectiveValue = string | KoaHelmetContentSecurityPolicyDirectiveFunction;
 
     interface KoaHelmetContentSecurityPolicyDirectives {
-        baseUri?: KoaHelmetCspDirectiveValue[];
-        childSrc?: KoaHelmetCspDirectiveValue[];
-        connectSrc?: KoaHelmetCspDirectiveValue[];
-        defaultSrc?: KoaHelmetCspDirectiveValue[];
-        fontSrc?: KoaHelmetCspDirectiveValue[];
-        formAction?: KoaHelmetCspDirectiveValue[];
-        frameAncestors?: KoaHelmetCspDirectiveValue[];
-        frameSrc?: KoaHelmetCspDirectiveValue[];
-        imgSrc?: KoaHelmetCspDirectiveValue[];
-        mediaSrc?: KoaHelmetCspDirectiveValue[];
-        objectSrc?: KoaHelmetCspDirectiveValue[];
-        pluginTypes?: KoaHelmetCspDirectiveValue[];
-        reportUri?: string;
-        sandbox?: KoaHelmetCspDirectiveValue[];
-        scriptSrc?: KoaHelmetCspDirectiveValue[];
-        styleSrc?: KoaHelmetCspDirectiveValue[];
+        baseUri?: KoaHelmetCspDirectiveValue[] | undefined;
+        childSrc?: KoaHelmetCspDirectiveValue[] | undefined;
+        connectSrc?: KoaHelmetCspDirectiveValue[] | undefined;
+        defaultSrc?: KoaHelmetCspDirectiveValue[] | undefined;
+        fontSrc?: KoaHelmetCspDirectiveValue[] | undefined;
+        formAction?: KoaHelmetCspDirectiveValue[] | undefined;
+        frameAncestors?: KoaHelmetCspDirectiveValue[] | undefined;
+        frameSrc?: KoaHelmetCspDirectiveValue[] | undefined;
+        imgSrc?: KoaHelmetCspDirectiveValue[] | undefined;
+        mediaSrc?: KoaHelmetCspDirectiveValue[] | undefined;
+        objectSrc?: KoaHelmetCspDirectiveValue[] | undefined;
+        pluginTypes?: KoaHelmetCspDirectiveValue[] | undefined;
+        reportUri?: string | undefined;
+        sandbox?: KoaHelmetCspDirectiveValue[] | undefined;
+        scriptSrc?: KoaHelmetCspDirectiveValue[] | undefined;
+        styleSrc?: KoaHelmetCspDirectiveValue[] | undefined;
     }
 
     interface KoaHelmetContentSecurityPolicyConfiguration {
-        reportOnly?: boolean;
-        directives?: KoaHelmetContentSecurityPolicyDirectives;
+        reportOnly?: boolean | undefined;
+        useDefaults?: boolean | undefined;
+        directives?: KoaHelmetContentSecurityPolicyDirectives | undefined;
     }
 
     interface KoaHelmet {
         (options?: HelmetOptions): Middleware;
         contentSecurityPolicy(options?: KoaHelmetContentSecurityPolicyConfiguration): Middleware;
-        dnsPrefetchControl(options?: HelmetOptions['dnsPrefetchControl']): Middleware;
-        expectCt(options?: HelmetOptions['expectCt']): Middleware;
-        frameguard(options?: HelmetOptions['frameguard']): Middleware;
-        hidePoweredBy(options?: HelmetOptions['hidePoweredBy']): Middleware;
-        hsts(options?: HelmetOptions['hsts']): Middleware;
-        ieNoOpen(options?: HelmetOptions['ieNoOpen']): Middleware;
-        noSniff(options?: HelmetOptions['noSniff']): Middleware;
-        permittedCrossDomainPolicies(options?: HelmetOptions['permittedCrossDomainPolicies']): Middleware;
-        referrerPolicy(options?: HelmetOptions['referrerPolicy']): Middleware;
-        xssFilter(options?: HelmetOptions['xssFilter']): Middleware;
+        dnsPrefetchControl(options?: HelmetOptions["dnsPrefetchControl"]): Middleware;
+        expectCt(options?: HelmetOptions["expectCt"]): Middleware;
+        frameguard(options?: HelmetOptions["frameguard"]): Middleware;
+        hidePoweredBy(options?: HelmetOptions["hidePoweredBy"]): Middleware;
+        hsts(options?: HelmetOptions["hsts"]): Middleware;
+        ieNoOpen(options?: HelmetOptions["ieNoOpen"]): Middleware;
+        noSniff(options?: HelmetOptions["noSniff"]): Middleware;
+        permittedCrossDomainPolicies(options?: HelmetOptions["permittedCrossDomainPolicies"]): Middleware;
+        referrerPolicy(options?: HelmetOptions["referrerPolicy"]): Middleware;
+        xssFilter(options?: HelmetOptions["xssFilter"]): Middleware;
     }
 }
 

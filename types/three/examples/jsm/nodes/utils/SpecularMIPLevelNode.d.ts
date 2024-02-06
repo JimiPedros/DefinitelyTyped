@@ -1,17 +1,12 @@
-import { TempNode } from '../core/TempNode';
-import { MaxMIPLevelNode } from '../utils/MaxMIPLevelNode';
-import { FunctionNode } from '../core/FunctionNode';
+import TextureNode from "../accessors/TextureNode.js";
+import Node from "../core/Node.js";
+import { ShaderNodeObject } from "../shadernode/ShaderNode.js";
 
-export class SpecularMIPLevelNode extends TempNode {
-    constructor(texture: Node);
+export default class SpecularMIPLevelNode extends Node {
+    textureNode: TextureNode;
+    roughnessNode: Node | null;
 
-    texture: Node;
-    maxMIPLevel: MaxMIPLevelNode;
-    nodeType: string;
-
-    copy(source: SpecularMIPLevelNode): this;
-
-    static Nodes: {
-        getSpecularMIPLevel: FunctionNode;
-    };
+    constructor(textureNode: TextureNode, roughnessNode?: Node | null);
 }
+
+export const specularMIPLevel: () => ShaderNodeObject<SpecularMIPLevelNode>;

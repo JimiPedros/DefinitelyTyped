@@ -1,9 +1,3 @@
-// Type definitions for fast-html-parser 1.0
-// Project: https://github.com/ashi009/node-fast-html-parser
-// Definitions by: Ryan Howard <https://github.com/rollercodester>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.4
-
 export function parse(data: string, options?: ParseOptions): HTMLElement;
 
 export enum NodeType {
@@ -39,8 +33,8 @@ export interface HTMLElement {
 }
 
 export interface ParseOptions {
-    lowerCaseTagName?: boolean;
-    pre?: boolean;
-    script?: boolean;
-    style?: boolean;
+    lowerCaseTagName?: boolean | undefined;
+    pre?: boolean | undefined;
+    script?: boolean | undefined;
+    style?: boolean | undefined;
 }

@@ -1,26 +1,20 @@
-// Type definitions for node-promptly 3.0.3
-// Project: https://github.com/IndigoUnited/node-promptly
-// Definitions by: Dan Spencer <https://github.com/danrspencer>
-//                 Alex Ilyaev <https://github.com/alexilyaev>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
+/// <reference types="node"/>
 
-///<reference types="node"/>
-
-import stream = require('stream');
+import stream = require("stream");
 
 interface Callback {
     (err: Error, value: string): void;
 }
 
 export interface Options {
-    default?: string;
-    trim?: boolean;
+    default?: string | undefined;
+    trim?: boolean | undefined;
     validator?: any;
-    retry?: boolean;
-    silent?: boolean;
-    replace?: string;
-    input?: NodeJS.ReadableStream;
-    output?: NodeJS.WritableStream;
+    retry?: boolean | undefined;
+    silent?: boolean | undefined;
+    replace?: string | undefined;
+    input?: NodeJS.ReadableStream | undefined;
+    output?: NodeJS.WritableStream | undefined;
 }
 
 export declare function prompt(message: string, fn?: Callback): Promise<string>;

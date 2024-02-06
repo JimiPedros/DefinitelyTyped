@@ -1,24 +1,19 @@
-// Type definitions for jslib-html5-camera-photo 3.1
-// Project: https://mabelanger.github.io/jslib-html5-camera-photo/
-// Definitions by: Glen Cheney <https://github.com/Vestride>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 interface FacingModes {
-    USER: 'user';
-    ENVIRONMENT: 'environment';
+    USER: "user";
+    ENVIRONMENT: "environment";
 }
 
 interface ImageTypes {
-    PNG: 'png';
-    JPG: 'jpg';
+    PNG: "png";
+    JPG: "jpg";
 }
 
-type FacingMode = 'user' | 'environment';
-type ImageType = 'png' | 'jpg';
+type FacingMode = "user" | "environment";
+type ImageType = "png" | "jpg";
 
 interface Resolution {
-    height?: MediaTrackConstraints['height'];
-    width?: MediaTrackConstraints['width'];
+    height?: MediaTrackConstraints["height"] | undefined;
+    width?: MediaTrackConstraints["width"] | undefined;
 }
 
 export const FACING_MODES: FacingModes;
@@ -31,19 +26,19 @@ export interface CaptureConfigOption {
      * resolution of the camera. The sizeFactor can be between range of `]0, 1]`
      * and the default value is `1`.
      */
-    sizeFactor?: number;
+    sizeFactor?: number | undefined;
     /**
      * Used to get the desired image type between `jpg` or `png`. to specify
      * the imageType use the constant IMAGE_TYPES, for example to specify jpg
      * format use IMAGE_TYPES.JPG. The default imageType is `png`
      */
-    imageType?: ImageType;
+    imageType?: ImageType | undefined;
     /**
      * Used to get the desired compression when `jpg` is selected. choose a
      * compression between `[0, 1]`, 1 is maximum, 0 is minimum. The default
      * value imageCompression is `0.92`.
      */
-    imageCompression?: number | null;
+    imageCompression?: number | null | undefined;
     /**
      * Used to get an image mirror when is set to `true`, the result of the
      * `dataUri` is the mirror of the actual camera data. Many software that use
@@ -53,7 +48,7 @@ export interface CaptureConfigOption {
      * stream, because the stream is not mirrored. It's only apply to the canvas
      * dataUri. The default value is `false` (no mirror).
      */
-    isImageMirror?: boolean;
+    isImageMirror?: boolean | undefined;
 }
 
 declare class CameraPhoto {

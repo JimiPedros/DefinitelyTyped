@@ -1,7 +1,7 @@
 // test global script usage
 
 const modal = new bootstrap.Modal("#myModal");
-const dropdown = new bootstrap.Dropdown('[data-bs-toggle="dropdown"]');
+const dropdown = new bootstrap.Dropdown("[data-bs-toggle=\"dropdown\"]");
 
 // ctor
 new bootstrap.Alert("#alert");

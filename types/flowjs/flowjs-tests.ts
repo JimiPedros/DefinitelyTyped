@@ -1,15 +1,15 @@
 // flow object
-let flowObject!: flowjs.Flow;
+let flowObject = new flowjs.Flow({});
 let bool: boolean = flowObject.support;
 bool = flowObject.supportDirectory;
 let flowOpts: flowjs.FlowOptions = flowObject.opts;
 let flowFileArray: flowjs.FlowFile[] = flowObject.files;
 let flowChunkParams: flowjs.FlowChunkParams;
 
-flowObject.assignBrowse(<HTMLElement[]> []);
-flowObject.assignBrowse(<HTMLElement[]> [], false, false, {});
-flowObject.assignDrop(<HTMLElement[]> []);
-flowObject.unAssignDrop(<HTMLElement[]> []);
+flowObject.assignBrowse([] as HTMLElement[]);
+flowObject.assignBrowse([] as HTMLElement[], false, false, {});
+flowObject.assignDrop([] as HTMLElement[]);
+flowObject.unAssignDrop([] as HTMLElement[]);
 flowObject.on("fileSuccess", (file: flowjs.FlowFile, serverMessage: string, chunk: flowjs.FlowChunk) => {});
 flowObject.off("fileSuccess", () => {});
 flowObject.upload();
@@ -49,8 +49,8 @@ flowOptions.maxChunkRetries = 0;
 flowOptions.chunkRetryInterval = 0;
 flowOptions.progressCallbacksInterval = 0;
 flowOptions.speedSmoothingFactor = 0;
-flowOptions.successStatuses = [""];
-flowOptions.permanentErrors = [""];
+flowOptions.successStatuses = [200, 201, 202];
+flowOptions.permanentErrors = [404, 415, 500, 501];
 
 // flow file
 flowObject = flowFile.flowObj;
@@ -61,7 +61,7 @@ num = flowFile.size;
 str = flowFile.uniqueIdentifier;
 num = flowFile.averageSpeed;
 num = flowFile.currentSpeed;
-let chunksArray: ReadonlyArray<flowjs.FlowChunk> = flowFile.chunks;
+let chunksArray: readonly flowjs.FlowChunk[] = flowFile.chunks;
 chunksArray[0].abort();
 num = chunksArray[0].chunkSize;
 num = chunksArray[0].endByte;

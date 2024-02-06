@@ -1,23 +1,21 @@
 import {
-    Scene,
     Camera,
-    Material,
-    MeshDepthMaterial,
-    MeshNormalMaterial,
-    ShaderMaterial,
     Color,
+    ColorRepresentation,
+    Material,
+    MeshNormalMaterial,
+    Scene,
+    ShaderMaterial,
     Vector2,
     WebGLRenderer,
     WebGLRenderTarget,
-} from '../../../src/Three';
+} from "../../../src/Three.js";
 
-import { Pass } from './Pass';
+import { FullScreenQuad, Pass } from "./Pass.js";
 
 export enum OUTPUT {
-    Beauty,
     Default,
     SAO,
-    Depth,
     Normal,
 }
 
@@ -35,44 +33,38 @@ export interface SAOPassParams {
 }
 
 export class SAOPass extends Pass {
-    constructor(scene: Scene, camera: Camera, depthTexture?: boolean, useNormals?: boolean, resolution?: Vector2);
+    constructor(scene: Scene, camera: Camera, resolution?: Vector2);
     scene: Scene;
     camera: Camera;
-    supportsDepthTextureExtension: boolean;
-    supportsNormalTexture: boolean;
     originalClearColor: Color;
     oldClearColor: Color;
     oldClearAlpha: number;
     resolution: Vector2;
     saoRenderTarget: WebGLRenderTarget;
     blurIntermediateRenderTarget: WebGLRenderTarget;
-    beautyRenderTarget: WebGLRenderTarget;
     normalRenderTarget: WebGLRenderTarget;
-    depthRenderTarget: WebGLRenderTarget;
-    depthMaterial: MeshDepthMaterial;
     normalMaterial: MeshNormalMaterial;
     saoMaterial: ShaderMaterial;
     vBlurMaterial: ShaderMaterial;
     hBlurMaterial: ShaderMaterial;
     materialCopy: ShaderMaterial;
-    depthCopy: ShaderMaterial;
-    fsQuad: object;
+    fsQuad: FullScreenQuad;
     params: SAOPassParams;
 
-    static OUTPUT: OUTPUT;
+    static OUTPUT: typeof OUTPUT;
 
     renderPass(
         renderer: WebGLRenderer,
         passMaterial: Material,
         renderTarget: WebGLRenderTarget,
-        clearColor?: Color | string | number,
+        clearColor?: ColorRepresentation,
         clearAlpha?: number,
     ): void;
     renderOverride(
         renderer: WebGLRenderer,
         overrideMaterial: Material,
         renderTarget: WebGLRenderTarget,
-        clearColor?: Color | string | number,
+        clearColor?: ColorRepresentation,
         clearAlpha?: number,
     ): void;
 }

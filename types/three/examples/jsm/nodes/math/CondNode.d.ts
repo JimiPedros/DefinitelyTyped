@@ -1,26 +1,22 @@
-import { TempNode } from '../core/TempNode';
-import { NodeBuilder } from '../core/NodeBuilder';
-import { Node } from '../core/Node';
+import Node from "../core/Node.js";
+import { NodeRepresentation, ShaderNodeObject } from "../shadernode/ShaderNode.js";
 
-export class CondNode extends TempNode {
-    constructor(a: Node, b: Node, op: string, ifNode?: Node, elseNode?: Node);
+export default class CondNode extends Node {
+    condNode: Node;
+    ifNode: Node;
+    elseNode: Node;
 
-    a: Node;
-    b: Node;
-    op: string;
-    ifNode: Node | undefined;
-    elseNode: Node | undefined;
-    nodeType: string;
+    constructor(condNode: Node, ifNode: Node, elseNode: Node);
+}
 
-    getCondType(builder: NodeBuilder): string;
-    copy(source: CondNode): this;
+export function cond(
+    condNode: NodeRepresentation,
+    ifNode: NodeRepresentation,
+    elseNode: NodeRepresentation,
+): ShaderNodeObject<Node>;
 
-    static EQUAL: string;
-    static NOT_EQUAL: string;
-    static GREATER: string;
-    static GREATER_EQUAL: string;
-    static LESS: string;
-    static LESS_EQUAL: string;
-    static AND: string;
-    static OR: string;
+declare module "../shadernode/ShaderNode.js" {
+    interface NodeElements {
+        cond: typeof cond;
+    }
 }

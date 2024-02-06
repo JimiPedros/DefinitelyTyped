@@ -1,6 +1,6 @@
-import jsan = require('jsan');
+import jsan = require("jsan");
 
-const options = {
+const options: jsan.Options = {
     refs: false,
     date: true,
     function: true,
@@ -12,6 +12,7 @@ const options = {
     set: true,
     nan: true,
     infinity: true,
+    circular: "[CIRCULAR]",
 };
 
 declare const data: unknown;
@@ -20,10 +21,10 @@ const stringified = jsan.stringify(
     data,
     undefined,
     undefined,
-    options
+    options,
 );
 
 const parsed = jsan.parse(
     stringified,
-    undefined
+    undefined,
 );

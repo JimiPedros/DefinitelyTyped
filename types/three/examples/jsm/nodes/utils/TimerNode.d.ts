@@ -1,19 +1,25 @@
-import { NodeFrame } from '../core/NodeFrame';
-import { FloatNode } from '../inputs/FloatNode';
+import UniformNode from "../core/UniformNode.js";
+import { ShaderNodeObject } from "../shadernode/ShaderNode.js";
 
-export class TimerNode extends FloatNode {
-    constructor(scale?: number, scope?: string, timeScale?: boolean);
+export type TimerNodeScope =
+    | typeof TimerNode.LOCAL
+    | typeof TimerNode.GLOBAL
+    | typeof TimerNode.DELTA
+    | typeof TimerNode.FRAME;
 
+export default class TimerNode extends UniformNode<number> {
+    static LOCAL: "local";
+    static GLOBAL: "global";
+    static DELTA: "delta";
+    static FRAME: "frame";
+
+    scope: TimerNodeScope;
     scale: number;
-    scope: string;
-    timeScale: boolean;
-    nodeType: string;
 
-    getUnique(): boolean;
-    updateFrame(frame: NodeFrame): void;
-    copy(source: TimerNode): this;
-
-    static GLOBAL: string;
-    static LOCAL: string;
-    static DELTA: string;
+    constructor(scope?: TimerNodeScope, scale?: number, value?: number);
 }
+
+export const timerLocal: (timeScale?: number, value?: number) => ShaderNodeObject<TimerNode>;
+export const timerGlobal: (timeScale?: number, value?: number) => ShaderNodeObject<TimerNode>;
+export const timerDelta: (timeScale?: number, value?: number) => ShaderNodeObject<TimerNode>;
+export const frameId: ShaderNodeObject<TimerNode>;

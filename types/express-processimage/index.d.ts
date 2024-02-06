@@ -1,9 +1,4 @@
-// Type definitions for express-processimage 10.1
-// Project: https://github.com/papandreou/express-processimage#readme
-// Definitions by: Piotr Błażejewicz <https://github.com/peterblazejewicz>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
-import { NextFunction } from 'express';
+import { NextFunction } from "express";
 
 /**
  * Middleware that processes images according to the query string.
@@ -14,18 +9,18 @@ declare function processImage(options?: processImage.Options): NextFunction;
 
 declare namespace processImage {
     interface Options {
-        allowedImageSourceContentTypes?: string[];
-        allowOperation?: (operationName: string, ...args: any[]) => boolean;
-        /** @debug false */
-        debug?: boolean;
-        filters?: Record<string, boolean>;
-        maxInputPixels?: number;
-        maxOutputPixels?: number;
-        onPipeline?: (pipeline: object) => void;
-        root?: string;
-        sharpCache?: number;
-        /** @defult false */
-        secondGuessSourceContentType?: boolean;
+        allowedImageSourceContentTypes?: string[] | undefined;
+        allowOperation?: ((operationName: string, ...args: any[]) => boolean) | undefined;
+        /** @default false */
+        debug?: boolean | undefined;
+        filters?: Record<string, boolean> | undefined;
+        maxInputPixels?: number | undefined;
+        maxOutputPixels?: number | undefined;
+        onPipeline?: ((pipeline: object) => void) | undefined;
+        root?: string | undefined;
+        sharpCache?: number | undefined;
+        /** @default false */
+        secondGuessSourceContentType?: boolean | undefined;
     }
 }
 

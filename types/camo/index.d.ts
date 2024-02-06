@@ -1,16 +1,10 @@
-// Type definitions for camo v0.12.2
-// Project: https://github.com/scottwrobinson/camo
-// Definitions by: Lucas Matías Ciruzzi <https://github.com/lucasmciruzzi>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 declare module "camo" {
-
     /**
      * Connect function
      *
      * @param uri Connection URI
      */
-    export function connect (uri: string): Promise<any>;
+    export function connect(uri: string): Promise<any>;
 
     type TypeOrArrayOfType<Type> = Type | Type[];
 
@@ -18,13 +12,13 @@ declare module "camo" {
      * Supported type constructors for document properties
      */
     export type SchemaTypeConstructor =
-        TypeOrArrayOfType<StringConstructor> |
-        TypeOrArrayOfType<NumberConstructor> |
-        TypeOrArrayOfType<BooleanConstructor> |
-        TypeOrArrayOfType<ArrayBufferConstructor> |
-        TypeOrArrayOfType<DateConstructor> |
-        TypeOrArrayOfType<ObjectConstructor> |
-        TypeOrArrayOfType<ArrayConstructor>;
+        | TypeOrArrayOfType<StringConstructor>
+        | TypeOrArrayOfType<NumberConstructor>
+        | TypeOrArrayOfType<BooleanConstructor>
+        | TypeOrArrayOfType<ArrayBufferConstructor>
+        | TypeOrArrayOfType<DateConstructor>
+        | TypeOrArrayOfType<ObjectConstructor>
+        | TypeOrArrayOfType<ArrayConstructor>;
 
     /**
      * Supported types for document properties
@@ -42,23 +36,23 @@ declare module "camo" {
         /**
          * Default value
          */
-        default?: Type;
+        default?: Type | undefined;
         /**
          * Min value (only with Number)
          */
-        min?: number;
+        min?: number | undefined;
         /**
          * Max value (only with Number)
          */
-        max?: number;
+        max?: number | undefined;
         /**
          * Posible options
          */
-        choices?: Type[];
+        choices?: Type[] | undefined;
         /**
          * RegEx to match value
          */
-        match?: RegExp;
+        match?: RegExp | undefined;
         /**
          * Validation function.
          *
@@ -69,11 +63,11 @@ declare module "camo" {
         /**
          * Unique value (like ids)
          */
-        unique?: boolean;
+        unique?: boolean | undefined;
         /**
          * Required field
          */
-        required?: boolean;
+        required?: boolean | undefined;
     }
 
     /**
@@ -92,7 +86,7 @@ declare module "camo" {
         /**
          * Document id
          */
-        _id?: string;
+        _id?: string | undefined;
     }
 
     /**
@@ -102,7 +96,7 @@ declare module "camo" {
         /**
          * Return a new document if one is not found with the given query.
          */
-        upsert?: boolean;
+        upsert?: boolean | undefined;
     }
 
     /**
@@ -113,7 +107,7 @@ declare module "camo" {
          * Find all or no references.
          * Pass an array of field names to only populate the specified references.
          */
-        populate?: boolean | string[];
+        populate?: boolean | string[] | undefined;
     }
 
     /**
@@ -124,19 +118,19 @@ declare module "camo" {
          * Find all or no references.
          * Pass an array of field names to only populate the specified references.
          */
-        populate?: boolean | string[];
+        populate?: boolean | string[] | undefined;
         /**
          * Sort the documents by the given field(s).
          */
-        sort?: TypeOrArrayOfType<string>;
+        sort?: TypeOrArrayOfType<string> | undefined;
         /**
          * Limits the number of documents returned.
          */
-        limit?: number;
+        limit?: number | undefined;
         /**
          * Skips the given number of documents and returns the rest.
          */
-        skip?: number;
+        skip?: number | undefined;
     }
 
     /**
@@ -174,13 +168,19 @@ declare module "camo" {
          * @param query Find query.
          * @param options findOne method options.
          */
-        public static findOne<StaticSchema extends DocumentSchema>(query: any, options?: FindOneOptions): Promise<StaticSchema>;
+        public static findOne<StaticSchema extends DocumentSchema>(
+            query: any,
+            options?: FindOneOptions,
+        ): Promise<StaticSchema>;
         /**
          * Return all documents matching the query.
          *
          * @param query Find query.
          */
-        public static find<StaticSchema extends DocumentSchema>(query: any, options?: FindOptions): Promise<StaticSchema[]>;
+        public static find<StaticSchema extends DocumentSchema>(
+            query: any,
+            options?: FindOptions,
+        ): Promise<StaticSchema[]>;
         /**
          * Find and update (or insert) a document in one atomic operation (atomic for MongoDB only).
          *
@@ -188,7 +188,11 @@ declare module "camo" {
          * @param values Values to set.
          * @param options findOneAndUpdate method options.
          */
-        public static findOneAndUpdate<StaticSchema extends DocumentSchema>(query: any, values: StaticSchema, options?: FindOneAndUpdateOptions): Promise<StaticSchema>;
+        public static findOneAndUpdate<StaticSchema extends DocumentSchema>(
+            query: any,
+            values: StaticSchema,
+            options?: FindOneAndUpdateOptions,
+        ): Promise<StaticSchema>;
         /**
          * Removes documents from the database.
          * Should only be used on an instantiated document with a valid id.
@@ -253,5 +257,4 @@ declare module "camo" {
          */
         public toJSON(): any;
     }
-
 }

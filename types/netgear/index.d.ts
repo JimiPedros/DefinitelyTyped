@@ -1,8 +1,3 @@
-// Type definitions for netgear 4.3
-// Project: https://github.com/gruijter/netgear.js#readme
-// Definitions by: Kyle Hensel <https://github.com/k-yle>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 declare namespace NetgearRouter {
     enum LoginMethod {
         Heritage = 1,
@@ -11,22 +6,22 @@ declare namespace NetgearRouter {
 
     interface Options {
         /** If not supplied, defaults to `admin` */
-        username?: string;
+        username?: string | undefined;
         /** If not supplied, defaults to `password` */
-        password?: string;
+        password?: string | undefined;
         /** Autodiscovery will be performed when left out */
-        host?: string;
+        host?: string | undefined;
         /** SOAP port. Autodiscovery will be performed when left out */
-        port?: number;
+        port?: number | undefined;
         /** TLS/SSL (HTTPS) is only supported on certain router types */
-        tls?: boolean;
+        tls?: boolean | undefined;
 
         /** @deprecated */
-        method?: LoginMethod;
+        method?: LoginMethod | undefined;
     }
 
-    type Band = '2.4G' | '5G' | '5G1';
-    type Channel = 'Auto' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12' | '13';
+    type Band = "2.4G" | "5G" | "5G1";
+    type Channel = "Auto" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12" | "13";
 
     interface Log {
         string: string;
@@ -261,7 +256,7 @@ declare class NetgearRouter {
     setWifiChannel(channel: NetgearRouter.Channel, mode: NetgearRouter.Band): Promise<true>;
 
     setBlockDeviceEnable(enabled: boolean): Promise<true>;
-    setBlockDevice(macAddress: string, action: 'Block' | 'Allow'): Promise<true>;
+    setBlockDevice(macAddress: string, action: "Block" | "Allow"): Promise<true>;
     getInfo(): Promise<NetgearRouter.Info>;
 
     getAttachedDevices(): Promise<NetgearRouter.Device[]>;

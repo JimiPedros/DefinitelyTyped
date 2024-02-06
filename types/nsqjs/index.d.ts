@@ -1,11 +1,6 @@
-// Type definitions for nsqjs 0.12
-// Project: https://github.com/dudleycarr/nsqjs
-// Definitions by: Robert Kania <https://github.com/cezaryrk>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /// <reference types="node" />
 
-import * as events from 'events';
+import * as events from "events";
 
 export class Message extends events.EventEmitter {
     static BACKOFF: string;
@@ -50,9 +45,18 @@ export class Writer extends events.EventEmitter {
 
     connect(): void;
 
-    publish(topic: string, msgs: string|Buffer|object|string[]|Buffer[]|object[], callback?: (err?: Error) => void): void;
+    publish(
+        topic: string,
+        msgs: string | Buffer | object | string[] | Buffer[] | object[],
+        callback?: (err?: Error) => void,
+    ): void;
 
-    deferPublish(topic: string, msgs: string|Buffer|object|string[]|Buffer[]|object[], timeMs: number, callback?: (err?: Error) => void): void;
+    deferPublish(
+        topic: string,
+        msgs: string | Buffer | object | string[] | Buffer[] | object[],
+        timeMs: number,
+        callback?: (err?: Error) => void,
+    ): void;
 
     close(): void;
 
@@ -94,30 +98,30 @@ export class Reader extends events.EventEmitter {
 }
 
 export interface ConnectionConfigOptions {
-    authSecret?: string;
-    clientId?: string;
-    deflate?: boolean;
-    deflateLevel?: number;
-    heartbeatInterval?: number;
-    maxInFlight?: number;
-    messageTimeout?: number;
-    outputBufferSize?: number;
-    outputBufferTimeout?: number;
-    requeueDelay?: number;
-    sampleRate?: number;
-    snappy?: boolean;
-    tls?: boolean;
-    tlsVerification?: boolean;
-    idleTimeout?: number;
+    authSecret?: string | undefined;
+    clientId?: string | undefined;
+    deflate?: boolean | undefined;
+    deflateLevel?: number | undefined;
+    heartbeatInterval?: number | undefined;
+    maxInFlight?: number | undefined;
+    messageTimeout?: number | undefined;
+    outputBufferSize?: number | undefined;
+    outputBufferTimeout?: number | undefined;
+    requeueDelay?: number | undefined;
+    sampleRate?: number | undefined;
+    snappy?: boolean | undefined;
+    tls?: boolean | undefined;
+    tlsVerification?: boolean | undefined;
+    idleTimeout?: number | undefined;
 }
 
 export interface ReaderConnectionConfigOptions extends ConnectionConfigOptions {
-    lookupdHTTPAddresses?: string | string[];
-    lookupdPollInterval?: number;
-    lookupdPollJitter?: number;
-    lowRdyTimeout?: number;
-    name?: string;
-    nsqdTCPAddresses?: string | string[];
-    maxAttempts?: number;
-    maxBackoffDuration?: number;
+    lookupdHTTPAddresses?: string | string[] | undefined;
+    lookupdPollInterval?: number | undefined;
+    lookupdPollJitter?: number | undefined;
+    lowRdyTimeout?: number | undefined;
+    name?: string | undefined;
+    nsqdTCPAddresses?: string | string[] | undefined;
+    maxAttempts?: number | undefined;
+    maxBackoffDuration?: number | undefined;
 }

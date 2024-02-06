@@ -1,8 +1,3 @@
-// Type definitions for Auth0.js 7.0
-// Project: https://github.com/auth0/auth0.js
-// Definitions by: Robert McLaws <https://github.com/advancedrei>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /** Extensions to the browser Window object. */
 interface Window {
     /** Allows you to pass the id_token to other APIs, as specified in https://docs.auth0.com/apps-apis */
@@ -11,7 +6,7 @@ interface Window {
 
 /** This is the interface for the main Auth0 client. */
 interface Auth0Static {
-    new (options: Auth0ClientOptions): Auth0Static;
+    new(options: Auth0ClientOptions): Auth0Static;
     changePassword(options: any, callback?: (error?: Auth0Error, valid?: any) => void): void;
     decodeJwt(jwt: string): any;
     login(
@@ -75,10 +70,10 @@ interface Auth0Static {
 interface Auth0ClientOptions {
     clientID: string;
     callbackURL: string;
-    callbackOnLocationHash?: boolean;
-    responseType?: string;
+    callbackOnLocationHash?: boolean | undefined;
+    responseType?: string | undefined;
     domain: string;
-    forceJSONP?: boolean;
+    forceJSONP?: boolean | undefined;
 }
 
 /** Represents a normalized UserProfile. */
@@ -138,14 +133,14 @@ interface Auth0PopupOptions {
 }
 
 interface Auth0LoginOptions {
-    auto_login?: boolean;
-    responseType?: string;
-    connection?: string;
-    email?: string;
-    username?: string;
-    password?: string;
-    popup?: boolean;
-    popupOptions?: Auth0PopupOptions;
+    auto_login?: boolean | undefined;
+    responseType?: string | undefined;
+    connection?: string | undefined;
+    email?: string | undefined;
+    username?: string | undefined;
+    password?: string | undefined;
+    popup?: boolean | undefined;
+    popupOptions?: Auth0PopupOptions | undefined;
 }
 
 interface Auth0SignupOptions extends Auth0LoginOptions {
@@ -172,6 +167,7 @@ interface Auth0DelegationToken {
 
 declare const Auth0: Auth0Static;
 
+// eslint-disable-next-line @definitelytyped/no-declare-current-package
 declare module "auth0-js" {
     export = Auth0;
 }

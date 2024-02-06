@@ -1,8 +1,3 @@
-// Type definitions for quotesy 1.0
-// Project: https://github.com/dwyl/quotes#readme
-// Definitions by: Nate Silva <https://github.com/natesilva>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /**
  * Returns an Array of Quote Objects
  */
@@ -26,7 +21,7 @@ export interface Quote {
     /** The text of the quote */
     text: string;
     /** Comma-separated list of words associated with the quote */
-    tags?: string;
+    tags?: string | undefined;
     /** A URL where the origin of the quote can be verified */
-    source?: string;
+    source?: string | undefined;
 }

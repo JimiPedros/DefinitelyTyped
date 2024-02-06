@@ -1,34 +1,28 @@
-// Type definitions for metascraper-logo-favicon 5.14
-// Project: https://nicedoc.io/microlinkhq/metascraper/packages/metascraper-logo-favicon
-// Definitions by: Florian Imdahl <https://github.com/ffflorian>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 3.5
-
 /// <reference types="node" />
 
-import * as http from 'http';
-import metascraper = require('metascraper');
+import * as http from "http";
+import metascraper = require("metascraper");
 
 declare namespace getData {
     type PickDefaultFunction = (sizes: FaviconSize[]) => FaviconSize;
     type PickFunction = (sizes: FaviconSize[], pickDefault: PickDefaultFunction) => FaviconSize;
 
     interface FaviconSize {
-        rel?: string;
+        rel?: string | undefined;
         href: string;
-        sizes?: string;
+        sizes?: string | undefined;
         url: string;
         size: number;
     }
 
     interface Options {
         /** Any option provided here will passed to `got#options`. */
-        gotOpts?: http.ClientRequestArgs;
+        gotOpts?: http.ClientRequestArgs | undefined;
         /** Truncate the value extracted to a maximum size (default: `300`). */
-        pickFn?: PickFunction;
+        pickFn?: PickFunction | undefined;
     }
 }
 
-declare function getData(options?: getData.Options): metascraper.Rule;
+declare function getData(options?: getData.Options): metascraper.Rules;
 
 export = getData;

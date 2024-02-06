@@ -1,13 +1,7 @@
-// Type definitions for xml-flow 1.0
-// Project: https://github.com/matthewmatician/xml-flow
-// Definitions by: Chris Lount <https://github.com/Warerebel>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// Minimum TypeScript Version: 3.8
-
 /// <reference types="node" />
 
-import { Readable } from "stream";
 import { EventEmitter } from "events";
+import { Readable } from "stream";
 
 declare function flow(infile: Readable, options?: flow.parserOptions): EventEmitter;
 
@@ -17,19 +11,19 @@ declare namespace flow {
     const ALWAYS = 1;
 
     interface parserOptions {
-        preserveMarkup?: typeof NEVER | typeof SOMETIMES | typeof ALWAYS;
-        simplifyNodes?: boolean;
-        useArrays?: typeof NEVER | typeof SOMETIMES | typeof ALWAYS;
-        lowercase?: boolean;
-        trim?: boolean;
-        normalize?: boolean;
-        cdataAsText?: boolean;
-        strict?: boolean;
+        preserveMarkup?: typeof NEVER | typeof SOMETIMES | typeof ALWAYS | undefined;
+        simplifyNodes?: boolean | undefined;
+        useArrays?: typeof NEVER | typeof SOMETIMES | typeof ALWAYS | undefined;
+        lowercase?: boolean | undefined;
+        trim?: boolean | undefined;
+        normalize?: boolean | undefined;
+        cdataAsText?: boolean | undefined;
+        strict?: boolean | undefined;
     }
     interface toXmlOptions {
-        indent?: string;
-        selfClosing?: boolean;
-        escape?: (s: string) => string;
+        indent?: string | undefined;
+        selfClosing?: boolean | undefined;
+        escape?: ((s: string) => string) | undefined;
     }
     function toXml(obj: object, options?: toXmlOptions): string;
 }

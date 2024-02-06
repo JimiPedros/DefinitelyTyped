@@ -1,7 +1,3 @@
-// Type definitions for zarinpal-checkout 0.2
-// Project: https://github.com/siamak/zarinpal-checkout
-// Definitions by: Omid Seyfan <https://github.com/iamomiid>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 declare namespace ZarinPal {
     interface Authority {
         Authority: string;
@@ -14,8 +10,8 @@ declare namespace ZarinPal {
         Amount: number;
         CallbackURL: string;
         Description: string;
-        Email?: string;
-        Mobile?: string;
+        Email?: string | undefined;
+        Mobile?: string | undefined;
     }
 
     interface PaymentRequestOutput {

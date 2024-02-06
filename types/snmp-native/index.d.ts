@@ -1,8 +1,3 @@
-// Type definitions for snmp-native 1.2
-// Project: https://github.com/calmh/node-snmp-native
-// Definitions by: Matthew Wilson <https://github.com/traverse1984>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /// <reference types="node" />
 /**
  * This is a native SNMP library for Node.js. The purpose is to provide enough
@@ -100,7 +95,7 @@ export class Session {
         options: {
             oid: OID;
         } & Options,
-        callback: ResponseCallback
+        callback: ResponseCallback,
     ): void;
     /**
      * Perform a simple GetNextRequest.
@@ -125,7 +120,7 @@ export class Session {
         options: {
             oid: OID;
         } & Options,
-        callback: ResponseCallback
+        callback: ResponseCallback,
     ): void;
     /**
      * Perform repeated GetRequests to fetch all the required values.
@@ -168,10 +163,10 @@ export class Session {
     getAll(
         options: {
             oids: OID[];
-            abortOnError?: boolean;
-            combinedTimeout?: number;
+            abortOnError?: boolean | undefined;
+            combinedTimeout?: number | undefined;
         } & Options,
-        callback: ResponseCallback
+        callback: ResponseCallback,
     ): void;
     /**
      * Perform repeated GetNextRequests to fetch all values in the
@@ -204,9 +199,9 @@ export class Session {
     getSubtree(
         options: {
             oid: OID;
-            combinedTimeout?: number;
+            combinedTimeout?: number | undefined;
         } & Options,
-        callback: ResponseCallback
+        callback: ResponseCallback,
     ): void;
     /**
      * Perform a simple SetRequest.
@@ -237,10 +232,10 @@ export class Session {
     set(
         options: {
             oid: OID;
-            type?: DataTypes[keyof DataTypes] | null,
+            type?: DataTypes[keyof DataTypes] | null | undefined;
             value?: any;
         } & Options,
-        callback?: ResponseCallback
+        callback?: ResponseCallback,
     ): void;
     /**
      * Cancels all outstanding requests and frees used OS resources.
@@ -287,12 +282,12 @@ export interface SessionOptions extends Options {
      * The UDP port used to bind the socket locally, or 0 to use a
      * random port.
      */
-    bindPort?: number;
+    bindPort?: number | undefined;
     /**
      * Address family to bind to. This is only used by the Session
      * constructor since that is when the bind is done.
      */
-    family?: 'udp4' | 'udp6';
+    family?: "udp4" | "udp6" | undefined;
     /**
      * Function responsible for handling incoming messages and sending UDP
      * responses back. If nothing is given here, the default implementation
@@ -311,15 +306,15 @@ export interface Options {
      * The host to send the request to. Any resolvable name is allowed in
      * addition to IP addresses.
      */
-    host?: string;
+    host?: string | undefined;
     /**
      * The UDP port number to send the request to.
      */
-    port?: number;
+    port?: number | undefined;
     /**
      * The SNMP community name.
      */
-    community?: string;
+    community?: string | undefined;
     /**
      * An array of timeout values. Values are times in milliseconds, the
      * length of the array is the total number of transmissions that will
@@ -328,12 +323,10 @@ export interface Options {
      * Re-transmissions can be disabled by providing a single timeout
      * value.
      *
-     *
      * @example
      * [ 5000 ] // Disable re-transmission
-     *
      */
-    timeouts?: number[];
+    timeouts?: number[] | undefined;
 }
 
 /**
@@ -352,7 +345,7 @@ export type ResponseCallback = (err: Error | null, varbinds: VarBind[]) => void;
 
 export interface ResponseInfo {
     address: string;
-    family: 'IPv4' | 'IPv6';
+    family: "IPv4" | "IPv6";
     port: number;
     size: number;
 }
@@ -379,7 +372,7 @@ export interface VarBind {
     /**
      * For octet string values, this is a hex string representation of the value.
      */
-    valueHex?: string;
+    valueHex?: string | undefined;
     /**
      * The timestamp (in milliseconds) when the response was received.
      */

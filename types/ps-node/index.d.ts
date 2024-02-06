@@ -1,8 +1,3 @@
-// Type definitions for ps-node 0.1
-// Project: https://github.com/neekey/ps#readme
-// Definitions by: Kyle Hensel <https://github.com/k-yle>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 export interface Program {
     arguments: string[];
     command: string;
@@ -10,11 +5,11 @@ export interface Program {
 }
 
 export interface Query {
-    pid?: string | string[] | number;
-    ppid?: number;
-    command?: string | RegExp;
-    arguments?: string | RegExp;
-    psargs?: string | string[];
+    pid?: string | string[] | number | undefined;
+    ppid?: number | undefined;
+    command?: string | RegExp | undefined;
+    arguments?: string | RegExp | undefined;
+    psargs?: string | string[] | undefined;
 }
 
 export interface Signal {

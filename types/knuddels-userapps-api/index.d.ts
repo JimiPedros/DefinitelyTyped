@@ -1,8 +1,3 @@
-// Type definitions for non-npm package Knuddels UserApps API 1.20201208063705
-// Project: https://developer.knuddels.de
-// Definitions by: Knuddels GmbH & Co. KG <https://github.com/Knuddels>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 // helper types
 export type JsonData = string | number | boolean | Date | Json | JsonArray | undefined;
 export type KnuddelsJsonData =
@@ -148,7 +143,7 @@ declare global {
         /**
          * @see https://developer.knuddels.de/docs/classes/App.html#property_chatCommands
          */
-        chatCommands?: { [commandName: string]: (user: User, params: string, command: string) => void };
+        chatCommands?: { [commandName: string]: (user: User, params: string, command: string) => void } | undefined;
     }
 
     /**
@@ -514,10 +509,10 @@ declare global {
             receivingUserOrAccount: User | KnuddelAccount,
             knuddelAmount: KnuddelAmount,
             parameters?: {
-                displayReasonText?: string;
-                transferDisplayType?: KnuddelTransferDisplayType;
-                onSuccess?: () => void;
-                onError?: (message: string) => void;
+                displayReasonText?: string | undefined;
+                transferDisplayType?: KnuddelTransferDisplayType | undefined;
+                onSuccess?: (() => void) | undefined;
+                onError?: ((message: string) => void) | undefined;
             },
         ): void;
         /**
@@ -528,8 +523,8 @@ declare global {
             knuddelAmount: KnuddelAmount,
             reason: string,
             parameters?: {
-                onSuccess?: (knuddelAmount: KnuddelAmount, reason: string) => void;
-                onError?: (knuddelAmount: KnuddelAmount, reason: string, message: string) => void;
+                onSuccess?: ((knuddelAmount: KnuddelAmount, reason: string) => void) | undefined;
+                onError?: ((knuddelAmount: KnuddelAmount, reason: string, message: string) => void) | undefined;
             },
         ): void;
     }
@@ -1005,7 +1000,7 @@ declare global {
         /**
          * @see https://developer.knuddels.de/docs/classes/Dice.html#method_Dice
          */
-        constructor(count: number /* optional */, value: number);
+        constructor(count: number, /* optional */ value: number);
         /**
          * @see https://developer.knuddels.de/docs/classes/Dice.html#method_getAmount
          */
@@ -1143,8 +1138,12 @@ declare global {
         getURL(
             urlString: string,
             parameters?: {
-                onSuccess?: (responseData: string, externalServerResponse: ExternalServerResponse) => void;
-                onFailure?: (responseData: string, externalServerResponse: ExternalServerResponse) => void;
+                onSuccess?:
+                    | ((responseData: string, externalServerResponse: ExternalServerResponse) => void)
+                    | undefined;
+                onFailure?:
+                    | ((responseData: string, externalServerResponse: ExternalServerResponse) => void)
+                    | undefined;
             },
         ): void;
         /**
@@ -1153,9 +1152,13 @@ declare global {
         postURL(
             urlString: string,
             parameters?: {
-                onSuccess?: (responseData: string, externalServerResponse: ExternalServerResponse) => void;
-                onFailure?: (responseData: string, externalServerResponse: ExternalServerResponse) => void;
-                data?: Json;
+                onSuccess?:
+                    | ((responseData: string, externalServerResponse: ExternalServerResponse) => void)
+                    | undefined;
+                onFailure?:
+                    | ((responseData: string, externalServerResponse: ExternalServerResponse) => void)
+                    | undefined;
+                data?: Json | undefined;
             },
         ): void;
         /**
@@ -1164,8 +1167,12 @@ declare global {
         touchURL(
             urlString: string,
             parameters?: {
-                onSuccess?: (responseData: string, externalServerResponse: ExternalServerResponse) => void;
-                onFailure?: (responseData: string, externalServerResponse: ExternalServerResponse) => void;
+                onSuccess?:
+                    | ((responseData: string, externalServerResponse: ExternalServerResponse) => void)
+                    | undefined;
+                onFailure?:
+                    | ((responseData: string, externalServerResponse: ExternalServerResponse) => void)
+                    | undefined;
             },
         ): void;
         /**
@@ -1174,10 +1181,14 @@ declare global {
         callURL(
             urlString: string,
             parameters?: {
-                onSuccess?: (responseData: string, externalServerResponse: ExternalServerResponse) => void;
-                onFailure?: (responseData: string, externalServerResponse: ExternalServerResponse) => void;
-                method?: 'GET' | 'POST';
-                data?: Json;
+                onSuccess?:
+                    | ((responseData: string, externalServerResponse: ExternalServerResponse) => void)
+                    | undefined;
+                onFailure?:
+                    | ((responseData: string, externalServerResponse: ExternalServerResponse) => void)
+                    | undefined;
+                method?: "GET" | "POST" | undefined;
+                data?: Json | undefined;
             },
         ): void;
     }
@@ -1285,9 +1296,9 @@ declare global {
             knuddelAmount: KnuddelAmount,
             displayReasonText: string,
             parameters?: {
-                transferReason?: string;
-                onError?: (message: string) => void;
-                onSuccess?: () => void;
+                transferReason?: string | undefined;
+                onError?: ((message: string) => void) | undefined;
+                onSuccess?: (() => void) | undefined;
             },
         ): void;
     }
@@ -1537,9 +1548,9 @@ declare global {
         static createKnuddelPot(
             knuddelAmount: KnuddelAmount,
             params?: {
-                payoutTimeoutMinutes?: number;
-                shouldSealPot?: (pot: KnuddelPot) => boolean;
-                onPotSealed?: (pot: KnuddelPot) => void;
+                payoutTimeoutMinutes?: number | undefined;
+                shouldSealPot?: ((pot: KnuddelPot) => boolean) | undefined;
+                onPotSealed?: ((pot: KnuddelPot) => void) | undefined;
             },
         ): KnuddelPot;
         /**
@@ -1662,9 +1673,9 @@ declare global {
             user: User,
             amount: KnuddelAmount,
             parameters?: {
-                customMessage?: string;
-                transferReason?: string;
-                toAccount?: boolean;
+                customMessage?: string | undefined;
+                transferReason?: string | undefined;
+                toAccount?: boolean | undefined;
             },
         ): void;
         /**
@@ -1680,9 +1691,9 @@ declare global {
                     {
                         productId: string;
                         origPriceCents: number;
-                        newPriceCents?: number;
+                        newPriceCents?: number | undefined;
                         origKnuddelPayout: number;
-                        newKnuddelPayout?: number;
+                        newKnuddelPayout?: number | undefined;
                     },
                 ],
                 result: string,
@@ -1839,12 +1850,12 @@ declare global {
         /**
          * @see https://developer.knuddels.de/docs/classes/RandomOperations.html#method_nextInt
          */
-        static nextInt(minValue: number /* optional */, maxValue: number): number;
+        static nextInt(minValue: number, /* optional */ maxValue: number): number;
         /**
          * @see https://developer.knuddels.de/docs/classes/RandomOperations.html#method_nextInts
          */
         static nextInts(
-            minValue: number /* optional */,
+            minValue: number, /* optional */
             maxValue: number,
             count: number,
             onlyDifferentNumbers: boolean,
@@ -1883,7 +1894,7 @@ declare global {
         /**
          * @see https://developer.knuddels.de/docs/classes/RootAppInstance.html#method_updateApp
          */
-        updateApp(message: string /* optional */, logMessage?: string): number;
+        updateApp(message: string, /* optional */ logMessage?: string): number;
         /**
          * @see https://developer.knuddels.de/docs/classes/RootAppInstance.html#method_cancelUpdateApp
          * @since AppServer 98117
@@ -1892,7 +1903,7 @@ declare global {
         /**
          * @see https://developer.knuddels.de/docs/classes/RootAppInstance.html#method_stopApp
          */
-        stopApp(message: string /* optional */, logMessage?: string): void;
+        stopApp(message: string, /* optional */ logMessage?: string): void;
     }
 
     /**
@@ -2067,9 +2078,9 @@ declare global {
             userPersistenceNumberKey: string,
             displayName: string,
             parameters?: {
-                labelMapping?: { [minValue: string]: string };
-                ascending?: boolean;
-                sortIndex?: number;
+                labelMapping?: { [minValue: string]: string } | undefined;
+                ascending?: boolean | undefined;
+                sortIndex?: number | undefined;
             },
         ): Toplist;
     }
@@ -2405,9 +2416,9 @@ declare global {
         eachAccessibleUser(
             callback: (user: User, index: number, accessibleUserCount: number, key?: string) => boolean,
             parameters?: {
-                onStart?: (accessibleUserCount: number, key?: string) => void;
-                onEnd?: (accessibleUserCount: number, key?: string) => void;
-                online?: boolean;
+                onStart?: ((accessibleUserCount: number, key?: string) => void) | undefined;
+                onEnd?: ((accessibleUserCount: number, key?: string) => void) | undefined;
+                online?: boolean | undefined;
             },
         ): void;
     }
@@ -2478,8 +2489,8 @@ declare global {
         static getCount(
             key: string,
             parameters?: {
-                minimumValue?: number;
-                maximumValue?: number;
+                minimumValue?: number | undefined;
+                maximumValue?: number | undefined;
             },
         ): number;
         /**
@@ -2497,9 +2508,9 @@ declare global {
             key: string,
             value: number,
             parameters?: {
-                minimumValue?: number;
-                maximumValue?: number;
-                targetUsers?: User[];
+                minimumValue?: number | undefined;
+                maximumValue?: number | undefined;
+                targetUsers?: User[] | undefined;
             },
         ): number;
         /**
@@ -2508,11 +2519,11 @@ declare global {
         static getSortedEntries(
             key: string,
             parameters?: {
-                ascending?: boolean;
-                count?: number;
-                page?: number;
-                minimumValue?: number;
-                maximumValue?: number;
+                ascending?: boolean | undefined;
+                count?: number | undefined;
+                page?: number | undefined;
+                minimumValue?: number | undefined;
+                maximumValue?: number | undefined;
             },
         ): UserPersistenceNumberEntry[];
         /**
@@ -2522,8 +2533,8 @@ declare global {
             key: string,
             user_or_userId: User | number,
             parameters?: {
-                ascending?: boolean;
-                count?: number;
+                ascending?: boolean | undefined;
+                count?: number | undefined;
             },
         ): UserPersistenceNumberEntry[];
         /**
@@ -2533,8 +2544,8 @@ declare global {
             key: string,
             user_or_userId: User | number,
             parameters?: {
-                ascending?: boolean;
-                minimumValue?: number;
+                ascending?: boolean | undefined;
+                minimumValue?: number | undefined;
             },
         ): number;
         /**
@@ -2544,8 +2555,8 @@ declare global {
             key: string,
             user_or_userId: User | number,
             parameters?: {
-                ascending?: boolean;
-                minimumValue?: number;
+                ascending?: boolean | undefined;
+                minimumValue?: number | undefined;
             },
         ): number;
         /**
@@ -2555,13 +2566,13 @@ declare global {
             key: string,
             callback: (user: User, value: number, index: number, totalCount: number, key: string) => boolean,
             parameters?: {
-                ascending?: boolean;
-                minimumValue?: number;
-                maximumValue?: number;
-                maximumCount?: number;
-                onStart?: (totalCount: number, key: string) => void;
-                onEnd?: (totalCount: number, key: string) => void;
-                online?: boolean;
+                ascending?: boolean | undefined;
+                minimumValue?: number | undefined;
+                maximumValue?: number | undefined;
+                maximumCount?: number | undefined;
+                onStart?: ((totalCount: number, key: string) => void) | undefined;
+                onEnd?: ((totalCount: number, key: string) => void) | undefined;
+                online?: boolean | undefined;
             },
         ): void;
         /**
@@ -2602,10 +2613,10 @@ declare global {
             key: string,
             callback: (user: User, value: object, index: number, totalCount: number, key: string) => boolean,
             parameters?: {
-                maximumCount?: number;
-                onStart?: (totalCount: number, key: string) => void;
-                onEnd?: (totalCount: number, key: string) => void;
-                online?: boolean;
+                maximumCount?: number | undefined;
+                onStart?: ((totalCount: number, key: string) => void) | undefined;
+                onEnd?: ((totalCount: number, key: string) => void) | undefined;
+                online?: boolean | undefined;
             },
         ): void;
         /**
@@ -2646,11 +2657,11 @@ declare global {
             key: string,
             callback: (user: User, value: string, index: number, totalCount: number, key: string) => boolean,
             parameters?: {
-                ascending?: boolean;
-                maximumCount?: number;
-                onStart?: (totalCount: number, key: string) => void;
-                onEnd?: (totalCount: number, key: string) => void;
-                online?: boolean;
+                ascending?: boolean | undefined;
+                maximumCount?: number | undefined;
+                onStart?: ((totalCount: number, key: string) => void) | undefined;
+                onEnd?: ((totalCount: number, key: string) => void) | undefined;
+                online?: boolean | undefined;
             },
         ): void;
         /**

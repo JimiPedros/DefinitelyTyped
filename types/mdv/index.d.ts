@@ -1,8 +1,3 @@
-// Type definitions for mdv 1.3
-// Project: https://github.com/Mermade/mdv#readme
-// Definitions by: Piotr Błażejewicz <https://github.com/peterblazejewicz>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /**
  * A tiny markdown validator
  */
@@ -18,17 +13,17 @@ export interface Options {
     /**
      * markdown document path
      */
-    source?: string;
+    source?: string | undefined;
     /**
      * enable warnings
      * @default false
      */
-    warnings?: boolean;
+    warnings?: boolean | undefined;
     /**
      * save intermediary html
      * @default false
      */
-    save?: boolean;
+    save?: boolean | undefined;
 }
 
 export interface Anchor {

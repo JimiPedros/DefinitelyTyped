@@ -1,31 +1,26 @@
-// Type definitions for passport-auth-token 1.0
-// Project: https://github.com/mbell8903/passport-auth-token.git
-// Definitions by: Ian Woongsoo Lee <https://github.com/yummyummyummy>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /// <reference types="passport"/>
 
-import express = require('express');
-import { Strategy as PassportStrategy } from 'passport-strategy';
+import express = require("express");
+import { Strategy as PassportStrategy } from "passport-strategy";
 
 interface StrategyOptions {
-    tokenFields?: string[];
-    headerFields?: string[];
-    session?: boolean;
-    passReqToCallback?: false;
-    params?: boolean;
-    optional?: boolean;
-    caseInsensitive?: boolean;
+    tokenFields?: string[] | undefined;
+    headerFields?: string[] | undefined;
+    session?: boolean | undefined;
+    passReqToCallback?: false | undefined;
+    params?: boolean | undefined;
+    optional?: boolean | undefined;
+    caseInsensitive?: boolean | undefined;
 }
 
 interface StrategyOptionsWithRequest {
-    tokenFields?: string[];
-    headerFields?: string[];
-    session?: boolean;
+    tokenFields?: string[] | undefined;
+    headerFields?: string[] | undefined;
+    session?: boolean | undefined;
     passReqToCallback: true;
-    params?: boolean;
-    optional?: boolean;
-    caseInsensitive?: boolean;
+    params?: boolean | undefined;
+    optional?: boolean | undefined;
+    caseInsensitive?: boolean | undefined;
 }
 
 interface VerifyOptions {

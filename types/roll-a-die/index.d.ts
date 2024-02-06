@@ -1,8 +1,3 @@
-// Type definitions for roll-a-die 1.5
-// Project: https://github.com/chukwumaijem/roll-a-die
-// Definitions by: Romilo <https://github.com/romilodev>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 export interface Options {
     /** The element to render die animation on. */
     element: HTMLElement;
@@ -17,18 +12,18 @@ export interface Options {
      * Roll the die without sound.
      * @default false
      */
-    noSound?: boolean;
+    noSound?: boolean | undefined;
     /**
      * Time in milliseconds to delay before removing animations
      * @default 3000
      */
-    delay?: number;
+    delay?: number | undefined;
     /**
      * Values to show on die face.
      * When provided, it overrides library genrated values.
      */
-    values?: number[];
-  }
+    values?: number[] | undefined;
+}
 
 /**
  * Run 3D dice roll animation.

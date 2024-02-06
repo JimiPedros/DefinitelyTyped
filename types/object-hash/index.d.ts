@@ -1,27 +1,22 @@
-// Type definitions for object-hash 2.1
-// Project: https://github.com/puleos/object-hash
-// Definitions by: Michael Zabka <https://github.com/misak113>
-//                 Artur Diniz <https://github.com/artdiniz>
-//                 Martin Badin <https://github.com/martin-badin>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 declare namespace objectHash {
+    type NotUndefined = object | string | number | boolean | null | NotUndefined[];
+
     /**
      * @see https://github.com/puleos/object-hash#hashsha1value
      */
-    function sha1(object: {} | null): string;
+    function sha1(object: NotUndefined): string;
     /**
      * @see https://github.com/puleos/object-hash#hashkeysvalue
      */
-    function keys(object: {} | null): string;
+    function keys(object: NotUndefined): string;
     /**
      * @see https://github.com/puleos/object-hash#hashmd5value
      */
-    function MD5(object: {} | null): string;
+    function MD5(object: NotUndefined): string;
     /**
      * @see https://github.com/puleos/object-hash#hashkeysmd5value
      */
-    function keysMD5(object: {} | null): string;
+    function keysMD5(object: NotUndefined): string;
     /**
      * @see https://github.com/puleos/object-hash#hashwritetostreamvalue-options-stream
      */
@@ -29,73 +24,120 @@ declare namespace objectHash {
     function writeToStream(value: any, options: Options, stream: Stream): void;
 
     type BufferEncoding =
-        | 'ascii'
-        | 'base64'
-        | 'binary'
-        | 'hex'
-        | 'latin1'
-        | 'ucs-2'
-        | 'ucs2'
-        | 'utf-8'
-        | 'utf16le'
-        | 'utf8';
+        | "ascii"
+        | "base64"
+        | "binary"
+        | "hex"
+        | "latin1"
+        | "ucs-2"
+        | "ucs2"
+        | "utf-8"
+        | "utf16le"
+        | "utf8";
 
     interface Stream {
         update?(chunk: any, encoding: BufferEncoding, callback: (error?: Error | null) => void): void;
         write?(chunk: any, encoding: BufferEncoding, callback: (error?: Error | null) => void): void;
     }
 
-    interface Options {
+    type HashName =
+        | "md4"
+        | "md4WithRSAEncryption"
+        | "md5"
+        | "md5WithRSAEncryption"
+        | "ripemd"
+        | "ripemd160"
+        | "ripemd160WithRSA"
+        | "rmd160"
+        | "rsa-md4"
+        | "rsa-md5"
+        | "rsa-ripemd160"
+        | "rsa-sha1"
+        | "rsa-sha1-2"
+        | "rsa-sha224"
+        | "rsa-sha256"
+        | "rsa-sha3-224"
+        | "rsa-sha3-256"
+        | "rsa-sha3-384"
+        | "rsa-sha3-512"
+        | "rsa-sha384"
+        | "rsa-sha512"
+        | "sha1"
+        | "sha1WithRSAEncryption"
+        | "sha224"
+        | "sha224WithRSAEncryption"
+        | "sha256"
+        | "sha256WithRSAEncryption"
+        | "sha3-224"
+        | "sha3-256"
+        | "sha3-384"
+        | "sha3-512"
+        | "sha384"
+        | "sha384WithRSAEncryption"
+        | "sha512"
+        | "sha512WithRSAEncryption";
+
+    interface BaseOptions {
         /**
          * @default 'sha1'
          */
-        algorithm?: 'sha1' | 'md5' | 'passthrough';
+        algorithm?: HashName | "passthrough" | undefined;
+
+        excludeKeys?: ((key: string) => boolean) | undefined;
+        /**
+         * @default false
+         */
+        excludeValues?: boolean | undefined;
+        /**
+         * @default false
+         */
+        ignoreUnknown?: boolean | undefined;
+
+        replacer?: ((value: any) => any) | undefined;
+        /**
+         * @default true
+         */
+        respectFunctionNames?: boolean | undefined;
+        /**
+         * @default true
+         */
+        respectFunctionProperties?: boolean | undefined;
+        /**
+         * @default true
+         */
+        respectType?: boolean | undefined;
+        /**
+         * @default false
+         */
+        unorderedArrays?: boolean | undefined;
+        /**
+         * @default true
+         */
+        unorderedObjects?: boolean | undefined;
+        /**
+         * @default true
+         */
+        unorderedSets?: boolean | undefined;
+    }
+
+    interface NormalOption extends BaseOptions {
         /**
          * @default 'hex'
          */
-        encoding?: 'buffer' | 'hex' | 'binary' | 'base64';
-
-        excludeKeys?: (key: string) => boolean;
-        /**
-         * @default false
-         */
-        excludeValues?: boolean;
-        /**
-         * @default false
-         */
-        ignoreUnknown?: boolean;
-
-        replacer?: (value: any) => any;
-        /**
-         * @default true
-         */
-        respectFunctionNames?: boolean;
-        /**
-         * @default true
-         */
-        respectFunctionProperties?: boolean;
-        /**
-         * @default true
-         */
-        respectType?: boolean;
-        /**
-         * @default false
-         */
-        unorderedArrays?: boolean;
-        /**
-         * @default true
-         */
-        unorderedObjects?: boolean;
-        /**
-         * @default true
-         */
-        unorderedSets?: boolean;
+        encoding?: "hex" | "binary" | "base64" | undefined;
     }
+
+    interface WithBufferOption extends BaseOptions {
+        encoding: "buffer";
+    }
+
+    type Options = NormalOption | WithBufferOption;
 }
 
 /**
  * @see https://github.com/puleos/object-hash#hashvalue-options
  */
-declare function objectHash(object: {} | null, options?: objectHash.Options): string;
+declare function objectHash(object: objectHash.NotUndefined, options?: objectHash.NormalOption): string;
+declare function objectHash(object: objectHash.NotUndefined, options?: objectHash.WithBufferOption): Buffer;
 
 export = objectHash;

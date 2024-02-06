@@ -1,10 +1,10 @@
-import { createInjectableStore } from "redux-injectable-store";
 import { applyMiddleware, Middleware } from "redux";
+import { createInjectableStore } from "redux-injectable-store";
 
 interface State {
     foo: string;
-    bar?: string;
-    baz?: string;
+    bar?: string | undefined;
+    baz?: string | undefined;
 }
 
 const initialState: State = { foo: "bar" };
@@ -22,5 +22,5 @@ store.clearReducers();
 
 anotherStore.injectAll({
     bar: dummyReducer,
-    baz: dummyReducer
+    baz: dummyReducer,
 });

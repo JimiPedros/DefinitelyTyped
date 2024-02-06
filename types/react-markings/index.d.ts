@@ -1,10 +1,5 @@
-// Type definitions for react-markings 1.3
-// Project: https://github.com/Thinkmill/react-markings#readme
-// Definitions by: Nathan Bierema <https://github.com/Methuselah96>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
-import * as React from "react";
 import * as CommonmarkReactRenderer from "commonmark-react-renderer";
+import * as React from "react";
 
 declare namespace md {
     type CommonProps = CommonmarkReactRenderer.CommonProps;
@@ -19,7 +14,7 @@ declare namespace md {
     type Renderers = CommonmarkReactRenderer.Renderers;
 
     interface Options {
-        renderers?: Partial<Renderers>;
+        renderers?: Partial<Renderers> | undefined;
     }
 
     type Markings = (...strings: Array<TemplateStringsArray | React.ReactElement>) => React.ReactElement;

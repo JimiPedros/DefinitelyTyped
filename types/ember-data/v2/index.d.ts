@@ -1,13 +1,5 @@
-// Type definitions for ember-data 2.14
-// Project: https://github.com/emberjs/data
-// Definitions by: Derek Wickern <https://github.com/dwickern>
-//                 Mike North <https://github.com/mike-north>
-//                 Chris Krycho <https://github.com/chriskrycho>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 3.7
-
-import Ember from 'ember';
-import RSVP from 'rsvp';
+import Ember from "ember";
+import RSVP from "rsvp";
 
 export interface ModelRegistry {}
 export interface AdapterRegistry {}
@@ -34,7 +26,7 @@ interface AttributeMeta<Model extends DS.Model> {
 }
 interface RelationshipMeta<Model extends DS.Model> {
     key: RelationshipsFor<Model>;
-    kind: 'belongsTo' | 'hasMany';
+    kind: "belongsTo" | "hasMany";
     type: keyof ModelRegistry;
     options: object;
     name: string;
@@ -53,16 +45,16 @@ export namespace DS {
     function errorsArrayToHash(errors: any[]): {};
 
     interface RelationshipOptions<Model> {
-        async?: boolean;
-        inverse?: RelationshipsFor<Model> | null;
-        polymorphic?: boolean;
+        async?: boolean | undefined;
+        inverse?: RelationshipsFor<Model> | null | undefined;
+        polymorphic?: boolean | undefined;
     }
 
     interface Sync {
         async: false;
     }
     interface Async {
-        async?: true;
+        async?: true | undefined;
     }
 
     /**
@@ -97,8 +89,8 @@ export namespace DS {
     const VERSION: string;
 
     interface AttrOptions<T = any> {
-        defaultValue?: T | (() => T);
-        allowNull?: boolean; // TODO: restrict to boolean transform (TS 2.8)
+        defaultValue?: T | (() => T) | undefined;
+        allowNull?: boolean | undefined; // TODO: restrict to boolean transform (TS 2.8)
     }
 
     /**
@@ -142,6 +134,12 @@ export namespace DS {
             requestType?: string,
             query?: {},
         ): string;
+        /**
+         * Used by `findAll` and `findRecord` to build the query's `data` hash supplied to the ajax method.
+         */
+        buildQuery<K extends keyof ModelRegistry>(
+            snapshot: Snapshot<K>,
+        ): Record<string, unknown>;
         /**
          * Builds a URL for a `store.findRecord(type, id)` call.
          */
@@ -412,7 +410,7 @@ export namespace DS {
          * Create a JSON representation of the record, using the serialization
          * strategy of the store's adapter.
          */
-        serialize(options?: { includeId?: boolean }): {};
+        serialize(options?: { includeId?: boolean | undefined }): {};
         /**
          * Use [DS.JSONSerializer](DS.JSONSerializer.html) to
          * get the JSON representation of a record.
@@ -901,7 +899,7 @@ export namespace DS {
         /**
          * A hash of adapter options
          */
-        adapterOptions: {};
+        adapterOptions: Record<string, unknown>;
         /**
          * The name of the type of the underlying record for this snapshot, as a string.
          */
@@ -928,14 +926,14 @@ export namespace DS {
         belongsTo<L extends RelationshipsFor<ModelRegistry[K]>>(
             keyName: L,
             options?: {},
-        ): Snapshot<K>['record'][L] | string | null | undefined;
+        ): Snapshot<K>["record"][L] | string | null | undefined;
         /**
          * Returns the current value of a hasMany relationship.
          */
         hasMany<L extends RelationshipsFor<ModelRegistry[K]>>(
             keyName: L,
             options?: { ids: false },
-        ): Array<Snapshot<K>['record'][L]> | undefined;
+        ): Array<Snapshot<K>["record"][L]> | undefined;
         hasMany<L extends RelationshipsFor<ModelRegistry[K]>>(keyName: L, options: { ids: true }): string[] | undefined;
         /**
          * Iterates through all the attributes of the model, calling the passed
@@ -1034,9 +1032,9 @@ export namespace DS {
         findAll<K extends keyof ModelRegistry>(
             modelName: K,
             options?: {
-                reload?: boolean;
-                backgroundReload?: boolean;
-                include?: string;
+                reload?: boolean | undefined;
+                backgroundReload?: boolean | undefined;
+                include?: string | undefined;
                 adapterOptions?: any;
             },
         ): PromiseArray<ModelRegistry[K]>;
@@ -1276,6 +1274,12 @@ export namespace DS {
             requestType?: string,
             query?: {},
         ): string;
+        /**
+         * Used by `findAll` and `findRecord` to build the query's `data` hash supplied to the ajax method.
+         */
+        buildQuery<K extends keyof ModelRegistry>(
+            snapshot: Snapshot<K>,
+        ): Record<string, unknown>;
         /**
          * Builds a URL for a `store.findRecord(type, id)` call.
          */
@@ -1943,7 +1947,7 @@ export namespace DS {
 
 export default DS;
 
-declare module 'ember' {
+declare module "ember" {
     namespace Ember {
         /*
          * The store is automatically injected into these objects
@@ -1964,13 +1968,13 @@ declare module 'ember' {
     // It is also available to inject anywhere
 }
 
-declare module '@ember/service' {
+declare module "@ember/service" {
     interface Registry {
         store: DS.Store;
     }
 }
 
-declare module 'ember-test-helpers' {
+declare module "ember-test-helpers" {
     interface TestContext {
         store: DS.Store;
     }

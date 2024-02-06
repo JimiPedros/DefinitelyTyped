@@ -1,8 +1,44 @@
 import * as Popper from "@popperjs/core";
-import BaseComponent from "./base-component";
+import BaseComponent, { GetInstanceFactory, GetOrCreateInstanceFactory } from "./base-component";
 
 declare class Tooltip extends BaseComponent {
+    static getInstance: GetInstanceFactory<Tooltip>;
+
+    /**
+     * Static method which allows you to get the tooltip instance associated with
+     * a DOM element, or create a new one in case it wasn’t initialised
+     */
+    static getOrCreateInstance: GetOrCreateInstanceFactory<Tooltip>;
+
+    static jQueryInterface: Tooltip.jQueryInterface;
+
+    static NAME: "tooltip";
+
+    /**
+     * Default settings of this plugin
+     *
+     * @link https://getbootstrap.com/docs/5.0/getting-started/javascript/#default-settings
+     */
+    static Default: Tooltip.Options;
+
+    static Event: Record<
+        | "CLICK"
+        | "FOCUSIN"
+        | "FOCUSOUT"
+        | "HIDDEN"
+        | "HIDE"
+        | "INSERTED"
+        | "MOUSEENTER"
+        | "MOUSELEAVE"
+        | "SHOW"
+        | "SHOWN",
+        string
+    >;
+
+    static DefaultType: Record<keyof Tooltip.Options, string>;
     constructor(element: string | Element, options?: Partial<Tooltip.Options>);
+
+    static SetContentFunction: Tooltip.SetContentFunction;
 
     /**
      * Reveals an element’s tooltip. Returns to the caller before the
@@ -50,41 +86,9 @@ declare class Tooltip extends BaseComponent {
     update(): void;
 
     /**
-     * Static method which allows you to get the tooltip instance associated
-     * with a DOM element
+     * Gives a way to change the tooltip’s content after its initialization.
      */
-    static getInstance(element: Element): Tooltip;
-
-    static jQueryInterface: Tooltip.jQueryInterface;
-
-    static NAME: "tooltip";
-
-    /**
-     * Default settings of this plugin
-     *
-     * @link https://getbootstrap.com/docs/5.0/getting-started/javascript/#default-settings
-     */
-    static Default: Tooltip.Options;
-
-    static DATA_KEY: string;
-
-    static Event: Record<
-        | "CLICK"
-        | "FOCUSIN"
-        | "FOCUSOUT"
-        | "HIDDEN"
-        | "HIDE"
-        | "INSERTED"
-        | "MOUSEENTER"
-        | "MOUSELEAVE"
-        | "SHOW"
-        | "SHOWN",
-        string
-    >;
-
-    static EVENT_KEY: string;
-
-    static DefaultType: Record<keyof Tooltip.Options, string>;
+    setContent(content?: Record<string, string | Element | Tooltip.SetContentFunction | null>): void;
 }
 
 declare namespace Tooltip {
@@ -123,7 +127,9 @@ declare namespace Tooltip {
 
     type OffsetFunction = () => Offset;
 
-    type PopperConfigFunction = (defaultBsPopperConfig: Options) => Partial<Popper.Options>;
+    type PopoverPlacement = "auto" | "top" | "bottom" | "left" | "right";
+
+    type PopperConfigFunction = (defaultBsPopperConfig: Popper.Options) => Partial<Popper.Options>;
 
     interface Options {
         /**
@@ -178,7 +184,7 @@ declare namespace Tooltip {
          *
          * @default 'top'
          */
-        placement: "auto" | "top" | "bottom" | "left" | "right" | (() => void);
+        placement: PopoverPlacement | (() => PopoverPlacement);
 
         /**
          * If a selector is provided, tooltip objects will be delegated to the
@@ -211,7 +217,7 @@ declare namespace Tooltip {
          *
          * @default ''
          */
-        title: string | Element | ((this: HTMLElement) => string);
+        title: string | Element | JQuery | ((this: HTMLElement) => string | Element | JQuery);
 
         /**
          * How tooltip is triggered - click | hover | focus | manual. You may
@@ -258,7 +264,7 @@ declare namespace Tooltip {
          * @see {@link https://popper.js.org/docs/v2/modifiers/flip/#fallbackplacements}
          * @default ['top', 'right', 'bottom', 'left']
          */
-        fallbackPlacement: string[];
+        fallbackPlacements: string[];
 
         /**
          * Overflow constraint boundary of the popover. Accepts the values of
@@ -281,7 +287,7 @@ declare namespace Tooltip {
          *
          * @default ''
          */
-        customClass?: string | (() => string);
+        customClass?: string | (() => string) | undefined;
 
         /**
          * Enable or disable the sanitization. If activated 'template' and
@@ -296,7 +302,7 @@ declare namespace Tooltip {
          *
          * @see {@link https://v5.getbootstrap.com/docs/5.0/getting-started/javascript/#sanitizer}
          */
-        allowList: Record<keyof HTMLElementTagNameMap, string[]>;
+        allowList: Record<keyof HTMLElementTagNameMap | "*", Array<string | RegExp>>;
 
         /**
          * Here you can supply your own sanitize function. This can be useful if
@@ -304,6 +310,7 @@ declare namespace Tooltip {
          *
          * @default null
          */
+        // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
         sanitizeFn: () => void | null;
 
         /**
@@ -321,6 +328,8 @@ declare namespace Tooltip {
         popperConfig: Partial<Popper.Options> | PopperConfigFunction | null;
     }
 
+    type SetContentFunction = () => string | Element | (() => string | Element | null) | null;
+
     type jQueryInterface = (
         config?:
             | Partial<Options>
@@ -331,8 +340,9 @@ declare namespace Tooltip {
             | "disable"
             | "toggleEnabled"
             | "update"
+            | "setContent"
             | "dispose",
-    ) => void;
+    ) => JQuery;
 }
 
 export default Tooltip;

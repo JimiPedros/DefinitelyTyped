@@ -1,9 +1,3 @@
-// Type definitions for bindings 1.5
-// Project: https://github.com/TooTallNate/node-bindings
-// Definitions by: Daniel Perez Alvarez <https://github.com/unindented>
-//                 ExE Boss <https://github.com/ExE-Boss>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /// <reference types="node"/>
 
 /**
@@ -15,20 +9,23 @@ declare function bindings(mod: string | bindings.Options): any;
 declare namespace bindings {
     interface Options {
         /** @default process.env.NODE_BINDINGS_ARROW || ' → ' */
-        arrow?: string;
+        arrow?: string | undefined;
         /** @default process.env.NODE_BINDINGS_COMPILED_DIR || 'compiled' */
-        compiled?: string;
+        compiled?: string | undefined;
         /** @default process.platform */
-        platform?: NodeJS.Platform;
+        platform?: NodeJS.Platform | undefined;
         /** @default process.arch */
-        arch?: string;
+        arch?: string | undefined;
         /** @default `node-v${process.versions.modules}-${process.platform}-${process.arch}` */
-        nodePreGyp?: string;
+        nodePreGyp?: string | undefined;
         /** @default process.versions.node */
-        version?: string;
+        version?: string | undefined;
         /** @default 'bindings.node' */
-        bindings?: string;
-        try?: ReadonlyArray<ReadonlyArray<string>>;
+        bindings?: string | undefined;
+        /* @default exports.getRoot(exports.getFileName()) */
+        module_root?: string | undefined;
+        /* @default (build/|out/)?(Debug|Release|default) and others */
+        try?: ReadonlyArray<readonly string[]> | undefined;
     }
 
     /**

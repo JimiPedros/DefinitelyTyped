@@ -1,9 +1,3 @@
-// Type definitions for non-npm package xelib 0.6
-// Project: https://github.com/z-edit/xelib
-// Definitions by: Alex Layton <https://github.com/awlayton>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// Minimum TypeScript Version: 3.4
-
 /**
  * xelib instance
  */
@@ -304,23 +298,23 @@ export interface GetREFRsOptions {
      * Pass true to exclude deleted REFRs.
      * @default false
      */
-    excludeDeleted?: boolean;
+    excludeDeleted?: boolean | undefined;
     /**
      * Pass true to exclude disabled REFRs.
      * @default false
      */
-    excludeDisabled?: boolean;
+    excludeDisabled?: boolean | undefined;
     /**
      * Pass true to exclude REFRs which have an XESP element.
      * @default false
      */
-    excludeXESP?: boolean;
+    excludeXESP?: boolean | undefined;
 }
 
 export interface Vector {
-    X?: number;
-    Y?: number;
-    Z?: number;
+    X?: number | undefined;
+    Y?: number | undefined;
+    Z?: number | undefined;
 }
 
 /**
@@ -335,7 +329,8 @@ export type I<T> = T;
  * API for xelib wrapper
  */
 export interface XELib
-    extends I<typeof LoaderState>,
+    extends
+        I<typeof LoaderState>,
         I<typeof GameMode>,
         I<typeof ArchiveType>,
         I<typeof ElementType>,
@@ -343,7 +338,8 @@ export interface XELib
         I<typeof SmashType>,
         I<typeof ValueType>,
         I<typeof ConflictThis>,
-        I<typeof ConflictAll> {
+        I<typeof ConflictAll>
+{
     /**
      * Meta functions
      * @see {@link https://z-edit.github.io#/docs?t=Development%2FAPIs%2Fxelib%2FMeta}
@@ -1163,7 +1159,7 @@ export interface XELib
      * Finds the first item in the `FormIDs` array on `record` matching `value`.
      * @returns Handle to the element if found, else returns 0.
      */
-    // tslint:disable-next-line adjacent-overload-signatures
+    // eslint-disable-next-line @typescript-eslint/adjacent-overload-signatures
     GetFormID(record: RecordHandle, value: string): Zeroable<ElementHandle>;
     /**
      * Adds an item to the `FormIDs` array on `record`.
@@ -1573,7 +1569,7 @@ export interface XELib
     /**
      * @see CreateHandleGroup
      */
-    HandleGroup?: Handle[];
+    HandleGroup?: Handle[] | undefined;
     /**
      * Releases all handles in `xelib.HandleGroup`.
      * After calling this, handles retrieved from xelib

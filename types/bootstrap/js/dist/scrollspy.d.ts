@@ -1,6 +1,26 @@
-import BaseComponent from './base-component';
+import BaseComponent, { GetInstanceFactory, GetOrCreateInstanceFactory } from "./base-component";
 
 declare class ScrollSpy extends BaseComponent {
+    /**
+     * Static method which allows you to get the scrollspy instance associated
+     * with a DOM element
+     */
+    static getInstance: GetInstanceFactory<ScrollSpy>;
+
+    /**
+     * Static method which allows you to get the scrollspy instance associated with
+     * a DOM element, or create a new one in case it wasn’t initialised
+     */
+    static getOrCreateInstance: GetOrCreateInstanceFactory<ScrollSpy, Partial<ScrollSpy.Options>>;
+
+    static jQueryInterface: ScrollSpy.jQueryInterface;
+
+    /**
+     * Default settings of this plugin
+     *
+     * @link https://getbootstrap.com/docs/5.0/getting-started/javascript/#default-settings
+     */
+    static Default: ScrollSpy.Options;
     constructor(element: string | Element, options?: Partial<ScrollSpy.Options>);
 
     /**
@@ -9,23 +29,6 @@ declare class ScrollSpy extends BaseComponent {
      * so:
      */
     refresh(): void;
-
-    /**
-     * Static method which allows you to get the scrollspy instance associated
-     * with a DOM element
-     */
-    static getInstance(element: Element, options?: Partial<ScrollSpy.Options>): ScrollSpy;
-
-    static jQueryInterface: ScrollSpy.jQueryInterface;
-
-    // static NAME: 'scrollspy';
-
-    /**
-     * Default settings of this plugin
-     *
-     * @link https://getbootstrap.com/docs/5.0/getting-started/javascript/#default-settings
-     */
-    static Default: ScrollSpy.Options;
 }
 
 declare namespace ScrollSpy {
@@ -34,7 +37,7 @@ declare namespace ScrollSpy {
          * This event fires on the scroll element whenever a new item becomes
          * activated by the scrollspy.
          */
-        activate = 'activate.bs.scrollspy',
+        activate = "activate.bs.scrollspy",
     }
 
     interface Options {
@@ -54,15 +57,35 @@ declare namespace ScrollSpy {
          *
          * @default 'auto'
          */
-        method: 'auto' | 'offset' | 'position';
+        method: "auto" | "offset" | "position";
+
+        /**
+         * Intersection Observer [rootMargin](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/rootMargin)
+         * valid units, when calculating scroll position.
+         *
+         * @default '0px 0px -25%'
+         */
+        rootMargin: string;
+
+        /**
+         * Enables smooth scrolling when a user clicks on a link that refers to ScrollSpy observables.
+         *
+         * @default false
+         */
+        smoothScroll: boolean;
 
         /**
          * Specifies element to apply Scrollspy plugin.
          */
         target: string | Element | JQuery;
+
+        /**
+         * `IntersectionObserver` [threshold](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/IntersectionObserver#threshold) valid input, when calculating scroll position.
+         */
+        threshold?: number[] | string;
     }
 
-    type jQueryInterface = (config?: Partial<Options> | 'refresh' | 'dispose') => void;
+    type jQueryInterface = (config?: Partial<Options> | "refresh" | "dispose") => JQuery;
 }
 
 export default ScrollSpy;
