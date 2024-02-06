@@ -709,11 +709,19 @@ declare namespace chrome.cast.media {
         constructor(mediaInfo: chrome.cast.media.MediaInfo);
 
         activeTrackIds: number[];
+        atvCredentials?: string | undefined;
+        atvCredentialsType?: string | undefined;
         autoplay: boolean;
+        credentials?: string | undefined;
+        credentialsType?: string | undefined;
         currentTime: number;
         customData: Object;
         media: chrome.cast.media.MediaInfo;
         playbackRate?: number | undefined;
+        queueData: chrome.cast.media.QueueData | undefined;
+        requestId: number;
+        sessionId: string;
+        type: string;
     }
 
     export class EditTracksInfoRequest {
